@@ -11,4 +11,10 @@ class Product extends Model
     public $timestamps = false;
     protected $table = 'productes';
 
+    protected $fillable = [
+        'nom',
+        'preu',
+        'imatge'
+    ];
+
 }
