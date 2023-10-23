@@ -1,9 +1,17 @@
 # Documentació bàsica del projecte
 Ha d'incloure, com a mínim
 ## Instruccions per crear un entorn de desenvolupament
-  - eines
-  - plugins
-  - ...
+  - Eines:
+      - Navegador: Chrome
+      - Editor de codi: Visual Studio Code
+      - Paquete de SoftWare: Xampp (Apache, MySql)
+      - Preproducció: Vercel
+  - Plugins:
+      - VUE en Chrome
+      - Live Server en VS
+      - MYSQL en VS
+      - ThunderClient en VS
+      - Live Share en VS
 
 ## Instruccions per desplegar el projecte a producció
 Quins fitxers s'han d'editar i com (típicament per connectar la BD etc...)
