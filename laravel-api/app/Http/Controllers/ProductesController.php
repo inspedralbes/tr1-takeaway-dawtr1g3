@@ -21,7 +21,7 @@ class ProductesController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return 'error';
+            return 'No es pot guardar aquesta categoria perquè ja existeix';
         }else{
             $user = Product::create($request->all());
             return $user;
