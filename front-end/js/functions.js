@@ -1,5 +1,5 @@
 const { createApp } = Vue
-import { getProductes } from "./comunicationManager.js";
+import { getProductes } from "../js/comunicationManager(array).js";
 
 createApp({
     data() {
@@ -17,7 +17,7 @@ createApp({
                 residence: '',
                 email: ''
             },
-            front_page: true,
+            landing_page: true,
             shop_page: false,
             checkout_page: false,
             status_page: false
@@ -25,7 +25,10 @@ createApp({
     },
     methods: {
         //front-page_functions
-        
+        clickStartShopping(){
+            this.landing_page = false;
+            this.shop_page = true;
+        }
         //shop-page_functions
         
         //checkout-page_functions
@@ -34,8 +37,9 @@ createApp({
 
     },
     created() {
-        getProductes().then( productes=> {
-            this.productes = movies
+        getProductes().then( productes => {
+            console.log('Data loaded:', productes);
+            this.productes = productes
             this.productes.forEach(element => {
                 element.counter = 0;
             });
