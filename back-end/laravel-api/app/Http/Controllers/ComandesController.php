@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class ComandesController extends Controller
-{   
-    
+{
+
     public function store(Request $request){
 
         $validator = Validator::make($request->all(),[
@@ -28,7 +28,8 @@ class ComandesController extends Controller
         if ($validator->fails()) {
             return 'error';
         }else{
-            $comanda = Comanda::update($request->all());
+            $comanda = Comanda::find($id);
+            $comanda->update($request->all());
             return $comanda;
         }
     }

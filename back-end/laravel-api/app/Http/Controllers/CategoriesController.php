@@ -11,7 +11,7 @@ class CategoriesController extends Controller
     public function index(){
         return Categoria::all();
     }
-    
+
     public function store(Request $request){
         $validator = Validator::make($request->all(),[
             'nom' => 'required|unique:categories,nom',
@@ -24,7 +24,7 @@ class CategoriesController extends Controller
             return $categoria;
         }
     }
-  
+
     public function update(Request $request, string $id)
     {
         $categoria = Categoria::find($id);

@@ -32,6 +32,7 @@ class ProductesController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'nom' => 'required',
+            'descripcio' => 'required',
             'preu' => 'required',
             'categoria_id' =>'required'
         ]);
@@ -41,6 +42,7 @@ class ProductesController extends Controller
         }else{
             $product = new Product;
             $product->nom = $request->nom;
+            $product->descripcio = $request->descripcio;
             $product->preu = $request->preu;
             $product->categoria_id = $request->categoria_id;
             $product->save();
