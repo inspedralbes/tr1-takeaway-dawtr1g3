@@ -5,7 +5,6 @@ Ha d'incloure, com a mínim
       - Navegador: Chrome
       - Editor de codi: Visual Studio Code
       - Paquete de SoftWare: Xampp (Apache, MySql)
-      - Preproducció: Vercel
   - Plugins:
       - VUE en Chrome
       - Live Server en VS
