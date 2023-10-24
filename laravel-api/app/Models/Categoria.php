@@ -11,6 +11,6 @@ class Categoria extends Model
     public $timestamps = false;
     protected $table = 'categories';
     protected $fillable =[
-        'nom',
+        'nom'
     ];
 }
