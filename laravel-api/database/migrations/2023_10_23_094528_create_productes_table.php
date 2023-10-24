@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->integer('preu');
-            $table->binary('imatge')->nullable()->default(null);
+            $table->string('imatge')->nullable()->default(null);
         });
     }
 
