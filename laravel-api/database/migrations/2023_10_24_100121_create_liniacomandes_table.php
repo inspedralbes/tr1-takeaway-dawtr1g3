@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comandes', function (Blueprint $table) {
-            $table->id(); 
-            $table->enum('estat',['rebut','en preparacio','llest per recollir'])->default('rebut');
-            $table->float('total');      
+        Schema::create('liniacomandes', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
     }
 
@@ -23,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comandes');
+        Schema::dropIfExists('liniacomandes');
     }
 };

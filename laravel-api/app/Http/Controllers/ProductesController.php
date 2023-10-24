@@ -17,14 +17,18 @@ class ProductesController extends Controller
         $validator = Validator::make($request->all(),[
             'nom' => 'required',
             'preu' => 'required',
-            'categoria' =>'required'
+            'categoria_id' =>'required'
         ]);
 
         if ($validator->fails()) {
-            return 'No es pot guardar aquesta categoria perquè ja existeix';
+            return 'error';
         }else{
-            $user = Product::create($request->all());
-            return $user;
+            $product = new Product;
+            $product->nom = $request->nom;
+            $product->preu = $request->preu;
+            $product->categoria_id = $request->categoria_id;
+            $product->save();
+            return $product;
         }
     }
 
