@@ -5,6 +5,7 @@ createApp({
     data() {
         return {
             productes: [],
+            categories: [],
             shopping_cart: {
                 products_cart: [],
                 totalPrice: 0,
@@ -38,6 +39,11 @@ createApp({
         },
         clickCartToggle() {
             this.cart_toggle = !this.cart_toggle;
+            if (this.shopping_cart.products_cart.length == 0) {
+                this.showTotalTicket = false;
+            } else {
+                this.showTotalTicket = true;
+            }
         },
         //front-page_functions
         clickStartShopping() {
@@ -95,7 +101,15 @@ createApp({
                 //shopping_cart
                 this.countPriceAccount();
                 this.countItemsAccount();
+                if (this.shopping_cart.totalItems == 0) {
+                    this.clickCartToggle();
+                }
             }
+        },
+        clickBuyButton(){
+            this.shop_page = false;
+            this.cart_toggle = false;
+            this.checkout_page = true;
         }
         //checkout-page_functions
 

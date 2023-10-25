@@ -22,7 +22,6 @@
     grid-area: nav;
     background-color: var(--bg-Nav-Footer);
     padding: 2vh;
-    height: 35px;
 }
 
 .nav__container{
@@ -199,6 +198,7 @@
 .ticket {
     position: absolute;
     right: 0;
+    top: 70px;
     z-index: 999;
     display: grid;
     grid-template-rows: 1fr auto;
@@ -241,7 +241,20 @@
 }
 
 .account__buttonCheck{
-    
+    background-color: #76d1e7;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.buttonCheck__checkBuy{
+    display: inline-block;
+    background-color: #ff6e6e; /* Rojo */
+    color: #FFFFFF; /* Texto blanco */
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
 }
 
 .div__itemCart,
@@ -282,6 +295,11 @@
     border-radius: 50%;
     background-color: rgb(255, 69, 69);
     color: #fff;
+}
+
+/* check-page */
+.check {
+    grid-area: container;
 }
 
 /* footer */
