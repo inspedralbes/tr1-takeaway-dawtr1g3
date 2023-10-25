@@ -18,14 +18,6 @@ class ProductesController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -45,6 +37,11 @@ class ProductesController extends Controller
             $product->descripcio = $request->descripcio;
             $product->preu = $request->preu;
             $product->categoria_id = $request->categoria_id;
+            $product->imatge = null;
+            if ($request->hasFile('imatge')) {
+                $imatgePath = $request->file('imatge')->storeAs('/img', $request->file('imatge')->getClientOriginalName());
+                $product->imatge = $imatgePath;
+            }
             $product->save();
             return $product;
         }
@@ -55,7 +52,8 @@ class ProductesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $product = Product::find($id);
+        return $product;
     }
 
     /**

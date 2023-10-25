@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('liniacomandes', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_comanda');
+            $table->integer('id_producte');
+            $table->string('nom_producte');
+            $table->string('desc_producte');
+            $table->integer('quantitat');
+            $table->integer('preu');
             $table->timestamps();
+            $table->foreign('id_comanda')->references('id')->on('comandes');
         });
     }
 
