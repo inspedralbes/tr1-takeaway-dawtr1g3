@@ -21,8 +21,8 @@ createApp({
             nav_toggle: false,
             cart_toggle: false,
             landing_page: false,
-            shop_page: true,
-            checkout_page: false,
+            shop_page: false,
+            checkout_page: true,
             status_page: false,
         };
     },

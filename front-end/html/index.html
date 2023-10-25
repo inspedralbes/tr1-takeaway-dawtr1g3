@@ -82,7 +82,18 @@
             </div>
         </div>
         <div class="check" v-if="checkout_page">
-            <h1>HELLOOOO!</h1>
+            <div class="check__form form">
+                <h2 class="form__title">Dades personals</h2>
+                <label class="form__labelNom" for="nombre">Nom:</label><br>
+                <input class="form__inputNom" type="text" id="nombre" name="nombre" v-model="user.name" required><br>
+                <label class="form__labelCognoms" for="apellidos">Cognoms:</label><br>
+                <input class="form__inputCognoms" type="text" id="apellidos" name="apellidos" v-model="user.surnames" required><br>
+                <label class="form__labelDomicili" for="direccion">Direcció Domicili:</label><br>
+                <input class="form__inputDomicili" type="text" id="direccion" name="direccion" v-model="user.residence" required><br>
+                <label class="form__labelEmail" for="email">Correu Electrónic:</label><br>
+                <input class="form__inputEmail" type="email" id="email" name="email" v-model="user.email" required><br>
+                <button class="form__btn" @click="clickBuyForm()">Enviar dades</button>
+            </div>
         </div>
         <div v-if="status_page"></div>
         <footer class="footer">
