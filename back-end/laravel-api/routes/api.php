@@ -9,9 +9,12 @@ use App\Http\Controllers\ComandesController;
 Route::resource('productes',ProductesController::class);
 Route::resource('categories',CategoriesController::class);
 Route::resource('comandes',ComandesController::class);
+Route::resource('lineacomandes',LineaComandesController::class);
+
 
 Route::get('/productes/search/{title}', [ProductesController::class, 'search']);
 Route::get('/categories/search/{nom}', [CategoriesController::class, 'search']);
+Route::get('/comandes/search/{nom}', [ComandesController::class, 'search']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

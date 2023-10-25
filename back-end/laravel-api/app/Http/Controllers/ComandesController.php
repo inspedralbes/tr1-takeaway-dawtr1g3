@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 class ComandesController extends Controller
 {
 
+    public function index(){
+        return Comanda:: all();
+    }
+
     public function store(Request $request){
 
         $validator = Validator::make($request->all(),[
@@ -21,6 +25,7 @@ class ComandesController extends Controller
         }
 
     }
+    
     public function update(Request $request, $id){
         $validator = Validator::make($request->all(),[
             'estat'=> 'required',
@@ -32,5 +37,14 @@ class ComandesController extends Controller
             $comanda->update($request->all());
             return $comanda;
         }
+    }
+
+    public function show($id){
+        $comanda = Comanda::find($id);
+        return $comanda;
+    }
+
+    public function search($id){
+        return Comanda::where('id', 'like', '%'.$id.'%')->get();
     }
 }
