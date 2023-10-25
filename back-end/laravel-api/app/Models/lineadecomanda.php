@@ -9,4 +9,12 @@ class lineadecomanda extends Model
 {
     use HasFactory;
     protected $table="lineacomandes";
+    protected $fillable =[
+        'id_comanda',
+        'id_producte',
+        'nom_producte',
+        'desc_producte',
+        'quantitat',
+        'preu'
+    ];
 }
