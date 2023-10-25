@@ -37,6 +37,11 @@ class ProductesController extends Controller
             $product->descripcio = $request->descripcio;
             $product->preu = $request->preu;
             $product->categoria_id = $request->categoria_id;
+            $product->imatge = null;
+            if ($request->hasFile('imatge')) {
+                $imatgePath = $request->file('imatge')->storeAs('/img', $request->file('imatge')->getClientOriginalName());
+                $product->imatge = $imatgePath;
+            }
             $product->save();
             return $product;
         }
