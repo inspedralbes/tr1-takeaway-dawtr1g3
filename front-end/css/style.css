@@ -95,6 +95,17 @@
     height: 32px;
 }
 
+.buttonCar__counterCar {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgb(101, 255, 242);
+    padding: 5px;
+    padding-left: 7px;
+    padding-right: 7px;
+    border-radius: 50px;
+}
+
 /* landing-page */
 .landing{
     grid-area: container;
@@ -173,8 +184,9 @@
     width: 30px;
     height: 30px;
     margin: 3px;
+    border: none;
     border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgb(0, 47, 255);
     color: #fff;
 }
 
@@ -182,6 +194,96 @@
     width: 150px;
     height: 200px;
 }
+
+/* shop-ticket */
+.ticket {
+    position: absolute;
+    right: 0;
+    z-index: 999;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    grid-template-areas:
+        "title"
+        "account";
+    color: rgb(48, 48, 48);
+    background-color: #bbf1ff;
+}
+
+.ticket__title {
+    grid-area: title;
+    font-family: var(--fontfamily);
+    font-variant: var(--fontvariant);
+    text-align: center;
+    position: sticky;
+    top: 1px;
+}
+
+.ticket__account {
+    grid-area: account;
+    display: grid;
+    grid-template-areas:
+        "itemCart"
+        "total";
+    font-family: var(--fontfamily);
+    font-variant: var(--fontvariant);
+    text-align: center;
+}
+
+.account__item {
+    grid-area: itemCart;
+    margin: 10px;
+}
+
+.account__total {
+    grid-area: total;
+    background-color: #76d1e7;
+    margin-left: 0;
+}
+
+.account__buttonCheck{
+    
+}
+
+.div__itemCart,
+.account__total {
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr 1fr 1fr;
+    grid-template-areas: "img name counter price btn";
+}
+
+.itemCart__image{
+    grid-area: img;
+    width: 32px;
+    height: 32px;
+    padding-top: 7px;
+}
+
+.itemCart__name,
+.total__name {
+    grid-area: name;
+}
+
+.itemCart__price,
+.total__price {
+    grid-area: price;
+}
+
+.itemCart__counter,
+.total__items {
+    grid-area: counter;
+}
+
+.itemCart__btnless{
+    grid-area: btn;
+    width: 30px;
+    height: 30px;
+    margin-top: 7px;
+    border: none;
+    border-radius: 50%;
+    background-color: rgb(255, 69, 69);
+    color: #fff;
+}
+
 /* footer */
 .footer {
     grid-area: footer;
