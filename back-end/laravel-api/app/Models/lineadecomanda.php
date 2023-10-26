@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class lineadecomanda extends Model
 {
     use HasFactory;
-    protected $table="lineacomandes";
+    protected $table="liniacomandes";
     protected $fillable =[
         'id_comanda',
         'id_producte',

@@ -9,23 +9,21 @@ class ComandesController extends Controller
 {
 
     public function index(){
-        return Comanda:: all();
+        return Comanda::all();
     }
 
     public function store(Request $request){
 
-        $validator = Validator::make($request->all(),[
-            'total' => 'required',
-        ]);
-        if ($validator->fails()) {
-            return 'error';
-        }else{
-            $comanda = Comanda::create($request->all());
-            return $comanda;
-        }
+        $dades = json_decode($request->getContent(), true);
+        $total = $dades[1]["total"];
 
+        $comanda = Comanda::create([
+            'total'=> $total,
+        ]);
+
+        return redirect()->action([LineaComandesController::class, 'store']);
     }
-    
+
     public function update(Request $request, $id){
         $validator = Validator::make($request->all(),[
             'estat'=> 'required',

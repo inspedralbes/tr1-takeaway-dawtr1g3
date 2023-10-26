@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductesController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ComandesController;
+use App\Http\Controllers\LineaComandesController;
 
 Route::resource('productes',ProductesController::class);
 Route::resource('categories',CategoriesController::class);
