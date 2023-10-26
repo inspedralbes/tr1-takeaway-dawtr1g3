@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Comanda;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class ComandesController extends Controller
 {
@@ -15,13 +16,15 @@ class ComandesController extends Controller
     public function store(Request $request){
 
         $dades = json_decode($request->getContent(), true);
-        $total = $dades[1]["total"];
+        $total = $dades[0]["total"];
 
         $comanda = Comanda::create([
             'total'=> $total,
         ]);
 
-        return redirect()->action([LineaComandesController::class, 'store']);
+        $comandaID = $comanda->id;
+
+        return response()->json(['comandaID' => $comandaID]);
     }
 
     public function update(Request $request, $id){

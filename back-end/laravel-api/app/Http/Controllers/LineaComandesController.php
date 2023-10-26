@@ -17,24 +17,21 @@ class LineaComandesController extends Controller
      */
     public function store(Request $request)
     {
-        $items = $request->session()->get('items');
-        $idComanda = $request->session()->get('idComanda');
+        $dades = json_decode($request->getContent(), true);
+        $comandaID = $dades[1]["idComanda"];
+        $items = $dades[0]["items"];
 
-        // $idComanda = $request->input('idComanda');
-        // $items = $request->input('items');
-
-        // foreach ($items as $item) {
-        //     $lineacomanda = new Lineadecomanda;
-        //     $lineacomanda->id_comanda = $idComanda;
-        //     $lineacomanda->id_producte = $item['id'];
-        //     $lineacomanda->nom_producte = $item['nom'];
-        //     $lineacomanda->desc_producte = $item['descripcio'];
-        //     $lineacomanda->quantitat = $item['counter'];
-        //     $lineacomanda->preu = $item['preu'];
-        //     $lineacomanda->save();
-        // }
+        foreach ($items as $item) {
+            $lineacomanda = new Lineadecomanda;
+            $lineacomanda->id_comanda = $comandaID;
+            $lineacomanda->id_producte = $item['id'];
+            $lineacomanda->nom_producte = $item['nom'];
+            $lineacomanda->desc_producte = $item['descripcio'];
+            $lineacomanda->quantitat = $item['counter'];
+            $lineacomanda->preu = $item['preu'];
+            $lineacomanda->save();
+        }
     }
-
     /**
      * Display the specified resource.
      */

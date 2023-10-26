@@ -14,39 +14,39 @@
 
 <body>
     <div id="app">
-      <div class="nav__container-sticky">
-          <nav class="nav">
-              <div class="nav__container container">
-                  <a class="container__title" @click="clickTitlePage()">
-                      <h1>StudentStock</h1>
-                  </a>
-                  <a class="container__buttonOpt buttonOpt " @click="clickNavToggle()">
-                      <img class="buttonOpt__iconNav" src="../icons/icon-nav-options.png"></img>
-                  </a>
-                  <div class="container__navExtens navExtens" v-if="nav_toggle">
-                      <ul class="navExtens__listExtens listExtens">
-                          <li class="listExtens__itemExtens itemExtens">
-                              <a class="itemExtens__link">Productes</a>
-                          </li>
-                          <li class="listExtens__itemExtens itemExtens">
-                              <a class="itemExtens__link">Comandes</a>
-                          </li>
-                          <li class="listExtens__itemExtens itemExtens">
-                              <a class="itemExtens__link">Administrador</a>
-                          </li>
-                      </ul>
-                      <div class="navExtens__searchExtens searchExtens" role="search">
-                          <input class="searchExtens__inputSearch" type="search"
-                              placeholder="Motxilles, calculadores, llibretes..." />
-                          <button class="searchExtens__buttonSearch">Cercar</button>
-                      </div>
-                  </div>
-                  <a class="container__buttonCar buttonCar" @click="clickCartToggle()">
-                      <img class="buttonCar__iconCar" src="../icons/icon-nav-shopCart.png"></img>
-                      <span class="buttonCar__counterCar">{{ shopping_cart.totalItems }}</span>
-                  </a>
-              </div>
-          </nav>
+        <div class="nav__container-sticky">
+            <nav class="nav">
+                <div class="nav__container container">
+                    <a class="container__title" @click="clickTitlePage()">
+                        <h1>StudentStock</h1>
+                    </a>
+                    <a class="container__buttonOpt buttonOpt " @click="clickNavToggle()">
+                        <img class="buttonOpt__iconNav" src="../icons/icon-nav-options.png"></img>
+                    </a>
+                    <div class="container__navExtens navExtens" v-if="nav_toggle">
+                        <ul class="navExtens__listExtens listExtens">
+                            <li class="listExtens__itemExtens itemExtens">
+                                <a class="itemExtens__link">Productes</a>
+                            </li>
+                            <li class="listExtens__itemExtens itemExtens">
+                                <a class="itemExtens__link">Comandes</a>
+                            </li>
+                            <li class="listExtens__itemExtens itemExtens">
+                                <a class="itemExtens__link">Administrador</a>
+                            </li>
+                        </ul>
+                        <div class="navExtens__searchExtens searchExtens" role="search">
+                            <input class="searchExtens__inputSearch" type="search"
+                                placeholder="Motxilles, calculadores, llibretes..." />
+                            <button class="searchExtens__buttonSearch">Cercar</button>
+                        </div>
+                    </div>
+                    <a class="container__buttonCar buttonCar" @click="clickCartToggle()">
+                        <img class="buttonCar__iconCar" src="../icons/icon-nav-shopCart.png"></img>
+                        <span class="buttonCar__counterCar">{{ shopping_cart.totalItems }}</span>
+                    </a>
+                </div>
+            </nav>
         </div>
         <div class="landing" v-if="landing_page">
             <div class="slide">
@@ -75,7 +75,6 @@
                     <label for="slide-1" class="slide-control next control-3">›</label>
                     <label for="slide-4" class="slide-control prev control-4">‹</label>
                     <label for="slide-1" class="slide-control next control-4">›</label>
-
                     <ol class="slide-indicador">
                         <li>
                             <label for="slide-1" class="slide-circulo">•</label>
@@ -92,13 +91,11 @@
                     </ol>
                 </div>
             </div>
-
             <input class="landing__search" type="search" placeholder="Material Escolar ..."
                 @keyup.enter="clickStartShopping()" />
             <button class="landing__button button" @click="clickStartShopping()">
                 <h2 class="button__tittle">Veure Productes</h2>
             </button>
-
             <div class="landing__horari horari">
                 <h2 class="horari__tittle">Horari</h2>
                 <h3 class="horari__dies">De Dilluns a Divendres</h3>
@@ -110,7 +107,7 @@
             <h3 class="ticket__title">Cistella</h3>
             <div class="ticket__account account">
                 <div class="account__item div">
-                    <div class=" div__itemCart itemCart" v-for="product_cart in shopping_cart.products_cart">
+                    <div class="div__itemCart itemCart" v-for="product_cart in shopping_cart.products_cart">
                         <img class="itemCart__image" src="../img/img-exemple-producte.png">
                         <p class="itemCart__name">{{ product_cart.nom }}</p>
                         <p class="itemCart__price">{{ product_cart.preu }}€</p>
@@ -154,16 +151,16 @@
             </div>
             <div class="check__resumTicket resumTicket">
                 <h3 class="resumTicket__title">Resum Compra</h3>
-                <div class="resumTicket__itemTicket itemTicket" v-for="product_cart in shopping_cart.products_cart">
-                    <img class="itemTicket__image" src="../img/img-exemple-producte.png">
-                    <p class="itemTicket__name">{{ product_cart.nom }}</p>
-                    <p class="itemTicket__price">{{ product_cart.preu }}€</p>
-                    <p class="itemTicket__counter">{{ product_cart.counter }}</p>
+                <div class="containerItemResum">
+                    <div class="resumTicket__itemTicket itemTicket" v-for="product_cart in shopping_cart.products_cart">
+                        <img class="itemTicket__image" src="../img/img-exemple-producte.png">
+                        <p class="itemTicket__name">{{ product_cart.nom }}</p>                    
+                        <p class="itemTicket__counter">{{ product_cart.counter }}</p>
+                        <p class="itemTicket__price">{{ product_cart.preu }}€</p>
+                    </div>
                 </div>
-                <div class="resumTicket__totalTicket">
-                    <p class="totalTicket__title">Total</p>
-                    <p class="totalTicket__price">{{ shopping_cart.totalPrice }}€</p>
-                </div>
+                <p class="resumTicket__totalTitle">Total</p>
+                <p class="resumTicket__totalPrice">{{ shopping_cart.totalPrice }}€</p>
             </div>
         </div>
         <div class="status" v-if="status_page">
@@ -177,5 +174,4 @@
     </div>
     <script src="../js/functions.js" type="module"></script>
 </body>
-
 </html>

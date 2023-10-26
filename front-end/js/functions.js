@@ -59,10 +59,6 @@ createApp({
             this.landing_page = false;
             this.shop_page = true;
         },
-
-        //shlidesShow
-
-
         //shop-page_functions
         searchProductePos(producte) {
             for (let i = 0; i < this.productes.length; i++) {
@@ -131,10 +127,29 @@ createApp({
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify([{items: this.shopping_cart.products_cart}, {total: this.shopping_cart.totalPrice}]),
+                body: JSON.stringify([{total: this.shopping_cart.totalPrice}]),
             });
-            console.log(JSON.stringify([{items: this.shopping_cart.products_cart}, {total: this.shopping_cart.totalPrice}]))
-            console.log(response);
+            response.then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Error al crear la comanda.");
+                }
+            }).then((data) => {
+                const comandaID = data.comandaID;
+                console.log("ID de la comanda creada:", comandaID);
+                const responseLineaComanda = fetch("http://localhost:8000/api/lineacomandes", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify([{items: this.shopping_cart.products_cart}, {idComanda: comandaID}]),
+            });
+            }).catch((error) => {
+                console.error(error);
+            });
+            this.checkout_page = false;
+            this.landing_page = true;
         },
         //status-page_functions
         clickOrdersButton() {

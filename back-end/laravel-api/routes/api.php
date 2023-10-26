@@ -12,7 +12,6 @@ Route::resource('categories',CategoriesController::class);
 Route::resource('comandes',ComandesController::class);
 Route::resource('lineacomandes',LineaComandesController::class);
 
-
 Route::get('/productes/search/{title}', [ProductesController::class, 'search']);
 Route::get('/categories/search/{nom}', [CategoriesController::class, 'search']);
 Route::get('/comandes/search/{nom}', [ComandesController::class, 'search']);
