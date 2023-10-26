@@ -18,10 +18,10 @@ class ComandesController extends Controller
         $total = $dades[1]["total"];
 
         $comanda = Comanda::create([
-                'total'=> $total,
-            ]);
+            'total'=> $total,
+        ]);
 
-        
+        return redirect()->action([LineaComandesController::class, 'store']);
     }
 
     public function update(Request $request, $id){
