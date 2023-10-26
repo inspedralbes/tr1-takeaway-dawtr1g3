@@ -18,11 +18,20 @@ createApp({
                 residence: "",
                 email: "",
             },
+            // landingImage: {
+            //     currentSlideIndex: 0,
+            //     slides: [
+            //         { src: "../img/img-landing-carrusel1.png", caption: "Caption Text" },
+            //         { src: "../img/img-landing-carrusel2.png", caption: "Caption Two" },
+            //         { src: "../img/img-landing-carrusel3.png", caption: "Caption Three" },
+            //         { src: "../img/img-landing-carrusel4.png", caption: "Caption Four" },
+            //     ]
+            // },
             nav_toggle: false,
             cart_toggle: false,
-            landing_page: false,
+            landing_page: true,
             shop_page: false,
-            checkout_page: true,
+            checkout_page: false,
             status_page: false,
         };
     },
@@ -50,6 +59,10 @@ createApp({
             this.landing_page = false;
             this.shop_page = true;
         },
+
+        //shlidesShow
+
+
         //shop-page_functions
         searchProductePos(producte) {
             for (let i = 0; i < this.productes.length; i++) {
@@ -132,5 +145,25 @@ clickOrdersButton() {
                 element.counter = 0;
             });
         });
+
+        // let slideIndex = 0;
+        // showSlides();
+
+        // function showSlides() {
+        //     let i;
+        //     let slides = document.getElementsByClassName("mySlides");
+        //     let dots = document.getElementsByClassName("dot");
+        //     for (i = 0; i < slides.length; i++) {
+        //         slides[i].style.display = "none";
+        //     }
+        //     slideIndex++;
+        //     if (slideIndex > slides.length) { slideIndex = 1 }
+        //     for (i = 0; i < dots.length; i++) {
+        //         dots[i].className = dots[i].className.replace(" active", "");
+        //     }
+        //     slides[slideIndex - 1].style.display = "block";
+        //     dots[slideIndex - 1].className += " active";
+        //     setTimeout(showSlides, 2000); // Change image every 2 seconds
+        // }
     },
 }).mount("#app");
