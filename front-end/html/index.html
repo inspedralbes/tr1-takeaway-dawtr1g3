@@ -16,7 +16,9 @@
     <div id="app">
         <nav class="nav">
             <div class="nav__container container">
-                <a class="container__title" @click="clickTitlePage()"><h1>StudentStock</h1></a>
+                <a class="container__title" @click="clickTitlePage()">
+                    <h1>StudentStock</h1>
+                </a>
                 <a class="container__buttonOpt buttonOpt " @click="clickNavToggle()">
                     <img class="buttonOpt__iconNav" src="../icons/icon-nav-options.png"></img>
                 </a>
@@ -33,7 +35,8 @@
                         </li>
                     </ul>
                     <div class="navExtens__searchExtens searchExtens" role="search">
-                        <input class="searchExtens__inputSearch" type="search" placeholder="Motxilles, calculadores, llibretes..."/>
+                        <input class="searchExtens__inputSearch" type="search"
+                            placeholder="Motxilles, calculadores, llibretes..." />
                         <button class="searchExtens__buttonSearch">Cercar</button>
                     </div>
                 </div>
@@ -44,11 +47,62 @@
             </div>
         </nav>
         <div class="landing" v-if="landing_page">
+            <div class="slide">
+                <div class="slide-inner">
+                    <input class="slide-open" type="radio" id="slide-1" name="slide" aria-hidden="true" hidden=""
+                        checked="checked">
+                    <div class="slide-item">
+                        <img src="../img/img-landing-carrusel1.png">
+                    </div>
+                    <input class="slide-open" type="radio" id="slide-2" name="slide" aria-hidden="true" hidden="">
+                    <div class="slide-item">
+                        <img src="../img/img-landing-carrusel2.png">
+                    </div>
+                    <input class="slide-open" type="radio" id="slide-3" name="slide" aria-hidden="true" hidden="">
+                    <div class="slide-item">
+                        <img src="../img/img-landing-carrusel3.png">
+                    </div>
+                    <input class="slide-open" type="radio" id="slide-4" name="slide" aria-hidden="true" hidden="">
+                    <div class="slide-item">
+                        <img src="../img/img-landing-carrusel4.png">
+                    </div>
+                    <label for="slide-2" class="slide-control next control-1">›</label>
+                    <label for="slide-1" class="slide-control prev control-2">‹</label>
+                    <label for="slide-3" class="slide-control next control-2">›</label>
+                    <label for="slide-2" class="slide-control prev control-3">‹</label>
+                    <label for="slide-1" class="slide-control next control-3">›</label>
+                    <label for="slide-4" class="slide-control prev control-4">‹</label>
+                    <label for="slide-1" class="slide-control next control-4">›</label>
+
+                    <ol class="slide-indicador">
+                        <li>
+                            <label for="slide-1" class="slide-circulo">•</label>
+                        </li>
+                        <li>
+                            <label for="slide-2" class="slide-circulo">•</label>
+                        </li>
+                        <li>
+                            <label for="slide-3" class="slide-circulo">•</label>
+                        </li>
+                        <li>
+                            <label for="slide-4" class="slide-circulo">•</label>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
             <input class="landing__search" type="search" placeholder="Material Escolar ..."
                 @keyup.enter="clickStartShopping()" />
-            <button class="landing__button" @click="clickStartShopping()">
-                <h2>Veure Productes</h2>
+            <button class="landing__button button" @click="clickStartShopping()">
+                <h2 class="button__tittle">Veure Productes</h2>
             </button>
+
+            <div class="landing__horari horari">
+                <h2 class="horari__tittle">Horari</h2>
+                <h3 class="horari__dies">De Dilluns a Divendres</h3>
+                <p class="horari__hores">9:00h a 13:30h</p>
+                <p class="horari__hores">16:00h a 19:30</p>
+            </div>
         </div>
         <div class="ticket" v-if="cart_toggle">
             <h3 class="ticket__title">Cistella</h3>
@@ -72,7 +126,7 @@
                 </div>
             </div>
         </div>
-        <div class="shop" v-if="shop_page">            
+        <div class="shop" v-if="shop_page">
             <div class="shop__item item" v-for="producte in productes">
                 <label class="item__label" for="producte">{{ producte.nom }}</label>
                 <div class="item__buttons buttons">
@@ -87,9 +141,11 @@
                 <label class="form__labelNom" for="nombre">Nom:</label><br>
                 <input class="form__inputNom" type="text" id="nombre" name="nombre" v-model="user.name" required><br>
                 <label class="form__labelCognoms" for="apellidos">Cognoms:</label><br>
-                <input class="form__inputCognoms" type="text" id="apellidos" name="apellidos" v-model="user.surnames" required><br>
+                <input class="form__inputCognoms" type="text" id="apellidos" name="apellidos" v-model="user.surnames"
+                    required><br>
                 <label class="form__labelDomicili" for="direccion">Direcció Domicili:</label><br>
-                <input class="form__inputDomicili" type="text" id="direccion" name="direccion" v-model="user.residence" required><br>
+                <input class="form__inputDomicili" type="text" id="direccion" name="direccion" v-model="user.residence"
+                    required><br>
                 <label class="form__labelEmail" for="email">Correu Electrónic:</label><br>
                 <input class="form__inputEmail" type="email" id="email" name="email" v-model="user.email" required><br>
                 <button class="form__btn" @click="clickBuyForm()">Enviar dades</button>
