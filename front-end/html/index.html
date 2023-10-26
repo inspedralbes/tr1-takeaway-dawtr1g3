@@ -14,35 +14,42 @@
 
 <body>
     <div id="app">
-        <nav class="nav">
-            <div class="nav__container container">
-                <a class="container__title" @click="clickTitlePage()"><h1>StudentStock</h1></a>
-                <a class="container__buttonOpt buttonOpt " @click="clickNavToggle()">
-                    <img class="buttonOpt__iconNav" src="../icons/icon-nav-options.png"></img>
-                </a>
-                <div class="container__navExtens navExtens" v-if="nav_toggle">
-                    <ul class="navExtens__listExtens listExtens">
-                        <li class="listExtens__itemExtens itemExtens">
-                            <a class="itemExtens__link">Productes</a>
-                        </li>
-                        <li class="listExtens__itemExtens itemExtens">
-                            <a class="itemExtens__link">Comandes</a>
-                        </li>
-                        <li class="listExtens__itemExtens itemExtens">
-                            <a class="itemExtens__link">Administrador</a>
-                        </li>
-                    </ul>
-                    <div class="navExtens__searchExtens searchExtens" role="search">
-                        <input class="searchExtens__inputSearch" type="search" placeholder="Motxilles, calculadores, llibretes..."/>
-                        <button class="searchExtens__buttonSearch">Cercar</button>
+        <div class="nav__container-sticky">
+
+            <nav class="nav">
+                <div class="nav__container container">
+                    <a class="container__title" @click="clickTitlePage()">
+                        <h1>StudentStock</h1>
+                    </a>
+                    <a class="container__buttonOpt buttonOpt " @click="clickNavToggle()">
+                        <img class="buttonOpt__iconNav" src="../icons/icon-nav-options.png"></img>
+
+                    </a>
+                    <div class="container__navExtens navExtens" v-if="nav_toggle">
+                        <ul class="navExtens__listExtens listExtens">
+                            <li class="listExtens__itemExtens itemExtens">
+                                <a class="itemExtens__link">Productes</a>
+                            </li>
+                            <li class="listExtens__itemExtens itemExtens">
+                                <a class="itemExtens__link" @click="clickOrdersButton()">Comandes</a>
+                            </li>
+                            <li class="listExtens__itemExtens itemExtens">
+                                <a class="itemExtens__link">Administrador</a>
+                            </li>
+                        </ul>
+                        <div class="navExtens__searchExtens searchExtens" role="search">
+                            <input class="searchExtens__inputSearch" type="search"
+                                placeholder="Motxilles, calculadores, llibretes..." />
+                            <button class="searchExtens__buttonSearch">Cercar</button>
+                        </div>
                     </div>
+                    <a class="container__buttonCar buttonCar" @click="clickCartToggle()">
+                        <img class="buttonCar__iconCar" src="../icons/icon-nav-shopCart.png"></img>
+                        <span class="buttonCar__counterCar">{{ shopping_cart.totalItems }}</span>
+                    </a>
                 </div>
-                <a class="container__buttonCar buttonCar" @click="clickCartToggle()">
-                    <img class="buttonCar__iconCar" src="../icons/icon-nav-shopCart.png"></img>
-                    <span class="buttonCar__counterCar">{{ shopping_cart.totalItems }}</span>
-                </a>
-            </div>
-        </nav>
+            </nav>
+        </div>
         <div class="landing" v-if="landing_page">
             <input class="landing__search" type="search" placeholder="Material Escolar ..."
                 @keyup.enter="clickStartShopping()" />
@@ -72,7 +79,7 @@
                 </div>
             </div>
         </div>
-        <div class="shop" v-if="shop_page">            
+        <div class="shop" v-if="shop_page">
             <div class="shop__item item" v-for="producte in productes">
                 <label class="item__label" for="producte">{{ producte.nom }}</label>
                 <div class="item__buttons buttons">
@@ -87,15 +94,22 @@
                 <label class="form__labelNom" for="nombre">Nom:</label><br>
                 <input class="form__inputNom" type="text" id="nombre" name="nombre" v-model="user.name" required><br>
                 <label class="form__labelCognoms" for="apellidos">Cognoms:</label><br>
-                <input class="form__inputCognoms" type="text" id="apellidos" name="apellidos" v-model="user.surnames" required><br>
+                <input class="form__inputCognoms" type="text" id="apellidos" name="apellidos" v-model="user.surnames"
+                    required><br>
                 <label class="form__labelDomicili" for="direccion">Direcció Domicili:</label><br>
-                <input class="form__inputDomicili" type="text" id="direccion" name="direccion" v-model="user.residence" required><br>
+                <input class="form__inputDomicili" type="text" id="direccion" name="direccion" v-model="user.residence"
+                    required><br>
                 <label class="form__labelEmail" for="email">Correu Electrónic:</label><br>
                 <input class="form__inputEmail" type="email" id="email" name="email" v-model="user.email" required><br>
                 <button class="form__btn" @click="clickBuyForm()">Enviar dades</button>
             </div>
         </div>
-        <div v-if="status_page"></div>
+        <div class="status" v-if="status_page">
+            <h3>Número de comanda: <input class="status__search" type="search" name="comanda" id="comanda"></h3>
+            <h3>Últim estat de la comanda:</h3>
+            <h3>Detalls de la comanda:</h3>
+
+        </div>
         <footer class="footer">
             <h2 class="footer__title">©2023, StudentStock</h2>
         </footer>
