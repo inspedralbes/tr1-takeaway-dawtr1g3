@@ -300,16 +300,25 @@
 /* check-page */
 .check {
     grid-area: container;
-    background-color: #fff; /* Color de fondo de la tarjeta */
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra de la tarjeta */
-    padding: 20px;
-    width: 300px; /* Ancho de la tarjeta */
 }
 
-.check__form {
-    display: flex;
-    flex-direction: column;
+.check__formContainer {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 40px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+    margin-top: 20px;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.formContainer__title{
+    font-family: var(--fontfamily);
+    font-variant: var(--fontvariant);
+    color: #000000;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .form__labelNom,
@@ -317,6 +326,8 @@
 .form__labelDomicili,
 .form__labelEmail {
     font-family: var(--fontfamily);
+    margin: 5px;
+    font-weight: bold;
 }
 
 .form__inputNom, 
@@ -326,14 +337,16 @@
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin-bottom: 1px;
+    margin-top: 3px;
+    margin-bottom: 15px;
 }
 
 .form__btn {
+    margin-top: 15px;
     background-color: #007BFF; /* Color de fondo del botón */
     color: #fff; /* Color del texto del botón */
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     border: none;
     border-radius: 25px;
     font-family: var(--fontfamily);

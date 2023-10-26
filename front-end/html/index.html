@@ -82,17 +82,32 @@
             </div>
         </div>
         <div class="check" v-if="checkout_page">
-            <div class="check__form form">
-                <h2 class="form__title">Dades personals</h2>
-                <label class="form__labelNom" for="nombre">Nom:</label><br>
-                <input class="form__inputNom" type="text" id="nombre" name="nombre" v-model="user.name" required><br>
-                <label class="form__labelCognoms" for="apellidos">Cognoms:</label><br>
-                <input class="form__inputCognoms" type="text" id="apellidos" name="apellidos" v-model="user.surnames" required><br>
-                <label class="form__labelDomicili" for="direccion">Direcció Domicili:</label><br>
-                <input class="form__inputDomicili" type="text" id="direccion" name="direccion" v-model="user.residence" required><br>
-                <label class="form__labelEmail" for="email">Correu Electrónic:</label><br>
-                <input class="form__inputEmail" type="email" id="email" name="email" v-model="user.email" required><br>
-                <button class="form__btn" @click="clickBuyForm()">Enviar dades</button>
+            <div class="check__formContainer formContainer">
+                <h2 class="formContainer__title">Dades personals</h2>
+                <div class="formContainer__form form">
+                    <label class="form__labelNom" for="nombre">Nom:</label><br>
+                    <input class="form__inputNom" type="text" id="nombre" name="nombre" v-model="user.name" required><br>
+                    <label class="form__labelCognoms" for="apellidos">Cognoms:</label><br>
+                    <input class="form__inputCognoms" type="text" id="apellidos" name="apellidos" v-model="user.surnames" required><br>
+                    <label class="form__labelDomicili" for="direccion">Direcció Domicili:</label><br>
+                    <input class="form__inputDomicili" type="text" id="direccion" name="direccion" v-model="user.residence" required><br>
+                    <label class="form__labelEmail" for="email">Correu Electrónic:</label><br>
+                    <input class="form__inputEmail" type="email" id="email" name="email" v-model="user.email" required><br>
+                    <button class="form__btn" @click="clickBuyForm()">Realitzar Compra</button>
+                </div>
+            </div>
+            <div class="check__resumTicket resumTicket">
+                <h3 class="resumTicket__title">Resum Compra</h3>
+                <div class="resumTicket__itemTicket itemTicket" v-for="product_cart in shopping_cart.products_cart">
+                    <img class="itemTicket__image" src="../img/img-exemple-producte.png">
+                    <p class="itemTicket__name">{{ product_cart.nom }}</p>
+                    <p class="itemTicket__price">{{ product_cart.preu }}€</p>
+                    <p class="itemTicket__counter">{{ product_cart.counter }}</p>
+                </div>
+                <div class="resumTicket__totalTicket">
+                    <p class="totalTicket__title">Total</p>
+                    <p class="totalTicket__price">{{ shopping_cart.totalPrice }}€</p>
+                </div>
             </div>
         </div>
         <div v-if="status_page"></div>

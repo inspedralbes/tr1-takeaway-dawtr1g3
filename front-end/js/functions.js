@@ -110,10 +110,19 @@ createApp({
             this.shop_page = false;
             this.cart_toggle = false;
             this.checkout_page = true;
-        }
+        },
         //checkout-page_functions
-
-        //status-page_functions
+        clickBuyForm(){
+            const response = fetch("http://localhost:8000/api/comandes", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify([{items: this.shopping_cart.products_cart}, {total: this.shopping_cart.totalPrice}]),
+            });
+            console.log(JSON.stringify([{items: this.shopping_cart.products_cart}, {total: this.shopping_cart.totalPrice}]))
+            console.log(response);
+        }
     },
     created() {
         getProductes().then((productes) => {
