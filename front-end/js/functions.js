@@ -18,11 +18,20 @@ createApp({
                 residence: "",
                 email: "",
             },
+            // landingImage: {
+            //     currentSlideIndex: 0,
+            //     slides: [
+            //         { src: "../img/img-landing-carrusel1.png", caption: "Caption Text" },
+            //         { src: "../img/img-landing-carrusel2.png", caption: "Caption Two" },
+            //         { src: "../img/img-landing-carrusel3.png", caption: "Caption Three" },
+            //         { src: "../img/img-landing-carrusel4.png", caption: "Caption Four" },
+            //     ]
+            // },
             nav_toggle: false,
             cart_toggle: false,
-            landing_page: false,
+            landing_page: true,
             shop_page: false,
-            checkout_page: true,
+            checkout_page: false,
             status_page: false,
         };
     },
@@ -50,24 +59,28 @@ createApp({
             this.landing_page = false;
             this.shop_page = true;
         },
+
+        //shlidesShow
+
+
         //shop-page_functions
         searchProductePos(producte) {
             for (let i = 0; i < this.productes.length; i++) {
-                if(producte.id == this.productes[i].id){
+                if (producte.id == this.productes[i].id) {
                     return i;
                 }
             }
         },
         countPriceAccount() {
             let priceSCart = 0;
-            this.shopping_cart.products_cart.forEach( element => {
+            this.shopping_cart.products_cart.forEach(element => {
                 priceSCart += element.preu * element.counter;
             });
             this.shopping_cart.totalPrice = priceSCart;
         },
         countItemsAccount() {
             let itemsSCart = 0;
-            this.shopping_cart.products_cart.forEach( element => {
+            this.shopping_cart.products_cart.forEach(element => {
                 itemsSCart += element.counter;
             });
             this.shopping_cart.totalItems = itemsSCart;
@@ -85,7 +98,7 @@ createApp({
         //ticket
         searchProducte_CartPos(producte_cart) {
             for (let i = 0; i < this.shopping_cart.products_cart.length; i++) {
-                if(producte_cart.id == this.shopping_cart.products_cart[i].id){
+                if (producte_cart.id == this.shopping_cart.products_cart[i].id) {
                     return i;
                 }
             }
@@ -96,7 +109,7 @@ createApp({
                 this.productes[position].counter--;
                 if (this.productes[position].counter == 0) {
                     let index = this.searchProducte_CartPos(producte_cart);
-                    this.shopping_cart.products_cart.splice(index,1);
+                    this.shopping_cart.products_cart.splice(index, 1);
                 }
                 //shopping_cart
                 this.countPriceAccount();
@@ -106,7 +119,7 @@ createApp({
                 }
             }
         },
-        clickBuyButton(){
+        clickBuyButton() {
             this.shop_page = false;
             this.cart_toggle = false;
             this.checkout_page = true;
@@ -123,5 +136,25 @@ createApp({
                 element.counter = 0;
             });
         });
+
+        // let slideIndex = 0;
+        // showSlides();
+
+        // function showSlides() {
+        //     let i;
+        //     let slides = document.getElementsByClassName("mySlides");
+        //     let dots = document.getElementsByClassName("dot");
+        //     for (i = 0; i < slides.length; i++) {
+        //         slides[i].style.display = "none";
+        //     }
+        //     slideIndex++;
+        //     if (slideIndex > slides.length) { slideIndex = 1 }
+        //     for (i = 0; i < dots.length; i++) {
+        //         dots[i].className = dots[i].className.replace(" active", "");
+        //     }
+        //     slides[slideIndex - 1].style.display = "block";
+        //     dots[slideIndex - 1].className += " active";
+        //     setTimeout(showSlides, 2000); // Change image every 2 seconds
+        // }
     },
 }).mount("#app");
