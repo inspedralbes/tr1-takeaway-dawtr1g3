@@ -123,10 +123,19 @@ createApp({
             this.shop_page = false;
             this.cart_toggle = false;
             this.checkout_page = true;
-        }
+        },
         //checkout-page_functions
 
         //status-page_functions
+
+clickOrdersButton() {
+    this.landing_page = false;
+    this.shop_page=false;
+    this.cart_toggle=false;
+    this.checkout_page = false;
+    this.status_page=true;
+
+        }
     },
     created() {
         getProductes().then((productes) => {
