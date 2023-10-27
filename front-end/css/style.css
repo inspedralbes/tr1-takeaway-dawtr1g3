@@ -540,7 +540,66 @@ body {
 .status__search{
     width: 40%;
 }
+/* admin */
+.config__admin{
+    background-image: url("https://img.freepik.com/premium-photo/white-background-white-texture-background-banner-pattern-texture-abstract-clean-grunge-white_873925-75888.jpg");
+}
+.admin{
+    margin-top: 200px;
+}
 
+/* Estilo para el botón 3D */
+.btn{
+    margin-left: 4px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #fff;
+    background-color: #99998e;
+    padding: 12px 23px;
+    border: solid #030303 2px;
+    box-shadow: rgb(0, 0, 0);
+    border-radius: 50px;
+
+    align-items: center;
+   
+}
+.boton-guardar {
+    background-color: #4CAF50; /* Color de fondo */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    padding: 10px 20px; /* Relleno (padding) del botón */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px; /* Tamaño del texto */
+    margin: 10px 2px; /* Márgenes exteriores */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+.boton-guardar:hover {
+    background-color: #45a049; /* Cambia el color de fondo al pasar el mouse */
+}
+
+  /* Efecto 3D al pasar el cursor sobre el botón 
+  .admin-buttons {
+    display: flex;
+    justify-content: center; 
+    align-items: center;   
+    height: 100vh;         
+}*/
+.orderadmin{
+    margin-top: 200px ;
+}
+.productadmin{
+    margin-top: 200px;
+}
+.titleOrder{
+    text-align: center;
+  }
+.titleProduct{
+  text-align: center;
+}
 /* footer */
 .footer {
     grid-area: footer;

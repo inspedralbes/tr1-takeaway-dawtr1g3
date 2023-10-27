@@ -10,6 +10,7 @@ createApp({
                 products_cart: [],
                 totalPrice: 0,
                 totalItems: 0,
+
             },
             user: {
                 name: "",
@@ -33,6 +34,11 @@ createApp({
             shop_page: false,
             checkout_page: false,
             status_page: false,
+            admin_page: false,
+            order_admin: false,
+            product_admin: false,
+            edit_order: false,
+
         };
     },
     methods: {
@@ -45,6 +51,9 @@ createApp({
             this.shop_page = false;
             this.checkout_page = false;
             this.status_page = false;
+            this.admin_page = false;
+            this.edit_order=false;
+            this.order_admin=false;
         },
         clickCartToggle() {
             this.cart_toggle = !this.cart_toggle;
@@ -121,13 +130,13 @@ createApp({
             this.checkout_page = true;
         },
         //checkout-page_functions
-        clickBuyForm(){
+        clickBuyForm() {
             const response = fetch("http://localhost:8000/api/comandes", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify([{total: this.shopping_cart.totalPrice}]),
+                body: JSON.stringify([{ total: this.shopping_cart.totalPrice }]),
             });
             response.then((response) => {
                 if (response.ok) {
@@ -139,12 +148,12 @@ createApp({
                 const comandaID = data.comandaID;
                 console.log("ID de la comanda creada:", comandaID);
                 const responseLineaComanda = fetch("http://localhost:8000/api/lineacomandes", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify([{items: this.shopping_cart.products_cart}, {idComanda: comandaID}]),
-            });
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify([{ items: this.shopping_cart.products_cart }, { idComanda: comandaID }]),
+                });
             }).catch((error) => {
                 console.error(error);
             });
@@ -154,10 +163,57 @@ createApp({
         //status-page_functions
         clickOrdersButton() {
             this.landing_page = false;
-            this.shop_page=false;
-            this.cart_toggle=false;
+            this.shop_page = false;
+            this.cart_toggle = false;
             this.checkout_page = false;
-            this.status_page=true;
+            this.status_page = true;
+        },
+        clickAdminFunction() {
+            this.edit_order=false;
+            this.admin_page = true;
+            this.landing_page = false;
+            this.shop_page = false;
+            this.cart_toggle = false;
+            this.checkout_page = false;
+            this.status_page = false;
+            this.order_admin = false;
+            this.product_admin = false;
+          } ,
+          ClickOrderAdmin() {
+            this.edit_order = true; // Establece edit_order a true
+            this.order_admin = false; // Establece order_admin a true
+            this.admin_page = false; // Asegúrate de ocultar otras secciones si es necesario
+            this.landing_page = false;
+            this.shop_page = false;
+            this.cart_toggle = false;
+            this.checkout_page = false;
+            this.status_page = false;
+            this.product_admin = false; // Asegúrate de ocultar product_admin si es necesario
+          },     
+        ClickProductsAdmin() {
+
+            this.product_admin = true;
+            this.admin_page = false;
+            this.landing_page = false;
+            this.shop_page = false;
+            this.cart_toggle = false;
+            this.checkout_page = false;
+            this.status_page = false;
+            this.order_admin = false;
+            this.edit_order=false;
+            
+        },
+        clickStartOrders() {
+            this.order_admin = true;
+            this.product_admin = false; 
+            this.admin_page = false;
+            this.landing_page = false;
+            this.shop_page = false;
+            this.cart_toggle = false;
+            this.checkout_page = false;
+            this.status_page = false;
+            this.edit_order = false; // Establece edit_order a true
+
         }
     },
     created() {
@@ -169,24 +225,5 @@ createApp({
             });
         });
 
-        // let slideIndex = 0;
-        // showSlides();
-
-        // function showSlides() {
-        //     let i;
-        //     let slides = document.getElementsByClassName("mySlides");
-        //     let dots = document.getElementsByClassName("dot");
-        //     for (i = 0; i < slides.length; i++) {
-        //         slides[i].style.display = "none";
-        //     }
-        //     slideIndex++;
-        //     if (slideIndex > slides.length) { slideIndex = 1 }
-        //     for (i = 0; i < dots.length; i++) {
-        //         dots[i].className = dots[i].className.replace(" active", "");
-        //     }
-        //     slides[slideIndex - 1].style.display = "block";
-        //     dots[slideIndex - 1].className += " active";
-        //     setTimeout(showSlides, 2000); // Change image every 2 seconds
-        // }
     },
 }).mount("#app");

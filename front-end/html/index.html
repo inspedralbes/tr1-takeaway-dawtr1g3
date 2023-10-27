@@ -29,10 +29,10 @@
                                 <a class="itemExtens__link">Productes</a>
                             </li>
                             <li class="listExtens__itemExtens itemExtens">
-                                <a class="itemExtens__link">Comandes</a>
+                                <a class="itemExtens__link" @click="clickOrdersButton()">Comandes</a>
                             </li>
                             <li class="listExtens__itemExtens itemExtens">
-                                <a class="itemExtens__link">Administrador</a>
+                                <a class="itemExtens__link" @click="clickAdminFunction()">Administrador</a>
                             </li>
                         </ul>
                         <div class="navExtens__searchExtens searchExtens" role="search">
@@ -150,6 +150,39 @@
             <h3>Número de comanda: <input class="status__search" type="search" name="comanda" id="comanda"></h3>
             <h3>Últim estat de la comanda:</h3>
             <h3>Detalls de la comanda:</h3>
+        </div>
+        <div class="config__admin">
+            <div class="admin" v-if="admin_page">
+                <button class="btn" @click="ClickOrderAdmin()">Comandess</button>
+                <button class="btn" @click="ClickProductsAdmin()">Productes</button>
+            </div>
+
+
+            <div class="orderedit" v-if="edit_order">
+
+                <h1>Proba Search</h1>
+                <h3>Id de comanda:<input type="search" @keyup.enter="clickStartOrders"></h3></input>
+
+                <hr>
+            </div>
+            <div class="orderadmin" v-if="order_admin">
+                <h3>Canviar estat de la comanda:</h3>
+                <button class="boton-original">Rebut</button>
+                <button class="boton-original">En preparació</button>
+                <button class="boton-original">Entregat</button>
+                <button class="boton-guardar">Guardar</button>
+
+            </div>
+            <div class="productadmin" v-if="product_admin">
+                <h3 class="titleProduct">Products</h3>
+                <hr>
+                <h3>Id de comanda: <input type="text"></h3>
+                <h3>Canviar imatge: <input type="text"></h3>
+                <h3>Canviar preu: <input type="text"></h3>
+                <h3>Canviar descripció: <input type="text"></h3>
+                <button class="boton-guardar">Guardar</button>
+
+            </div>
         </div>
         <footer class="footer">
             <h2 class="footer__title">©2023, StudentStock</h2>
