@@ -5,10 +5,12 @@
     --sizeTitleNav: 1em;
     --bg-Nav-Footer: rgb(166, 200, 226);
 }
+
 *{
     margin: 0;
     padding: 0;
 }
+
 body {
     font-family: Verdana, sans-serif;
     position: relative;
@@ -169,8 +171,7 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 2;
-    margin-top: 55px; /* Ajusta este valor para controlar la posición vertical del contenedor de horarios */
-    
+    margin-top: 55px;
 }
 
 .landing__horari {
@@ -227,7 +228,7 @@ body {
 .slider-box img {
     width: 100%;
     position: absolute;
-    top: -50px; /* Ajusta este valor según tus necesidades */
+    top: -50px;
     left: 0;
     z-index: -1;
 }
@@ -305,7 +306,6 @@ body {
 }
 
 .item__image {
-
     width: 150px;
     height: 200px;
 }
@@ -540,6 +540,7 @@ body {
 .status__search{
     width: 40%;
 }
+
 /* admin */
 .config__admin{
     background-image: url("https://img.freepik.com/premium-photo/white-background-white-texture-background-banner-pattern-texture-abstract-clean-grunge-white_873925-75888.jpg");
@@ -600,6 +601,7 @@ body {
 .titleProduct{
   text-align: center;
 }
+
 /* footer */
 .footer {
     grid-area: footer;
@@ -610,6 +612,7 @@ body {
     z-index: 1; /* Asegura que el footer esté en la parte inferior */
     /* margin-top: -50px; */
 }
+
 .footer__title {
     font-family: var(--fontfamily);
     font-variant: var(--fontvariant);

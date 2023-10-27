@@ -18,6 +18,15 @@ createApp({
                 email: "",
                 password: "",
             },
+            // landingImage: {
+            //     currentSlideIndex: 0,
+            //     slides: [
+            //         { src: "../img/img-landing-carrusel1.png", caption: "Caption Text" },
+            //         { src: "../img/img-landing-carrusel2.png", caption: "Caption Two" },
+            //         { src: "../img/img-landing-carrusel3.png", caption: "Caption Three" },
+            //         { src: "../img/img-landing-carrusel4.png", caption: "Caption Four" },
+            //     ]
+            // },
             nav_toggle: false,
             cart_toggle: false,
             landing_page: true,
@@ -88,7 +97,6 @@ createApp({
             }).catch((error) => {
                 console.error(error);
             });
-
         },
         //front-page_functions
         clickStartShopping() {
@@ -266,7 +274,7 @@ createApp({
             this.cart_toggle = false;
             this.checkout_page = false;
             this.status_page = false;
-            this.edit_order = false; // Establece edit_order a true
+            this.edit_order = false; 
         }
     },
     created() {
