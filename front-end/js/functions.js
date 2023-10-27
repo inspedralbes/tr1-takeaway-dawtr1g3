@@ -18,15 +18,6 @@ createApp({
                 residence: "",
                 email: "",
             },
-            // landingImage: {
-            //     currentSlideIndex: 0,
-            //     slides: [
-            //         { src: "../img/img-landing-carrusel1.png", caption: "Caption Text" },
-            //         { src: "../img/img-landing-carrusel2.png", caption: "Caption Two" },
-            //         { src: "../img/img-landing-carrusel3.png", caption: "Caption Three" },
-            //         { src: "../img/img-landing-carrusel4.png", caption: "Caption Four" },
-            //     ]
-            // },
             nav_toggle: false,
             cart_toggle: false,
             landing_page: true,
@@ -53,6 +44,38 @@ createApp({
             } else {
                 this.showTotalTicket = true;
             }
+        },
+        searchProducte() {
+            let inputNomLanding = document.getElementById('searchInputLanding');
+            let inputNomNav = document.getElementById('searchInputNav');
+
+            if (inputNomNav != null) {
+                var nom = inputNomNav.value;
+            } else if (inputNomLanding != null){
+                var nom = inputNomLanding.value;
+            }
+            const response = fetch(`http://localhost:8000/api/productes/search/${nom}`);
+            response.then((response) => {
+                if (response.ok) {
+                    return response.json();                    
+                } else {
+                    throw new Error("Error al fer una cerca.");
+                }
+            }).then((data) => {
+                this.productes = data;
+                this.landing_page = false;
+                this.checkout_page = false;
+                this.status_page = false;
+                this.nav_toggle = false;
+                this.shop_page = true;
+                console.log("Els productes per la recerca:", this.productes);
+                this.productes.forEach((element) => {
+                    element.counter = 0;
+                });
+            }).catch((error) => {
+                console.error(error);
+            });
+
         },
         //front-page_functions
         clickStartShopping() {
@@ -150,6 +173,7 @@ createApp({
             });
             this.checkout_page = false;
             this.landing_page = true;
+            this.shopping_cart.products_cart.splice();
         },
         //status-page_functions
         clickOrdersButton() {
@@ -168,25 +192,5 @@ createApp({
                 element.counter = 0;
             });
         });
-
-        // let slideIndex = 0;
-        // showSlides();
-
-        // function showSlides() {
-        //     let i;
-        //     let slides = document.getElementsByClassName("mySlides");
-        //     let dots = document.getElementsByClassName("dot");
-        //     for (i = 0; i < slides.length; i++) {
-        //         slides[i].style.display = "none";
-        //     }
-        //     slideIndex++;
-        //     if (slideIndex > slides.length) { slideIndex = 1 }
-        //     for (i = 0; i < dots.length; i++) {
-        //         dots[i].className = dots[i].className.replace(" active", "");
-        //     }
-        //     slides[slideIndex - 1].style.display = "block";
-        //     dots[slideIndex - 1].className += " active";
-        //     setTimeout(showSlides, 2000); // Change image every 2 seconds
-        // }
     },
 }).mount("#app");

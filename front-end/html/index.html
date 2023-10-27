@@ -26,7 +26,7 @@
                     <div class="container__navExtens navExtens" v-if="nav_toggle">
                         <ul class="navExtens__listExtens listExtens">
                             <li class="listExtens__itemExtens itemExtens">
-                                <a class="itemExtens__link">Productes</a>
+                                <a class="itemExtens__link" @click="clickStartShopping()">Productes</a>
                             </li>
                             <li class="listExtens__itemExtens itemExtens">
                                 <a class="itemExtens__link">Comandes</a>
@@ -36,9 +36,10 @@
                             </li>
                         </ul>
                         <div class="navExtens__searchExtens searchExtens" role="search">
-                            <input class="searchExtens__inputSearch" type="search"
-                                placeholder="Motxilles, calculadores, llibretes..." />
-                            <button class="searchExtens__buttonSearch">Cercar</button>
+                            <input id="searchInputNav" class="searchExtens__inputSearch" type="search"
+                                placeholder="Motxilles, calculadores, llibretes..." 
+                                @keyup.enter="searchProducte()"/>
+                            <button class="searchExtens__buttonSearch" @click="searchProducte()">Cercar</button>
                         </div>
                     </div>
                     <a class="container__buttonCar buttonCar" @click="clickCartToggle()">
@@ -91,8 +92,8 @@
                     </ol>
                 </div>
             </div>
-            <input class="landing__search" type="search" placeholder="Material Escolar ..."
-                @keyup.enter="clickStartShopping()" />
+            <input id="searchInputLanding" class="landing__search" type="search" placeholder="Material Escolar ..."
+                @keyup.enter="searchProducte()" />
             <button class="landing__button button" @click="clickStartShopping()">
                 <h2 class="button__tittle">Veure Productes</h2>
             </button>
