@@ -14,40 +14,125 @@
 
 <body>
     <div id="app">
-        <nav class="nav">
-            <div class="nav__container container">
-                <a class="container__title" @click="clickTitlePage()"><h1>StudentStock</h1></a>
-                <a class="container__buttonOpt buttonOpt " @click="clickNavToggle()">
-                    <img class="buttonOpt__iconNav" src="../icons/icon-nav-options.png"></img>
-                </a>
-                <div class="container__navExtens navExtens" v-if="nav_toggle">
-                    <ul class="navExtens__listExtens listExtens">
-                        <li class="listExtens__itemExtens itemExtens">
-                            <a class="itemExtens__link">Productes</a>
+        <div class="nav__container-sticky">
+            <nav class="nav">
+                <div class="nav__container container">
+                    <a class="container__title" @click="clickTitlePage()">
+                        <h1>StudentStock</h1>
+                    </a>
+                    <a class="container__buttonOpt buttonOpt " @click="clickNavToggle()">
+                        <img class="buttonOpt__iconNav" src="../icons/icon-nav-options.png"></img>
+                    </a>
+                    <div class="container__navExtens navExtens" v-if="nav_toggle">
+                        <ul class="navExtens__listExtens listExtens">
+                            <li class="listExtens__itemExtens itemExtens">
+                                <a class="itemExtens__link">Productes</a>
+                            </li>
+                            <li class="listExtens__itemExtens itemExtens">
+                                <a class="itemExtens__link">Comandes</a>
+                            </li>
+                            <li class="listExtens__itemExtens itemExtens">
+                                <a class="itemExtens__link">Administrador</a>
+                            </li>
+                        </ul>
+                        <div class="navExtens__searchExtens searchExtens" role="search">
+                            <input class="searchExtens__inputSearch" type="search"
+                                placeholder="Motxilles, calculadores, llibretes..." />
+                            <button class="searchExtens__buttonSearch">Cercar</button>
+                        </div>
+                    </div>
+                    <a class="container__buttonCar buttonCar" @click="clickCartToggle()">
+                        <img class="buttonCar__iconCar" src="../icons/icon-nav-shopCart.png"></img>
+                        <span class="buttonCar__counterCar">{{ shopping_cart.totalItems }}</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+        <div class="landing" v-if="landing_page">
+            <div class="slider-container">
+                <div class="slider-box">
+                    <ul>
+                        <li>
+                            <img src="../img/img-landing-carrusel5.png" alt="">
+                            <div class="texto">
+                                <!-- <h2>Imagen 1</h2>
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dolores perferendis minus!
+                                    Omnis ducimus hic vitae, reprehenderit dolore sint sapiente mollitia laboriosam a. Velit
+                                    possimus voluptate voluptatibus asperiores iste labore.
+                                </p> -->
+                            </div>
                         </li>
-                        <li class="listExtens__itemExtens itemExtens">
-                            <a class="itemExtens__link">Comandes</a>
+                        <li>
+                            <img src="../img/img-landing-carrusel6.png" alt="">
+                            <div class="texto">
+                                <!-- <h2>Imagen 2</h2>
+                                <p>
+                                    llibres per a ells
+                                </p> -->
+                            </div>
                         </li>
-                        <li class="listExtens__itemExtens itemExtens">
-                            <a class="itemExtens__link">Administrador</a>
+                        <li>
+                            <img src="../img/img-landing-carrusel7.png" alt="">
+                            <div class="texto">
+                                <!-- <h2>Imagen 3</h2>
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dolores perferendis minus!
+                                    Omnis ducimus hic vitae, reprehenderit dolore sint sapiente mollitia laboriosam a. Velit
+                                    possimus voluptate voluptatibus asperiores iste labore.
+                                </p> -->
+                            </div>
+                        </li>
+                        <li>
+                            <img src="../img/img-landing-carrusel8.png" alt="">
+                            <div class="texto">
+                                <!-- <h2>Imagen 4</h2>
+                                <p>
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dolores perferendis minus!
+                                    Omnis ducimus hic vitae, reprehenderit dolore sint sapiente mollitia laboriosam a. Velit
+                                    possimus voluptate voluptatibus asperiores iste labore.
+                                </p> -->
+                            </div>
                         </li>
                     </ul>
-                    <div class="navExtens__searchExtens searchExtens" role="search">
-                        <input class="searchExtens__inputSearch" type="search" placeholder="Motxilles, calculadores, llibretes..."/>
-                        <button class="searchExtens__buttonSearch">Cercar</button>
+                </div>
+            </div>
+
+            <div class="overlay">
+                <input class="landing__search" type="search" placeholder="Material Escolar ..."
+                    @keyup.enter="clickStartShopping" />
+                <button class="landing__button button" @click="clickStartShopping">
+                    <h2 class="button__tittle">Veure Productes</h2>
+                </button>
+                <div class="landing__horari horari">
+                    <h2 class="horari__tittle">Horari</h2>
+                    <h3 class="horari__dies">De Dilluns a Divendres</h3>
+                    <p class="horari__hores">9:00h a 13:30h</p>
+                    <p class="horari__hores">16:00h a 19:30</p>
+                </div>
+            </div>
+        </div>
+        <div class="ticket" v-if="cart_toggle">
+            <h3 class="ticket__title">Cistella</h3>
+            <div class="ticket__account account">
+                <div class="account__item div">
+                    <div class="div__itemCart itemCart" v-for="product_cart in shopping_cart.products_cart">
+                        <img class="itemCart__image" src="../img/img-exemple-producte.png">
+                        <p class="itemCart__name">{{ product_cart.nom }}</p>
+                        <p class="itemCart__price">{{ product_cart.preu }}€</p>
+                        <p class="itemCart__counter">{{ product_cart.counter }}</p>
+                        <input class="itemCart__btnless" type="button" value="-" @click="clickButtonLess(product_cart)">
                     </div>
                 </div>
-                <a class="container__buttonCar buttonCar" @click="clickCartToggle()">
-                    <img class="buttonCar__iconCar" src="../icons/icon-nav-shopCart.png"></img>
-                </a>
+                <div class="account__total total" v-if="showTotalTicket">
+                    <p class="total__name">Total</p>
+                    <p class="total__price">{{ shopping_cart.totalPrice }}€</p>
+                    <p class="total__items">{{ shopping_cart.totalItems }}</p>
+                </div>
+                <div class="account__buttonCheck buttonCheck" v-if="showTotalTicket">
+                    <button class="buttonCheck__checkBuy" @click="clickBuyButton()">Comprar</button>
+                </div>
             </div>
-        </nav>
-        <div class="landing" v-if="landing_page">
-            <input class="landing__search" type="search" placeholder="Material Escolar ..."
-                @keyup.enter="clickStartShopping()" />
-            <button class="landing__button" @click="clickStartShopping()">
-                <h2>Veure Productes</h2>
-            </button>
         </div>
         <div class="shop" v-if="shop_page">
             <div class="shop__item item" v-for="producte in productes">
@@ -58,8 +143,44 @@
                 <img class="item__image" src="../img/img-exemple-producte.png">
             </div>
         </div>
-        <div v-if="checkout_page"></div>
-        <div v-if="status_page"></div>
+        <div class="check" v-if="checkout_page">
+            <div class="check__formContainer formContainer">
+                <h2 class="formContainer__title">Dades personals</h2>
+                <div class="formContainer__form form">
+                    <label class="form__labelNom" for="nombre">Nom:</label><br>
+                    <input class="form__inputNom" type="text" id="nombre" name="nombre" v-model="user.name"
+                        required><br>
+                    <label class="form__labelCognoms" for="apellidos">Cognoms:</label><br>
+                    <input class="form__inputCognoms" type="text" id="apellidos" name="apellidos"
+                        v-model="user.surnames" required><br>
+                    <label class="form__labelDomicili" for="direccion">Direcció Domicili:</label><br>
+                    <input class="form__inputDomicili" type="text" id="direccion" name="direccion"
+                        v-model="user.residence" required><br>
+                    <label class="form__labelEmail" for="email">Correu Electrónic:</label><br>
+                    <input class="form__inputEmail" type="email" id="email" name="email" v-model="user.email"
+                        required><br>
+                    <button class="form__btn" @click="clickBuyForm()">Realitzar Compra</button>
+                </div>
+            </div>
+            <div class="check__resumTicket resumTicket">
+                <h3 class="resumTicket__title">Resum Compra</h3>
+                <div class="containerItemResum">
+                    <div class="resumTicket__itemTicket itemTicket" v-for="product_cart in shopping_cart.products_cart">
+                        <img class="itemTicket__image" src="../img/img-exemple-producte.png">
+                        <p class="itemTicket__name">{{ product_cart.nom }}</p>
+                        <p class="itemTicket__counter">{{ product_cart.counter }}</p>
+                        <p class="itemTicket__price">{{ product_cart.preu }}€</p>
+                    </div>
+                </div>
+                <p class="resumTicket__totalTitle">Total</p>
+                <p class="resumTicket__totalPrice">{{ shopping_cart.totalPrice }}€</p>
+            </div>
+        </div>
+        <div class="status" v-if="status_page">
+            <h3>Número de comanda: <input class="status__search" type="search" name="comanda" id="comanda"></h3>
+            <h3>Últim estat de la comanda:</h3>
+            <h3>Detalls de la comanda:</h3>
+        </div>
         <footer class="footer">
             <h2 class="footer__title">©2023, StudentStock</h2>
         </footer>

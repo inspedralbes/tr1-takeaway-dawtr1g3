@@ -3,34 +3,50 @@
     --fontfamily: Arial, Helvetica, sans-serif;
     --fontvariant: small-caps;
     --sizeTitleNav: 1em;
-    --bg-Nav-Footer: rgb(236, 236, 236);
+    --bg-Nav-Footer: rgb(166, 200, 226);
+}
+
+body {
+    font-family: Verdana, sans-serif;
+    position: relative;
+    margin: 0;
+    padding: 0;
 }
 
 #app {
-    background-color: antiquewhite;
+    position: relative;
+    background-color: rgb(255, 255, 255);
     display: grid;
     grid-template-rows: auto 1fr auto;
-    grid-template-areas: 
-    "nav"
-    "container"
-    "footer";
-    min-height: 100vh;
+    grid-template-areas:
+        "nav"
+        "container"
+        "footer";
+    min-height: 100vh;    
 }
 
 /* header y nav*/
 .nav {
+    position: absolute;
     grid-area: nav;
     background-color: var(--bg-Nav-Footer);
     padding: 2vh;
-    height: 35px;
+    left: 0;
+    right: 0;
 }
 
-.nav__container{
+.nav__container {
     display: grid;
     grid-template-columns: 1fr 8fr 1fr;
-    grid-template-areas: 
-    "options title shopCart"
-    "navExtens navExtens navExtens";
+    grid-template-areas:
+        "options title shopCart"
+        "navExtens navExtens navExtens";
+}
+.nav__container-sticky {
+    position: sticky;
+    top: 0;
+    background-color: var(--bg-Nav-Footer);
+    z-index: 1; /* Añade una capa superior para que la barra de navegación esté por encima de otros elementos */
 }
 
 .container__buttonOpt {
@@ -42,35 +58,35 @@
     height: 32px;
 }
 
-.container__navExtens{
+.container__navExtens {
     grid-area: navExtens;
     background-color: var(--bg-Nav-Footer);
     display: grid;
-    grid-template-areas: 
-    "list"
-    "searchNav";
+    grid-template-areas:
+        "list"
+        "searchNav";
 }
 
-.navExtens__listExtens{
+.navExtens__listExtens {
     grid-area: list;
     margin: 0;
     padding: 0;
 }
 
-.listExtens__itemExtens{
+.listExtens__itemExtens {
     list-style: none;
     margin: 5px;
 }
 
-.itemExtens__link{
+.itemExtens__link {
     text-decoration: none;
 }
 
-.navExtens__searchExtens{
+.navExtens__searchExtens {
     grid-area: searchNav;
 }
 
-.searchExtens__inputSearch{
+.searchExtens__inputSearch {
     margin: 3px;
 }
 
@@ -82,7 +98,7 @@
     font-variant: var(--fontvariant);
 }
 
-.container__title > h1 {
+.container__title>h1 {
     margin: 0;
 }
 
@@ -95,40 +111,145 @@
     height: 32px;
 }
 
+.buttonCar__counterCar {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgb(101, 255, 242);
+    padding: 5px;
+    padding-left: 7px;
+    padding-right: 7px;
+    border-radius: 50px;
+}
+
 /* landing-page */
-.landing{
+.landing {
     grid-area: container;
     text-align: center;
+    position: relative;
 }
 
 .landing__search {
     background: url(https://cdn0.iconfinder.com/data/icons/slim-square-icons-basics/100/basics-19-32.png) no-repeat 0px 5px;
     background-size: 24px;
+    background-color: #fafafacb;
     width: 70%;
     border: transparent;
-    border-bottom: solid 1px #ccc;
+    border-bottom: solid 1px rgba(238, 113, 74, 0.897);
     padding: 10px 10px 10px 30px;
     outline: none;
-    margin-top: 20%;
+    margin-top: 50px;
 }
 
 .landing__button {
     border: none;
     border-radius: 10px;
-    margin-top: 40%;
     width: 40%;
     background-color: #cae3ff;
+    margin-top: 100px;
+}
+
+/* landing horari */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    margin-top: 45px; /* Ajusta este valor para controlar la posición vertical del contenedor de horarios */
+}
+
+.landing__horari {
+    background-color: rgb(250, 223, 187);
+    text-align: center;
+    max-width: 70%;
+    border-radius: 15px;
+    padding: 15px;
+    margin-top: 150px;
+}
+
+.horari__dies {
+    padding: 10px;
+    background-color: rgb(64, 105, 240);
+    color: white;
+}
+
+.horari__hores {
+    font-size: 17px;
+}
+
+/* landing carrusel */
+.slider-container {
+    width: 400px;
+    height: 77%;
+    margin: 0 auto; /* Elimina el margen superior para que el carrusel esté más arriba */
+    overflow: hidden;
+    position: relative;
+}
+
+.slider-box {
+    width: 400px;
+    height: 77%;
+    margin: 50px auto 0;
+    overflow: hidden;
+    position: relative; /* Agregamos posición relativa al carrusel */
+    z-index: 0; /* Establecemos el carrusel detrás de los demás elementos */
+}
+
+.slider-box ul {
+    display: flex;
+    padding: 0;
+    width: 400%;
+    animation: slide 15s infinite alternate ease-in-out;
+}
+
+.slider-box li {
+    width: 100%;
+    list-style: none;
+    position: relative;
+}
+
+.texto {
+    position: absolute;
+    text-align: center;
+    top: 150px;
+}
+
+.slider-box img {
+    width: 100%;
+    position: absolute;
+    top: -90px; /* Ajusta este valor según tus necesidades */
+    left: 0;
+    z-index: -1;
+}
+
+@keyframes slide {
+    0% { margin-left: 0; }
+    20% { margin-left: 0; }
+    25% { margin-left: -100%; }
+    45% { margin-left: -100%; }
+    50% { margin-left: -200%; }
+    70% { margin-left: -200%; }
+    75% { margin-left: -300%; }
+    100% { margin-left: -300%; }
 }
 
 /* shop-page */
 .shop {
+    margin-top: 20%;
     grid-area: container;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 }
 
-.shop__item{
-    background-color: #e6e2d0;
+.shop__item {
+    /* Estilos comunes para todos los elementos .shop__item */
+    background-color: #ccf5ff;
     width: 150px;
     height: 200px;
     border-radius: 5px;
@@ -136,11 +257,11 @@
     position: relative;
     text-align: center;
     margin: auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 3%;
+    margin-bottom: 5%; /* Espacio entre todos los elementos .shop__item */
 }
 
-.item__label{
+.item__label {
     font-family: var(--fontfamily);
     font-variant: var(--fontvariant);
     position: absolute;
@@ -173,15 +294,249 @@
     width: 30px;
     height: 30px;
     margin: 3px;
+    border: none;
     border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgb(0, 47, 255);
     color: #fff;
 }
 
 .item__image {
+
     width: 150px;
     height: 200px;
 }
+
+
+/* shop-ticket */
+.ticket {
+    position: absolute;
+    right: 0;
+    top: 70px;
+    z-index: 999;
+    display: grid;
+    grid-template-rows: 1fr auto;
+    grid-template-areas:
+        "title"
+        "account";
+    color: rgb(48, 48, 48);
+    background-color: #bbf1ff;
+}
+
+.ticket__title {
+    grid-area: title;
+    font-family: var(--fontfamily);
+    font-variant: var(--fontvariant);
+    text-align: center;
+    position: sticky;
+    top: 1px;
+}
+
+.ticket__account {
+    grid-area: account;
+    display: grid;
+    grid-template-areas:
+        "itemCart"
+        "total";
+    font-family: var(--fontfamily);
+    font-variant: var(--fontvariant);
+    text-align: center;
+}
+
+.account__item {
+    grid-area: itemCart;
+    margin: 10px;
+}
+
+.account__total {
+    grid-area: total;
+    background-color: #76d1e7;
+    margin-left: 0;
+}
+
+.account__buttonCheck {
+    background-color: #76d1e7;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.buttonCheck__checkBuy {
+    display: inline-block;
+    background-color: #ff6e6e;
+    /* Rojo */
+    color: #FFFFFF;
+    /* Texto blanco */
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.div__itemCart,
+.account__total {
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr 1fr 1fr;
+    grid-template-areas: "img name counter price btn";
+}
+
+.itemCart__image {
+    grid-area: img;
+    width: 32px;
+    height: 32px;
+    padding-top: 7px;
+}
+
+.itemCart__name,
+.total__name {
+    grid-area: name;
+}
+
+.itemCart__price,
+.total__price {
+    grid-area: price;
+}
+
+.itemCart__counter,
+.total__items {
+    grid-area: counter;
+}
+
+.itemCart__btnless {
+    grid-area: btn;
+    width: 30px;
+    height: 30px;
+    margin-top: 7px;
+    border: none;
+    border-radius: 50%;
+    background-color: rgb(255, 69, 69);
+    color: #fff;
+}
+
+/* check-page */
+.check {
+    grid-area: container;
+    margin-top: 10%;
+}
+
+.check__formContainer {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 40px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+    margin-top: 10%;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.formContainer__title{
+    font-family: var(--fontfamily);
+    font-variant: var(--fontvariant);
+    color: #000000;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.form__labelNom,
+.form__labelCognoms,
+.form__labelDomicili,
+.form__labelEmail {
+    font-family: var(--fontfamily);
+    margin: 5px;
+    font-weight: bold;
+}
+
+.form__inputNom,
+.form__inputCognoms,
+.form__inputDomicili,
+.form__inputEmail {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 3px;
+    margin-bottom: 15px;
+}
+
+.form__btn {
+    margin-top: 15px;
+    background-color: #007BFF; /* Color de fondo del botón */
+    color: #fff; /* Color del texto del botón */
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: none;
+    border-radius: 25px;
+    font-family: var(--fontfamily);
+}
+
+.check__resumTicket {
+    display: grid;
+    grid-template-columns: 3fr 5fr 1fr 1fr;
+    grid-row: 2fr auto 1fr;
+    grid-template-areas: 
+    "title title title title"
+    "item item item item"
+    "totalTitle . . totalPrice";
+    margin: 7%;
+    padding: 2%;
+    background-color: #cae3ff;
+    border-radius: 25px;
+}
+
+.resumTicket__title{
+    grid-area: title;
+    font-family: var(--fontfamily);
+}
+
+.containerItemResum{
+    grid-area: item;
+}
+
+.resumTicket__itemTicket{
+    
+    display: grid;
+    grid-template-columns: 3fr 5fr 1fr 1fr;
+    grid-template-areas: 
+    "image name counter price";
+    font-family: var(--fontfamily);
+}
+
+.itemTicket__image{
+    grid-area: image;
+    height: 100%;
+    width: 80%;
+}
+
+.itemTicket__name{
+    grid-area: name;
+}
+
+.itemTicket__counter{
+    grid-area: counter;
+}
+
+.itemTicket__price{
+    grid-area: price;
+    color: red;
+}
+
+.resumTicket__totalTitle {
+    grid-area: totalTitle;
+    font-family: var(--fontfamily);
+}
+
+.resumTicket__totalPrice{
+    grid-area: totalPrice;
+    font-family: var(--fontfamily);
+}
+
+/* status-page */
+.status{
+    margin-top: 200px;
+}
+.status__search{
+    width: 40%;
+}
+
 /* footer */
 .footer {
     grid-area: footer;
@@ -190,7 +545,7 @@
     bottom: 0;
 }
 
-.footer__title{
+.footer__title {
     font-family: var(--fontfamily);
     font-variant: var(--fontvariant);
     text-align: center;

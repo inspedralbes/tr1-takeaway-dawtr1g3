@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Lineadecomanda;
-use Illuminate\Support\Facades\Validator;
 
 class LineaComandesController extends Controller
 {
-    
+
     public function index()
     {
         return Lineadecomanda::all();
@@ -18,29 +17,21 @@ class LineaComandesController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(),[
-            'id_comanda' => 'required',
-            'id_producte' => 'required',
-            'nom_producte' => 'required',
-            'desc_producte' => 'required',
-            'quantitat' => 'required',
-            'preu' => 'required',
-        ]);
-        if ($validator->fails()) {
-            return 'error';
-        }else{
+        $dades = json_decode($request->getContent(), true);
+        $comandaID = $dades[1]["idComanda"];
+        $items = $dades[0]["items"];
+
+        foreach ($items as $item) {
             $lineacomanda = new Lineadecomanda;
-            $lineacomanda->id_comanda = $request->id_comanda;
-            $lineacomanda->id_producte = $request->id_producte;
-            $lineacomanda->nom_producte = $request->nom_producte;
-            $lineacomanda->desc_producte = $request->desc_producte;
-            $lineacomanda->quantitat = $request->quantitat;
-            $lineacomanda->preu = $request->preu;
+            $lineacomanda->id_comanda = $comandaID;
+            $lineacomanda->id_producte = $item['id'];
+            $lineacomanda->nom_producte = $item['nom'];
+            $lineacomanda->desc_producte = $item['descripcio'];
+            $lineacomanda->quantitat = $item['counter'];
+            $lineacomanda->preu = $item['preu'];
             $lineacomanda->save();
-            return $lineacomanda;
         }
     }
-
     /**
      * Display the specified resource.
      */
