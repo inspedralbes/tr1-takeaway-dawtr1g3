@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\tipusUsuari;
 use Illuminate\Http\Request;
 
+
 class TipusUsuariController extends Controller
 {
     /**
@@ -12,7 +13,7 @@ class TipusUsuariController extends Controller
      */
     public function index()
     {
-        //
+        tipusUsuari::all();
     }
 
     /**
@@ -20,7 +21,11 @@ class TipusUsuariController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tipusUsuari = new tipusUsuari;
+        $tipusUsuari->fill($request->all());
+        $tipusUsuari->save();
+
+        return $tipusUsuari;
     }
 
     /**

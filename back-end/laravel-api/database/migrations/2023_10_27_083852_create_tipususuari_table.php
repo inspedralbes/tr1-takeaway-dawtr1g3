@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tipususuari', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('tipus');
+            $table->string('tipus')->unique();
         });
     }
 

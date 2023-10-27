@@ -9,4 +9,7 @@ class tipusUsuari extends Model
 {
     protected $table = "tipususuari";
     use HasFactory;
+    protected $fillable =[
+        'tipus'
+    ];
 }
