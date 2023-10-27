@@ -49,58 +49,37 @@
             </nav>
         </div>
         <div class="landing" v-if="landing_page">
-            <div class="slide">
-                <div class="slide-inner">
-                    <input class="slide-open" type="radio" id="slide-1" name="slide" aria-hidden="true" hidden=""
-                        checked="checked">
-                    <div class="slide-item">
-                        <img src="../img/img-landing-carrusel1.png">
-                    </div>
-                    <input class="slide-open" type="radio" id="slide-2" name="slide" aria-hidden="true" hidden="">
-                    <div class="slide-item">
-                        <img src="../img/img-landing-carrusel2.png">
-                    </div>
-                    <input class="slide-open" type="radio" id="slide-3" name="slide" aria-hidden="true" hidden="">
-                    <div class="slide-item">
-                        <img src="../img/img-landing-carrusel3.png">
-                    </div>
-                    <input class="slide-open" type="radio" id="slide-4" name="slide" aria-hidden="true" hidden="">
-                    <div class="slide-item">
-                        <img src="../img/img-landing-carrusel4.png">
-                    </div>
-                    <label for="slide-2" class="slide-control next control-1">›</label>
-                    <label for="slide-1" class="slide-control prev control-2">‹</label>
-                    <label for="slide-3" class="slide-control next control-2">›</label>
-                    <label for="slide-2" class="slide-control prev control-3">‹</label>
-                    <label for="slide-1" class="slide-control next control-3">›</label>
-                    <label for="slide-4" class="slide-control prev control-4">‹</label>
-                    <label for="slide-1" class="slide-control next control-4">›</label>
-                    <ol class="slide-indicador">
+            <div class="slider-container">
+                <div class="slider-box">
+                    <ul>
                         <li>
-                            <label for="slide-1" class="slide-circulo">•</label>
+                            <img src="../img/img-landing-carrusel5.png" alt="">
                         </li>
                         <li>
-                            <label for="slide-2" class="slide-circulo">•</label>
+                            <img src="../img/img-landing-carrusel6.png" alt="">
                         </li>
                         <li>
-                            <label for="slide-3" class="slide-circulo">•</label>
+                            <img src="../img/img-landing-carrusel7.png" alt="">
                         </li>
                         <li>
-                            <label for="slide-4" class="slide-circulo">•</label>
+                            <img src="../img/img-landing-carrusel8.png" alt="">
                         </li>
-                    </ol>
+                    </ul>
                 </div>
             </div>
-            <input class="landing__search" type="search" placeholder="Material Escolar ..."
-                @keyup.enter="clickStartShopping()" />
-            <button class="landing__button button" @click="clickStartShopping()">
-                <h2 class="button__tittle">Veure Productes</h2>
-            </button>
-            <div class="landing__horari horari">
-                <h2 class="horari__tittle">Horari</h2>
-                <h3 class="horari__dies">De Dilluns a Divendres</h3>
-                <p class="horari__hores">9:00h a 13:30h</p>
-                <p class="horari__hores">16:00h a 19:30</p>
+
+            <div class="overlay">
+                <input class="landing__search" type="search" placeholder="Material Escolar ..."
+                    @keyup.enter="clickStartShopping" />
+                <button class="landing__button button" @click="clickStartShopping">
+                    <h2 class="button__tittle">Veure Productes</h2>
+                </button>
+                <div class="landing__horari horari">
+                    <h2 class="horari__tittle">Horari</h2>
+                    <h3 class="horari__dies">De Dilluns a Divendres</h3>
+                    <p class="horari__hores">9:00h a 13:30h</p>
+                    <p class="horari__hores">16:00h a 19:30h</p>
+                </div>
             </div>
         </div>
         <div class="ticket" v-if="cart_toggle">
@@ -139,13 +118,17 @@
                 <h2 class="formContainer__title">Dades personals</h2>
                 <div class="formContainer__form form">
                     <label class="form__labelNom" for="nombre">Nom:</label><br>
-                    <input class="form__inputNom" type="text" id="nombre" name="nombre" v-model="user.name" required><br>
+                    <input class="form__inputNom" type="text" id="nombre" name="nombre" v-model="user.name"
+                        required><br>
                     <label class="form__labelCognoms" for="apellidos">Cognoms:</label><br>
-                    <input class="form__inputCognoms" type="text" id="apellidos" name="apellidos" v-model="user.surnames" required><br>
+                    <input class="form__inputCognoms" type="text" id="apellidos" name="apellidos"
+                        v-model="user.surnames" required><br>
                     <label class="form__labelDomicili" for="direccion">Direcció Domicili:</label><br>
-                    <input class="form__inputDomicili" type="text" id="direccion" name="direccion" v-model="user.residence" required><br>
+                    <input class="form__inputDomicili" type="text" id="direccion" name="direccion"
+                        v-model="user.residence" required><br>
                     <label class="form__labelEmail" for="email">Correu Electrónic:</label><br>
-                    <input class="form__inputEmail" type="email" id="email" name="email" v-model="user.email" required><br>
+                    <input class="form__inputEmail" type="email" id="email" name="email" v-model="user.email"
+                        required><br>
                     <button class="form__btn" @click="clickBuyForm()">Realitzar Compra</button>
                 </div>
             </div>
@@ -154,7 +137,7 @@
                 <div class="containerItemResum">
                     <div class="resumTicket__itemTicket itemTicket" v-for="product_cart in shopping_cart.products_cart">
                         <img class="itemTicket__image" src="../img/img-exemple-producte.png">
-                        <p class="itemTicket__name">{{ product_cart.nom }}</p>                    
+                        <p class="itemTicket__name">{{ product_cart.nom }}</p>
                         <p class="itemTicket__counter">{{ product_cart.counter }}</p>
                         <p class="itemTicket__price">{{ product_cart.preu }}€</p>
                     </div>
@@ -170,8 +153,25 @@
         </div>
         <footer class="footer">
             <h2 class="footer__title">©2023, StudentStock</h2>
+            <a href="https://www.facebook.com/?locale=es_ES" target="_blank"><img class="footer__img"
+                    src="../icons/facebook.png" alt="facebook">
+            </a>
+            <a href="https://www.instagram.com/" target="_blank"><img class="footer__img" src="../icons/instagram2.png"
+                    alt="instagram">
+            </a>
+            <a href="https://twitter.com/?lang=es" target="_blank"><img class="footer__img"
+                    src="../icons/gorjeo.png" alt="twitter">
+            </a>
+            <a href="https://www.youtube.com/" target="_blank"><img class="footer__img" src="../icons/social.png"
+                    alt="youtube">
+            </a>
+
+
+
+
         </footer>
     </div>
     <script src="../js/functions.js" type="module"></script>
 </body>
+
 </html>
