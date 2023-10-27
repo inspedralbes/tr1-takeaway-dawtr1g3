@@ -26,7 +26,7 @@
                     <div class="container__navExtens navExtens" v-if="nav_toggle">
                         <ul class="navExtens__listExtens listExtens">
                             <li class="listExtens__itemExtens itemExtens">
-                                <a class="itemExtens__link">Productes</a>
+                                <a class="itemExtens__link" @click="clickStartShopping()">Productes</a>
                             </li>
                             <li class="listExtens__itemExtens itemExtens">
                                 <a class="itemExtens__link" @click="clickOrdersButton()">Comandes</a>
@@ -36,9 +36,10 @@
                             </li>
                         </ul>
                         <div class="navExtens__searchExtens searchExtens" role="search">
-                            <input class="searchExtens__inputSearch" type="search"
-                                placeholder="Motxilles, calculadores, llibretes..." />
-                            <button class="searchExtens__buttonSearch">Cercar</button>
+                            <input id="searchInputNav" class="searchExtens__inputSearch" type="search"
+                                placeholder="Motxilles, calculadores, llibretes..." 
+                                @keyup.enter="searchProducte()"/>
+                            <button class="searchExtens__buttonSearch" @click="searchProducte()">Cercar</button>
                         </div>
                     </div>
                     <a class="container__buttonCar buttonCar" @click="clickCartToggle()">
@@ -67,10 +68,9 @@
                     </ul>
                 </div>
             </div>
-
             <div class="overlay">
-                <input class="landing__search" type="search" placeholder="Material Escolar ..."
-                    @keyup.enter="clickStartShopping" />
+                <input id="searchInputLanding" class="landing__search" type="search" placeholder="Material Escolar ..."
+                    @keyup.enter="searchProducte()"/>
                 <button class="landing__button button" @click="clickStartShopping">
                     <h2 class="button__tittle">Veure Productes</h2>
                 </button>
@@ -116,21 +116,18 @@
         <div class="check" v-if="checkout_page">
             <div class="check__formContainer formContainer">
                 <h2 class="formContainer__title">Dades personals</h2>
-                <div class="formContainer__form form">
+                <form class="formContainer__form form">
                     <label class="form__labelNom" for="nombre">Nom:</label><br>
                     <input class="form__inputNom" type="text" id="nombre" name="nombre" v-model="user.name"
                         required><br>
                     <label class="form__labelCognoms" for="apellidos">Cognoms:</label><br>
-                    <input class="form__inputCognoms" type="text" id="apellidos" name="apellidos"
-                        v-model="user.surnames" required><br>
-                    <label class="form__labelDomicili" for="direccion">Direcció Domicili:</label><br>
-                    <input class="form__inputDomicili" type="text" id="direccion" name="direccion"
-                        v-model="user.residence" required><br>
-                    <label class="form__labelEmail" for="email">Correu Electrónic:</label><br>
-                    <input class="form__inputEmail" type="email" id="email" name="email" v-model="user.email"
-                        required><br>
-                    <button class="form__btn" @click="clickBuyForm()">Realitzar Compra</button>
-                </div>
+                    <input class="form__inputCognoms" type="text" id="apellidos" name="apellidos" v-model="user.surnames" required><br>
+                    <label class="form__labelDomicili" for="email">Correu electónic:</label><br>
+                    <input class="form__inputDomicili" type="email" id="email" name="email" v-model="user.email" required><br>
+                    <label class="form__labelEmail" for="password">Contrasenya:</label><br>
+                    <input class="form__inputEmail" type="password" id="password" name="password" v-model="user.password" required><br>
+                    <button class="form__btn" @click="clickBuyForm()" :disabled="!isFormValid">Realitzar Compra</button>
+                </form>
             </div>
             <div class="check__resumTicket resumTicket">
                 <h3 class="resumTicket__title">Resum Compra</h3>
@@ -156,13 +153,9 @@
                 <button class="btn" @click="ClickOrderAdmin()">Comandess</button>
                 <button class="btn" @click="ClickProductsAdmin()">Productes</button>
             </div>
-
-
             <div class="orderedit" v-if="edit_order">
-
                 <h1>Proba Search</h1>
                 <h3>Id de comanda:<input type="search" @keyup.enter="clickStartOrders"></h3></input>
-
                 <hr>
             </div>
             <div class="orderadmin" v-if="order_admin">
@@ -198,13 +191,8 @@
             <a href="https://www.youtube.com/" target="_blank"><img class="footer__img" src="../icons/social.png"
                     alt="youtube">
             </a>
-
-
-
-
         </footer>
     </div>
     <script src="../js/functions.js" type="module"></script>
 </body>
-
 </html>
