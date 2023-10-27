@@ -138,17 +138,17 @@
         <div class="check" v-if="checkout_page">
             <div class="check__formContainer formContainer">
                 <h2 class="formContainer__title">Dades personals</h2>
-                <div class="formContainer__form form">
+                <form class="formContainer__form form">
                     <label class="form__labelNom" for="nombre">Nom:</label><br>
                     <input class="form__inputNom" type="text" id="nombre" name="nombre" v-model="user.name" required><br>
                     <label class="form__labelCognoms" for="apellidos">Cognoms:</label><br>
                     <input class="form__inputCognoms" type="text" id="apellidos" name="apellidos" v-model="user.surnames" required><br>
-                    <label class="form__labelDomicili" for="direccion">Direcció Domicili:</label><br>
-                    <input class="form__inputDomicili" type="text" id="direccion" name="direccion" v-model="user.residence" required><br>
-                    <label class="form__labelEmail" for="email">Correu Electrónic:</label><br>
-                    <input class="form__inputEmail" type="email" id="email" name="email" v-model="user.email" required><br>
-                    <button class="form__btn" @click="clickBuyForm()">Realitzar Compra</button>
-                </div>
+                    <label class="form__labelDomicili" for="email">Correu electónic:</label><br>
+                    <input class="form__inputDomicili" type="email" id="email" name="email" v-model="user.email" required><br>
+                    <label class="form__labelEmail" for="password">Contrasenya:</label><br>
+                    <input class="form__inputEmail" type="password" id="password" name="password" v-model="user.password" required><br>
+                    <button class="form__btn" @click="clickBuyForm()" :disabled="!isFormValid">Realitzar Compra</button>
+                </form>
             </div>
             <div class="check__resumTicket resumTicket">
                 <h3 class="resumTicket__title">Resum Compra</h3>

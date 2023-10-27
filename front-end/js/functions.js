@@ -14,9 +14,8 @@ createApp({
             user: {
                 name: "",
                 surnames: "",
-                DNI: "",
-                residence: "",
                 email: "",
+                password: "",
             },
             nav_toggle: false,
             cart_toggle: false,
@@ -24,6 +23,12 @@ createApp({
             shop_page: false,
             checkout_page: false,
             status_page: false,
+            isFormValid: false,
+            computed: {
+                isFormValid: function() {
+                    return this.user.name && this.user.surnames && this.user.email && this.user.password;
+                }
+            }
         };
     },
     methods: {
@@ -142,38 +147,66 @@ createApp({
             this.shop_page = false;
             this.cart_toggle = false;
             this.checkout_page = true;
+            if (localStorage == null) {
+                this.user.name = localStorage.getItem(JSON.parse(user.name));
+                this.user.surnames = localStorage.getItem(JSON.parse(user.surnames));
+                this.user.residence = localStorage.getItem(JSON.parse(user.email));
+                this.user.email = localStorage.getItem(JSON.parse(user.password));
+            }
         },
         //checkout-page_functions
         clickBuyForm(){
-            const response = fetch("http://localhost:8000/api/comandes", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify([{total: this.shopping_cart.totalPrice}]),
-            });
-            response.then((response) => {
-                if (response.ok) {
-                    return response.json();
+            if (this.isFormValid) {
+                const response = fetch("http://localhost:8000/api/comandes", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify([{total: this.shopping_cart.totalPrice}, ]),
+                });
+                response.then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error("Error al crear la comanda.");
+                    }
+                }).then((data) => {
+                    const comandaID = data.comandaID;
+                    console.log("ID de la comanda creada:", comandaID);
+                    const responseLineaComanda = fetch("http://localhost:8000/api/lineacomandes", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify([{items: this.shopping_cart.products_cart}, {idComanda: comandaID}]),
+                    });
+                    responseLineaComanda.then((response) => {
+                        if (response.ok) {
+                            this.checkout_page = false;
+                            this.landing_page = true;
+                            this.shopping_cart.products_cart = [];
+                            this.shopping_cart.totalAccount = 0;
+                            this.shopping_cart.totalItems = 0;
+                            this.productes.forEach(element => {
+                                element.counter = 0;
+                            });
+                            return response.json();
+                        } else {
+                            throw new Error("Error al crear la comanda.");
+                        }
+                    });
+                }).catch((error) => {
+                    console.error(error);
+                });
+                if (localStorage == null) {
+                    localStorage.setItem('user', JSON.stringify(this.user));
                 } else {
-                    throw new Error("Error al crear la comanda.");
+                    localStorage.clear();
+                    localStorage.setItem('user', JSON.stringify(this.user));
                 }
-            }).then((data) => {
-                const comandaID = data.comandaID;
-                console.log("ID de la comanda creada:", comandaID);
-                const responseLineaComanda = fetch("http://localhost:8000/api/lineacomandes", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify([{items: this.shopping_cart.products_cart}, {idComanda: comandaID}]),
-            });
-            }).catch((error) => {
-                console.error(error);
-            });
-            this.checkout_page = false;
-            this.landing_page = true;
-            this.shopping_cart.products_cart.splice();
+            } else {
+                console.log('Por favor, complete todos los campos obligatorios.');
+            }
         },
         //status-page_functions
         clickOrdersButton() {
