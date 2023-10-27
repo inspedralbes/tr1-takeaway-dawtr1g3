@@ -26,19 +26,20 @@
                     <div class="container__navExtens navExtens" v-if="nav_toggle">
                         <ul class="navExtens__listExtens listExtens">
                             <li class="listExtens__itemExtens itemExtens">
-                                <a class="itemExtens__link">Productes</a>
+                                <a class="itemExtens__link" @click="clickStartShopping()">Productes</a>
                             </li>
                             <li class="listExtens__itemExtens itemExtens">
-                                <a class="itemExtens__link">Comandes</a>
+                                <a class="itemExtens__link" @click="clickOrdersButton()">Comandes</a>
                             </li>
                             <li class="listExtens__itemExtens itemExtens">
-                                <a class="itemExtens__link">Administrador</a>
+                                <a class="itemExtens__link" @click="clickAdminFunction()">Administrador</a>
                             </li>
                         </ul>
                         <div class="navExtens__searchExtens searchExtens" role="search">
-                            <input class="searchExtens__inputSearch" type="search"
-                                placeholder="Motxilles, calculadores, llibretes..." />
-                            <button class="searchExtens__buttonSearch">Cercar</button>
+                            <input id="searchInputNav" class="searchExtens__inputSearch" type="search"
+                                placeholder="Motxilles, calculadores, llibretes..." 
+                                @keyup.enter="searchProducte()"/>
+                            <button class="searchExtens__buttonSearch" @click="searchProducte()">Cercar</button>
                         </div>
                     </div>
                     <a class="container__buttonCar buttonCar" @click="clickCartToggle()">
@@ -54,53 +55,22 @@
                     <ul>
                         <li>
                             <img src="../img/img-landing-carrusel5.png" alt="">
-                            <div class="texto">
-                                <!-- <h2>Imagen 1</h2>
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dolores perferendis minus!
-                                    Omnis ducimus hic vitae, reprehenderit dolore sint sapiente mollitia laboriosam a. Velit
-                                    possimus voluptate voluptatibus asperiores iste labore.
-                                </p> -->
-                            </div>
                         </li>
                         <li>
                             <img src="../img/img-landing-carrusel6.png" alt="">
-                            <div class="texto">
-                                <!-- <h2>Imagen 2</h2>
-                                <p>
-                                    llibres per a ells
-                                </p> -->
-                            </div>
                         </li>
                         <li>
                             <img src="../img/img-landing-carrusel7.png" alt="">
-                            <div class="texto">
-                                <!-- <h2>Imagen 3</h2>
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dolores perferendis minus!
-                                    Omnis ducimus hic vitae, reprehenderit dolore sint sapiente mollitia laboriosam a. Velit
-                                    possimus voluptate voluptatibus asperiores iste labore.
-                                </p> -->
-                            </div>
                         </li>
                         <li>
                             <img src="../img/img-landing-carrusel8.png" alt="">
-                            <div class="texto">
-                                <!-- <h2>Imagen 4</h2>
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab dolores perferendis minus!
-                                    Omnis ducimus hic vitae, reprehenderit dolore sint sapiente mollitia laboriosam a. Velit
-                                    possimus voluptate voluptatibus asperiores iste labore.
-                                </p> -->
-                            </div>
                         </li>
                     </ul>
                 </div>
             </div>
-
             <div class="overlay">
-                <input class="landing__search" type="search" placeholder="Material Escolar ..."
-                    @keyup.enter="clickStartShopping" />
+                <input id="searchInputLanding" class="landing__search" type="search" placeholder="Material Escolar ..."
+                    @keyup.enter="searchProducte()"/>
                 <button class="landing__button button" @click="clickStartShopping">
                     <h2 class="button__tittle">Veure Productes</h2>
                 </button>
@@ -108,7 +78,7 @@
                     <h2 class="horari__tittle">Horari</h2>
                     <h3 class="horari__dies">De Dilluns a Divendres</h3>
                     <p class="horari__hores">9:00h a 13:30h</p>
-                    <p class="horari__hores">16:00h a 19:30</p>
+                    <p class="horari__hores">16:00h a 19:30h</p>
                 </div>
             </div>
         </div>
@@ -146,21 +116,18 @@
         <div class="check" v-if="checkout_page">
             <div class="check__formContainer formContainer">
                 <h2 class="formContainer__title">Dades personals</h2>
-                <div class="formContainer__form form">
+                <form class="formContainer__form form">
                     <label class="form__labelNom" for="nombre">Nom:</label><br>
                     <input class="form__inputNom" type="text" id="nombre" name="nombre" v-model="user.name"
                         required><br>
                     <label class="form__labelCognoms" for="apellidos">Cognoms:</label><br>
-                    <input class="form__inputCognoms" type="text" id="apellidos" name="apellidos"
-                        v-model="user.surnames" required><br>
-                    <label class="form__labelDomicili" for="direccion">Direcció Domicili:</label><br>
-                    <input class="form__inputDomicili" type="text" id="direccion" name="direccion"
-                        v-model="user.residence" required><br>
-                    <label class="form__labelEmail" for="email">Correu Electrónic:</label><br>
-                    <input class="form__inputEmail" type="email" id="email" name="email" v-model="user.email"
-                        required><br>
-                    <button class="form__btn" @click="clickBuyForm()">Realitzar Compra</button>
-                </div>
+                    <input class="form__inputCognoms" type="text" id="apellidos" name="apellidos" v-model="user.surnames" required><br>
+                    <label class="form__labelDomicili" for="email">Correu electónic:</label><br>
+                    <input class="form__inputDomicili" type="email" id="email" name="email" v-model="user.email" required><br>
+                    <label class="form__labelEmail" for="password">Contrasenya:</label><br>
+                    <input class="form__inputEmail" type="password" id="password" name="password" v-model="user.password" required><br>
+                    <button class="form__btn" @click="clickBuyForm()" :disabled="!isFormValid">Realitzar Compra</button>
+                </form>
             </div>
             <div class="check__resumTicket resumTicket">
                 <h3 class="resumTicket__title">Resum Compra</h3>
@@ -181,11 +148,49 @@
             <h3>Últim estat de la comanda:</h3>
             <h3>Detalls de la comanda:</h3>
         </div>
+        <div class="config__admin">
+            <div class="admin" v-if="admin_page">
+                <button class="btn" @click="ClickOrderAdmin()">Comandess</button>
+                <button class="btn" @click="ClickProductsAdmin()">Productes</button>
+            </div>
+            <div class="orderedit" v-if="edit_order">
+                <h1>Proba Search</h1>
+                <h3>Id de comanda:<input type="search" @keyup.enter="clickStartOrders"></h3></input>
+                <hr>
+            </div>
+            <div class="orderadmin" v-if="order_admin">
+                <h3>Canviar estat de la comanda:</h3>
+                <button class="boton-original">Rebut</button>
+                <button class="boton-original">En preparació</button>
+                <button class="boton-original">Entregat</button>
+                <button class="boton-guardar">Guardar</button>
+            </div>
+            <div class="productadmin" v-if="product_admin">
+                <h3 class="titleProduct">Products</h3>
+                <hr>
+                <h3>Id de comanda: <input type="text"></h3>
+                <h3>Canviar imatge: <input type="text"></h3>
+                <h3>Canviar preu: <input type="text"></h3>
+                <h3>Canviar descripció: <input type="text"></h3>
+                <button class="boton-guardar">Guardar</button>
+            </div>
+        </div>
         <footer class="footer">
             <h2 class="footer__title">©2023, StudentStock</h2>
+            <a href="https://www.facebook.com/?locale=es_ES" target="_blank"><img class="footer__img"
+                    src="../icons/facebook.png" alt="facebook">
+            </a>
+            <a href="https://www.instagram.com/" target="_blank"><img class="footer__img" src="../icons/instagram2.png"
+                    alt="instagram">
+            </a>
+            <a href="https://twitter.com/?lang=es" target="_blank"><img class="footer__img"
+                    src="../icons/gorjeo.png" alt="twitter">
+            </a>
+            <a href="https://www.youtube.com/" target="_blank"><img class="footer__img" src="../icons/social.png"
+                    alt="youtube">
+            </a>
         </footer>
     </div>
     <script src="../js/functions.js" type="module"></script>
 </body>
-
 </html>
