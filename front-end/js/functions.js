@@ -36,18 +36,27 @@ createApp({
         };
     },
     methods: {
+        //allPages
+        hiddenAllPages() {
+            this.nav_toggle = false,
+            this.cart_toggle = false,
+            this.landing_page = false,
+            this.shop_page = false,
+            this.checkout_page = false,
+            this.status_page = false,
+            this.admin_page = false,
+            this.order_admin = false,
+            this.product_admin = false,
+            this.edit_order = false,
+            this.isFormValid = false
+        },
         //header
         clickNavToggle() {
             this.nav_toggle = !this.nav_toggle;
         },
         clickTitlePage() {
+            this.hiddenAllPages();
             this.landing_page = true;
-            this.shop_page = false;
-            this.checkout_page = false;
-            this.status_page = false;
-            this.admin_page = false;
-            this.edit_order=false;
-            this.order_admin=false;
         },
         clickCartToggle() {
             this.cart_toggle = !this.cart_toggle;
@@ -74,10 +83,7 @@ createApp({
                 }
             }).then((data) => {
                 this.productes = data;
-                this.landing_page = false;
-                this.checkout_page = false;
-                this.status_page = false;
-                this.nav_toggle = false;
+                this.hiddenAllPages();
                 this.shop_page = true;
                 console.log("Els productes per la recerca:", this.productes);
                 this.productes.forEach((element) => {
@@ -89,7 +95,7 @@ createApp({
         },
         //front-page_functions
         clickStartShopping() {
-            this.landing_page = false;
+            this.hiddenAllPages();
             this.shop_page = true;
         },
         //shop-page_functions
@@ -149,8 +155,7 @@ createApp({
             }
         },
         clickBuyButton() {
-            this.shop_page = false;
-            this.cart_toggle = false;
+            this.hiddenAllPages();
             this.checkout_page = true;
             if (localStorage == null) {
                 this.user.name = localStorage.getItem(JSON.parse(user.name));
@@ -187,7 +192,7 @@ createApp({
                     });
                     responseLineaComanda.then((response) => {
                         if (response.ok) {
-                            this.checkout_page = false;
+                            this.hiddenAllPages();
                             this.landing_page = true;
                             this.shopping_cart.products_cart = [];
                             this.shopping_cart.totalAccount = 0;
@@ -215,55 +220,24 @@ createApp({
         },
         //status-page_functions
         clickOrdersButton() {
-            this.landing_page = false;
-            this.shop_page = false;
-            this.cart_toggle = false;
-            this.checkout_page = false;
+            this.hiddenAllPages();
             this.status_page = true;
         },
         clickAdminFunction() {
-            this.edit_order=false;
+            this.hiddenAllPages();
             this.admin_page = true;
-            this.landing_page = false;
-            this.shop_page = false;
-            this.cart_toggle = false;
-            this.checkout_page = false;
-            this.status_page = false;
-            this.order_admin = false;
-            this.product_admin = false;
         },
         ClickOrderAdmin() {
-            this.edit_order = true; // Establece edit_order a true
-            this.order_admin = false; // Establece order_admin a true
-            this.admin_page = false; // Asegúrate de ocultar otras secciones si es necesario
-            this.landing_page = false;
-            this.shop_page = false;
-            this.cart_toggle = false;
-            this.checkout_page = false;
-            this.status_page = false;
-            this.product_admin = false; // Asegúrate de ocultar product_admin si es necesario
+            this.hiddenAllPages();
+            this.edit_order = true;
         },     
         ClickProductsAdmin() {
+            this.hiddenAllPages();
             this.product_admin = true;
-            this.admin_page = false;
-            this.landing_page = false;
-            this.shop_page = false;
-            this.cart_toggle = false;
-            this.checkout_page = false;
-            this.status_page = false;
-            this.order_admin = false;
-            this.edit_order=false;
         },
         clickStartOrders() {
-            this.order_admin = true;
-            this.product_admin = false; 
-            this.admin_page = false;
-            this.landing_page = false;
-            this.shop_page = false;
-            this.cart_toggle = false;
-            this.checkout_page = false;
-            this.status_page = false;
-            this.edit_order = false; 
+            this.hiddenAllPages();
+            this.order_admin = true; 
         }
     },
     created() {
