@@ -10,7 +10,6 @@ createApp({
                 products_cart: [],
                 totalPrice: 0,
                 totalItems: 0,
-
             },
             user: {
                 name: "",
@@ -18,15 +17,6 @@ createApp({
                 email: "",
                 password: "",
             },
-            // landingImage: {
-            //     currentSlideIndex: 0,
-            //     slides: [
-            //         { src: "../img/img-landing-carrusel1.png", caption: "Caption Text" },
-            //         { src: "../img/img-landing-carrusel2.png", caption: "Caption Two" },
-            //         { src: "../img/img-landing-carrusel3.png", caption: "Caption Three" },
-            //         { src: "../img/img-landing-carrusel4.png", caption: "Caption Four" },
-            //     ]
-            // },
             nav_toggle: false,
             cart_toggle: false,
             landing_page: true,
@@ -70,7 +60,6 @@ createApp({
         searchProducte() {
             let inputNomLanding = document.getElementById('searchInputLanding');
             let inputNomNav = document.getElementById('searchInputNav');
-
             if (inputNomNav != null) {
                 var nom = inputNomNav.value;
             } else if (inputNomLanding != null){
@@ -242,8 +231,8 @@ createApp({
             this.status_page = false;
             this.order_admin = false;
             this.product_admin = false;
-          } ,
-          ClickOrderAdmin() {
+        },
+        ClickOrderAdmin() {
             this.edit_order = true; // Establece edit_order a true
             this.order_admin = false; // Establece order_admin a true
             this.admin_page = false; // Asegúrate de ocultar otras secciones si es necesario
@@ -253,7 +242,7 @@ createApp({
             this.checkout_page = false;
             this.status_page = false;
             this.product_admin = false; // Asegúrate de ocultar product_admin si es necesario
-          },     
+        },     
         ClickProductsAdmin() {
             this.product_admin = true;
             this.admin_page = false;
