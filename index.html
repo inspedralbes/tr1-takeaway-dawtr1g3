@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ca">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>StudentStock</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
-        integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="front-end/css/style.css" />
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
@@ -26,19 +24,18 @@
                     <div class="container__navExtens navExtens" v-if="nav_toggle">
                         <ul class="navExtens__listExtens listExtens">
                             <li class="listExtens__itemExtens itemExtens">
-                                <a class="itemExtens__link">Productes</a>
+                                <a class="itemExtens__link" @click="clickStartShopping()">Productes</a>
                             </li>
                             <li class="listExtens__itemExtens itemExtens">
-                                <a class="itemExtens__link">Comandes</a>
+                                <a class="itemExtens__link" @click="clickOrdersButton()">Comandes</a>
                             </li>
                             <li class="listExtens__itemExtens itemExtens">
-                                <a class="itemExtens__link">Administrador</a>
+                                <a class="itemExtens__link" @click="clickAdminFunction()">Administrador</a>
                             </li>
                         </ul>
                         <div class="navExtens__searchExtens searchExtens" role="search">
-                            <input class="searchExtens__inputSearch" type="search"
-                                placeholder="Motxilles, calculadores, llibretes..." />
-                            <button class="searchExtens__buttonSearch">Cercar</button>
+                            <input id="searchInputNav" class="searchExtens__inputSearch" type="search" placeholder="Motxilles, calculadores, llibretes..." @keyup.enter="searchProducte()"/>
+                            <button class="searchExtens__buttonSearch" @click="searchProducte()">Cercar</button>
                         </div>
                     </div>
                     <a class="container__buttonCar buttonCar" @click="clickCartToggle()">
@@ -49,58 +46,28 @@
             </nav>
         </div>
         <div class="landing" v-if="landing_page">
-            <div class="slide">
-                <div class="slide-inner">
-                    <input class="slide-open" type="radio" id="slide-1" name="slide" aria-hidden="true" hidden=""
-                        checked="checked">
-                    <div class="slide-item">
-                        <img src="front-end/img/img-landing-carrusel1.png">
-                    </div>
-                    <input class="slide-open" type="radio" id="slide-2" name="slide" aria-hidden="true" hidden="">
-                    <div class="slide-item">
-                        <img src="front-end/img/img-landing-carrusel2.png">
-                    </div>
-                    <input class="slide-open" type="radio" id="slide-3" name="slide" aria-hidden="true" hidden="">
-                    <div class="slide-item">
-                        <img src="front-end/img/img-landing-carrusel3.png">
-                    </div>
-                    <input class="slide-open" type="radio" id="slide-4" name="slide" aria-hidden="true" hidden="">
-                    <div class="slide-item">
-                        <img src="front-end/img/img-landing-carrusel4.png">
-                    </div>
-                    <label for="slide-2" class="slide-control next control-1">›</label>
-                    <label for="slide-1" class="slide-control prev control-2">‹</label>
-                    <label for="slide-3" class="slide-control next control-2">›</label>
-                    <label for="slide-2" class="slide-control prev control-3">‹</label>
-                    <label for="slide-1" class="slide-control next control-3">›</label>
-                    <label for="slide-4" class="slide-control prev control-4">‹</label>
-                    <label for="slide-1" class="slide-control next control-4">›</label>
-                    <ol class="slide-indicador">
-                        <li>
-                            <label for="slide-1" class="slide-circulo">•</label>
-                        </li>
-                        <li>
-                            <label for="slide-2" class="slide-circulo">•</label>
-                        </li>
-                        <li>
-                            <label for="slide-3" class="slide-circulo">•</label>
-                        </li>
-                        <li>
-                            <label for="slide-4" class="slide-circulo">•</label>
-                        </li>
-                    </ol>
+            <div class="slider-container">
+                <div class="slider-box">
+                    <ul>
+                        <li><img src="front-end/img/img-landing-carrusel5.png" alt=""></li>
+                        <li><img src="front-end/img/img-landing-carrusel6.png" alt=""></li>
+                        <li><img src="front-end/img/img-landing-carrusel7.png" alt=""></li>
+                        <li><img src="front-end/img/img-landing-carrusel8.png" alt=""></li>
+                    </ul>
                 </div>
             </div>
-            <input class="landing__search" type="search" placeholder="Material Escolar ..."
-                @keyup.enter="clickStartShopping()" />
-            <button class="landing__button button" @click="clickStartShopping()">
-                <h2 class="button__tittle">Veure Productes</h2>
-            </button>
-            <div class="landing__horari horari">
-                <h2 class="horari__tittle">Horari</h2>
-                <h3 class="horari__dies">De Dilluns a Divendres</h3>
-                <p class="horari__hores">9:00h a 13:30h</p>
-                <p class="horari__hores">16:00h a 19:30</p>
+            <div class="overlay">
+                <input id="searchInputLanding" class="landing__search" type="search" placeholder="Material Escolar ..."
+                    @keyup.enter="searchProducte()"/>
+                <button class="landing__button button" @click="clickStartShopping">
+                    <h2 class="button__tittle">Veure Productes</h2>
+                </button>
+                <div class="landing__horari horari">
+                    <h2 class="horari__tittle">Horari</h2>
+                    <h3 class="horari__dies">De Dilluns a Divendres</h3>
+                    <p class="horari__hores">9:00h a 13:30h</p>
+                    <p class="horari__hores">16:00h a 19:30h</p>
+                </div>
             </div>
         </div>
         <div class="ticket" v-if="cart_toggle">
@@ -108,7 +75,7 @@
             <div class="ticket__account account">
                 <div class="account__item div">
                     <div class="div__itemCart itemCart" v-for="product_cart in shopping_cart.products_cart">
-                        <img class="itemCart__image" :src="'back-end/laravel-api/public/'+ product_cart.imatge">
+                        <img class="itemCart__image" :src="'back-end/laravel-api/public/'+producte.imatge">
                         <p class="itemCart__name">{{ product_cart.nom }}</p>
                         <p class="itemCart__price">{{ product_cart.preu }}€</p>
                         <p class="itemCart__counter">{{ product_cart.counter }}</p>
@@ -137,24 +104,25 @@
         <div class="check" v-if="checkout_page">
             <div class="check__formContainer formContainer">
                 <h2 class="formContainer__title">Dades personals</h2>
-                <div class="formContainer__form form">
+                <form class="formContainer__form form">
                     <label class="form__labelNom" for="nombre">Nom:</label><br>
-                    <input class="form__inputNom" type="text" id="nombre" name="nombre" v-model="user.name" required><br>
+                    <input class="form__inputNom" type="text" id="nombre" name="nombre" v-model="user.name"
+                        required><br>
                     <label class="form__labelCognoms" for="apellidos">Cognoms:</label><br>
                     <input class="form__inputCognoms" type="text" id="apellidos" name="apellidos" v-model="user.surnames" required><br>
-                    <label class="form__labelDomicili" for="direccion">Direcció Domicili:</label><br>
-                    <input class="form__inputDomicili" type="text" id="direccion" name="direccion" v-model="user.residence" required><br>
-                    <label class="form__labelEmail" for="email">Correu Electrónic:</label><br>
-                    <input class="form__inputEmail" type="email" id="email" name="email" v-model="user.email" required><br>
-                    <button class="form__btn" @click="clickBuyForm()">Realitzar Compra</button>
-                </div>
+                    <label class="form__labelDomicili" for="email">Correu electónic:</label><br>
+                    <input class="form__inputDomicili" type="email" id="email" name="email" v-model="user.email" required><br>
+                    <label class="form__labelEmail" for="password">Contrasenya:</label><br>
+                    <input class="form__inputEmail" type="password" id="password" name="password" v-model="user.password" required><br>
+                    <button class="form__btn" @click="clickBuyForm()" :disabled="!isFormValid">Realitzar Compra</button>
+                </form>
             </div>
             <div class="check__resumTicket resumTicket">
                 <h3 class="resumTicket__title">Resum Compra</h3>
                 <div class="containerItemResum">
                     <div class="resumTicket__itemTicket itemTicket" v-for="product_cart in shopping_cart.products_cart">
-                        <img class="itemTicket__image" src="front-end/img/img-exemple-producte.png">
-                        <p class="itemTicket__name">{{ product_cart.nom }}</p>                    
+                        <img class="itemTicket__image" :src="'back-end/laravel-api/public/'+product_cart.imatge">
+                        <p class="itemTicket__name">{{ product_cart.nom }}</p>
                         <p class="itemTicket__counter">{{ product_cart.counter }}</p>
                         <p class="itemTicket__price">{{ product_cart.preu }}€</p>
                     </div>
@@ -168,8 +136,39 @@
             <h3>Últim estat de la comanda:</h3>
             <h3>Detalls de la comanda:</h3>
         </div>
+        <div class="config__admin">
+            <div class="admin" v-if="admin_page">
+                <button class="btn" @click="ClickOrderAdmin()">Comandess</button>
+                <button class="btn" @click="ClickProductsAdmin()">Productes</button>
+            </div>
+            <div class="orderedit" v-if="edit_order">
+                <h1>Proba Search</h1>
+                <h3>Id de comanda:<input type="search" @keyup.enter="clickStartOrders"></h3></input>
+                <hr>
+            </div>
+            <div class="orderadmin" v-if="order_admin">
+                <h3>Canviar estat de la comanda:</h3>
+                <button class="boton-original">Rebut</button>
+                <button class="boton-original">En preparació</button>
+                <button class="boton-original">Entregat</button>
+                <button class="boton-guardar">Guardar</button>
+            </div>
+            <div class="productadmin" v-if="product_admin">
+                <h3 class="titleProduct">Products</h3>
+                <hr>
+                <h3>Id de comanda: <input type="text"></h3>
+                <h3>Canviar imatge: <input type="text"></h3>
+                <h3>Canviar preu: <input type="text"></h3>
+                <h3>Canviar descripció: <input type="text"></h3>
+                <button class="boton-guardar">Guardar</button>
+            </div>
+        </div>
         <footer class="footer">
             <h2 class="footer__title">©2023, StudentStock</h2>
+            <a href="https://www.facebook.com/?locale=es_ES" target="_blank"><img class="footer__img" src="front-end/icons/facebook.png" alt="facebook"></a>
+            <a href="https://www.instagram.com/" target="_blank"><img class="footer__img" src="front-end/icons/instagram2.png" alt="instagram"></a>
+            <a href="https://twitter.com/?lang=es" target="_blank"><img class="footer__img" src="front-end/icons/gorjeo.png" alt="twitter"></a>
+            <a href="https://www.youtube.com/" target="_blank"><img class="footer__img" src="front-end/icons/social.png" alt="youtube"></a>
         </footer>
     </div>
     <script src="front-end/js/functions.js" type="module"></script>
