@@ -27,14 +27,14 @@ createApp({
             order_admin: false,
             product_admin: false,
             edit_order: false,
-            isFormValid: false,
-            computed: {
-                isFormValid: function() {
-                    return this.user.name && this.user.surnames && this.user.email && this.user.password;
-                }
-            }
+            showTotalTicket: false,
         };
     },
+    // computed: {
+    //     isFormValid: function() {
+    //         return this.user.name && this.user.surnames && this.user.email && this.user.password;
+    //     }
+    // },
     methods: {
         //allPages
         hiddenAllPages() {
@@ -166,8 +166,7 @@ createApp({
         },
         //checkout-page_functions
         clickBuyForm(){
-            if (this.isFormValid) {
-                const response = fetch("http://localhost:8000/api/comandes", {
+            const response = fetch("http://localhost:8000/api/comandes", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -214,9 +213,11 @@ createApp({
                     localStorage.clear();
                     localStorage.setItem('user', JSON.stringify(this.user));
                 }
-            } else {
-                console.log('Por favor, complete todos los campos obligatorios.');
-            }
+            // if (this.isFormValid) {
+            
+            // } else {
+            //     console.log('Por favor, complete todos los campos obligatorios.');
+            // }
         },
         //status-page_functions
         clickOrdersButton() {
