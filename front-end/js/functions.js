@@ -10,7 +10,6 @@ createApp({
                 products_cart: [],
                 totalPrice: 0,
                 totalItems: 0,
-
             },
             user: {
                 name: "",
@@ -18,15 +17,6 @@ createApp({
                 email: "",
                 password: "",
             },
-            // landingImage: {
-            //     currentSlideIndex: 0,
-            //     slides: [
-            //         { src: "../img/img-landing-carrusel1.png", caption: "Caption Text" },
-            //         { src: "../img/img-landing-carrusel2.png", caption: "Caption Two" },
-            //         { src: "../img/img-landing-carrusel3.png", caption: "Caption Three" },
-            //         { src: "../img/img-landing-carrusel4.png", caption: "Caption Four" },
-            //     ]
-            // },
             nav_toggle: false,
             cart_toggle: false,
             landing_page: true,
@@ -37,27 +27,36 @@ createApp({
             order_admin: false,
             product_admin: false,
             edit_order: false,
-            isFormValid: false,
-            computed: {
-                isFormValid: function() {
-                    return this.user.name && this.user.surnames && this.user.email && this.user.password;
-                }
-            }
+            showTotalTicket: false,
         };
     },
+    // computed: {
+    //     isFormValid: function() {
+    //         return this.user.name && this.user.surnames && this.user.email && this.user.password;
+    //     }
+    // },
     methods: {
+        //allPages
+        hiddenAllPages() {
+            this.nav_toggle = false,
+            this.cart_toggle = false,
+            this.landing_page = false,
+            this.shop_page = false,
+            this.checkout_page = false,
+            this.status_page = false,
+            this.admin_page = false,
+            this.order_admin = false,
+            this.product_admin = false,
+            this.edit_order = false,
+            this.isFormValid = false
+        },
         //header
         clickNavToggle() {
             this.nav_toggle = !this.nav_toggle;
         },
         clickTitlePage() {
+            this.hiddenAllPages();
             this.landing_page = true;
-            this.shop_page = false;
-            this.checkout_page = false;
-            this.status_page = false;
-            this.admin_page = false;
-            this.edit_order=false;
-            this.order_admin=false;
         },
         clickCartToggle() {
             this.cart_toggle = !this.cart_toggle;
@@ -70,7 +69,6 @@ createApp({
         searchProducte() {
             let inputNomLanding = document.getElementById('searchInputLanding');
             let inputNomNav = document.getElementById('searchInputNav');
-
             if (inputNomNav != null) {
                 var nom = inputNomNav.value;
             } else if (inputNomLanding != null){
@@ -85,10 +83,7 @@ createApp({
                 }
             }).then((data) => {
                 this.productes = data;
-                this.landing_page = false;
-                this.checkout_page = false;
-                this.status_page = false;
-                this.nav_toggle = false;
+                this.hiddenAllPages();
                 this.shop_page = true;
                 console.log("Els productes per la recerca:", this.productes);
                 this.productes.forEach((element) => {
@@ -100,7 +95,7 @@ createApp({
         },
         //front-page_functions
         clickStartShopping() {
-            this.landing_page = false;
+            this.hiddenAllPages();
             this.shop_page = true;
         },
         //shop-page_functions
@@ -160,8 +155,7 @@ createApp({
             }
         },
         clickBuyButton() {
-            this.shop_page = false;
-            this.cart_toggle = false;
+            this.hiddenAllPages();
             this.checkout_page = true;
             if (localStorage == null) {
                 this.user.name = localStorage.getItem(JSON.parse(user.name));
@@ -172,8 +166,7 @@ createApp({
         },
         //checkout-page_functions
         clickBuyForm(){
-            if (this.isFormValid) {
-                const response = fetch("http://localhost:8000/api/comandes", {
+            const response = fetch("http://localhost:8000/api/comandes", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -198,7 +191,7 @@ createApp({
                     });
                     responseLineaComanda.then((response) => {
                         if (response.ok) {
-                            this.checkout_page = false;
+                            this.hiddenAllPages();
                             this.landing_page = true;
                             this.shopping_cart.products_cart = [];
                             this.shopping_cart.totalAccount = 0;
@@ -220,61 +213,32 @@ createApp({
                     localStorage.clear();
                     localStorage.setItem('user', JSON.stringify(this.user));
                 }
-            } else {
-                console.log('Por favor, complete todos los campos obligatorios.');
-            }
+            // if (this.isFormValid) {
+            
+            // } else {
+            //     console.log('Por favor, complete todos los campos obligatorios.');
+            // }
         },
         //status-page_functions
         clickOrdersButton() {
-            this.landing_page = false;
-            this.shop_page = false;
-            this.cart_toggle = false;
-            this.checkout_page = false;
+            this.hiddenAllPages();
             this.status_page = true;
         },
         clickAdminFunction() {
-            this.edit_order=false;
+            this.hiddenAllPages();
             this.admin_page = true;
-            this.landing_page = false;
-            this.shop_page = false;
-            this.cart_toggle = false;
-            this.checkout_page = false;
-            this.status_page = false;
-            this.order_admin = false;
-            this.product_admin = false;
-          } ,
-          ClickOrderAdmin() {
-            this.edit_order = true; // Establece edit_order a true
-            this.order_admin = false; // Establece order_admin a true
-            this.admin_page = false; // Asegúrate de ocultar otras secciones si es necesario
-            this.landing_page = false;
-            this.shop_page = false;
-            this.cart_toggle = false;
-            this.checkout_page = false;
-            this.status_page = false;
-            this.product_admin = false; // Asegúrate de ocultar product_admin si es necesario
-          },     
+        },
+        ClickOrderAdmin() {
+            this.hiddenAllPages();
+            this.edit_order = true;
+        },     
         ClickProductsAdmin() {
+            this.hiddenAllPages();
             this.product_admin = true;
-            this.admin_page = false;
-            this.landing_page = false;
-            this.shop_page = false;
-            this.cart_toggle = false;
-            this.checkout_page = false;
-            this.status_page = false;
-            this.order_admin = false;
-            this.edit_order=false;
         },
         clickStartOrders() {
-            this.order_admin = true;
-            this.product_admin = false; 
-            this.admin_page = false;
-            this.landing_page = false;
-            this.shop_page = false;
-            this.cart_toggle = false;
-            this.checkout_page = false;
-            this.status_page = false;
-            this.edit_order = false; 
+            this.hiddenAllPages();
+            this.order_admin = true; 
         }
     },
     created() {

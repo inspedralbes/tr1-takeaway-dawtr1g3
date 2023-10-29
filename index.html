@@ -56,18 +56,15 @@
                     </ul>
                 </div>
             </div>
-            <div class="overlay">
-                <input id="searchInputLanding" class="landing__search" type="search" placeholder="Material Escolar ..."
-                    @keyup.enter="searchProducte()"/>
-                <button class="landing__button button" @click="clickStartShopping">
-                    <h2 class="button__tittle">Veure Productes</h2>
-                </button>
-                <div class="landing__horari horari">
-                    <h2 class="horari__tittle">Horari</h2>
-                    <h3 class="horari__dies">De Dilluns a Divendres</h3>
-                    <p class="horari__hores">9:00h a 13:30h</p>
-                    <p class="horari__hores">16:00h a 19:30h</p>
-                </div>
+            <input id="searchInputLanding" class="landing__search" type="search" placeholder="Material Escolar ..." @keyup.enter="searchProducte()"/>
+            <button class="landing__button button" @click="clickStartShopping">
+                <h2 class="button__tittle">Veure Productes</h2>
+            </button>
+            <div class="landing__horari horari">
+                <h2 class="horari__tittle">Horari</h2>
+                <h3 class="horari__dies">De Dilluns a Divendres</h3>
+                <p class="horari__hores">9:00h a 13:30h</p>
+                <p class="horari__hores">16:00h a 19:30h</p>
             </div>
         </div>
         <div class="ticket" v-if="cart_toggle">
@@ -75,7 +72,7 @@
             <div class="ticket__account account">
                 <div class="account__item div">
                     <div class="div__itemCart itemCart" v-for="product_cart in shopping_cart.products_cart">
-                        <img class="itemCart__image" :src="'back-end/laravel-api/public/'+producte.imatge">
+                        <img class="itemCart__image" :src="'back-end/laravel-api/public/'+product_cart.imatge">
                         <p class="itemCart__name">{{ product_cart.nom }}</p>
                         <p class="itemCart__price">{{ product_cart.preu }}€</p>
                         <p class="itemCart__counter">{{ product_cart.counter }}</p>
@@ -114,7 +111,7 @@
                     <input class="form__inputDomicili" type="email" id="email" name="email" v-model="user.email" required><br>
                     <label class="form__labelEmail" for="password">Contrasenya:</label><br>
                     <input class="form__inputEmail" type="password" id="password" name="password" v-model="user.password" required><br>
-                    <button class="form__btn" @click="clickBuyForm()" :disabled="!isFormValid">Realitzar Compra</button>
+                    <button class="form__btn" @click="clickBuyForm()">Realitzar Compra</button>
                 </form>
             </div>
             <div class="check__resumTicket resumTicket">
