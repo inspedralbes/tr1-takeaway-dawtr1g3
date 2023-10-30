@@ -15,7 +15,7 @@ Pedro, - dominio preproduccion
         - y seguir con los auth 
         - si puedes preparar el correo y que se envie alli el pdf
 
-Julie, - Consultar comanda CLIENT
+Julie, - Consultar comanda CLIENT (hecho)
         - ADMIN, Laravel, mostrant llistat comandes
         - ADMIN, Laravel, editant estat comandes
         OPCIONAL
