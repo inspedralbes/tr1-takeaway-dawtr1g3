@@ -237,9 +237,10 @@ createApp({
                     throw new Error("Error al fer una cerca.");
                 }
             }).then((data) => {
-                console.log(data.comanda);
-                console.log(data.comanda.id);
                 this.estatOrderClient.id = data.comanda.id;
+                this.estatOrderClient.estat = data.comanda.estat;
+                this.estatOrderClient.usuari = data.comanda.usuari;
+                this.estatOrderClient.total = data.comanda.total;
             }).catch((error) => {
                 console.error(error);
             });
