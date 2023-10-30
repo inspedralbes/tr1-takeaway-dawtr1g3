@@ -32,9 +32,16 @@
                             <li class="listExtens__itemExtens itemExtens">
                                 <a class="itemExtens__link" @click="clickAdminFunction()">Administrador</a>
                             </li>
+                            <li class="listExtens__itemExtens itemExtens">
+                                <a class="itemExtens__link" @click="clickLogin()">Login / Register</a>
+                            </li>
+                            <li class="listExtens__itemExtens itemExtens">
+                                <a class="itemExtens__link" @click="clickLogout()">Logout</a>
+                            </li>
                         </ul>
                         <div class="navExtens__searchExtens searchExtens" role="search">
-                            <input id="searchInputNav" class="searchExtens__inputSearch" type="search" placeholder="Motxilles, calculadores, llibretes..." @keyup.enter="searchProducte()"/>
+                            <input id="searchInputNav" class="searchExtens__inputSearch" type="search"
+                                placeholder="Motxilles, calculadores, llibretes..." @keyup.enter="searchProducte()" />
                             <button class="searchExtens__buttonSearch" @click="searchProducte()">Cercar</button>
                         </div>
                     </div>
@@ -60,6 +67,7 @@
             <button class="landing__button button" @click="clickStartShopping()">
                 <h2 class="button__tittle">Veure Productes</h2>
             </button>
+          
             <div class="landing__horari horari">
                 <h2 class="horari__tittle">Horari</h2>
                 <h3 class="horari__dies">De Dilluns a Divendres</h3>
@@ -67,7 +75,30 @@
                 <p class="horari__hores">16:00h a 19:30h</p>
             </div>
         </div>
-        <div class="ticket" v-if="views.cart_toggle">
+        <div class="login" v-if="login_page">
+            <form>
+                <h3>Login Here</h3>
+              
+                <label for="username">Username</label>
+                <input type="text" placeholder="Email or Phone" id="username">
+
+                <label for="password">Password</label>
+                <input type="password" placeholder="Password" id="password">
+
+                <button>Log In</button>
+                <a @click="clickRegister()">Register</a>
+                <div class="register" v-if="register_page">
+                    <form>
+                        <h3>Login Here</h3>
+        
+                        <label for="username">Username</label>
+                        <input type="text" placeholder="Email or Phone" id="username">
+        
+                        <label for="password">Password</label>
+                        <input type="password" placeholder="Password" id="password">
+                </div>
+        </div>
+        <div class="ticket" v-if="cart_toggle">
             <h3 class="ticket__title">Cistella</h3>
             <div class="ticket__account account">
                 <div class="account__item div">
@@ -93,9 +124,12 @@
             <div class="shop__item item" v-for="producte in productes">
                 <label class="item__label" for="producte">{{ producte.nom }}</label>
                 <div class="item__buttons buttons">
-                    <input class="buttons__more" type="button" value="+" @click="clickButtonMore(producte)">
+
+                    <input class="buttons__more" type="button" value="Afegir al carro"
+                        @click="clickButtonMore(producte)">
                 </div>
                 <img class="item__image" :src="'back-end/laravel-api/public/'+producte.imatge">
+
             </div>
         </div>
         <div class="check" v-if="views.checkout_page">
@@ -151,7 +185,6 @@
                 <button class="btn" @click="ClickProductsAdmin()">Productes</button>
             </div>
             <div class="orderedit" v-if="views.edit_order">
-                <h1>Proba Search</h1>
                 <h3>Id de comanda:<input type="search" @keyup.enter="clickStartOrders"></h3></input>
                 <hr>
             </div>
@@ -174,12 +207,17 @@
         </div>
         <footer class="footer">
             <h2 class="footer__title">©2023, StudentStock</h2>
-            <a href="https://www.facebook.com/?locale=es_ES" target="_blank"><img class="footer__img" src="front-end/icons/facebook.png" alt="facebook"></a>
-            <a href="https://www.instagram.com/" target="_blank"><img class="footer__img" src="front-end/icons/instagram2.png" alt="instagram"></a>
-            <a href="https://twitter.com/?lang=es" target="_blank"><img class="footer__img" src="front-end/icons/gorjeo.png" alt="twitter"></a>
-            <a href="https://www.youtube.com/" target="_blank"><img class="footer__img" src="front-end/icons/social.png" alt="youtube"></a>
+            <a href="https://www.facebook.com/?locale=es_ES" target="_blank"><img class="footer__img"
+                    src="front-end/icons/facebook.png" alt="facebook"></a>
+            <a href="https://www.instagram.com/" target="_blank"><img class="footer__img"
+                    src="front-end/icons/instagram2.png" alt="instagram"></a>
+            <a href="https://twitter.com/?lang=es" target="_blank"><img class="footer__img"
+                    src="front-end/icons/gorjeo.png" alt="twitter"></a>
+            <a href="https://www.youtube.com/" target="_blank"><img class="footer__img" src="front-end/icons/social.png"
+                    alt="youtube"></a>
         </footer>
     </div>
     <script src="front-end/js/functions.js" type="module"></script>
 </body>
+
 </html>

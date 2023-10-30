@@ -41,6 +41,7 @@ createApp({
         };
     },
     methods: {
+
         //allPages
         hiddenAllPages() {
             this.views.nav_toggle = false,
@@ -55,6 +56,7 @@ createApp({
             this.views.edit_order = false,
             this.views.isFormValid = false
         },
+
         //header
         clickNavToggle() {
             this.views.nav_toggle = !this.views.nav_toggle;
@@ -76,13 +78,13 @@ createApp({
             let inputNomNav = document.getElementById('searchInputNav');
             if (inputNomNav != null) {
                 var nom = inputNomNav.value;
-            } else if (inputNomLanding != null){
+            } else if (inputNomLanding != null) {
                 var nom = inputNomLanding.value;
             }
             const response = fetch(`http://localhost:8000/api/productes/search/${nom}`);
             response.then((response) => {
                 if (response.ok) {
-                    return response.json();                    
+                    return response.json();
                 } else {
                     throw new Error("Error al fer una cerca.");
                 }
@@ -98,6 +100,7 @@ createApp({
                 console.error(error);
             });
         },
+
         //front-page_functions
         clickStartShopping() {
             this.hiddenAllPages();
@@ -170,8 +173,8 @@ createApp({
             }
         },
         //checkout-page_functions
-        clickBuyForm(){
-            const response = fetch("http://localhost:8000/api/comandes", {
+        clickBuyForm() {
+           const response = fetch("http://localhost:8000/api/comandes", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -218,11 +221,12 @@ createApp({
                     localStorage.setItem('user', JSON.stringify(this.usuari));
                 }
             // if (this.isFormValid) {
-            
+
             // } else {
             //     console.log('Por favor, complete todos los campos obligatorios.');
             // }
         },
+
         //status-page_functions
         clickOrdersButton() {
             this.hiddenAllPages();
@@ -269,10 +273,19 @@ createApp({
             this.hiddenAllPages();
             this.views.admin_page = true;
         },
+        clickLogin() {
+            this.hiddenAllPages();
+            this.login_page = true; // Show the login form
+        },
+        clickRegister() {
+            this.hiddenAllPages();
+            this.register_page = true; // Show the registration form
+            this.login_page = true; // Make sure the login page is also displayed
+        },
         ClickOrderAdmin() {
             this.hiddenAllPages();
             this.views.edit_order = true;
-        },     
+        },
         ClickProductsAdmin() {
             this.hiddenAllPages();
             this.views.product_admin = true;
