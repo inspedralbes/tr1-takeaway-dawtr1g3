@@ -47,35 +47,35 @@ INSERT INTO `comandes` (`id`, `estat`, `total`) VALUES
 -- Volcado de datos para la tabla `liniacomandes`
 --
 
-INSERT INTO `liniacomandes` (`id`, `id_comanda`, `id_producte`, `nom_producte`, `desc_producte`, `quantitat`, `preu`, `created_at`, `updated_at`) VALUES
-(1, 1, 6, 'Motxilla vermella', 'Motxilla escolar de color vermell', 1, 25, '2023-10-29 20:57:52', '2023-10-29 20:57:52'),
-(2, 1, 5, 'Llapis h5', 'Llapis de grafit de duresa H5', 1, 7, '2023-10-29 20:57:52', '2023-10-29 20:57:52'),
-(3, 2, 16, 'Llibre de matemàtiques', 'Llibre de matemàtiques avançades', 1, 12, '2023-10-29 20:58:40', '2023-10-29 20:58:40'),
-(4, 2, 19, 'Llibre de ciències', 'Llibre de ciències naturals', 1, 15, '2023-10-29 20:58:40', '2023-10-29 20:58:40'),
-(5, 3, 32, 'Goma de borrar blanca', "Goma d'esborrar de color blanc", 1, 1, '2023-10-29 20:59:10', '2023-10-29 20:59:10'),
-(6, 3, 30, 'Quadern de notes', 'Quadern de notes per a prendre apunts', 1, 3, '2023-10-29 20:59:10', '2023-10-29 20:59:10'),
-(7, 3, 14, 'Llapis HB', 'Llapis de grafit de duresa HB', 1, 3, '2023-10-29 20:59:10', '2023-10-29 20:59:10'),
-(8, 3, 25, 'Llapis 2B', 'Llapis de grafit de duresa 2B', 1, 4, '2023-10-29 20:59:10', '2023-10-29 20:59:10'),
-(9, 3, 5, 'Llapis h5', 'Llapis de grafit de duresa H5', 1, 7, '2023-10-29 20:59:10', '2023-10-29 20:59:10'),
-(10, 3, 4, 'Llapis h1', 'Llapis de grafit de duresa H1', 1, 5, '2023-10-29 20:59:10', '2023-10-29 20:59:10'),
-(11, 4, 13, 'Calculadora científica', 'Calculadora científica avançada', 1, 20, '2023-10-29 20:59:49', '2023-10-29 20:59:49'),
-(12, 4, 20, 'Esquadra', 'Esquadra per a fer dibuixos', 1, 2, '2023-10-29 20:59:49', '2023-10-29 20:59:49'),
-(13, 4, 32, 'Goma de borrar blanca', "Goma d'esborrar de color blanc", 1, 1, '2023-10-29 20:59:49', '2023-10-29 20:59:49'),
-(14, 4, 23, 'Carpeta blanca', 'Carpeta de color blanca per a arxivar documents', 1, 8, '2023-10-29 20:59:49', '2023-10-29 20:59:49'),
-(15, 4, 21, 'Compàs', 'Compàs per a fer cercles', 1, 4, '2023-10-29 20:59:49', '2023-10-29 20:59:49'),
-(16, 4, 33, 'Motxilla amb estampat', 'Motxilla escolar amb estampat decoratiu', 1, 28, '2023-10-29 20:59:49', '2023-10-29 20:59:49');
+INSERT INTO `liniacomandes` (`id`, `id_comanda`, `id_producte`, `nom_producte`, `desc_producte`, `quantitat`, `preu`, `imatge_producte`, `created_at`, `updated_at`) VALUES
+(1, 1, 6, 'Motxilla vermella', 'Motxilla escolar de color vermell', 1, 25, 0x696d672f696d672d6d6f7478696c6c617665726d656c6c612e706e67, '2023-10-29 20:57:52', '2023-10-29 20:57:52'),
+(2, 1, 5, 'Llapis h5', 'Llapis de grafit de duresa H5', 1, 7, 0x696d672f696d672d6c6c6170697368352e706e67, '2023-10-29 20:57:52', '2023-10-29 20:57:52'),
+(3, 2, 16, 'Llibre de matemàtiques', 'Llibre de matemàtiques avançades', 1, 12, 0x696d672f696d672d6c6c6962726564656d6174656d617469717565732e706e67, '2023-10-29 20:58:40', '2023-10-29 20:58:40'),
+(4, 2, 19, 'Llibre de ciències', 'Llibre de ciències naturals', 1, 15, 0x696d672f696d672d6c6c6962726564656369656e636965732e706e67, '2023-10-29 20:58:40', '2023-10-29 20:58:40'),
+(5, 3, 32, 'Goma de borrar blanca', "Goma d'esborrar de color blanc", 1, 1, 0x696d672f696d672d676f6d616465626f72726172626c616e63612e706e67, '2023-10-29 20:59:10', '2023-10-29 20:59:10'),
+(6, 3, 30, 'Quadern de notes', 'Quadern de notes per a prendre apunts', 1, 3, 0x696d672f696d672d7175616465726e64656e6f7465732e706e67, '2023-10-29 20:59:10', '2023-10-29 20:59:10'),
+(7, 3, 14, 'Llapis HB', 'Llapis de grafit de duresa HB', 1, 3, 0x696d672f696d672d6c6c6170697368622e706e67, '2023-10-29 20:59:10', '2023-10-29 20:59:10'),
+(8, 3, 25, 'Llapis 2B', 'Llapis de grafit de duresa 2B', 1, 4, 0x696d672f696d672d6c6c6170697332622e706e67, '2023-10-29 20:59:10', '2023-10-29 20:59:10'),
+(9, 3, 5, 'Llapis h5', 'Llapis de grafit de duresa H5', 1, 7, 0x696d672f696d672d6c6c6170697368352e706e67, '2023-10-29 20:59:10', '2023-10-29 20:59:10'),
+(10, 3, 4, 'Llapis h1', 'Llapis de grafit de duresa H1', 1, 5, 0x696d672f696d672d6c6c6170697368312e706e67, '2023-10-29 20:59:10', '2023-10-29 20:59:10'),
+(11, 4, 13, 'Calculadora científica', 'Calculadora científica avanzada', 1, 20, 0x696d672f696d672d63616c63756c61646f72616369656e7469666963612e706e67, '2023-10-29 20:59:49', '2023-10-29 20:59:49'),
+(12, 4, 20, 'Esquadra', 'Esquadra per a fer dibuixos', 1, 2, 0x696d672f696d672d65737175616472612e706e67, '2023-10-29 20:59:49', '2023-10-29 20:59:49'),
+(13, 4, 32, 'Goma de borrar blanca', "Goma d'esborrar de color blanc", 1, 1, 0x696d672f696d672d676f6d616465626f72726172626c616e63612e706e67, '2023-10-29 20:59:49', '2023-10-29 20:59:49'),
+(14, 4, 23, 'Carpeta blanca', 'Carpeta de color blanca per a arxivar documentos', 1, 8, 0x696d672f696d672d63617270657461626c616e63612e706e67, '2023-10-29 20:59:49', '2023-10-29 20:59:49'),
+(15, 4, 21, 'Compàs', 'Compàs per a fer cercles', 1, 4, 0x696d672f696d672d636f6d7061732e706e67, '2023-10-29 20:59:49', '2023-10-29 20:59:49'),
+(16, 4, 33, 'Motxilla amb estampat', 'Motxilla escolar amb estampat decoratiu', 1, 28, 0x696d672f696d672d6d6f7478696c6c61616d62657374616d7061742, '2023-10-29 20:59:49', '2023-10-29 20:59:49');
 
 --
 -- Volcado de datos para la tabla `productes`
 --
 
 INSERT INTO `productes` (`id`, `nom`, `descripcio`, `preu`, `imatge`, `categoria_id`) VALUES
-(4, 'Llapis h1', 'Llapis de grafit de duresa H1', 5, 0x696d672f696d672d6c6c6170697368312e6a7067, 4),
-(5, 'Llapis h5', 'Llapis de grafit de duresa H5', 7, 0x696d672f696d672d6c6c6170697368352e77656270, 4),
+(4, 'Llapis h1', 'Llapis de grafit de duresa H1', 5, 0x696d672f696d672d6c6c6170697368312e706e67, 4),
+(5, 'Llapis h5', 'Llapis de grafit de duresa H5', 7, 0x696d672f696d672d6c6c6170697368352e706e67, 4),
 (6, 'Motxilla vermella', 'Motxilla escolar de color vermell', 25, 0x696d672f696d672d6d6f7478696c6c617665726d656c6c612e706e67, 1),
-(7, 'Motxilla blava', 'Motxilla escolar de color blau', 15, 0x696d672f696d672d6d6f7478696c6c61626c6176612e6a7067, 1),
+(7, 'Motxilla blava', 'Motxilla escolar de color blau', 15, 0x696d672f696d672d6d6f7478696c6c61626c6176612e706e67, 1),
 (8, 'Carpeta lila', 'Carpeta de color lila per a arxivar documents', 10, 0x696d672f696d672d636172706574616c696c612e706e67, 2),
-(9, 'Carpeta verda', 'Carpeta de color verda per a arxivar documents', 10, 0x696d672f696d672d6361727065746176657264612e6a7067, 2),
+(9, 'Carpeta verda', 'Carpeta de color verda per a arxivar documents', 10, 0x696d672f696d672d6361727065746176657264612e706e67, 2),
 (10, 'Quadern de dibuix', 'Quadern de dibuix en blanc', 4, 0x696d672f696d672d7175616465726e64656469627569782e706e67, 5),
 (11, 'Llapis de colors', 'Joc de llapis de colors', 8, 0x696d672f696d672d6c6c617069736465636f6c6f72732e706e67, 4),
 (12, 'Regla 30 cm', 'Regla de 30 cm per a ús escolar', 2, 0x696d672f696d672d7265676c613330636d2e706e67, 4),
