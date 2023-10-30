@@ -29,6 +29,9 @@ createApp({
             edit_order: false,
             showTotalTicket: false,
             login_page: false,
+            register_page:false,
+            showLoginForm: true, // Mostrar el formulario (Login o Register)
+            isLogin: true, // 
         };
     },
     // computed: {
@@ -38,7 +41,7 @@ createApp({
     // },
 
     methods: {
-     
+
         //allPages
         hiddenAllPages() {
             this.nav_toggle = false,
@@ -52,10 +55,11 @@ createApp({
                 this.product_admin = false,
                 this.edit_order = false,
                 this.isFormValid = false,
-                this.login_page = false
+                this.login_page = false,
+                this.register_page = false
 
         },
-        
+
         //header
         clickNavToggle() {
             this.nav_toggle = !this.nav_toggle;
@@ -226,7 +230,7 @@ createApp({
             //     console.log('Por favor, complete todos los campos obligatorios.');
             // }
         },
-      
+
         //status-page_functions
         clickOrdersButton() {
             this.hiddenAllPages();
@@ -238,9 +242,13 @@ createApp({
         },
         clickLogin() {
             this.hiddenAllPages();
-            this.login_page = true;
+            this.login_page = true; // Show the login form
         },
-
+        clickRegister() {
+            this.hiddenAllPages();
+            this.register_page = true; // Show the registration form
+            this.login_page = true; // Make sure the login page is also displayed
+        },
         ClickOrderAdmin() {
             this.hiddenAllPages();
             this.edit_order = true;
@@ -253,6 +261,8 @@ createApp({
             this.hiddenAllPages();
             this.order_admin = true;
         },
+     
+        
 
     },
     created() {

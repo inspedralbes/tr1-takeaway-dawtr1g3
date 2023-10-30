@@ -80,10 +80,7 @@
 
 
         <div class="login" v-if="login_page">
-            <div class="background">
-                <div class="shape"></div>
-                <div class="shape"></div>
-            </div>
+
             <form>
                 <h3>Login Here</h3>
 
@@ -94,10 +91,19 @@
                 <input type="password" placeholder="Password" id="password">
 
                 <button>Log In</button>
-                <div class="register">
-                    <button>register</button>
-                    
+                <a @click="clickRegister()">Register</a>
+                <div class="register" v-if="register_page">
+                    <form>
+                        <h3>Login Here</h3>
+        
+                        <label for="username">Username</label>
+                        <input type="text" placeholder="Email or Phone" id="username">
+        
+                        <label for="password">Password</label>
+                        <input type="password" placeholder="Password" id="password">
+        
                 </div>
+
         </div>
         <div class="ticket" v-if="cart_toggle">
             <h3 class="ticket__title">Cistella</h3>
@@ -121,7 +127,7 @@
                 </div>
             </div>
         </div>
-       
+
         <div class="shop" v-if="shop_page">
             <div class="shop__item item" v-for="producte in productes">
                 <label class="item__label" for="producte">{{ producte.nom }}</label>
