@@ -5,7 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>StudentStock</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+        integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="front-end/css/style.css" />
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
@@ -32,9 +34,16 @@
                             <li class="listExtens__itemExtens itemExtens">
                                 <a class="itemExtens__link" @click="clickAdminFunction()">Administrador</a>
                             </li>
+                            <li class="listExtens__itemExtens itemExtens">
+                                <a class="itemExtens__link" @click="clickLogin()">Login / Register</a>
+                            </li>
+                            <li class="listExtens__itemExtens itemExtens">
+                                <a class="itemExtens__link" @click="clickLogout()">Logout</a>
+                            </li>
                         </ul>
                         <div class="navExtens__searchExtens searchExtens" role="search">
-                            <input id="searchInputNav" class="searchExtens__inputSearch" type="search" placeholder="Motxilles, calculadores, llibretes..." @keyup.enter="searchProducte()"/>
+                            <input id="searchInputNav" class="searchExtens__inputSearch" type="search"
+                                placeholder="Motxilles, calculadores, llibretes..." @keyup.enter="searchProducte()" />
                             <button class="searchExtens__buttonSearch" @click="searchProducte()">Cercar</button>
                         </div>
                     </div>
@@ -56,7 +65,8 @@
                     </ul>
                 </div>
             </div>
-            <input id="searchInputLanding" class="landing__search" type="search" placeholder="Material Escolar ..." @keyup.enter="searchProducte()"/>
+            <input id="searchInputLanding" class="landing__search" type="search" placeholder="Material Escolar ..."
+                @keyup.enter="searchProducte()" />
             <button class="landing__button button" @click="clickStartShopping">
                 <h2 class="button__tittle">Veure Productes</h2>
             </button>
@@ -66,6 +76,28 @@
                 <p class="horari__hores">9:00h a 13:30h</p>
                 <p class="horari__hores">16:00h a 19:30h</p>
             </div>
+        </div>
+
+
+        <div class="login" v-if="login_page">
+            <div class="background">
+                <div class="shape"></div>
+                <div class="shape"></div>
+            </div>
+            <form>
+                <h3>Login Here</h3>
+
+                <label for="username">Username</label>
+                <input type="text" placeholder="Email or Phone" id="username">
+
+                <label for="password">Password</label>
+                <input type="password" placeholder="Password" id="password">
+
+                <button>Log In</button>
+                <div class="register">
+                    <button>register</button>
+                    
+                </div>
         </div>
         <div class="ticket" v-if="cart_toggle">
             <h3 class="ticket__title">Cistella</h3>
@@ -89,13 +121,17 @@
                 </div>
             </div>
         </div>
+       
         <div class="shop" v-if="shop_page">
             <div class="shop__item item" v-for="producte in productes">
                 <label class="item__label" for="producte">{{ producte.nom }}</label>
                 <div class="item__buttons buttons">
-                    <input class="buttons__more" type="button" value="+" @click="clickButtonMore(producte)">
+
+                    <input class="buttons__more" type="button" value="Afegir al carro"
+                        @click="clickButtonMore(producte)">
                 </div>
                 <img class="item__image" :src="'back-end/laravel-api/public/'+producte.imatge">
+
             </div>
         </div>
         <div class="check" v-if="checkout_page">
@@ -106,11 +142,14 @@
                     <input class="form__inputNom" type="text" id="nombre" name="nombre" v-model="user.name"
                         required><br>
                     <label class="form__labelCognoms" for="apellidos">Cognoms:</label><br>
-                    <input class="form__inputCognoms" type="text" id="apellidos" name="apellidos" v-model="user.surnames" required><br>
+                    <input class="form__inputCognoms" type="text" id="apellidos" name="apellidos"
+                        v-model="user.surnames" required><br>
                     <label class="form__labelDomicili" for="email">Correu electónic:</label><br>
-                    <input class="form__inputDomicili" type="email" id="email" name="email" v-model="user.email" required><br>
+                    <input class="form__inputDomicili" type="email" id="email" name="email" v-model="user.email"
+                        required><br>
                     <label class="form__labelEmail" for="password">Contrasenya:</label><br>
-                    <input class="form__inputEmail" type="password" id="password" name="password" v-model="user.password" required><br>
+                    <input class="form__inputEmail" type="password" id="password" name="password"
+                        v-model="user.password" required><br>
                     <button class="form__btn" @click="clickBuyForm()">Realitzar Compra</button>
                 </form>
             </div>
@@ -139,7 +178,6 @@
                 <button class="btn" @click="ClickProductsAdmin()">Productes</button>
             </div>
             <div class="orderedit" v-if="edit_order">
-                <h1>Proba Search</h1>
                 <h3>Id de comanda:<input type="search" @keyup.enter="clickStartOrders"></h3></input>
                 <hr>
             </div>
@@ -162,12 +200,17 @@
         </div>
         <footer class="footer">
             <h2 class="footer__title">©2023, StudentStock</h2>
-            <a href="https://www.facebook.com/?locale=es_ES" target="_blank"><img class="footer__img" src="front-end/icons/facebook.png" alt="facebook"></a>
-            <a href="https://www.instagram.com/" target="_blank"><img class="footer__img" src="front-end/icons/instagram2.png" alt="instagram"></a>
-            <a href="https://twitter.com/?lang=es" target="_blank"><img class="footer__img" src="front-end/icons/gorjeo.png" alt="twitter"></a>
-            <a href="https://www.youtube.com/" target="_blank"><img class="footer__img" src="front-end/icons/social.png" alt="youtube"></a>
+            <a href="https://www.facebook.com/?locale=es_ES" target="_blank"><img class="footer__img"
+                    src="front-end/icons/facebook.png" alt="facebook"></a>
+            <a href="https://www.instagram.com/" target="_blank"><img class="footer__img"
+                    src="front-end/icons/instagram2.png" alt="instagram"></a>
+            <a href="https://twitter.com/?lang=es" target="_blank"><img class="footer__img"
+                    src="front-end/icons/gorjeo.png" alt="twitter"></a>
+            <a href="https://www.youtube.com/" target="_blank"><img class="footer__img" src="front-end/icons/social.png"
+                    alt="youtube"></a>
         </footer>
     </div>
     <script src="front-end/js/functions.js" type="module"></script>
 </body>
+
 </html>
