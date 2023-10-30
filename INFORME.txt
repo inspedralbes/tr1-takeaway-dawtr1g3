@@ -15,7 +15,9 @@ Pedro, - dominio preproduccion
         - y seguir con los auth 
         - si puedes preparar el correo y que se envie alli el pdf
 
-Julie, - ADMIN, Laravel, mostrant llistat comandes
+Julie, - Consultar comanda CLIENT
+        - ADMIN, Laravel, mostrant llistat comandes
         - ADMIN, Laravel, editant estat comandes
-        - API Laravel guardant compra i dades usuari
+        OPCIONAL
         - Els productes es mostren agrupats / filtrats dinàmicament
+        - Guardar dades usuari

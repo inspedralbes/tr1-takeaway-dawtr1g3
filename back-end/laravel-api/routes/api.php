@@ -19,6 +19,8 @@ Route::resource('usuari',UsuariController::class);
 Route::get('/productes/search/{nom}', [ProductesController::class, 'search']);
 Route::get('/categories/search/{nom}', [CategoriesController::class, 'search']);
 Route::get('/comandes/search/{nom}', [ComandesController::class, 'search']);
+Route::get('/pdf', [LineaComandesController::class, 'getpdf']);
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

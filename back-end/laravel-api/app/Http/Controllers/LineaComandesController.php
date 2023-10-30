@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Lineadecomanda;
+use PDF;
 
 class LineaComandesController extends Controller
 {
@@ -20,6 +21,7 @@ class LineaComandesController extends Controller
         $dades = json_decode($request->getContent(), true);
         $comandaID = $dades[1]["idComanda"];
         $items = $dades[0]["items"];
+        $usuari = $dades[2]["usuari"];
 
         foreach ($items as $item) {
             $lineacomanda = new Lineadecomanda;
@@ -31,6 +33,7 @@ class LineaComandesController extends Controller
             $lineacomanda->preu = $item['preu'];
             $lineacomanda->save();
         }
+        return redirect()->action([LineaComandesController::class, 'getpdf'])->with('dades',$dades);
     }
     /**
      * Display the specified resource.
@@ -54,5 +57,11 @@ class LineaComandesController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function getpdf(){
+        $data = Lineadecomanda::where('id_comanda',1)->get();
+        $pdf = PDF::loadView('pdf', compact('dades'));
+        return $pdf->stream('invoice.pdf');
     }
 }
