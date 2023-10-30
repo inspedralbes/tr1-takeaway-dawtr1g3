@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('id_producte');
             $table->string('nom_producte');
             $table->string('desc_producte');
+            $table->binary('imatge_producte')->nullable()->default(null);
             $table->integer('quantitat');
             $table->integer('preu');
             $table->timestamps();

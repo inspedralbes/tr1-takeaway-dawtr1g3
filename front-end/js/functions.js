@@ -11,69 +11,66 @@ createApp({
                 totalPrice: 0,
                 totalItems: 0,
             },
-            user: {
+            usuari: {
                 name: "",
                 surnames: "",
                 email: "",
                 password: "",
             },
-            nav_toggle: false,
-            cart_toggle: false,
-            landing_page: true,
-            shop_page: false,
-            checkout_page: false,
-            status_page: false,
-            admin_page: false,
-            order_admin: false,
-            product_admin: false,
-            edit_order: false,
-            showTotalTicket: false,
-            login_page: false,
-            register_page:false,
-            showLoginForm: true, // Mostrar el formulario (Login o Register)
-            isLogin: true, // 
+            estatOrderClient: {
+                id: '',                
+                usuari: "",
+                estat: "",
+                total: "",
+                productsOrder: {}
+            },
+            views : {
+                nav_toggle: false,
+                cart_toggle: false,
+                landing_page: true,
+                shop_page: false,
+                checkout_page: false,
+                status_page: false,
+                admin_page: false,
+                order_admin: false,
+                product_admin: false,
+                edit_order: false,
+                showTotalTicket: false,
+                searchOrderClientPage: false
+            }
         };
     },
-    // computed: {
-    //     isFormValid: function() {
-    //         return this.user.name && this.user.surnames && this.user.email && this.user.password;
-    //     }
-    // },
-
     methods: {
 
         //allPages
         hiddenAllPages() {
-            this.nav_toggle = false,
-                this.cart_toggle = false,
-                this.landing_page = false,
-                this.shop_page = false,
-                this.checkout_page = false,
-                this.status_page = false,
-                this.admin_page = false,
-                this.order_admin = false,
-                this.product_admin = false,
-                this.edit_order = false,
-                this.isFormValid = false,
-                this.login_page = false,
-                this.register_page = false
-
+            this.views.nav_toggle = false,
+            this.views.cart_toggle = false,
+            this.views.landing_page = false,
+            this.views.shop_page = false,
+            this.views.checkout_page = false,
+            this.views.status_page = false,
+            this.views.admin_page = false,
+            this.views.order_admin = false,
+            this.views.product_admin = false,
+            this.views.edit_order = false,
+            this.views.isFormValid = false
         },
 
         //header
         clickNavToggle() {
-            this.nav_toggle = !this.nav_toggle;
+            this.views.nav_toggle = !this.views.nav_toggle;
         },
         clickTitlePage() {
             this.hiddenAllPages();
-            this.landing_page = true;
+            this.views.landing_page = true;
         },
         clickCartToggle() {
-            this.cart_toggle = !this.cart_toggle;
+            this.views.cart_toggle = !this.views.cart_toggle;
             if (this.shopping_cart.products_cart.length == 0) {
-                this.showTotalTicket = false;
+                this.views.showTotalTicket = false;
             } else {
-                this.showTotalTicket = true;
+                this.views.showTotalTicket = true;
             }
         },
         searchProducte() {
@@ -94,7 +91,7 @@ createApp({
             }).then((data) => {
                 this.productes = data;
                 this.hiddenAllPages();
-                this.shop_page = true;
+                this.views.shop_page = true;
                 console.log("Els productes per la recerca:", this.productes);
                 this.productes.forEach((element) => {
                     element.counter = 0;
@@ -107,7 +104,7 @@ createApp({
         //front-page_functions
         clickStartShopping() {
             this.hiddenAllPages();
-            this.shop_page = true;
+            this.views.shop_page = true;
         },
         //shop-page_functions
         searchProductePos(producte) {
@@ -167,63 +164,62 @@ createApp({
         },
         clickBuyButton() {
             this.hiddenAllPages();
-            this.checkout_page = true;
+            this.views.checkout_page = true;
             if (localStorage == null) {
-                this.user.name = localStorage.getItem(JSON.parse(user.name));
-                this.user.surnames = localStorage.getItem(JSON.parse(user.surnames));
-                this.user.residence = localStorage.getItem(JSON.parse(user.email));
-                this.user.email = localStorage.getItem(JSON.parse(user.password));
+                this.usuari.name = localStorage.getItem(JSON.parse(user.name));
+                this.usuari.surnames = localStorage.getItem(JSON.parse(user.surnames));
+                this.usuari.residence = localStorage.getItem(JSON.parse(user.email));
+                this.usuari.email = localStorage.getItem(JSON.parse(user.password));
             }
         },
         //checkout-page_functions
         clickBuyForm() {
-            const response = fetch("http://localhost:8000/api/comandes", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify([{ total: this.shopping_cart.totalPrice },]),
-            });
-            response.then((response) => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error("Error al crear la comanda.");
-                }
-            }).then((data) => {
-                const comandaID = data.comandaID;
-                console.log("ID de la comanda creada:", comandaID);
-                const responseLineaComanda = fetch("http://localhost:8000/api/lineacomandes", {
+           const response = fetch("http://localhost:8000/api/comandes", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify([{ items: this.shopping_cart.products_cart }, { idComanda: comandaID }]),
+                    body: JSON.stringify([{total: this.shopping_cart.totalPrice}, {usuari: this.usuari.email}]),
                 });
-                responseLineaComanda.then((response) => {
+                response.then((response) => {
                     if (response.ok) {
-                        this.hiddenAllPages();
-                        this.landing_page = true;
-                        this.shopping_cart.products_cart = [];
-                        this.shopping_cart.totalAccount = 0;
-                        this.shopping_cart.totalItems = 0;
-                        this.productes.forEach(element => {
-                            element.counter = 0;
-                        });
                         return response.json();
                     } else {
                         throw new Error("Error al crear la comanda.");
                     }
+                }).then((data) => {
+                    const comandaID = data.comandaID;
+                    const responseLineaComanda = fetch("http://localhost:8000/api/lineacomandes", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify([{items: this.shopping_cart.products_cart}, {idComanda: comandaID}, {usuari: this.usuari.email}]),
+                    });
+                    responseLineaComanda.then((response) => {
+                        if (response.ok) {
+                            this.hiddenAllPages();
+                            this.views.landing_page = true;
+                            this.shopping_cart.products_cart = [];
+                            this.shopping_cart.totalAccount = 0;
+                            this.shopping_cart.totalItems = 0;
+                            this.productes.forEach(element => {
+                                element.counter = 0;
+                            });
+                            return response.json();
+                        } else {
+                            throw new Error("Error al crear la comanda.");
+                        }
+                    });
+                }).catch((error) => {
+                    console.error(error);
                 });
-            }).catch((error) => {
-                console.error(error);
-            });
-            if (localStorage == null) {
-                localStorage.setItem('user', JSON.stringify(this.user));
-            } else {
-                localStorage.clear();
-                localStorage.setItem('user', JSON.stringify(this.user));
-            }
+                if (localStorage == null) {
+                    localStorage.setItem('user', JSON.stringify(this.usuari));
+                } else {
+                    localStorage.clear();
+                    localStorage.setItem('user', JSON.stringify(this.usuari));
+                }
             // if (this.isFormValid) {
 
             // } else {
@@ -234,11 +230,48 @@ createApp({
         //status-page_functions
         clickOrdersButton() {
             this.hiddenAllPages();
-            this.status_page = true;
+            this.views.status_page = true;
         },
+        clickSearchOrderClient(){
+            let inputOrderClient = document.getElementById('searchInputOrderClient');
+            var id = inputOrderClient.value;
+
+            const response = fetch(`http://localhost:8000/api/comandes/${id}`);
+            response.then((response) => {
+                if (response.ok) {
+                    return response.json();                    
+                } else {
+                    throw new Error("Error al fer una cerca.");
+                }
+            }).then((data) => {
+                this.estatOrderClient.id = data.comanda.id;
+                this.estatOrderClient.estat = data.comanda.estat;
+                this.estatOrderClient.usuari = data.comanda.usuari;
+                this.estatOrderClient.total = data.comanda.total;
+                this.views.searchOrderClientPage = true;
+                let comandaID = this.estatOrderClient.id;
+                const responseLineaComanda = fetch(`http://localhost:8000/api/lineacomandes/orderclient/${comandaID}`);
+                responseLineaComanda.then((response) => {
+                    if (response.ok) {
+                        return response.json();                    
+                    } else {
+                        throw new Error("Error al fer una cerca.");
+                    }
+                }).then((data) => {
+                    this.estatOrderClient.productsOrder = data.items;
+                    console.log(data.items);
+                    console.log(this.estatOrderClient.productsOrder);
+                }).catch((error) => {
+                    console.error(error);
+                });
+            }).catch((error) => {
+                console.error(error);
+            });
+        },
+        //admin-fuctions
         clickAdminFunction() {
             this.hiddenAllPages();
-            this.admin_page = true;
+            this.views.admin_page = true;
         },
         clickLogin() {
             this.hiddenAllPages();
@@ -251,19 +284,16 @@ createApp({
         },
         ClickOrderAdmin() {
             this.hiddenAllPages();
-            this.edit_order = true;
+            this.views.edit_order = true;
         },
         ClickProductsAdmin() {
             this.hiddenAllPages();
-            this.product_admin = true;
+            this.views.product_admin = true;
         },
         clickStartOrders() {
             this.hiddenAllPages();
-            this.order_admin = true;
-        },
-     
-        
-
+            this.views.order_admin = true; 
+        }
     },
     created() {
         getProductes().then((productes) => {

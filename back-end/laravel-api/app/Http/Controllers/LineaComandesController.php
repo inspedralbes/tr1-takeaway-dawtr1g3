@@ -20,6 +20,7 @@ class LineaComandesController extends Controller
         $dades = json_decode($request->getContent(), true);
         $comandaID = $dades[1]["idComanda"];
         $items = $dades[0]["items"];
+        $usuari = $dades[2]["usuari"];
 
         foreach ($items as $item) {
             $lineacomanda = new Lineadecomanda;
@@ -27,6 +28,10 @@ class LineaComandesController extends Controller
             $lineacomanda->id_producte = $item['id'];
             $lineacomanda->nom_producte = $item['nom'];
             $lineacomanda->desc_producte = $item['descripcio'];
+            if ($item->hasFile('imatge')) {
+                $imatgePath = $item['imatge']->storeAs('/img', $item['imatge']->getClientOriginalName());
+                $lineacomanda->imatge_producte = $imatgePath;
+            }
             $lineacomanda->quantitat = $item['counter'];
             $lineacomanda->preu = $item['preu'];
             $lineacomanda->save();
@@ -54,5 +59,11 @@ class LineaComandesController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function getLineasPorIdComanda($comandaID)
+    {
+        $lineas = Lineadecomanda::where('id_comanda', $comandaID)->get();
+        return response()->json(['items' => $lineas]);
     }
 }

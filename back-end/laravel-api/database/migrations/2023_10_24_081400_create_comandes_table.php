@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('comandes', function (Blueprint $table) {
             $table->id();
+            $table->string('usuari')->default('example@gmail.com');
             $table->enum('estat',['Rebut','En preparacio','Llest per recollir'])->default('rebut');
             $table->float('total');
         });
