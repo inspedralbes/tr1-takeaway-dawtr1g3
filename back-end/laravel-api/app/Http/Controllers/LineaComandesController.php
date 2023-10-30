@@ -20,6 +20,7 @@ class LineaComandesController extends Controller
         $dades = json_decode($request->getContent(), true);
         $comandaID = $dades[1]["idComanda"];
         $items = $dades[0]["items"];
+        $usuari = $dades[2]["usuari"];
 
         foreach ($items as $item) {
             $lineacomanda = new Lineadecomanda;
@@ -31,6 +32,8 @@ class LineaComandesController extends Controller
             $lineacomanda->preu = $item['preu'];
             $lineacomanda->save();
         }
+
+        
     }
     /**
      * Display the specified resource.

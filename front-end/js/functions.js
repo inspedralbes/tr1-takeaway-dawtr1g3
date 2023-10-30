@@ -11,11 +11,18 @@ createApp({
                 totalPrice: 0,
                 totalItems: 0,
             },
-            user: {
+            usuari: {
                 name: "",
                 surnames: "",
                 email: "",
                 password: "",
+            },
+            estatOrderClient: {
+                id: '',                
+                usuari: "",
+                estat: "",
+                total: "",
+                productsOrder: {}
             },
             nav_toggle: false,
             cart_toggle: false,
@@ -30,11 +37,6 @@ createApp({
             showTotalTicket: false,
         };
     },
-    // computed: {
-    //     isFormValid: function() {
-    //         return this.user.name && this.user.surnames && this.user.email && this.user.password;
-    //     }
-    // },
     methods: {
         //allPages
         hiddenAllPages() {
@@ -171,7 +173,7 @@ createApp({
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify([{total: this.shopping_cart.totalPrice}, ]),
+                    body: JSON.stringify([{total: this.shopping_cart.totalPrice}, {usuari: this.usuari.email}]),
                 });
                 response.then((response) => {
                     if (response.ok) {
@@ -181,13 +183,12 @@ createApp({
                     }
                 }).then((data) => {
                     const comandaID = data.comandaID;
-                    console.log("ID de la comanda creada:", comandaID);
                     const responseLineaComanda = fetch("http://localhost:8000/api/lineacomandes", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
                         },
-                        body: JSON.stringify([{items: this.shopping_cart.products_cart}, {idComanda: comandaID}]),
+                        body: JSON.stringify([{items: this.shopping_cart.products_cart}, {idComanda: comandaID}, {usuari: this.usuari.email}]),
                     });
                     responseLineaComanda.then((response) => {
                         if (response.ok) {
@@ -208,10 +209,10 @@ createApp({
                     console.error(error);
                 });
                 if (localStorage == null) {
-                    localStorage.setItem('user', JSON.stringify(this.user));
+                    localStorage.setItem('user', JSON.stringify(this.usuari));
                 } else {
                     localStorage.clear();
-                    localStorage.setItem('user', JSON.stringify(this.user));
+                    localStorage.setItem('user', JSON.stringify(this.usuari));
                 }
             // if (this.isFormValid) {
             
@@ -224,6 +225,26 @@ createApp({
             this.hiddenAllPages();
             this.status_page = true;
         },
+        clickSearchOrderClient(){
+            let inputOrderClient = document.getElementById('searchInputOrderClient');
+            var id = inputOrderClient.value;
+
+            const response = fetch(`http://localhost:8000/api/comandes/${id}`);
+            response.then((response) => {
+                if (response.ok) {
+                    return response.json();                    
+                } else {
+                    throw new Error("Error al fer una cerca.");
+                }
+            }).then((data) => {
+                console.log(data.comanda);
+                console.log(data.comanda.id);
+                this.estatOrderClient.id = data.comanda.id;
+            }).catch((error) => {
+                console.error(error);
+            });
+        },
+        //admin-fuctions
         clickAdminFunction() {
             this.hiddenAllPages();
             this.admin_page = true;

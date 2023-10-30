@@ -16,11 +16,13 @@ class ComandesController extends Controller
     public function store(Request $request){
 
         $dades = json_decode($request->getContent(), true);
+        $user = $dades[1]["usuari"];
         $total = $dades[0]["total"];
 
-        $comanda = Comanda::create([
-            'total'=> $total,
-        ]);
+        $comanda = new Comanda;
+        $comanda->total = $total;
+        $comanda->usuari = $user;
+        $comanda->save();
 
         $comandaID = $comanda->id;
 
@@ -42,7 +44,8 @@ class ComandesController extends Controller
 
     public function show($id){
         $comanda = Comanda::find($id);
-        return $comanda;
+
+        return response()->json(['comanda' => $comanda]);
     }
 
     public function search($id){
