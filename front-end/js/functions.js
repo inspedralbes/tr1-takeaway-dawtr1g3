@@ -31,10 +31,6 @@ createApp({
                 shop_page: false,
                 checkout_page: false,
                 status_page: false,
-                admin_page: false,
-                order_admin: false,
-                product_admin: false,
-                edit_order: false,
                 showTotalTicket: false,
                 searchOrderClientPage: false
             }
@@ -54,7 +50,9 @@ createApp({
             this.views.order_admin = false,
             this.views.product_admin = false,
             this.views.edit_order = false,
-            this.views.isFormValid = false
+            this.views.isFormValid = false,
+            this.views.login_page = false,
+            this.views.register_page = false
         },
 
         //header
@@ -100,7 +98,6 @@ createApp({
                 console.error(error);
             });
         },
-
         //front-page_functions
         clickStartShopping() {
             this.hiddenAllPages();
@@ -174,7 +171,7 @@ createApp({
         },
         //checkout-page_functions
         clickBuyForm() {
-           const response = fetch("http://localhost:8000/api/comandes", {
+            const response = fetch("http://localhost:8000/api/comandes", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -268,31 +265,15 @@ createApp({
                 console.error(error);
             });
         },
-        //admin-fuctions
-        clickAdminFunction() {
-            this.hiddenAllPages();
-            this.views.admin_page = true;
-        },
+        // Register-Login Functions
         clickLogin() {
             this.hiddenAllPages();
-            this.login_page = true; // Show the login form
+            this.views.login_page = true; 
         },
         clickRegister() {
             this.hiddenAllPages();
-            this.register_page = true; // Show the registration form
-            this.login_page = true; // Make sure the login page is also displayed
-        },
-        ClickOrderAdmin() {
-            this.hiddenAllPages();
-            this.views.edit_order = true;
-        },
-        ClickProductsAdmin() {
-            this.hiddenAllPages();
-            this.views.product_admin = true;
-        },
-        clickStartOrders() {
-            this.hiddenAllPages();
-            this.views.order_admin = true; 
+            this.views.register_page = true;
+            this.views.login_page = true; 
         }
     },
     created() {
