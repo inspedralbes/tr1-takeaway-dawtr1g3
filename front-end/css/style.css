@@ -3,7 +3,7 @@
     --fontfamily: Arial, Helvetica, sans-serif;
     --fontvariant: small-caps;
     --sizeTitleNav: 1em;
-    --bg-Nav-Footer: rgb(166, 200, 226);
+    --bg-Nav-Footer: rgb(225, 200, 226);
 }
 
 * {
@@ -326,6 +326,12 @@ body {
     height: 170px;
 
 }
+.product-image.with-transition {
+    transition: transform 0.3s ease; 
+    transform-origin: center;
+}
+
+
 
 
 /* shop-ticket */
@@ -480,7 +486,7 @@ body {
 
 .form__btn {
     margin-top: 15px;
-    background-color: #007BFF;
+    background-color: #d9dfe6;
     /* Color de fondo del botón */
     color: #fff;
     /* Color del texto del botón */
@@ -759,19 +765,27 @@ body {
     border-radius: 5px;
     cursor: pointer;
 }
-.register {
-    background-image: url("https://wallpapers.com/images/featured/light-blue-2iuzyh711jo9bmgo.jpg");
+.usuari {
+    background-image: url("https://media.istockphoto.com/id/1299712614/photo/the-gray-and-silver-are-light-black-with-white-the-gradient-is-the-surface-with-templates.webp?b=1&s=170667a&w=0&k=20&c=QgjMdwWukiTPJV-8mm2VrVtwMgu5QEpeHeBvxXaBIzA=");
 }
-
+.register{
+    margin-top: 200px;
+}
 .background .shape {
     height: 200px;
     width: 200px;
     position: absolute;
     border-radius: 50%;
 }
-
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
 
 .register form {
+    
     width: 200px;
     background-color: rgba(51, 49, 49, 0.11);
     position: absolute;
@@ -848,3 +862,83 @@ body {
     padding: 5px;
     margin-bottom: -10px;
 }
+/* TRANSICION*/
+.hamburger__toggle{
+    display:block;
+    position: relative;
+    background-color:#3d3d3d;
+    width: 60px; 
+    height: 60px; 
+    margin:50px auto;
+    border-radius:50%;
+    border:none;
+  }
+  
+  /* give the span element and related pseudo-elements the appearance of white lines */
+  .hamburger__icon,
+  .hamburger__icon::before,
+  .hamburger__icon::after {
+    position: absolute;
+    width: 30px; 
+    height: 2px;
+    border-radius: 4px;
+    background-color: white;
+  }
+  
+  /* center the span element in the middle of its containing button */
+  .hamburger__icon {
+    top: calc(50% - 2px);
+    left: calc(50% - 15px);
+  }
+  
+  /* position the two pseudo-elements to the very left */
+  .hamburger__icon::before,
+  .hamburger__icon::after {
+    content: "";
+    left: 0;
+  }
+  
+  /* this is the top dash of the hamburger */
+  .hamburger__icon::before {
+    bottom: 8px;
+  }
+  
+  /* this is the bottom dash of the hamburger */
+  .hamburger__icon::after {
+    top: 8px;
+  }
+  
+.toggled .hamburger__icon {
+    width: 33px; /* Ajusta el ancho según tu diseño */
+    height: 5px; /* Ajusta la altura según tu diseño */
+    left: 20px;
+    top: 30px; /* Ajusta la posición vertical según tu diseño */
+    bottom:23px;
+    transform: rotate(-219deg);
+    background-color: green; /* Establece el color de fondo a verde */
+    position: absolute;
+}
+
+/* rotate bottom dash of hamburger counter clockwise */
+.toggled .hamburger__icon::after {
+    width: 22px; /* Ajusta el ancho según tu diseño */
+    height: 5px; /* Ajusta la altura según tu diseño */
+    left: 20px;
+    top:10px; /* Ajusta la posición vertical según tu diseño */
+    bottom: 59px;
+    transform: rotate(-280deg);
+    background-color: green; /* Establece el color de fondo a verde */
+    position: absolute;
+}
+
+  
+  /* hide the top dash by scaling it to 0 */
+  .toggled .hamburger__icon::before {
+    transform: scale(0);
+  }
+  
+  /* TRANSITION */
+  /* adjust duration to see it happen slower */
+  .hamburger__icon, .hamburger__icon::after {
+    transition: all 0.3s linear;
+  }

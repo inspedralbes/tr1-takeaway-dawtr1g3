@@ -5,8 +5,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>StudentStock</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="front-end/css/style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+        integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="front-end/css/style.css" />
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 
@@ -63,40 +65,47 @@
                     </ul>
                 </div>
             </div>
-            <input id="searchInputLanding" class="landing__search" type="search" placeholder="Material Escolar ..." @keyup.enter="searchProducte()"/>
+            <input id="searchInputLanding" class="landing__search" type="search" placeholder="Material Escolar ..."
+                @keyup.enter="searchProducte()" />
             <button class="landing__button button" @click="clickStartShopping()">
                 <h2 class="button__tittle">Veure Productes</h2>
             </button>
-          
+
             <div class="landing__horari horari">
+              
                 <h2 class="horari__tittle">Horari</h2>
                 <h3 class="horari__dies">De Dilluns a Divendres</h3>
                 <p class="horari__hores">9:00h a 13:30h</p>
                 <p class="horari__hores">16:00h a 19:30h</p>
             </div>
         </div>
-        <div class="login" v-if="login_page">
-            <form>
-                <h3>Login Here</h3>
-              
-                <label for="username">Username</label>
-                <input type="text" placeholder="Email or Phone" id="username">
+        <div class="usuari">
+            <div class="login" v-if="views.login_page">
+                <form>
+                    <h3>Login Here</h3>
 
-                <label for="password">Password</label>
-                <input type="password" placeholder="Password" id="password">
+                    <label for="username">Username</label>
+                    <input type="text" placeholder="Email or Phone" id="username">
 
-                <button>Log In</button>
-                <a @click="clickRegister()">Register</a>
-                <div class="register" v-if="register_page">
-                    <form>
-                        <h3>Login Here</h3>
-        
-                        <label for="username">Username</label>
-                        <input type="text" placeholder="Email or Phone" id="username">
-        
-                        <label for="password">Password</label>
-                        <input type="password" placeholder="Password" id="password">
-                </div>
+                    <label for="password">Password</label>
+                    <input type="password" placeholder="Password" id="password">
+
+                    <button>Log In</button>
+                    <a @click="clickRegister()">Register</a>
+            </div>
+            <div class="register" v-if="views.register_page">
+                <form>
+
+                    <label for="username">Nom</label>
+                    <input type="text" id="username">
+                    <label for="lastname">Cognom</label>
+                    <input type="text" id="lastname">
+                    <label for="email">Username</label>
+                    <input type="text" placeholder="Email or Phone" id="email">
+                    <label for="password">Password</label>
+                    <input type="password" placeholder="Password" id="password">
+                    
+            </div>
         </div>
         <div class="ticket" v-if="cart_toggle">
             <h3 class="ticket__title">Cistella</h3>
@@ -127,23 +136,34 @@
 
                     <input class="buttons__more" type="button" value="Afegir al carro"
                         @click="clickButtonMore(producte)">
+                        
                 </div>
                 <img class="item__image" :src="'back-end/laravel-api/public/'+producte.imatge">
 
             </div>
         </div>
+        
+        <!--BOTON TRANSICION
+        <button class="hamburger__toggle">
+                            <span class="hamburger__icon"></span>
+                        </button>-->
+                        
         <div class="check" v-if="views.checkout_page">
             <div class="check__formContainer formContainer">
                 <h2 class="formContainer__title">Dades personals</h2>
                 <div class="formContainer__form form">
                     <label class="form__labelNom" for="nombre">Nom:</label><br>
-                    <input class="form__inputNom" type="text" id="nombre" name="nombre" v-model="usuari.name" required><br>
+                    <input class="form__inputNom" type="text" id="nombre" name="nombre" v-model="usuari.name"
+                        required><br>
                     <label class="form__labelCognoms" for="apellidos">Cognoms:</label><br>
-                    <input class="form__inputCognoms" type="text" id="apellidos" name="apellidos" v-model="usuari.surnames" required><br>
+                    <input class="form__inputCognoms" type="text" id="apellidos" name="apellidos"
+                        v-model="usuari.surnames" required><br>
                     <label class="form__labelDomicili" for="email">Correu electónic:</label><br>
-                    <input class="form__inputDomicili" type="email" id="email" name="email" v-model="usuari.email" required><br>
+                    <input class="form__inputDomicili" type="email" id="email" name="email" v-model="usuari.email"
+                        required><br>
                     <label class="form__labelEmail" for="password">Contrasenya:</label><br>
-                    <input class="form__inputEmail" type="password" id="password" name="password" v-model="usuari.password" required><br>
+                    <input class="form__inputEmail" type="password" id="password" name="password"
+                        v-model="usuari.password" required><br>
                 </div>
                 <button class="form__btn" @click="clickBuyForm()">Realitzar Compra</button>
             </div>
@@ -162,7 +182,8 @@
             </div>
         </div>
         <div class="status" v-if="views.status_page">
-            <h3>Número de comanda: <input class="status__search" type="search" name="comanda" id="searchInputOrderClient" @keyup.enter="clickSearchOrderClient()"></h3>
+            <h3>Número de comanda: <input class="status__search" type="search" name="comanda"
+                    id="searchInputOrderClient" @keyup.enter="clickSearchOrderClient()"></h3>
             <div v-if="views.searchOrderClientPage">
                 <h3>Últim estat de la comanda:</h3>
                 <h4>{{ this.estatOrderClient.estat }}</h4>
@@ -181,7 +202,7 @@
         </div>
         <div class="config__admin">
             <div class="admin" v-if="views.admin_page">
-                <button class="btn" @click="ClickOrderAdmin()">Comandess</button>
+                <button class="btn" @click="ClickOrderAdmin()">Comandes</button>
                 <button class="btn" @click="ClickProductsAdmin()">Productes</button>
             </div>
             <div class="orderedit" v-if="views.edit_order">
