@@ -11,17 +11,17 @@ Route::get("/admin", function () {
 
 //comandes
 Route::get('/admin/comandes', function() {
-    $comandes = Comanda::all();
+    $comandes = Comanda::where('estat', '<>', 'Llest per recollir')->get();
     return view('admin.comandes')->with('comandes', $comandes);
 })->name('comandes');
 
 Route::get('/admin/comandes/{id}', function($id) {
     $comanda = Comanda::find($id);
-    return view('admin.updateComanda')->with('comanda', $comanda);
+    $estadosPosibles = ['Rebut', 'En preparació', 'Llest per recollir'];
+    return view('admin.updateComanda')->with(['comanda' => $comanda, 'estats' => $estadosPosibles]);
 })->name('comanda');
 
-// Route::get('/admin/comandes/edit', [ComandesController::class,'show'])->name('comanda');
-
+Route::patch('/admin/comandes/{id}', [ComandesController::class, 'update'])->name('comandaupdate');
 
 //productes
 Route::get('/admin/productes', [ProductesController::class,'index'])->name('productes');
