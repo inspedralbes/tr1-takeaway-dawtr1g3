@@ -188,7 +188,8 @@ createApp({
                         headers: {
                             "Content-Type": "application/json",
                         },
-                        body: JSON.stringify([{items: this.shopping_cart.products_cart}, {idComanda: comandaID}, {usuari: this.usuari.email}]),
+                        
+                        body: JSON.stringify([{items: this.shopping_cart.products_cart}, {idComanda: comandaID}, {usuari: this.usuari.email},{total: this.shopping_cart.totalPrice}]),
                     });
                     responseLineaComanda.then((response) => {
                         if (response.ok) {
@@ -200,7 +201,7 @@ createApp({
                             this.productes.forEach(element => {
                                 element.counter = 0;
                             });
-                            return response.json();
+                            //return response.json();
                         } else {
                             throw new Error("Error al crear la comanda.");
                         }
