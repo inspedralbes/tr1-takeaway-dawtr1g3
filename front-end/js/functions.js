@@ -176,6 +176,21 @@ createApp({
         //checkout-page_functions
         clickBuyForm() {
             const response = fetch("http://localhost:8000/api/comandes", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify([{ total: this.shopping_cart.totalPrice }, { usuari: this.usuari.email }]),
+            });
+            response.then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Error al crear la comanda.");
+                }
+            }).then((data) => {
+                const comandaID = data.comandaID;
+                const responseLineaComanda = fetch("http://localhost:8000/api/lineacomandes", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -258,7 +273,7 @@ createApp({
         // Register-Login Functions
         clickLogin() {
             this.hiddenAllPages();
-            this.views.login_page = true; 
+            this.views.login_page = true;
         },
         clickRegister() {
             this.hiddenAllPages();
