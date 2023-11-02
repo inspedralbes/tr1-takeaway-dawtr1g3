@@ -20,6 +20,8 @@ Route::get('lineacomandes/orderclient/{comandaID}', [LineaComandesController::cl
 Route::get('/productes/search/{nom}', [ProductesController::class, 'search']);
 Route::get('/categories/search/{nom}', [CategoriesController::class, 'search']);
 Route::get('/comandes/search/{nom}', [ComandesController::class, 'search']);
+Route::get('/pdf', [LineaComandesController::class, 'getpdf']);
+Route::get('/correu', [LineaComandesController::class, 'enviarCorreu']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

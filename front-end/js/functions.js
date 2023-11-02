@@ -24,7 +24,7 @@ createApp({
                 total: "",
                 productsOrder: {}
             },
-            views : {
+            views: {
                 nav_toggle: false,
                 cart_toggle: false,
                 landing_page: true,
@@ -32,7 +32,9 @@ createApp({
                 checkout_page: false,
                 status_page: false,
                 showTotalTicket: false,
-                searchOrderClientPage: false
+                searchOrderClientPage: false,
+                register_page: false,
+                login_page: false
             }
         };
     },
@@ -131,6 +133,7 @@ createApp({
             if (!this.shopping_cart.products_cart.includes(this.productes[position])) {
                 this.shopping_cart.products_cart.push(this.productes[position]);
             }
+
             //shopping_cart
             this.countPriceAccount();
             this.countItemsAccount();
@@ -172,18 +175,18 @@ createApp({
         //checkout-page_functions
         clickBuyForm() {
             const response = fetch("http://localhost:8000/api/comandes", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify([{total: this.shopping_cart.totalPrice}, {usuari: this.usuari.email}]),
-                });
-                response.then((response) => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error("Error al crear la comanda.");
-                    }
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify([{ total: this.shopping_cart.totalPrice }, { usuari: this.usuari.email }]),
+            });
+            response.then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Error al crear la comanda.");
+                }
                 }).then((data) => {
                     const comandaID = data.comandaID;
                     const responseLineaComanda = fetch("http://localhost:8000/api/lineacomandes", {
@@ -191,19 +194,20 @@ createApp({
                         headers: {
                             "Content-Type": "application/json",
                         },
-                        body: JSON.stringify([{items: this.shopping_cart.products_cart}, {idComanda: comandaID}, {usuari: this.usuari.email}]),
+                        
+                        body: JSON.stringify([{items: this.shopping_cart.products_cart}, {idComanda: comandaID}, {usuari: this.usuari},{total: this.shopping_cart.totalPrice}]),
                     });
                     responseLineaComanda.then((response) => {
                         if (response.ok) {
                             this.hiddenAllPages();
-                            this.views.landing_page = true;
+                            this.landing_page = true;
                             this.shopping_cart.products_cart = [];
                             this.shopping_cart.totalAccount = 0;
                             this.shopping_cart.totalItems = 0;
                             this.productes.forEach(element => {
                                 element.counter = 0;
                             });
-                            return response.json();
+                            //return response.json();
                         } else {
                             throw new Error("Error al crear la comanda.");
                         }
@@ -229,14 +233,15 @@ createApp({
             this.hiddenAllPages();
             this.views.status_page = true;
         },
-        clickSearchOrderClient(){
+
+        clickSearchOrderClient() {
             let inputOrderClient = document.getElementById('searchInputOrderClient');
             var id = inputOrderClient.value;
 
             const response = fetch(`http://localhost:8000/api/comandes/${id}`);
             response.then((response) => {
                 if (response.ok) {
-                    return response.json();                    
+                    return response.json();
                 } else {
                     throw new Error("Error al fer una cerca.");
                 }
@@ -250,7 +255,7 @@ createApp({
                 const responseLineaComanda = fetch(`http://localhost:8000/api/lineacomandes/orderclient/${comandaID}`);
                 responseLineaComanda.then((response) => {
                     if (response.ok) {
-                        return response.json();                    
+                        return response.json();
                     } else {
                         throw new Error("Error al fer una cerca.");
                     }
@@ -268,12 +273,11 @@ createApp({
         // Register-Login Functions
         clickLogin() {
             this.hiddenAllPages();
-            this.views.login_page = true; 
+            this.views.login_page = true;
         },
         clickRegister() {
             this.hiddenAllPages();
             this.views.register_page = true;
-            this.views.login_page = true; 
         }
     },
     created() {
@@ -283,6 +287,12 @@ createApp({
             this.productes.forEach((element) => {
                 element.counter = 0;
             });
+
         });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const button = document.querySelector(".hamburger__toggle");
+            button.addEventListener("click", () => button.classList.toggle("toggled"));
+          });
     },
 }).mount("#app");
