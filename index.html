@@ -32,9 +32,6 @@
                                 <a class="itemExtens__link" @click="clickOrdersButton()">Comandes</a>
                             </li>
                             <li class="listExtens__itemExtens itemExtens">
-                                <a class="itemExtens__link" @click="clickAdminFunction()">Administrador</a>
-                            </li>
-                            <li class="listExtens__itemExtens itemExtens">
                                 <a class="itemExtens__link" @click="clickLogin()">Login / Register</a>
                             </li>
                             <li class="listExtens__itemExtens itemExtens">
@@ -72,42 +69,43 @@
             </button>
 
             <div class="landing__horari horari">
-              
                 <h2 class="horari__tittle">Horari</h2>
                 <h3 class="horari__dies">De Dilluns a Divendres</h3>
                 <p class="horari__hores">9:00h a 13:30h</p>
                 <p class="horari__hores">16:00h a 19:30h</p>
             </div>
         </div>
-        <div class="usuari">
-            <div class="login" v-if="views.login_page">
-                <form>
-                    <h3>Login Here</h3>
+        <div class="login" v-if="views.login_page">
+            <form>
+                <h3>Login Here</h3>
+                <label for="username">Username</label>
+                <input type="text" placeholder="Email or Phone" id="username">
 
-                    <label for="username">Username</label>
-                    <input type="text" placeholder="Email or Phone" id="username">
-
-                    <label for="password">Password</label>
-                    <input type="password" placeholder="Password" id="password">
-
-                    <button>Log In</button>
-                    <a @click="clickRegister()">Register</a>
-            </div>
-            <div class="register" v-if="views.register_page">
-                <form>
-
-                    <label for="username">Nom</label>
-                    <input type="text" id="username">
-                    <label for="lastname">Cognom</label>
-                    <input type="text" id="lastname">
-                    <label for="email">Username</label>
-                    <input type="text" placeholder="Email or Phone" id="email">
-                    <label for="password">Password</label>
-                    <input type="password" placeholder="Password" id="password">
-                    
-            </div>
+                <label for="password">Password</label>
+                <input type="password" placeholder="Password" id="password">
+           
+                <button>Log In</button>
+                <button @click="clickRegister()">Register</button> 
+            </form>
         </div>
-        <div class="ticket" v-if="cart_toggle">
+        <div class="register" v-if="views.register_page">
+            <form>
+                <h3>Register</h3>
+                <label for="nom">Nom</label>
+                <input type="text" placeholder="Nom" id="nom">
+                <label for="cognoms">Cognoms</label>
+                <input type="text" placeholder="Cognoms" id="cognoms">
+                <label for="username">Username</label>
+                <input type="text" placeholder="Email or Phone" id="username">
+
+                <label for="password">Password</label>
+                <input type="password" placeholder="Password" id="password">
+                <button>Register</button>
+
+            </form>
+        </div>
+
+        <div class="ticket" v-if="views.cart_toggle">
             <h3 class="ticket__title">Cistella</h3>
             <div class="ticket__account account">
                 <div class="account__item div">
@@ -136,18 +134,15 @@
 
                     <input class="buttons__more" type="button" value="Afegir al carro"
                         @click="clickButtonMore(producte)">
-                        
                 </div>
                 <img class="item__image" :src="'back-end/laravel-api/public/'+producte.imatge">
 
             </div>
         </div>
-        
         <!--BOTON TRANSICION
         <button class="hamburger__toggle">
                             <span class="hamburger__icon"></span>
                         </button>-->
-                        
         <div class="check" v-if="views.checkout_page">
             <div class="check__formContainer formContainer">
                 <h2 class="formContainer__title">Dades personals</h2>
@@ -198,32 +193,6 @@
                         <p class="itemCart__counter">{{ orderProduct.quantitat }}</p>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="config__admin">
-            <div class="admin" v-if="views.admin_page">
-                <button class="btn" @click="ClickOrderAdmin()">Comandes</button>
-                <button class="btn" @click="ClickProductsAdmin()">Productes</button>
-            </div>
-            <div class="orderedit" v-if="views.edit_order">
-                <h3>Id de comanda:<input type="search" @keyup.enter="clickStartOrders"></h3></input>
-                <hr>
-            </div>
-            <div class="orderadmin" v-if="views.order_admin">
-                <h3>Canviar estat de la comanda:</h3>
-                <button class="boton-original">Rebut</button>
-                <button class="boton-original">En preparació</button>
-                <button class="boton-original">Entregat</button>
-                <button class="boton-guardar">Guardar</button>
-            </div>
-            <div class="productadmin" v-if="views.product_admin">
-                <h3 class="titleProduct">Products</h3>
-                <hr>
-                <h3>Id de comanda: <input type="text"></h3>
-                <h3>Canviar imatge: <input type="text"></h3>
-                <h3>Canviar preu: <input type="text"></h3>
-                <h3>Canviar descripció: <input type="text"></h3>
-                <button class="boton-guardar">Guardar</button>
             </div>
         </div>
         <footer class="footer">
