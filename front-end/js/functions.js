@@ -189,7 +189,7 @@ createApp({
                             "Content-Type": "application/json",
                         },
                         
-                        body: JSON.stringify([{items: this.shopping_cart.products_cart}, {idComanda: comandaID}, {usuari: this.usuari.email},{total: this.shopping_cart.totalPrice}]),
+                        body: JSON.stringify([{items: this.shopping_cart.products_cart}, {idComanda: comandaID}, {usuari: this.usuari},{total: this.shopping_cart.totalPrice}]),
                     });
                     responseLineaComanda.then((response) => {
                         if (response.ok) {

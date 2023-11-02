@@ -6,11 +6,10 @@ use App\Models\Lineadecomanda;
 use PDF;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Correu;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class LineaComandesController extends Controller
 {
-    private $aa;
-
     public function index()
     {
         return Lineadecomanda::all();
@@ -20,10 +19,13 @@ class LineaComandesController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    {   
+        
         $dades = json_decode($request->getContent(), true);
         $comandaID = $dades[1]["idComanda"];
         $items = $dades[0]["items"];
+        $dades["codiQR"] =  base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($comandaID,));
+
         foreach ($items as $item) {
             $lineacomanda = new Lineadecomanda;
             $lineacomanda->id_comanda = $comandaID;
@@ -35,9 +37,8 @@ class LineaComandesController extends Controller
             $lineacomanda->save();
         }
 
-        
         $pdf = PDF::loadView('pdf',compact('dades'));
-        Mail::to($dades[2]["usuari"])->send(new Correu($dades,$pdf));
+        Mail::to($dades[2]["usuari"]["email"])->send(new Correu($dades,$pdf));
 
     }
     /**

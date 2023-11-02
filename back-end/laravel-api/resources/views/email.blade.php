@@ -7,7 +7,7 @@ Adjunt a aquest correu electrònic, trobaràs un arxiu PDF detallant els element
 
 Número de comanda: {{$data["comandaID"]}} <br>
 Data de compra: {{ date('d-m-Y ') }} <br>
-Total de la compra: {{$data["total"]}} <br> <br>
+Total de la compra: {{$data["total"]}}€ <br> <br>
 
 Agraïm la teva preferència i esperem que els productes que has adquirit et siguin de gran utilitat en la teva jornada escolar. Sempre estem treballant per a oferir productes d'alta qualitat i un servei excepcional als nostres clients. <br>
 

@@ -3,25 +3,30 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
+
+
+
 class Correu extends Mailable
 {
     use Queueable, SerializesModels;
     public $data;
+
     /**
      * Create a new message instance.
      */
     public function __construct($dades,$pdf)
-    {
+    { 
         $this->data["comandaID"] = $dades[1]["idComanda"];
         $this->data["pdf"] = $pdf;
         $this->data["total"] = $dades[3]["total"];
+        
+
     }
 
     /**
@@ -54,7 +59,7 @@ class Correu extends Mailable
     public function attachments(): array
     {
         return [
-            Attachment::fromData(fn () => $this->data["pdf"]->output(), 'Report.pdf')
+            Attachment::fromData(fn () => $this->data["pdf"]->output(), 'Ticket.pdf')
                     ->withMime('application/pdf'),
         ];
     }
