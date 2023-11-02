@@ -12,8 +12,11 @@
 <body>
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-            <a class="navbar-item is-size-3" href="http://studentstock.daw.inspedralbes.cat/" target="_blank">
+            <a href="http://studentstock.daw.inspedralbes.cat/" target="_blank" class="navbar-item is-size-3">
                 StudentStock
+            </a>
+            <a class="navbar-item" href="{{ route ('index') }}">
+                Area Administrador
             </a>
             <a class="navbar-item" href="{{ route ('comandes') }}">
                 Comandes

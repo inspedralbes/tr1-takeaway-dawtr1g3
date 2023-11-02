@@ -35,11 +35,11 @@
             @method('PATCH')
             @csrf
 
-            <label class="label" for="estado">Estat:</label>
+            <label class="label" for="estat">Estat:</label>
             <div class="select">
-                <select name="estado" id="estado" class="form-control">
+                <select name="estat" id="estat" class="form-control">
                     @foreach ($estats as $estat)
-                        <option value="{{ $estat }}" {{ $comanda->estat === $estat ? 'selected' : '' }}>
+                        <option value="{{ $estat }}" {{ $comanda->estat == $estat ? 'selected' : '' }}>
                             {{ $estat }}</option>
                     @endforeach
                 </select>

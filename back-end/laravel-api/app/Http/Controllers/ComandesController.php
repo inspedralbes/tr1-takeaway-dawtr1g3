@@ -29,7 +29,10 @@ class ComandesController extends Controller
 
     public function update(Request $request, $id){
         $comanda = Comanda::find($id);
-        $comanda->update($request->all());
+
+        if($request->has('estat')) {
+            $comanda->update(['estat' => $request->estat]);
+        }
 
         return redirect()->route('comandes');
     }
