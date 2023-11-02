@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Comanda;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
 class ComandesController extends Controller
 {
@@ -30,16 +28,13 @@ class ComandesController extends Controller
     }
 
     public function update(Request $request, $id){
-        $validator = Validator::make($request->all(),[
-            'estat'=> 'required',
-        ]);
-        if ($validator->fails()) {
-            return 'error';
-        }else{
-            $comanda = Comanda::find($id);
-            $comanda->update($request->all());
-            return $comanda;
+        $comanda = Comanda::find($id);
+
+        if($request->has('estat')) {
+            $comanda->update(['estat' => $request->estat]);
         }
+
+        return redirect()->route('comandes');
     }
 
     public function show($id){
