@@ -83,19 +83,26 @@
 
                 <label for="password">Password</label>
                 <input type="password" placeholder="Password" id="password">
-
+           
                 <button>Log In</button>
-                <a @click="clickRegister()">Register</a>
-                <div class="register" v-if="views.register_page">
-                    <form>
-                        <h3>Login Here</h3>
+                <button @click="clickRegister()">Register</button> 
+            </form>
+        </div>
+        <div class="register" v-if="views.register_page">
+            <form>
+                <h3>Register</h3>
+                <label for="nom">Nom</label>
+                <input type="text" placeholder="Nom" id="nom">
+                <label for="cognoms">Cognoms</label>
+                <input type="text" placeholder="Cognoms" id="cognoms">
+                <label for="username">Username</label>
+                <input type="text" placeholder="Email or Phone" id="username">
 
-                        <label for="username">Username</label>
-                        <input type="text" placeholder="Email or Phone" id="username">
+                <label for="password">Password</label>
+                <input type="password" placeholder="Password" id="password">
+                <button>Register</button>
 
-                        <label for="password">Password</label>
-                        <input type="password" placeholder="Password" id="password">
-                </div>
+            </form>
         </div>
         <div class="ticket" v-if="views.cart_toggle">
             <h3 class="ticket__title">Cistella</h3>
@@ -131,6 +138,10 @@
 
             </div>
         </div>
+        <!--BOTON TRANSICION
+        <button class="hamburger__toggle">
+                            <span class="hamburger__icon"></span>
+                        </button>-->
         <div class="check" v-if="views.checkout_page">
             <div class="check__formContainer formContainer">
                 <h2 class="formContainer__title">Dades personals</h2>

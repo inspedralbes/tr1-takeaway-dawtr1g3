@@ -32,7 +32,10 @@ createApp({
                 checkout_page: false,
                 status_page: false,
                 showTotalTicket: false,
-                searchOrderClientPage: false
+                searchOrderClientPage: false,
+                register_page: false,
+                login_page: false
+
             }
         };
     },
@@ -41,18 +44,18 @@ createApp({
         //allPages
         hiddenAllPages() {
             this.views.nav_toggle = false,
-                this.views.cart_toggle = false,
-                this.views.landing_page = false,
-                this.views.shop_page = false,
-                this.views.checkout_page = false,
-                this.views.status_page = false,
-                this.views.admin_page = false,
-                this.views.order_admin = false,
-                this.views.product_admin = false,
-                this.views.edit_order = false,
-                this.views.isFormValid = false,
-                this.views.login_page = false,
-                this.views.register_page = false
+            this.views.cart_toggle = false,
+            this.views.landing_page = false,
+            this.views.shop_page = false,
+            this.views.checkout_page = false,
+            this.views.status_page = false,
+            this.views.admin_page = false,
+            this.views.order_admin = false,
+            this.views.product_admin = false,
+            this.views.edit_order = false,
+            this.views.isFormValid = false,
+            this.views.login_page = false,
+            this.views.register_page = false
         },
 
         //header
@@ -131,6 +134,7 @@ createApp({
             if (!this.shopping_cart.products_cart.includes(this.productes[position])) {
                 this.shopping_cart.products_cart.push(this.productes[position]);
             }
+
             //shopping_cart
             this.countPriceAccount();
             this.countItemsAccount();
@@ -193,6 +197,7 @@ createApp({
                     },
                     body: JSON.stringify([{ items: this.shopping_cart.products_cart }, { idComanda: comandaID }, { usuari: this.usuari.email }]),
                 });
+
                 responseLineaComanda.then((response) => {
                     if (response.ok) {
                         this.hiddenAllPages();
@@ -273,7 +278,6 @@ createApp({
         clickRegister() {
             this.hiddenAllPages();
             this.views.register_page = true;
-            this.views.login_page = true;
         }
     },
     created() {
@@ -283,6 +287,12 @@ createApp({
             this.productes.forEach((element) => {
                 element.counter = 0;
             });
+
         });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const button = document.querySelector(".hamburger__toggle");
+            button.addEventListener("click", () => button.classList.toggle("toggled"));
+          });
     },
 }).mount("#app");

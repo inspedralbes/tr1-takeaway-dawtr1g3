@@ -323,8 +323,13 @@ body {
     border-radius: 5px;
     background-color: rgb(0, 47, 255);
     color: #fff;
+    transition: background-color 0.3s ease; /* Transición para el color de fondo */
 }
 
+/* Cambio de estilo al hacer clic en el botón */
+.buttons__more:active {
+    background-color: #4cda30; /* Cambia el color de fondo al hacer clic */
+}
 .item__image {
     width: 130px;
     height: 170px;
@@ -564,9 +569,12 @@ body {
 
 /* status-page */
 .status {
-    margin-top: 200px;
+    background-image:url("https://img.freepik.com/free-photo/abstract-light-pink-wallpaper-background-image_53876-102526.jpg?size=626&ext=jpg&ga=GA1.1.386372595.1697760000&semt=ais");
 }
+.status h3{
+        margin-top: 200px;
 
+}
 .status__search {
     width: 40%;
 }
@@ -669,7 +677,7 @@ body {
 
 /*Pagina Login Register*/
 .login {
-    background-image: url("https://wallpapers.com/images/featured/light-blue-2iuzyh711jo9bmgo.jpg");
+    background-image: url("https://c.wallhere.com/photos/26/51/line_light_background_bright-685894.jpg!d");
 }
 
 .background .shape {
@@ -713,6 +721,8 @@ body {
     margin-top: 30px;
     font-size: 16px;
     font-weight: 500;
+    background-color: #fbfdffab;
+    width: 45%;
 }
 
 .login input {
@@ -757,18 +767,9 @@ body {
     height: 200px;
     width: 200px;
   }
-.register button {
-    margin-left: 80%;
-    width: 30%;
-    background-color: #ffffff;
-    color: #080710;
-    padding: 15px 0;
-    font-size: 12px;
-    border-radius: 5px;
-    cursor: pointer;
-}
+
 .register {
-    background-image: url("https://wallpapers.com/images/featured/light-blue-2iuzyh711jo9bmgo.jpg");
+    background-image: url("https://c.wallhere.com/photos/26/51/line_light_background_bright-685894.jpg!d");
 }
 
 .background .shape {
@@ -791,6 +792,8 @@ body {
     border: 2px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 40px rgba(8, 7, 16, 0.918);
     padding: 50px 35px;
+    width: 250px;
+    height: 500px;
 }
 
 .register form * {
@@ -798,6 +801,15 @@ body {
     letter-spacing: 0.5px;
     outline: none;
     border: none;
+}
+.cart-enter-active {
+    transition: opacity 0.5s;
+}
+.cart-leave-active {
+    transition: opacity 0.5s;
+}
+.cart-enter, .cart-leave-to {
+    opacity: 0;
 }
 
 .register form h3 {
@@ -812,13 +824,16 @@ body {
     margin-top: 30px;
     font-size: 16px;
     font-weight: 500;
+    background-color: #fbfdffab;
+    width: 45%;
+
 }
 
 .register input {
     display: block;
     height: 50px;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.07);
+    background-color: rgba(15, 15, 15, 0.07);
     border-radius: 3px;
     padding: 0 10px;
     margin-top: 8px;
@@ -826,9 +841,6 @@ body {
     font-weight: 300;
 }
 
-::placeholder {
-    color: #1a1919;
-}
 
 .register button {
     margin-top: 50px;
