@@ -2,17 +2,11 @@
 
 @section('content')
 
-<div>
-    <form action="{{ route ('comandes') }}" method="GET">
-        @csrf
-        <button class="button is-primary" type="submit">Edit Comandes</button>
-    </form>
-    <br>
-    <form action="{{ route ('productes') }}" method="GET">
-        @csrf
-        <button class="button is-info" type="submit">Edit Productes</button>
-    </form>
-
+<div class="has-text-centered mt-5">
+    <div class="buttons is-centered">
+        <a class="button is-info is-medium" href="{{ route('comandes') }}">Administrar comandes</a>
+        <a class="button is-success is-medium" href="{{ route('productes') }}">Administrar Productes</a>
+    </div>
 </div>
 
 @endsection

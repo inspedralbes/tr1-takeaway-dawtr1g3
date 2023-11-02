@@ -22,16 +22,16 @@ class ProductesController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'nom' => 'required',
             'descripcio' => 'required',
             'preu' => 'required',
-            'categoria_id' =>'required'
+            'categoria_id' => 'required'
         ]);
 
         if ($validator->fails()) {
             return 'error';
-        }else{
+        } else {
             $product = new Product;
             $product->nom = $request->nom;
             $product->descripcio = $request->descripcio;
@@ -43,7 +43,8 @@ class ProductesController extends Controller
                 $product->imatge = $imatgePath;
             }
             $product->save();
-            return $product;
+
+            return redirect()->route('productes');
         }
     }
 
@@ -70,8 +71,18 @@ class ProductesController extends Controller
     public function update(Request $request, string $id)
     {
         $product = Product::find($id);
-        $product->update($request->all());
-        return $product;
+
+        $product->nom = $request->nom;
+        $product->descripcio = $request->descripcio;
+        $product->preu = $request->preu;
+        $product->categoria_id = $request->categoria_id;
+        if ($request->hasFile('imatge')) {
+            $imatgePath = $request->file('imatge')->storeAs('/img', $request->file('imatge')->getClientOriginalName());
+            $product->imatge = $imatgePath;
+        }
+        $product->update();
+
+        return redirect()->route('productes');
     }
 
     /**
@@ -84,6 +95,6 @@ class ProductesController extends Controller
 
     public function search(string $nom)
     {
-        return Product::where('nom', 'like', '%'.$nom.'%')->get();
+        return Product::where('nom', 'like', '%' . $nom . '%')->get();
     }
 }
