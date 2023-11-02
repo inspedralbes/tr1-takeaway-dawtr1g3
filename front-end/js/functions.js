@@ -31,10 +31,6 @@ createApp({
                 shop_page: false,
                 checkout_page: false,
                 status_page: false,
-                admin_page: false,
-                order_admin: false,
-                product_admin: false,
-                edit_order: false,
                 showTotalTicket: false,
                 searchOrderClientPage: false,
                 register_page: false,
@@ -48,18 +44,18 @@ createApp({
         //allPages
         hiddenAllPages() {
             this.views.nav_toggle = false,
-                this.views.cart_toggle = false,
-                this.views.landing_page = false,
-                this.views.shop_page = false,
-                this.views.checkout_page = false,
-                this.views.status_page = false,
-                this.views.admin_page = false,
-                this.views.order_admin = false,
-                this.views.product_admin = false,
-                this.views.edit_order = false,
-                this.views.isFormValid = false,
-                this.views.register_page = false,
-                this.views.login_page = false
+            this.views.cart_toggle = false,
+            this.views.landing_page = false,
+            this.views.shop_page = false,
+            this.views.checkout_page = false,
+            this.views.status_page = false,
+            this.views.admin_page = false,
+            this.views.order_admin = false,
+            this.views.product_admin = false,
+            this.views.edit_order = false,
+            this.views.isFormValid = false,
+            this.views.login_page = false,
+            this.views.register_page = false
         },
 
         //header
@@ -105,7 +101,6 @@ createApp({
                 console.error(error);
             });
         },
-
         //front-page_functions
         clickStartShopping() {
             this.hiddenAllPages();
@@ -181,21 +176,6 @@ createApp({
         //checkout-page_functions
         clickBuyForm() {
             const response = fetch("http://localhost:8000/api/comandes", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify([{ total: this.shopping_cart.totalPrice }, { usuari: this.usuari.email }]),
-            });
-            response.then((response) => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error("Error al crear la comanda.");
-                }
-            }).then((data) => {
-                const comandaID = data.comandaID;
-                const responseLineaComanda = fetch("http://localhost:8000/api/lineacomandes", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -275,30 +255,14 @@ createApp({
                 console.error(error);
             });
         },
-        //admin-fuctions
-        clickAdminFunction() {
-            this.hiddenAllPages();
-            this.views.admin_page = true;
-        },
+        // Register-Login Functions
         clickLogin() {
             this.hiddenAllPages();
-            this.views.login_page = true; // Show the login form
+            this.views.login_page = true; 
         },
         clickRegister() {
             this.hiddenAllPages();
-            this.views.register_page = true; // Show the registration form
-        },
-        ClickOrderAdmin() {
-            this.hiddenAllPages();
-            this.views.edit_order = true;
-        },
-        ClickProductsAdmin() {
-            this.hiddenAllPages();
-            this.views.product_admin = true;
-        },
-        clickStartOrders() {
-            this.hiddenAllPages();
-            this.views.order_admin = true;
+            this.views.register_page = true;
         }
     },
     created() {
