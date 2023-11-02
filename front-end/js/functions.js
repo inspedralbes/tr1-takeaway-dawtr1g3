@@ -24,48 +24,53 @@ createApp({
                 total: "",
                 productsOrder: {}
             },
-            nav_toggle: false,
-            cart_toggle: false,
-            landing_page: true,
-            shop_page: false,
-            checkout_page: false,
-            status_page: false,
-            admin_page: false,
-            order_admin: false,
-            product_admin: false,
-            edit_order: false,
-            showTotalTicket: false,
+            views: {
+                nav_toggle: false,
+                cart_toggle: false,
+                landing_page: true,
+                shop_page: false,
+                checkout_page: false,
+                status_page: false,
+                showTotalTicket: false,
+                searchOrderClientPage: false,
+                register_page: false,
+                login_page: false
+            }
         };
     },
     methods: {
+
         //allPages
         hiddenAllPages() {
-            this.nav_toggle = false,
-            this.cart_toggle = false,
-            this.landing_page = false,
-            this.shop_page = false,
-            this.checkout_page = false,
-            this.status_page = false,
-            this.admin_page = false,
-            this.order_admin = false,
-            this.product_admin = false,
-            this.edit_order = false,
-            this.isFormValid = false
+            this.views.nav_toggle = false,
+            this.views.cart_toggle = false,
+            this.views.landing_page = false,
+            this.views.shop_page = false,
+            this.views.checkout_page = false,
+            this.views.status_page = false,
+            this.views.admin_page = false,
+            this.views.order_admin = false,
+            this.views.product_admin = false,
+            this.views.edit_order = false,
+            this.views.isFormValid = false,
+            this.views.login_page = false,
+            this.views.register_page = false
         },
+
         //header
         clickNavToggle() {
-            this.nav_toggle = !this.nav_toggle;
+            this.views.nav_toggle = !this.views.nav_toggle;
         },
         clickTitlePage() {
             this.hiddenAllPages();
-            this.landing_page = true;
+            this.views.landing_page = true;
         },
         clickCartToggle() {
-            this.cart_toggle = !this.cart_toggle;
+            this.views.cart_toggle = !this.views.cart_toggle;
             if (this.shopping_cart.products_cart.length == 0) {
-                this.showTotalTicket = false;
+                this.views.showTotalTicket = false;
             } else {
-                this.showTotalTicket = true;
+                this.views.showTotalTicket = true;
             }
         },
         searchProducte() {
@@ -73,20 +78,20 @@ createApp({
             let inputNomNav = document.getElementById('searchInputNav');
             if (inputNomNav != null) {
                 var nom = inputNomNav.value;
-            } else if (inputNomLanding != null){
+            } else if (inputNomLanding != null) {
                 var nom = inputNomLanding.value;
             }
             const response = fetch(`http://localhost:8000/api/productes/search/${nom}`);
             response.then((response) => {
                 if (response.ok) {
-                    return response.json();                    
+                    return response.json();
                 } else {
                     throw new Error("Error al fer una cerca.");
                 }
             }).then((data) => {
                 this.productes = data;
                 this.hiddenAllPages();
-                this.shop_page = true;
+                this.views.shop_page = true;
                 console.log("Els productes per la recerca:", this.productes);
                 this.productes.forEach((element) => {
                     element.counter = 0;
@@ -98,7 +103,7 @@ createApp({
         //front-page_functions
         clickStartShopping() {
             this.hiddenAllPages();
-            this.shop_page = true;
+            this.views.shop_page = true;
         },
         //shop-page_functions
         searchProductePos(producte) {
@@ -128,6 +133,7 @@ createApp({
             if (!this.shopping_cart.products_cart.includes(this.productes[position])) {
                 this.shopping_cart.products_cart.push(this.productes[position]);
             }
+
             //shopping_cart
             this.countPriceAccount();
             this.countItemsAccount();
@@ -158,29 +164,29 @@ createApp({
         },
         clickBuyButton() {
             this.hiddenAllPages();
-            this.checkout_page = true;
+            this.views.checkout_page = true;
             if (localStorage == null) {
-                this.user.name = localStorage.getItem(JSON.parse(user.name));
-                this.user.surnames = localStorage.getItem(JSON.parse(user.surnames));
-                this.user.residence = localStorage.getItem(JSON.parse(user.email));
-                this.user.email = localStorage.getItem(JSON.parse(user.password));
+                this.usuari.name = localStorage.getItem(JSON.parse(user.name));
+                this.usuari.surnames = localStorage.getItem(JSON.parse(user.surnames));
+                this.usuari.residence = localStorage.getItem(JSON.parse(user.email));
+                this.usuari.email = localStorage.getItem(JSON.parse(user.password));
             }
         },
         //checkout-page_functions
-        clickBuyForm(){
+        clickBuyForm() {
             const response = fetch("http://localhost:8000/api/comandes", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify([{total: this.shopping_cart.totalPrice}, {usuari: this.usuari.email}]),
-                });
-                response.then((response) => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error("Error al crear la comanda.");
-                    }
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify([{ total: this.shopping_cart.totalPrice }, { usuari: this.usuari.email }]),
+            });
+            response.then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Error al crear la comanda.");
+                }
                 }).then((data) => {
                     const comandaID = data.comandaID;
                     const responseLineaComanda = fetch("http://localhost:8000/api/lineacomandes", {
@@ -216,51 +222,62 @@ createApp({
                     localStorage.setItem('user', JSON.stringify(this.usuari));
                 }
             // if (this.isFormValid) {
-            
+
             // } else {
             //     console.log('Por favor, complete todos los campos obligatorios.');
             // }
         },
+
         //status-page_functions
         clickOrdersButton() {
             this.hiddenAllPages();
-            this.status_page = true;
+            this.views.status_page = true;
         },
-        clickSearchOrderClient(){
+
+        clickSearchOrderClient() {
             let inputOrderClient = document.getElementById('searchInputOrderClient');
             var id = inputOrderClient.value;
 
             const response = fetch(`http://localhost:8000/api/comandes/${id}`);
             response.then((response) => {
                 if (response.ok) {
-                    return response.json();                    
+                    return response.json();
                 } else {
                     throw new Error("Error al fer una cerca.");
                 }
             }).then((data) => {
-                console.log(data.comanda);
-                console.log(data.comanda.id);
                 this.estatOrderClient.id = data.comanda.id;
+                this.estatOrderClient.estat = data.comanda.estat;
+                this.estatOrderClient.usuari = data.comanda.usuari;
+                this.estatOrderClient.total = data.comanda.total;
+                this.views.searchOrderClientPage = true;
+                let comandaID = this.estatOrderClient.id;
+                const responseLineaComanda = fetch(`http://localhost:8000/api/lineacomandes/orderclient/${comandaID}`);
+                responseLineaComanda.then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error("Error al fer una cerca.");
+                    }
+                }).then((data) => {
+                    this.estatOrderClient.productsOrder = data.items;
+                    console.log(data.items);
+                    console.log(this.estatOrderClient.productsOrder);
+                }).catch((error) => {
+                    console.error(error);
+                });
             }).catch((error) => {
                 console.error(error);
             });
         },
-        //admin-fuctions
-        clickAdminFunction() {
+        // Register-Login Functions
+        clickLogin() {
             this.hiddenAllPages();
-            this.admin_page = true;
+            this.views.login_page = true;
         },
-        ClickOrderAdmin() {
+        clickRegister() {
             this.hiddenAllPages();
-            this.edit_order = true;
-        },     
-        ClickProductsAdmin() {
-            this.hiddenAllPages();
-            this.product_admin = true;
-        },
-        clickStartOrders() {
-            this.hiddenAllPages();
-            this.order_admin = true; 
+            this.views.register_page = true;
         }
     },
     created() {
@@ -270,6 +287,12 @@ createApp({
             this.productes.forEach((element) => {
                 element.counter = 0;
             });
+
         });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const button = document.querySelector(".hamburger__toggle");
+            button.addEventListener("click", () => button.classList.toggle("toggled"));
+          });
     },
 }).mount("#app");

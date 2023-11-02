@@ -16,6 +16,7 @@ Route::resource('lineacomandes',LineaComandesController::class);
 Route::resource('tipususuari',TipusUsuariController::class);
 Route::resource('usuari',UsuariController::class);
 
+Route::get('lineacomandes/orderclient/{comandaID}', [LineaComandesController::class,'getLineasPorIdComanda']);
 Route::get('/productes/search/{nom}', [ProductesController::class, 'search']);
 Route::get('/categories/search/{nom}', [CategoriesController::class, 'search']);
 Route::get('/comandes/search/{nom}', [ComandesController::class, 'search']);
