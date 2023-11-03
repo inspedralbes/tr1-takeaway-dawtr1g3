@@ -19,8 +19,8 @@ class LineaComandesController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {   
-        
+    {
+
         $dades = json_decode($request->getContent(), true);
         $comandaID = $dades[1]["idComanda"];
         $items = $dades[0]["items"];
@@ -32,10 +32,7 @@ class LineaComandesController extends Controller
             $lineacomanda->id_producte = $item['id'];
             $lineacomanda->nom_producte = $item['nom'];
             $lineacomanda->desc_producte = $item['descripcio'];
-            if ($item->hasFile('imatge')) {
-                $imatgePath = $item['imatge']->storeAs('/img', $item['imatge']->getClientOriginalName());
-                $lineacomanda->imatge_producte = $imatgePath;
-            }
+            $lineacomanda->imatge_producte = $item['imatge'];
             $lineacomanda->quantitat = $item['counter'];
             $lineacomanda->preu = $item['preu'];
             $lineacomanda->save();
