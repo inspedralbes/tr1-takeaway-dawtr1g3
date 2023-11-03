@@ -42,6 +42,10 @@ body {
     left: 0;
     right: 0;
     border: #000000 1px solid;
+    top:0;
+    padding-left: 2vw;
+    padding-bottom: 2vw;
+    padding-right: 2vw;
 }
 
 .nav__container {
@@ -102,10 +106,11 @@ body {
 
 .container__title {
     grid-area: title;
-    margin-left: 15px;
+    text-align: center;
     font-size: var(--sizeTitleNav);
     font-family: var(--fontfamily);
     font-variant: var(--fontvariant);
+
 }
 
 .container__title>h1 {
@@ -343,10 +348,8 @@ body {
 
 /* shop-ticket */
 .ticket {
-    position: absolute;
-    right: 0;
-    top: 70px;
-    z-index: 999;
+    width: 100%;
+    margin-top: 10px;
     display: grid;
     grid-template-rows: 1fr auto;
     grid-template-areas:
@@ -364,6 +367,10 @@ body {
     text-align: center;
     position: sticky;
     top: 1px;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 15px;
+    z-index: 999;
 }
 
 .ticket__account {
@@ -386,6 +393,9 @@ body {
     grid-area: total;
     background-color: #21aaff;
     margin-left: 0;
+    padding: 15px;
+    font-weight: bold;
+    font-size: 20px;
 }
 
 .account__buttonCheck {
@@ -432,6 +442,10 @@ body {
     grid-area: price;
 }
 
+.itemCart__name,.itemCart__price,.itemCart__counter{
+    margin-top: 1.5vh;
+}
+
 .itemCart__counter,
 .total__items {
     grid-area: counter;
@@ -457,13 +471,12 @@ body {
 .check__formContainer {
     background-color: #ffffff;
     padding: 25px;
-    border-radius: 40px;
     width: 300px;
     text-align: center;
-    box-shadow: 0 2px 2px 3px rgba(0, 0, 0, 0.2);
     margin-top: 10%;
-    margin-left: 25px;
-    margin-right: 25px;
+    margin: auto;
+    border: #000000 1px solid;
+    margin-top: 15%;
 }
 
 .formContainer__title {
@@ -487,23 +500,22 @@ body {
 .form__inputDomicili,
 .form__inputEmail {
     padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 1px solid #000000;
     margin-top: 3px;
     margin-bottom: 15px;
 }
 
 .form__btn {
     margin-top: 15px;
-    background-color: #007BFF;
+    background-color: #1e91d6;
     /* Color de fondo del botón */
     color: #fff;
     /* Color del texto del botón */
-    padding-top: 15px;
-    padding-bottom: 15px;
-    border: none;
-    border-radius: 25px;
+    padding: 15px;
+    border: 1PX solid black;
     font-family: var(--fontfamily);
+    font-weight: bold;
+    font-size: 20px;
 }
 
 .check__resumTicket {
@@ -516,32 +528,40 @@ body {
         "totalTitle . . totalPrice";
     margin: 7%;
     padding: 2%;
-    background-color: #cae3ff;
-    border-radius: 25px;
+    
 }
 
 .resumTicket__title {
     grid-area: title;
     font-family: var(--fontfamily);
+    padding: 15px;
 }
 
 .containerItemResum {
     grid-area: item;
 }
 
-.resumTicket__itemTicket {
+.resumTicket__itemTicket:nth-child(odd){
+    border-bottom:#20f005 1.5px solid;
+}
+.resumTicket__itemTicket:nth-child(even){
+    border-bottom:#f0e005 1.5px solid;
+}
 
+.resumTicket__itemTicket {
     display: grid;
     grid-template-columns: 3fr 5fr 1fr 1fr;
     grid-template-areas:
         "image name counter price";
     font-family: var(--fontfamily);
+    margin: 10%;
 }
 
 .itemTicket__image {
     grid-area: image;
     height: 100%;
     width: 80%;
+    margin-bottom: 0.5vh;
 }
 
 .itemTicket__name {
@@ -557,14 +577,22 @@ body {
     color: red;
 }
 
+.itemTicket__name,.itemTicket__counter,.itemTicket__price{
+    margin-top: 1.5vh;
+}
+
 .resumTicket__totalTitle {
     grid-area: totalTitle;
     font-family: var(--fontfamily);
+    font-weight: bold;
+    font-size: 23px;
 }
 
 .resumTicket__totalPrice {
     grid-area: totalPrice;
     font-family: var(--fontfamily);
+    font-weight: bold;
+    font-size: 23px
 }
 
 /* status-page */
