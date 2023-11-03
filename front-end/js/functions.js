@@ -34,7 +34,8 @@ createApp({
                 showTotalTicket: false,
                 searchOrderClientPage: false,
                 register_page: false,
-                login_page: false
+                login_page: false,
+                orders_users:false
             }
         };
     },
@@ -54,7 +55,8 @@ createApp({
             this.views.edit_order = false,
             this.views.isFormValid = false,
             this.views.login_page = false,
-            this.views.register_page = false
+            this.views.register_page = false,
+            this.views.orders_users =false
         },
 
         //header
@@ -233,7 +235,10 @@ createApp({
             this.hiddenAllPages();
             this.views.status_page = true;
         },
-
+        clickOrdersUser(){
+            this.hiddenAllPages();
+            this.views.orders_users=true;
+        },
         clickSearchOrderClient() {
             let inputOrderClient = document.getElementById('searchInputOrderClient');
             var id = inputOrderClient.value;

@@ -5,8 +5,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>StudentStock</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="front-end/css/style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+        integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="front-end/css/style.css" />
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 
@@ -27,7 +29,7 @@
                                 <a class="itemExtens__link" @click="clickStartShopping()">Productes</a>
                             </li>
                             <li class="listExtens__itemExtens itemExtens">
-                                <a class="itemExtens__link" @click="clickOrdersButton()">Comandes</a>
+                                <a class="itemExtens__link" @click="clickOrdersUser()">Les meves comandes</a>
                             </li>
                             <li class="listExtens__itemExtens itemExtens">
                                 <a class="itemExtens__link" @click="clickLogin()">Login / Register</a>
@@ -81,9 +83,9 @@
 
                 <label for="password">Password</label>
                 <input type="password" placeholder="Password" id="password">
-           
+
                 <button>Log In</button>
-                <button @click="clickRegister()">Register</button> 
+                <button @click="clickRegister()">Register</button>
             </form>
         </div>
         <div class="register" v-if="views.register_page">
@@ -126,7 +128,10 @@
         </div>
         <div class="shop" v-if="views.shop_page">
             <div class="shop__item item" v-for="producte in productes">
-                <label class="item__label" for="producte">{{ producte.nom }}</label>
+                
+                <label class="item__label">{{ producte.nom }}</label>
+                <label class="item__preu">{{producte.preu}}.99€</label> 
+
                 <div class="item__buttons buttons">
 
                     <input class="buttons__more" type="button" value="Afegir al carro"
@@ -145,13 +150,17 @@
                 <h2 class="formContainer__title">Dades personals</h2>
                 <div class="formContainer__form form">
                     <label class="form__labelNom" for="nombre">Nom:</label><br>
-                    <input class="form__inputNom" type="text" id="nombre" name="nombre" v-model="usuari.name" required><br>
+                    <input class="form__inputNom" type="text" id="nombre" name="nombre" v-model="usuari.name"
+                        required><br>
                     <label class="form__labelCognoms" for="apellidos">Cognoms:</label><br>
-                    <input class="form__inputCognoms" type="text" id="apellidos" name="apellidos" v-model="usuari.surnames" required><br>
+                    <input class="form__inputCognoms" type="text" id="apellidos" name="apellidos"
+                        v-model="usuari.surnames" required><br>
                     <label class="form__labelDomicili" for="email">Correu electónic:</label><br>
-                    <input class="form__inputDomicili" type="email" id="email" name="email" v-model="usuari.email" required><br>
+                    <input class="form__inputDomicili" type="email" id="email" name="email" v-model="usuari.email"
+                        required><br>
                     <label class="form__labelEmail" for="password">Contrasenya:</label><br>
-                    <input class="form__inputEmail" type="password" id="password" name="password" v-model="usuari.password" required><br>
+                    <input class="form__inputEmail" type="password" id="password" name="password"
+                        v-model="usuari.password" required><br>
                 </div>
                 <button class="form__btn" @click="clickBuyForm()">Realitzar Compra</button>
             </div>
@@ -169,6 +178,22 @@
                 <p class="resumTicket__totalPrice">{{ shopping_cart.totalPrice }}€</p>
             </div>
         </div>
+        <div class="status" v-if="views.orders_users">
+            <div class="recuadro">
+        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda illo, delectus consectetur reprehenderit temporafugiat doloribus?</h2>
+       </div> 
+       <div class="recuadro">
+        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda illo, delectus consectetur reprehenderit tempora  dicta quo fugiat doloribus?</h2>
+       </div> 
+       <div class="recuadro">
+        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda illo, delectus consectetur reprehenderit temporafugiat doloribus?</h2>
+       </div> 
+      <button @click="clickOrdersButton()"> COMANDES</button>
+
+    </div>
+
+
+        <!-- COMANDES -->
         <div class="status" v-if="views.status_page">
             <h3>Número de comanda: <input class="status__search" type="search" name="comanda"
                     id="searchInputOrderClient" @keyup.enter="clickSearchOrderClient()"></h3>
@@ -188,6 +213,7 @@
                 </div>
             </div>
         </div>
+
         <footer class="footer">
             <h2 class="footer__title">©2023, StudentStock</h2>
             <a href="https://www.facebook.com/?locale=es_ES" target="_blank"><img class="footer__img"
