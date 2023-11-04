@@ -29,7 +29,7 @@
                                 <a class="itemExtens__link" @click="clickStartShopping()">Productes</a>
                             </li>
                             <li class="listExtens__itemExtens itemExtens">
-                                <a class="itemExtens__link" @click="clickOrdersButton()">Comandes</a>
+                                <a class="itemExtens__link" @click="clickOrdersUser()">Les meves comandes</a>
                             </li>
                             <li class="listExtens__itemExtens itemExtens">
                                 <a class="itemExtens__link" @click="clickLogin()">Login / Register</a>
@@ -129,7 +129,10 @@
 
         <div class="shop" v-if="views.shop_page">
             <div class="shop__item item" v-for="producte in productes">
-                <label class="item__label" for="producte">{{ producte.nom }}</label>
+                
+                <label class="item__label">{{ producte.nom }}</label>
+                <label class="item__preu">{{producte.preu}}.99€</label> 
+
                 <div class="item__buttons buttons">
 
                     <input class="buttons__more" type="button" value="Afegir al carro"
@@ -176,6 +179,22 @@
                 <p class="resumTicket__totalPrice">{{ shopping_cart.totalPrice }}€</p>
             </div>
         </div>
+        <div class="status" v-if="views.orders_users">
+            <div class="recuadro">
+        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda illo, delectus consectetur reprehenderit temporafugiat doloribus?</h2>
+       </div> 
+       <div class="recuadro">
+        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda illo, delectus consectetur reprehenderit tempora  dicta quo fugiat doloribus?</h2>
+       </div> 
+       <div class="recuadro">
+        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda illo, delectus consectetur reprehenderit temporafugiat doloribus?</h2>
+       </div> 
+      <button @click="clickOrdersButton()"> COMANDES</button>
+
+    </div>
+
+
+        <!-- COMANDES -->
         <div class="status" v-if="views.status_page">
             <h3>Número de comanda: <input class="status__search" type="search" name="comanda"
                     id="searchInputOrderClient" @keyup.enter="clickSearchOrderClient()"></h3>
@@ -195,6 +214,7 @@
                 </div>
             </div>
         </div>
+
         <footer class="footer">
             <h2 class="footer__title">©2023, StudentStock</h2>
             <a href="https://www.facebook.com/?locale=es_ES" target="_blank"><img class="footer__img"
