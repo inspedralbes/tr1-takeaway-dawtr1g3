@@ -18,7 +18,7 @@ createApp({
                 password: "",
             },
             estatOrderClient: {
-                id: '',
+                id: '',                
                 usuari: "",
                 estat: "",
                 total: "",
@@ -35,7 +35,6 @@ createApp({
                 searchOrderClientPage: false,
                 register_page: false,
                 login_page: false
-
             }
         };
     },
@@ -188,40 +187,40 @@ createApp({
                 } else {
                     throw new Error("Error al crear la comanda.");
                 }
-            }).then((data) => {
-                const comandaID = data.comandaID;
-                const responseLineaComanda = fetch("http://localhost:8000/api/lineacomandes", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify([{ items: this.shopping_cart.products_cart }, { idComanda: comandaID }, { usuari: this.usuari.email }]),
+                }).then((data) => {
+                    const comandaID = data.comandaID;
+                    const responseLineaComanda = fetch("http://localhost:8000/api/lineacomandes", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        
+                        body: JSON.stringify([{items: this.shopping_cart.products_cart}, {idComanda: comandaID}, {usuari: this.usuari},{total: this.shopping_cart.totalPrice}]),
+                    });
+                    responseLineaComanda.then((response) => {
+                        if (response.ok) {
+                            this.hiddenAllPages();
+                            this.landing_page = true;
+                            this.shopping_cart.products_cart = [];
+                            this.shopping_cart.totalAccount = 0;
+                            this.shopping_cart.totalItems = 0;
+                            this.productes.forEach(element => {
+                                element.counter = 0;
+                            });
+                            //return response.json();
+                        } else {
+                            throw new Error("Error al crear la comanda.");
+                        }
+                    });
+                }).catch((error) => {
+                    console.error(error);
                 });
-
-                responseLineaComanda.then((response) => {
-                    if (response.ok) {
-                        this.hiddenAllPages();
-                        this.views.landing_page = true;
-                        this.shopping_cart.products_cart = [];
-                        this.shopping_cart.totalAccount = 0;
-                        this.shopping_cart.totalItems = 0;
-                        this.productes.forEach(element => {
-                            element.counter = 0;
-                        });
-                        return response.json();
-                    } else {
-                        throw new Error("Error al crear la comanda.");
-                    }
-                });
-            }).catch((error) => {
-                console.error(error);
-            });
-            if (localStorage == null) {
-                localStorage.setItem('user', JSON.stringify(this.usuari));
-            } else {
-                localStorage.clear();
-                localStorage.setItem('user', JSON.stringify(this.usuari));
-            }
+                if (localStorage == null) {
+                    localStorage.setItem('user', JSON.stringify(this.usuari));
+                } else {
+                    localStorage.clear();
+                    localStorage.setItem('user', JSON.stringify(this.usuari));
+                }
             // if (this.isFormValid) {
 
             // } else {
@@ -234,6 +233,7 @@ createApp({
             this.hiddenAllPages();
             this.views.status_page = true;
         },
+
         clickSearchOrderClient() {
             let inputOrderClient = document.getElementById('searchInputOrderClient');
             var id = inputOrderClient.value;
