@@ -1,8 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Mail\CanviEstat;
 use App\Models\Comanda;
 use Illuminate\Http\Request;
+use App\Mail\Correu;
+use Illuminate\Support\Facades\Mail;
+
 
 class ComandesController extends Controller
 {
@@ -31,7 +36,10 @@ class ComandesController extends Controller
         $comanda = Comanda::find($id);
 
         if($request->has('estat')) {
+            $estatAntic = $comanda->estat;
             $comanda->update(['estat' => $request->estat]);
+            Mail::to($comanda->usuari)->send(new CanviEstat($comanda,$estatAntic));
+            
         }
 
         return redirect()->route('comandes');
