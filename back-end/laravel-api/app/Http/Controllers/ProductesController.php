@@ -40,6 +40,9 @@ class ProductesController extends Controller
             $product->imatge = null;
             if ($request->hasFile('imatge')) {
                 $imatgePath = $request->file('imatge')->storeAs('/img', $request->file('imatge')->getClientOriginalName());
+                $image = $request->file('imatge');
+                $imageName = $image->getClientOriginalName();
+                $image->move(public_path('img'), $imageName);
                 $product->imatge = $imatgePath;
             }
             $product->save();
@@ -78,6 +81,9 @@ class ProductesController extends Controller
         $product->categoria_id = $request->categoria_id;
         if ($request->hasFile('imatge')) {
             $imatgePath = $request->file('imatge')->storeAs('/img', $request->file('imatge')->getClientOriginalName());
+            $image = $request->file('imatge');
+            $imageName = $image->getClientOriginalName();
+            $image->move(public_path('img'), $imageName);
             $product->imatge = $imatgePath;
         }
         $product->update();
