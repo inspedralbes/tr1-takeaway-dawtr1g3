@@ -26,13 +26,13 @@
                     <div class="container__navExtens navExtens" v-if="views.nav_toggle">
                         <ul class="navExtens__listExtens listExtens">
                             <li class="listExtens__itemExtens itemExtens">
-                                <a class="itemExtens__link" @click="clickStartShopping()">Productes</a>
+                                <a class="itemExtens__link" @click="clickStartShopping()">Tots els Productes</a>
                             </li>
                             <li class="listExtens__itemExtens itemExtens">
                                 <a class="itemExtens__link" @click="clickOrdersUser()">Les meves comandes</a>
                             </li>
                             <li class="listExtens__itemExtens itemExtens">
-                                <a class="itemExtens__link" @click="clickLogin()">Login / Register</a>
+                                <a class="itemExtens__link" @click="clickLogin()">Login</a> / <a class="itemExtens__link" @click="clickRegister()">Register</a>
                             </li>
                             <li class="listExtens__itemExtens itemExtens">
                                 <a class="itemExtens__link" @click="clickLogout()">Logout</a>
@@ -50,7 +50,7 @@
                     </a>
                 </div>
                 <div class="ticket" v-if="views.cart_toggle">
-                    <h3 class="ticket__title">Cistella</h3>
+                    <h3 class="ticket__title" id="titleCart">La teva cistella</h3>
                     <div class="ticket__account account">
                         <div class="account__item div">
                             <div class="div__itemCart itemCart" v-for="product_cart in shopping_cart.products_cart">
@@ -58,7 +58,8 @@
                                 <p class="itemCart__name">{{ product_cart.nom }}</p>
                                 <p class="itemCart__price">{{ product_cart.preu }}€</p>
                                 <p class="itemCart__counter">{{ product_cart.counter }}</p>
-                                <input class="itemCart__btnless" type="button" value="-" @click="clickButtonLess(product_cart)">
+                                <input class="itemCart__btnless" type="button" value="-"
+                                    @click="clickButtonLess(product_cart)">
                             </div>
                         </div>
                         <div class="account__total total" v-if="views.showTotalTicket">
@@ -126,15 +127,20 @@
 
             </form>
         </div>
-
         <div class="shop" v-if="views.shop_page">
+            <div class="shop__buttonsCategories buttonsCategories">
+                <button class="buttonsCategories" @click="clickStartShopping()">Tots els productes</button>
+                <button class="buttonsCategories" v-for="category in categories" @click="filterByCategory(category)"
+                    :class="{ active: category.id == selectedCategory }"
+                >
+                    {{ category.nom }}
+                </button>
+            </div>
+
             <div class="shop__item item" v-for="producte in productes">
-                
                 <label class="item__label">{{ producte.nom }}</label>
-                <label class="item__preu">{{producte.preu}}.99€</label> 
-
+                <label class="item__preu">{{producte.preu}}.00€</label>
                 <div class="item__buttons buttons">
-
                     <input class="buttons__more" type="button" value="Afegir al carro"
                         @click="clickButtonMore(producte)">
                 </div>
@@ -144,8 +150,8 @@
         </div>
         <!--BOTON TRANSICION
         <button class="hamburger__toggle">
-                            <span class="hamburger__icon"></span>
-                        </button>-->
+            <span class="hamburger__icon"></span>
+        </button>-->
         <div class="check" v-if="views.checkout_page">
             <div class="check__formContainer formContainer">
                 <h2 class="formContainer__title">Dades personals</h2>
@@ -181,19 +187,20 @@
         </div>
         <div class="status" v-if="views.orders_users">
             <div class="recuadro">
-        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda illo, delectus consectetur reprehenderit temporafugiat doloribus?</h2>
-       </div> 
-       <div class="recuadro">
-        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda illo, delectus consectetur reprehenderit tempora  dicta quo fugiat doloribus?</h2>
-       </div> 
-       <div class="recuadro">
-        <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda illo, delectus consectetur reprehenderit temporafugiat doloribus?</h2>
-       </div> 
-      <button @click="clickOrdersButton()"> COMANDES</button>
+                <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda illo, delectus consectetur
+                    reprehenderit temporafugiat doloribus?</h2>
+            </div>
+            <div class="recuadro">
+                <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda illo, delectus consectetur
+                    reprehenderit tempora dicta quo fugiat doloribus?</h2>
+            </div>
+            <div class="recuadro">
+                <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda illo, delectus consectetur
+                    reprehenderit temporafugiat doloribus?</h2>
+            </div>
+            <button @click="clickOrdersButton()"> COMANDES</button>
 
-    </div>
-
-
+        </div>
         <!-- COMANDES -->
         <div class="status" v-if="views.status_page">
             <h3>Número de comanda: <input class="status__search" type="search" name="comanda"
@@ -214,7 +221,6 @@
                 </div>
             </div>
         </div>
-
         <footer class="footer">
             <h2 class="footer__title">©2023, StudentStock</h2>
             <a href="https://www.facebook.com/?locale=es_ES" target="_blank"><img class="footer__img"
@@ -229,5 +235,4 @@
     </div>
     <script src="front-end/js/functions.js" type="module"></script>
 </body>
-
 </html>

@@ -275,6 +275,10 @@ body {
     position: relative; /* Agregamos esta propiedad para posicionar el pseudo-elemento */
 }
 
+.shop__buttonsCategories {
+    z-index: 999;
+}
+
 .shop::before {
     content: "";
     position: absolute;
@@ -355,22 +359,26 @@ body {
     color: #fff;
     transition: background-color 0.3s ease;
 }
+
 .recuadro:first-child{
     background-color: #007BFF;
     margin-top: 100px;
     margin-left: 10px;
     width: 300px;
 }
+
 .recuadro{
     background-color: #007BFF;
     margin-top: 20px;
     margin-left: 10px;
     width: 300px;
 }
+
 /* Cambio de estilo al hacer clic en el botón */
 .buttons__more:active {
     background-color: #4cda30; /* Cambia el color de fondo al hacer clic */
 }
+
 .item__image {
     width: 120px;
     height: 140px;
@@ -665,31 +673,22 @@ body {
     border: solid #030303 2px;
     box-shadow: rgb(0, 0, 0);
     border-radius: 50px;
-
     align-items: center;
 
 }
 
 .boton-guardar {
     background-color: #4CAF50;
-    /* Color de fondo */
     color: white;
-    /* Color del texto */
     border: none;
-    /* Sin borde */
     padding: 10px 20px;
-    /* Relleno (padding) del botón */
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    /* Tamaño del texto */
     margin: 10px 2px;
-    /* Márgenes exteriores */
     cursor: pointer;
-    /* Cambia el cursor al pasar por encima */
     border-radius: 5px;
-    /* Bordes redondeados */
 }
 
 .boton-guardar:hover {
@@ -703,7 +702,7 @@ body {
 }
 
 /* Efecto 3D al pasar el cursor sobre el botón 
-  .admin-buttons {
+.admin-buttons {
     display: flex;
     justify-content: center; 
     align-items: center;   
@@ -817,21 +816,22 @@ body {
     border-radius: 5px;
     cursor: pointer;
 }
+
 .box{
     background-color: #218d98;
     height: 100px;
     width: 100px;
-  }
-  
-  .transform{
+}
+
+.transform{
     transition: all 2s ease;
-  }
-  
-  .transform-active{
+}
+
+.transform-active{
     background-color: #45cee0;
     height: 200px;
     width: 200px;
-  }
+}
 
 .register {
     background-image: url("https://c.wallhere.com/photos/26/51/line_light_background_bright-685894.jpg!d");
@@ -843,7 +843,6 @@ body {
     position: absolute;
     border-radius: 50%;
 }
-
 
 .register form {
     width: 200px;

@@ -4,3 +4,10 @@ export async function getProductes() {
     console.log(productes);
     return productes;
 }
+
+export async function getCategories() {
+    let response = await fetch("http://localhost:8000/api/categories");
+    let categories = await response.json();
+    console.log(categories);
+    return categories;
+}
