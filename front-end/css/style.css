@@ -754,7 +754,7 @@ body {
 
 
 .login form {
-    width: 200px;
+    width: 60vw;
     background-color: rgba(51, 49, 49, 0.11);
     position: absolute;
     transform: translate(-50%, -50%);
@@ -786,7 +786,7 @@ body {
     margin-top: 30px;
     font-size: 16px;
     font-weight: 500;
-    width: 45%;
+    width: 70%;
 }
 
 .login input {
@@ -849,7 +849,7 @@ body {
     background-color: rgba(51, 49, 49, 0.11);
     position: absolute;
     transform: translate(-50%, -50%);
-    top: 50%;
+    top: 47%;
     left: 50%;
     border-radius: 10px;
     backdrop-filter: blur(10px);
@@ -888,7 +888,7 @@ body {
     margin-top: 30px;
     font-size: 16px;
     font-weight: 500;
-    width: 45%;
+    width: 60%;
 
 }
 
