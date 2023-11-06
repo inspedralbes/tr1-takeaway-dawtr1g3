@@ -19,7 +19,7 @@ Route::get('/admin/comandes', function() {
 
 Route::get('/admin/comandes/{id}', function($id) {
     $comanda = Comanda::find($id);
-    $estadosPosibles = ['Rebut', 'En preparació', 'Llest per recollir'];
+    $estadosPosibles = ['Rebut','En preparacio','Llest per recollir'];
     return view('admin.updateComanda')->with(['comanda' => $comanda, 'estats' => $estadosPosibles]);
 })->name('comanda');
 

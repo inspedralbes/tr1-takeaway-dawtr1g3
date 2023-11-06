@@ -39,7 +39,6 @@ class ComandesController extends Controller
             $estatAntic = $comanda->estat;
             $comanda->update(['estat' => $request->estat]);
             Mail::to($comanda->usuari)->send(new CanviEstat($comanda,$estatAntic));
-            
         }
 
         return redirect()->route('comandes');
