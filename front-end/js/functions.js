@@ -74,6 +74,7 @@ createApp({
             this.views.nav_toggle = false;
             if (this.shopping_cart.products_cart.length == 0) {
                 this.views.showTotalTicket = false;
+                this.views.cart_toggle = false;
             } else {
                 this.views.showTotalTicket = true;
             }
