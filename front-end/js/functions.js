@@ -1,6 +1,6 @@
 const { createApp } = Vue;
 import { getProductes } from "../js/comunicationManager.js";
-import {getCategories} from "../js/comunicationManager.js";
+import { getCategories } from "../js/comunicationManager.js";
 
 createApp({
     data() {
@@ -15,11 +15,12 @@ createApp({
                 totalItems: 0,
             },
             usuari: {
-                name: "",
-                surnames: "",
+                nom: "",
+                cognoms: "",
                 email: "",
-                password: "",
+                contrasenya: "",
             },
+            registreMissatge: "",
             estatOrderClient: {
                 id: '',
                 usuari: "",
@@ -38,7 +39,8 @@ createApp({
                 searchOrderClientPage: false,
                 register_page: false,
                 login_page: false,
-                orders_users: false
+                orders_users: false,
+                registreMissatgeView: false
             }
         };
     },
@@ -111,7 +113,7 @@ createApp({
         filterByCategory(category) {
             console.log(category.id);
             this.selectedCategory = category.id;
-    
+
             if (category.id == null) {
                 this.productes = this.productesOriginal;
             } else {
@@ -186,10 +188,10 @@ createApp({
             this.hiddenAllPages();
             this.views.checkout_page = true;
             if (localStorage == null) {
-                this.usuari.name = localStorage.getItem(JSON.parse(user.name));
-                this.usuari.surnames = localStorage.getItem(JSON.parse(user.surnames));
-                this.usuari.residence = localStorage.getItem(JSON.parse(user.email));
-                this.usuari.email = localStorage.getItem(JSON.parse(user.password));
+                this.usuari.nom = localStorage.getItem(JSON.parse(user.nom));
+                this.usuari.cognoms = localStorage.getItem(JSON.parse(user.cognoms));
+                this.usuari.email = localStorage.getItem(JSON.parse(user.email));
+                this.usuari.contrasenya = localStorage.getItem(JSON.parse(user.contrasenya));
             }
         },
         //checkout-page_functions
@@ -287,13 +289,33 @@ createApp({
             });
         },
         // Register-Login Functions
+        // Login Functions
         clickLogin() {
             this.hiddenAllPages();
             this.views.login_page = true;
         },
+        // Register Functions
         clickRegister() {
             this.hiddenAllPages();
             this.views.register_page = true;
+        },
+        clickRegisterForm() {
+            fetch("http://localhost:8000/api/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(this.usuari),
+            }).then((data) => {
+                this.registreMissatge = data.error; // Mensaje de error del servidor
+            });
+
+            if (localStorage == null) {
+                localStorage.setItem('user', JSON.stringify(this.usuari));
+            } else {
+                localStorage.clear();
+                localStorage.setItem('user', JSON.stringify(this.usuari));
+            }
         }
     },
     created() {
@@ -308,7 +330,7 @@ createApp({
         getCategories().then((categories) => {
             this.categories = categories;
             console.log(this.categories);
-        }); 
+        });
         document.addEventListener("DOMContentLoaded", function () {
             const button = document.querySelector(".hamburger__toggle");
             button.addEventListener("click", () => button.classList.toggle("toggled"));

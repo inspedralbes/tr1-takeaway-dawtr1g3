@@ -112,20 +112,19 @@
             </form>
         </div>
         <div class="register" v-if="views.register_page">
-            <form>
+            <div>
                 <h3>Registrar-se</h3>
-                <label for="nom">Nom</label>
-                <input type="text" placeholder="Nom" id="nom">
-                <label for="cognoms">Cognoms</label>
-                <input type="text" placeholder="Cognoms" id="cognoms">
-                <label for="email">Correu electónic:</label>
-                <input type="email" placeholder="Email" id="email">
-
-                <label for="password">Contrasenya:</label>
-                <input type="password" placeholder="Password" id="password">
-                <button>Registrar-se</button>
-
-            </form>
+                <label for="nom">Dades personals:</label>
+                <input type="text" placeholder="Nom" id="nom" name="nom" required v-model="usuari.nom">
+                <input type="text" placeholder="Cognoms" id="cognoms" name="cognoms" required v-model="usuari.cognoms">
+                <label for="email">Dades d'accés:</label>
+                <input type="email" placeholder="Email" id="email" name="email" required v-model="usuari.email">
+                <input type="password" placeholder="Contrasenya" id="contrasenya" name="contrasenya" required v-model="usuari.contrasenya">
+                <button @click="clickRegisterForm()">Registrar-se</button>
+                <div v-if="views.registreMissatgeçView">
+                    {{ registreMissatge }}
+                </div>
+            </div>
         </div>
         <div class="shop" v-if="views.shop_page">
             <div class="shop__buttonsCategories buttonsCategories">
@@ -156,18 +155,18 @@
             <div class="check__formContainer formContainer">
                 <h2 class="formContainer__title">Dades personals</h2>
                 <div class="formContainer__form form">
-                    <label class="form__labelNom" for="nombre">Nom:</label><br>
-                    <input class="form__inputNom" type="text" id="nombre" name="nombre" v-model="usuari.name"
+                    <label class="form__labelNom" for="nom">Nom:</label><br>
+                    <input class="form__inputNom" type="text" id="nom" name="nom" v-model="usuari.nom"
                         required><br>
-                    <label class="form__labelCognoms" for="apellidos">Cognoms:</label><br>
-                    <input class="form__inputCognoms" type="text" id="apellidos" name="apellidos"
-                        v-model="usuari.surnames" required><br>
+                    <label class="form__labelCognoms" for="cognoms">Cognoms:</label><br>
+                    <input class="form__inputCognoms" type="text" id="cognoms" name="cognoms"
+                        v-model="usuari.cognoms" required><br>
                     <label class="form__labelDomicili" for="email">Correu electónic:</label><br>
                     <input class="form__inputDomicili" type="email" id="email" name="email" v-model="usuari.email"
                         required><br>
-                    <label class="form__labelEmail" for="password">Contrasenya:</label><br>
-                    <input class="form__inputEmail" type="password" id="password" name="password"
-                        v-model="usuari.password" required><br>
+                    <label class="form__labelEmail" for="contrasenya">Contrasenya:</label><br>
+                    <input class="form__inputEmail" type="password" id="contrasenya" name="contrasenya"
+                        v-model="usuari.contrasenya" required><br>
                 </div>
                 <button class="form__btn" @click="clickBuyForm()">Realitzar Compra</button>
             </div>

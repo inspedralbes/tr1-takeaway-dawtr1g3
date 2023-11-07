@@ -844,7 +844,7 @@ body {
     border-radius: 50%;
 }
 
-.register form {
+.register div {
     width: 200px;
     background-color: rgba(51, 49, 49, 0.11);
     position: absolute;
@@ -860,7 +860,7 @@ body {
     height: 500px;
 }
 
-.register form * {
+.register div * {
     color: #222020;
     letter-spacing: 0.5px;
     outline: none;
@@ -876,7 +876,7 @@ body {
     opacity: 0;
 }
 
-.register form h3 {
+.register div h3 {
     font-size: 32px;
     font-weight: 500;
     line-height: 42px;
