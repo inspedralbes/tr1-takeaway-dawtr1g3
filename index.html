@@ -32,11 +32,10 @@
                                 <a class="itemExtens__link" @click="clickOrdersUser()">Les meves comandes</a>
                             </li>
                             <li class="listExtens__itemExtens itemExtens">
-                                <a class="itemExtens__link" @click="clickLogin()">Login</a> / <a
-                                    class="itemExtens__link" @click="clickRegister()">Register</a>
+                                <a class="itemExtens__link" @click="clickLogin()">Iniciar Sessió</a> / <a class="itemExtens__link" @click="clickRegister()">Registrar-se</a>
                             </li>
                             <li class="listExtens__itemExtens itemExtens">
-                                <a class="itemExtens__link" @click="clickLogout()">Logout</a>
+                                <a class="itemExtens__link" @click="clickLogout()">Tancar Sessió</a>
                             </li>
                         </ul>
                         <div class="navExtens__searchExtens searchExtens" role="search">
@@ -101,30 +100,30 @@
         </div>
         <div class="login" v-if="views.login_page">
             <form>
-                <h3>Login Here</h3>
-                <label for="username">Username</label>
-                <input type="text" placeholder="Email or Phone" id="username">
+                <h3>Iniciar Sessió</h3>
+                <label for="username">Correu electónic:</label>
+                <input type="email" placeholder="Email" id="email">
 
-                <label for="password">Password</label>
+                <label for="password">Contrasenya:</label>
                 <input type="password" placeholder="Password" id="password">
 
-                <button>Log In</button>
-                <button @click="clickRegister()">Register</button>
+                <button>Iniciar Sessió</button>
+                <button @click="clickRegister()">Registrar-se</button>
             </form>
         </div>
         <div class="register" v-if="views.register_page">
             <form>
-                <h3>Register</h3>
+                <h3>Registrar-se</h3>
                 <label for="nom">Nom</label>
                 <input type="text" placeholder="Nom" id="nom">
                 <label for="cognoms">Cognoms</label>
                 <input type="text" placeholder="Cognoms" id="cognoms">
-                <label for="username">Username</label>
-                <input type="text" placeholder="Email or Phone" id="username">
+                <label for="email">Correu electónic:</label>
+                <input type="email" placeholder="Email" id="email">
 
-                <label for="password">Password</label>
+                <label for="password">Contrasenya:</label>
                 <input type="password" placeholder="Password" id="password">
-                <button>Register</button>
+                <button>Registrar-se</button>
 
             </form>
         </div>

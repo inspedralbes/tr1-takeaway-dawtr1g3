@@ -7,7 +7,7 @@
         <div class="field">
             <label class="label">ID Producte:</label>
             <div class="control">
-                <input class="input" type="number" value="{{ $producte->id }}">
+                <input class="input" type="number" value="{{ $producte->id }}" disabled>
             </div>
         </div>
 
