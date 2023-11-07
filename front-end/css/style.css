@@ -401,13 +401,11 @@ body {
     height: 140px;
     position: relative;
     bottom: 5%;
-
 }
 
 .image__background {
     background-color: #aeaadd78;
     border: 1px solid;
-
 }
 
 .activado {
@@ -530,7 +528,6 @@ body {
     border: none;
     background-color: rgb(0, 0, 0);
     color: #fff;
-
 }
 
 /* check-page */
@@ -704,7 +701,6 @@ body {
     box-shadow: rgb(0, 0, 0);
     border-radius: 50px;
     align-items: center;
-
 }
 
 .boton-guardar {

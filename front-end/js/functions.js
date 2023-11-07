@@ -1,6 +1,6 @@
 const { createApp } = Vue;
 import { getProductes } from "../js/comunicationManager.js";
-import {getCategories} from "../js/comunicationManager.js";
+import { getCategories } from "../js/comunicationManager.js";
 
 createApp({
     data() {
