@@ -128,10 +128,9 @@
             </form>
         </div>
         <div class="shop" v-if="views.shop_page">
-            <div class="shop__buttonsCategories buttonsCategories">
-                <button class="buttonsCategories" @click="clickStartShopping()">Tots els productes</button>
-                <button class="buttonsCategories" v-for="category in categories" @click="filterByCategory(category)"
-                    :class="{ active: category.id == selectedCategory }">
+            <div class="shop__buttonsCategories">
+                <button class="buttonsCategories"  style="text-align: center;" :class="{ 'filterClicked': null == selectedCategory }" @click="clickStartShopping()">Tots els productes</button>
+                <button style="margin-left: 4%;" class="buttonsCategories" v-for="category in categories" @click="filterByCategory(category)" :class="{ 'filterClicked': category.id == selectedCategory }">
                     {{ category.nom }}
                 </button>
             </div>

@@ -1,6 +1,6 @@
 const { createApp } = Vue;
 import { getProductes } from "../js/comunicationManager.js";
-import {getCategories} from "../js/comunicationManager.js";
+import { getCategories } from "../js/comunicationManager.js";
 
 createApp({
     data() {
@@ -122,6 +122,7 @@ createApp({
         },
         clickStartShopping() {
             this.hiddenAllPages();
+            this.selectedCategory= null,
             this.productes = this.productesOriginal;
             this.views.shop_page = true;
         },

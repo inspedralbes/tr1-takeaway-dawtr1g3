@@ -34,8 +34,8 @@ body {
 
 /* header y nav */
 .nav {
-    display: block;
-    position: absolute;
+
+    position: sticky;
     grid-area: nav;
     background-color: var(--bg-Nav-Footer);
     padding: 2vh;
@@ -268,27 +268,49 @@ body {
 
 /* shop-page */
 .shop {
-    margin-top: 20%;
     grid-area: container;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 }
 
 .shop__buttonsCategories {
-    z-index: 999;
+    position: relative;
+    width: 175%; 
+    overflow-x: auto; 
+    white-space: nowrap;
+    left: 12%;
+    gap: 5%;
+
+}
+
+.filterClicked{
+    background-color:#9ad7e9;
+}
+
+
+.shop__buttonsCategories::-webkit-scrollbar{
+    display: none;
+}
+
+.buttonsCategories{
+    width: 45%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 10%;
+    text-align: center;
+    border: 1px solid #222222;
+    border-radius: 10px;
 }
 
 .shop::before {
+    background-color: #cdf8fb;
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url("https://png.pngtree.com/thumb_back/fh260/background/20190222/ourmid/pngtree-marine-gradient-watercolor-blue-background-poster-material-image_49306.jpg");
     filter: blur(2px);
-    background-size: cover; /* Ajusta el fondo a toda la pantalla sin repetir */
-    background-repeat: no-repeat; /* Evita que se repita */
 }
 
 
@@ -379,13 +401,11 @@ body {
     height: 140px;
     position: relative;
     bottom: 5%;
-
 }
 
 .image__background {
     background-color: #aeaadd78;
     border: 1px solid;
-
 }
 
 .activado {
@@ -508,7 +528,6 @@ body {
     border: none;
     background-color: rgb(0, 0, 0);
     color: #fff;
-
 }
 
 /* check-page */
@@ -682,7 +701,6 @@ body {
     box-shadow: rgb(0, 0, 0);
     border-radius: 50px;
     align-items: center;
-
 }
 
 .boton-guardar {
