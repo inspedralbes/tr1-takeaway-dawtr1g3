@@ -5,8 +5,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>StudentStock</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="front-end/css/style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+        integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="front-end/css/style.css" />
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 
@@ -24,16 +26,16 @@
                     <div class="container__navExtens navExtens" v-if="views.nav_toggle">
                         <ul class="navExtens__listExtens listExtens">
                             <li class="listExtens__itemExtens itemExtens">
-                                <a class="itemExtens__link" @click="clickStartShopping()">Productes</a>
+                                <a class="itemExtens__link" @click="clickStartShopping()">Tots els Productes</a>
                             </li>
                             <li class="listExtens__itemExtens itemExtens">
-                                <a class="itemExtens__link" @click="clickOrdersButton()">Comandes</a>
+                                <a class="itemExtens__link" @click="clickOrdersUser()">Les meves comandes</a>
                             </li>
                             <li class="listExtens__itemExtens itemExtens">
-                                <a class="itemExtens__link" @click="clickLogin()">Login / Register</a>
+                                <a class="itemExtens__link" @click="clickLogin()">Iniciar Sessió</a> / <a class="itemExtens__link" @click="clickRegister()">Registrar-se</a>
                             </li>
                             <li class="listExtens__itemExtens itemExtens">
-                                <a class="itemExtens__link" @click="clickLogout()">Logout</a>
+                                <a class="itemExtens__link" @click="clickLogout()">Tancar Sessió</a>
                             </li>
                         </ul>
                         <div class="navExtens__searchExtens searchExtens" role="search">
@@ -46,6 +48,29 @@
                         <img class="buttonCar__iconCar" src="front-end/icons/icon-nav-shopCart.png"></img>
                         <span class="buttonCar__counterCar">{{ shopping_cart.totalItems }}</span>
                     </a>
+                </div>
+                <div class="ticket" v-if="views.cart_toggle">
+                    <h3 class="ticket__title" id="titleCart">La teva cistella</h3>
+                    <div class="ticket__account account">
+                        <div class="account__item div">
+                            <div class="div__itemCart itemCart" v-for="product_cart in shopping_cart.products_cart">
+                                <img class="itemCart__image" :src="'back-end/laravel-api/public/'+product_cart.imatge">
+                                <p class="itemCart__name">{{ product_cart.nom }}</p>
+                                <p class="itemCart__price">{{ product_cart.preu }}€</p>
+                                <p class="itemCart__counter">{{ product_cart.counter }}</p>
+                                <input class="itemCart__btnless" type="button" value="-"
+                                    @click="clickButtonLess(product_cart)">
+                            </div>
+                        </div>
+                        <div class="account__total total" v-if="views.showTotalTicket">
+                            <p class="total__name">Total</p>
+                            <p class="total__price">{{ shopping_cart.totalPrice }}€</p>
+                            <p class="total__items">{{ shopping_cart.totalItems }}</p>
+                        </div>
+                        <div class="account__buttonCheck buttonCheck" v-if="views.showTotalTicket">
+                            <button class="buttonCheck__checkBuy" @click="clickBuyButton()">Comprar</button>
+                        </div>
+                    </div>
                 </div>
             </nav>
         </div>
@@ -75,83 +100,79 @@
         </div>
         <div class="login" v-if="views.login_page">
             <form>
-                <h3>Login Here</h3>
-                <label for="username">Username</label>
-                <input type="text" placeholder="Email or Phone" id="username">
+                <h3>Iniciar Sessió</h3>
+                <label for="username">Correu electónic:</label>
+                <input type="email" placeholder="Email" id="email">
 
-                <label for="password">Password</label>
+                <label for="password">Contrasenya:</label>
                 <input type="password" placeholder="Password" id="password">
-           
-                <button>Log In</button>
-                <button @click="clickRegister()">Register</button> 
+
+                <button>Iniciar Sessió</button>
+                <button @click="clickRegister()">Registrar-se</button>
             </form>
         </div>
         <div class="register" v-if="views.register_page">
             <form>
-                <h3>Register</h3>
+                <h3>Registrar-se</h3>
                 <label for="nom">Nom</label>
                 <input type="text" placeholder="Nom" id="nom">
                 <label for="cognoms">Cognoms</label>
                 <input type="text" placeholder="Cognoms" id="cognoms">
-                <label for="username">Username</label>
-                <input type="text" placeholder="Email or Phone" id="username">
+                <label for="email">Correu electónic:</label>
+                <input type="email" placeholder="Email" id="email">
 
-                <label for="password">Password</label>
+                <label for="password">Contrasenya:</label>
                 <input type="password" placeholder="Password" id="password">
-                <button>Register</button>
+                <button>Registrar-se</button>
 
             </form>
         </div>
-        <div class="ticket" v-if="views.cart_toggle">
-            <h3 class="ticket__title">Cistella</h3>
-            <div class="ticket__account account">
-                <div class="account__item div">
-                    <div class="div__itemCart itemCart" v-for="product_cart in shopping_cart.products_cart">
-                        <img class="itemCart__image" :src="'back-end/laravel-api/public/'+product_cart.imatge">
-                        <p class="itemCart__name">{{ product_cart.nom }}</p>
-                        <p class="itemCart__price">{{ product_cart.preu }}€</p>
-                        <p class="itemCart__counter">{{ product_cart.counter }}</p>
-                        <input class="itemCart__btnless" type="button" value="-" @click="clickButtonLess(product_cart)">
-                    </div>
-                </div>
-                <div class="account__total total" v-if="views.showTotalTicket">
-                    <p class="total__name">Total</p>
-                    <p class="total__price">{{ shopping_cart.totalPrice }}€</p>
-                    <p class="total__items">{{ shopping_cart.totalItems }}</p>
-                </div>
-                <div class="account__buttonCheck buttonCheck" v-if="views.showTotalTicket">
-                    <button class="buttonCheck__checkBuy" @click="clickBuyButton()">Comprar</button>
-                </div>
-            </div>
-        </div>
         <div class="shop" v-if="views.shop_page">
+            <div class="shop__buttonsCategories">
+                <button class="buttonsCategories"  style="text-align: center;" :class="{ 'filterClicked': null == selectedCategory }" @click="clickStartShopping()">Tots els productes</button>
+                <button style="margin-left: 4%;" class="buttonsCategories" v-for="category in categories" @click="filterByCategory(category)" :class="{ 'filterClicked': category.id == selectedCategory }">
+                    {{ category.nom }}
+                </button>
+            </div>
+            <hr>
             <div class="shop__item item" v-for="producte in productes">
-                <label class="item__label" for="producte">{{ producte.nom }}</label>
-                <div class="item__buttons buttons">
 
-                    <input class="buttons__more" type="button" value="Afegir al carro"
+                <label class="item__label">{{ producte.nom }}</label>
+                <div class="item__buttons buttons">
+                    <input class="buttons__more" type="button" value="Afegir al carro 🛒"
                         @click="clickButtonMore(producte)">
                 </div>
-                <img class="item__image" :src="'back-end/laravel-api/public/'+producte.imatge">
+                <div class="image__background">
+                    <img class="item__image" :src="'back-end/laravel-api/public/'+producte.imatge">
+                    <label class="item__preu">{{producte.preu}}.00€</label>
+                    <span style="text-decoration:line-through; color: red;">{{producte.preu+4}}.99€</span>
 
+
+
+                </div>
             </div>
+
         </div>
         <!--BOTON TRANSICION
         <button class="hamburger__toggle">
-                            <span class="hamburger__icon"></span>
-                        </button>-->
+            <span class="hamburger__icon"></span>
+        </button>-->
         <div class="check" v-if="views.checkout_page">
             <div class="check__formContainer formContainer">
                 <h2 class="formContainer__title">Dades personals</h2>
                 <div class="formContainer__form form">
                     <label class="form__labelNom" for="nombre">Nom:</label><br>
-                    <input class="form__inputNom" type="text" id="nombre" name="nombre" v-model="usuari.name" required><br>
+                    <input class="form__inputNom" type="text" id="nombre" name="nombre" v-model="usuari.name"
+                        required><br>
                     <label class="form__labelCognoms" for="apellidos">Cognoms:</label><br>
-                    <input class="form__inputCognoms" type="text" id="apellidos" name="apellidos" v-model="usuari.surnames" required><br>
+                    <input class="form__inputCognoms" type="text" id="apellidos" name="apellidos"
+                        v-model="usuari.surnames" required><br>
                     <label class="form__labelDomicili" for="email">Correu electónic:</label><br>
-                    <input class="form__inputDomicili" type="email" id="email" name="email" v-model="usuari.email" required><br>
+                    <input class="form__inputDomicili" type="email" id="email" name="email" v-model="usuari.email"
+                        required><br>
                     <label class="form__labelEmail" for="password">Contrasenya:</label><br>
-                    <input class="form__inputEmail" type="password" id="password" name="password" v-model="usuari.password" required><br>
+                    <input class="form__inputEmail" type="password" id="password" name="password"
+                        v-model="usuari.password" required><br>
                 </div>
                 <button class="form__btn" @click="clickBuyForm()">Realitzar Compra</button>
             </div>
@@ -169,6 +190,23 @@
                 <p class="resumTicket__totalPrice">{{ shopping_cart.totalPrice }}€</p>
             </div>
         </div>
+        <div class="status" v-if="views.orders_users">
+            <div class="recuadro">
+                <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda illo, delectus consectetur
+                    reprehenderit temporafugiat doloribus?</h2>
+            </div>
+            <div class="recuadro">
+                <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda illo, delectus consectetur
+                    reprehenderit tempora dicta quo fugiat doloribus?</h2>
+            </div>
+            <div class="recuadro">
+                <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda illo, delectus consectetur
+                    reprehenderit temporafugiat doloribus?</h2>
+            </div>
+            <button @click="clickOrdersButton()"> COMANDES</button>
+
+        </div>
+        <!-- COMANDES -->
         <div class="status" v-if="views.status_page">
             <h3>Número de comanda: <input class="status__search" type="search" name="comanda"
                     id="searchInputOrderClient" @keyup.enter="clickSearchOrderClient()"></h3>

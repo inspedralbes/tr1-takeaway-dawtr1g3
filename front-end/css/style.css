@@ -3,7 +3,7 @@
     --fontfamily: Arial, Helvetica, sans-serif;
     --fontvariant: small-caps;
     --sizeTitleNav: 1em;
-    --bg-Nav-Footer: #e18335;
+    --bg-Nav-Footer: #8394cc;
 }
 
 * {
@@ -34,14 +34,18 @@ body {
 
 /* header y nav */
 .nav {
-    display: block;
-    position: absolute;
+
+    position: sticky;
     grid-area: nav;
     background-color: var(--bg-Nav-Footer);
     padding: 2vh;
     left: 0;
     right: 0;
     border: #000000 1px solid;
+    top: 0;
+    padding-left: 2vw;
+    padding-bottom: 2vw;
+    padding-right: 2vw;
 }
 
 .nav__container {
@@ -102,10 +106,11 @@ body {
 
 .container__title {
     grid-area: title;
-    margin-left: 15px;
+    text-align: center;
     font-size: var(--sizeTitleNav);
     font-family: var(--fontfamily);
     font-variant: var(--fontvariant);
+
 }
 
 .container__title>h1 {
@@ -125,7 +130,7 @@ body {
     position: absolute;
     top: 5px;
     right: 5px;
-    background-color: #ec964f;
+    background-color: #59f0f5;
     border: #000000 1px solid;
     padding: 5px;
     padding-left: 7px;
@@ -263,25 +268,63 @@ body {
 
 /* shop-page */
 .shop {
-    margin-top: 20%;
     grid-area: container;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 }
 
-.shop__item {
-    /* Estilos comunes para todos los elementos .shop__item */
-    background-color: #ccf5ff;
+.shop__buttonsCategories {
+    position: relative;
+    width: 175%; 
+    overflow-x: auto; 
+    white-space: nowrap;
+    left: 12%;
+    gap: 5%;
+
+}
+
+.filterClicked{
+    background-color:#9ad7e9;
+}
+
+
+.shop__buttonsCategories::-webkit-scrollbar{
+    display: none;
+}
+
+.buttonsCategories{
+    width: 45%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 10%;
+    text-align: center;
+    border: 1px solid #222222;
+    border-radius: 10px;
+}
+
+.shop::before {
+    background-color: #cdf8fb;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    filter: blur(2px);
+}
+
+
+.shop .shop__item {
+    background-color: #f5fdff;
     width: 150px;
     height: 250px;
     border-radius: 5px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 4px 4px 4px rgb(20, 20, 20);
     position: relative;
     text-align: center;
     margin: auto;
     margin-top: 5px;
     margin-bottom: 5px;
-    /* Espacio entre todos los elementos .shop__item */
 }
 
 .item__label {
@@ -289,17 +332,23 @@ body {
     font-variant: var(--fontvariant);
     position: absolute;
     bottom: 3px;
-    left: 5px;
-    width: 140px;
-    height: 20px;
     padding-bottom: 50px;
-    padding-left: 0;
-    padding-right: 0;
-    background-color: rgba(1, 78, 97, 0.801);
-    color: #fff;
+    color: rgb(32, 31, 31);
     border: none;
-    border-radius: 20px;
-    margin-top: 2px;
+    right: 0;
+    left: 0;
+    padding-bottom: 45px;
+
+}
+
+.item__preu {
+    font-family: var(--fontfamily);
+    font-variant: var(--fontvariant);
+    position: relative;
+    color: rgb(2, 2, 2);
+    border: 1px solid;
+    right: 15%;
+
 }
 
 .item__buttons {
@@ -307,46 +356,69 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
+    padding: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
     padding-left: 0;
     padding-right: 0;
 }
 
+
 .buttons__more {
     width: auto;
-    height: auto;
+    height: 30px;
     margin: 3px;
     border: none;
     border-radius: 5px;
-    background-color: rgb(0, 47, 255);
-    color: #fff;
-    transition: background-color 0.3s ease; /* Transición para el color de fondo */
+    background-color: rgba(2, 50, 196, 0.8);
+    color: #fff7f7;
+    transition: background-color 0.3s ease;
+    padding: 2px;
+}
+
+.recuadro:first-child {
+    background-color: #007BFF;
+    margin-top: 100px;
+    margin-left: 10px;
+    width: 300px;
+}
+
+.recuadro {
+    background-color: #007BFF;
+    margin-top: 20px;
+    margin-left: 10px;
+    width: 300px;
 }
 
 /* Cambio de estilo al hacer clic en el botón */
 .buttons__more:active {
-    background-color: #4cda30; /* Cambia el color de fondo al hacer clic */
+    background-color: #4cda30;
+    /* Cambia el color de fondo al hacer clic */
 }
+
 .item__image {
-    width: 130px;
-    height: 170px;
+    width: 120px;
+    height: 140px;
+    position: relative;
+    bottom: 5%;
 
 }
 
-.activado{
+.image__background {
+    background-color: #aeaadd78;
+    border: 1px solid;
+
+}
+
+.activado {
     background-color: #20f005;
 }
 
 
 /* shop-ticket */
 .ticket {
-    position: absolute;
-    right: 0;
-    top: 70px;
-    z-index: 999;
+    width: 100%;
+    margin-top: 10px;
     display: grid;
     grid-template-rows: 1fr auto;
     grid-template-areas:
@@ -364,6 +436,10 @@ body {
     text-align: center;
     position: sticky;
     top: 1px;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 15px;
+    z-index: 999;
 }
 
 .ticket__account {
@@ -386,6 +462,9 @@ body {
     grid-area: total;
     background-color: #21aaff;
     margin-left: 0;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 20px;
 }
 
 .account__buttonCheck {
@@ -432,6 +511,12 @@ body {
     grid-area: price;
 }
 
+.itemCart__name,
+.itemCart__price,
+.itemCart__counter {
+    margin-top: 1.5vh;
+}
+
 .itemCart__counter,
 .total__items {
     grid-area: counter;
@@ -445,7 +530,7 @@ body {
     border: none;
     background-color: rgb(0, 0, 0);
     color: #fff;
-    
+
 }
 
 /* check-page */
@@ -457,13 +542,12 @@ body {
 .check__formContainer {
     background-color: #ffffff;
     padding: 25px;
-    border-radius: 40px;
     width: 300px;
     text-align: center;
-    box-shadow: 0 2px 2px 3px rgba(0, 0, 0, 0.2);
     margin-top: 10%;
-    margin-left: 25px;
-    margin-right: 25px;
+    margin: auto;
+    border: #000000 1px solid;
+    margin-top: 15%;
 }
 
 .formContainer__title {
@@ -487,23 +571,22 @@ body {
 .form__inputDomicili,
 .form__inputEmail {
     padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 1px solid #000000;
     margin-top: 3px;
     margin-bottom: 15px;
 }
 
 .form__btn {
     margin-top: 15px;
-    background-color: #007BFF;
+    background-color: #1e91d6;
     /* Color de fondo del botón */
     color: #fff;
     /* Color del texto del botón */
-    padding-top: 15px;
-    padding-bottom: 15px;
-    border: none;
-    border-radius: 25px;
+    padding: 15px;
+    border: 1PX solid black;
     font-family: var(--fontfamily);
+    font-weight: bold;
+    font-size: 20px;
 }
 
 .check__resumTicket {
@@ -516,32 +599,41 @@ body {
         "totalTitle . . totalPrice";
     margin: 7%;
     padding: 2%;
-    background-color: #cae3ff;
-    border-radius: 25px;
+
 }
 
 .resumTicket__title {
     grid-area: title;
     font-family: var(--fontfamily);
+    padding: 15px;
 }
 
 .containerItemResum {
     grid-area: item;
 }
 
-.resumTicket__itemTicket {
+.resumTicket__itemTicket:nth-child(odd) {
+    border-bottom: #20f005 1.5px solid;
+}
 
+.resumTicket__itemTicket:nth-child(even) {
+    border-bottom: #f0e005 1.5px solid;
+}
+
+.resumTicket__itemTicket {
     display: grid;
     grid-template-columns: 3fr 5fr 1fr 1fr;
     grid-template-areas:
         "image name counter price";
     font-family: var(--fontfamily);
+    margin: 10%;
 }
 
 .itemTicket__image {
     grid-area: image;
     height: 100%;
     width: 80%;
+    margin-bottom: 0.5vh;
 }
 
 .itemTicket__name {
@@ -557,24 +649,36 @@ body {
     color: red;
 }
 
+.itemTicket__name,
+.itemTicket__counter,
+.itemTicket__price {
+    margin-top: 1.5vh;
+}
+
 .resumTicket__totalTitle {
     grid-area: totalTitle;
     font-family: var(--fontfamily);
+    font-weight: bold;
+    font-size: 23px;
 }
 
 .resumTicket__totalPrice {
     grid-area: totalPrice;
     font-family: var(--fontfamily);
+    font-weight: bold;
+    font-size: 23px
 }
 
 /* status-page */
 .status {
-    background-image:url("https://img.freepik.com/free-photo/abstract-light-pink-wallpaper-background-image_53876-102526.jpg?size=626&ext=jpg&ga=GA1.1.386372595.1697760000&semt=ais");
+    background-image: url("https://img.freepik.com/free-photo/abstract-light-pink-wallpaper-background-image_53876-102526.jpg?size=626&ext=jpg&ga=GA1.1.386372595.1697760000&semt=ais");
 }
-.status h3{
-        margin-top: 200px;
+
+.status h3 {
+    margin-top: 200px;
 
 }
+
 .status__search {
     width: 40%;
 }
@@ -599,31 +703,22 @@ body {
     border: solid #030303 2px;
     box-shadow: rgb(0, 0, 0);
     border-radius: 50px;
-
     align-items: center;
 
 }
 
 .boton-guardar {
     background-color: #4CAF50;
-    /* Color de fondo */
     color: white;
-    /* Color del texto */
     border: none;
-    /* Sin borde */
     padding: 10px 20px;
-    /* Relleno (padding) del botón */
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    /* Tamaño del texto */
     margin: 10px 2px;
-    /* Márgenes exteriores */
     cursor: pointer;
-    /* Cambia el cursor al pasar por encima */
     border-radius: 5px;
-    /* Bordes redondeados */
 }
 
 .boton-guardar:hover {
@@ -637,7 +732,7 @@ body {
 }
 
 /* Efecto 3D al pasar el cursor sobre el botón 
-  .admin-buttons {
+.admin-buttons {
     display: flex;
     justify-content: center; 
     align-items: center;   
@@ -689,7 +784,7 @@ body {
 
 
 .login form {
-    width: 200px;
+    width: 60vw;
     background-color: rgba(51, 49, 49, 0.11);
     position: absolute;
     transform: translate(-50%, -50%);
@@ -721,8 +816,7 @@ body {
     margin-top: 30px;
     font-size: 16px;
     font-weight: 500;
-    background-color: #fbfdffab;
-    width: 45%;
+    width: 70%;
 }
 
 .login input {
@@ -752,21 +846,22 @@ body {
     border-radius: 5px;
     cursor: pointer;
 }
-.box{
+
+.box {
     background-color: #218d98;
     height: 100px;
     width: 100px;
-  }
-  
-  .transform{
+}
+
+.transform {
     transition: all 2s ease;
-  }
-  
-  .transform-active{
+}
+
+.transform-active {
     background-color: #45cee0;
     height: 200px;
     width: 200px;
-  }
+}
 
 .register {
     background-image: url("https://c.wallhere.com/photos/26/51/line_light_background_bright-685894.jpg!d");
@@ -779,13 +874,12 @@ body {
     border-radius: 50%;
 }
 
-
 .register form {
     width: 200px;
     background-color: rgba(51, 49, 49, 0.11);
     position: absolute;
     transform: translate(-50%, -50%);
-    top: 50%;
+    top: 47%;
     left: 50%;
     border-radius: 10px;
     backdrop-filter: blur(10px);
@@ -802,13 +896,17 @@ body {
     outline: none;
     border: none;
 }
+
 .cart-enter-active {
     transition: opacity 0.5s;
 }
+
 .cart-leave-active {
     transition: opacity 0.5s;
 }
-.cart-enter, .cart-leave-to {
+
+.cart-enter,
+.cart-leave-to {
     opacity: 0;
 }
 
@@ -824,8 +922,7 @@ body {
     margin-top: 30px;
     font-size: 16px;
     font-weight: 500;
-    background-color: #fbfdffab;
-    width: 45%;
+    width: 60%;
 
 }
 

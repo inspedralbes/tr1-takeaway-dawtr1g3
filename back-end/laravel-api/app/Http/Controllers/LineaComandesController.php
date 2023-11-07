@@ -24,7 +24,7 @@ class LineaComandesController extends Controller
         $dades = json_decode($request->getContent(), true);
         $comandaID = $dades[1]["idComanda"];
         $items = $dades[0]["items"];
-        $dades["codiQR"] =  base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($comandaID,));
+        $dades["codiQR"] =  base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($comandaID));
 
         foreach ($items as $item) {
             $lineacomanda = new Lineadecomanda;
