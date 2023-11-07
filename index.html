@@ -131,22 +131,28 @@
             <div class="shop__buttonsCategories buttonsCategories">
                 <button class="buttonsCategories" @click="clickStartShopping()">Tots els productes</button>
                 <button class="buttonsCategories" v-for="category in categories" @click="filterByCategory(category)"
-                    :class="{ active: category.id == selectedCategory }"
-                >
+                    :class="{ active: category.id == selectedCategory }">
                     {{ category.nom }}
                 </button>
             </div>
-
+            <hr>
             <div class="shop__item item" v-for="producte in productes">
+
                 <label class="item__label">{{ producte.nom }}</label>
-                <label class="item__preu">{{producte.preu}}.00€</label>
                 <div class="item__buttons buttons">
-                    <input class="buttons__more" type="button" value="Afegir al carro"
+                    <input class="buttons__more" type="button" value="Afegir al carro 🛒"
                         @click="clickButtonMore(producte)">
                 </div>
-                <img class="item__image" :src="'back-end/laravel-api/public/'+producte.imatge">
+                <div class="image__background">
+                    <img class="item__image" :src="'back-end/laravel-api/public/'+producte.imatge">
+                    <label class="item__preu">{{producte.preu}}.00€</label>
+                    <span style="text-decoration:line-through; color: red;">{{producte.preu+4}}.99€</span>
 
+
+
+                </div>
             </div>
+
         </div>
         <!--BOTON TRANSICION
         <button class="hamburger__toggle">
@@ -235,4 +241,5 @@
     </div>
     <script src="front-end/js/functions.js" type="module"></script>
 </body>
+
 </html>
