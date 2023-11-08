@@ -195,6 +195,8 @@ createApp({
         },
         //checkout-page_functions
         clickBuyForm() {
+            this.hiddenAllPages();
+            this.views.landing_page = true;
             const response = fetch("http://localhost:8000/api/comandes", {
                 method: "POST",
                 headers: {
@@ -220,8 +222,6 @@ createApp({
                 });
                 responseLineaComanda.then((response) => {
                     if (response.ok) {
-                        this.hiddenAllPages();
-                        this.landing_page = true;
                         this.shopping_cart.products_cart = [];
                         this.shopping_cart.totalAccount = 0;
                         this.shopping_cart.totalItems = 0;
