@@ -121,9 +121,9 @@
                 <input type="email" placeholder="Email" id="email" name="email" required v-model="usuari.email">
                 <input type="password" placeholder="Contrasenya" id="contrasenya" name="contrasenya" required v-model="usuari.contrasenya">
                 <button @click="clickRegisterForm()">Registrar-se</button>
-                <div v-if="views.registreMissatgeçView">
-                    {{ registreMissatge }}
-                </div>
+            </div>
+            <div v-if="views.registreMissatgeView">
+                {{ registreMissatge }}
             </div>
         </div>
         <div class="shop" v-if="views.shop_page">
@@ -147,10 +147,6 @@
 
             </div>
         </div>
-        <!--BOTON TRANSICION
-        <button class="hamburger__toggle">
-            <span class="hamburger__icon"></span>
-        </button>-->
         <div class="check" v-if="views.checkout_page">
             <div class="check__formContainer formContainer">
                 <h2 class="formContainer__title">Dades personals</h2>

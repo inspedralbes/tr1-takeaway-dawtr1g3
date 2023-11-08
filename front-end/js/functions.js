@@ -300,14 +300,32 @@ createApp({
             this.views.register_page = true;
         },
         clickRegisterForm() {
-            fetch("http://localhost:8000/api/register", {
+            const response = fetch("http://localhost:8000/api/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(this.usuari),
-            }).then((data) => {
-                this.registreMissatge = data.error; // Mensaje de error del servidor
+            });
+            response.then((response) => {
+                if (response.ok) {
+                    console.log('hola');
+                    return response.json();
+                } else {
+                    throw new Error("Error al crear la comanda.");
+                }
+            }).then((jsonData) => {
+                const dades = jsonData.data;
+                console.log(dades);
+                if (dades['error'] == 1) {
+                    this.views.registreMissatgeView = true;
+                    this.registreMissatge = dades['missatge'];
+                } else {
+                    this.views.registreMissatgeView = true;
+                    this.registreMissatge = dades['missatge'];
+                }
+            }).catch((error) => {
+                console.error(error);
             });
 
             if (localStorage == null) {

@@ -14,7 +14,7 @@ class AuthController extends Controller
         $fields = $request -> validate([
             'nom' => 'required|string',
             'cognoms'=> 'required|string',
-            'email'=> 'required|string|unique:usuari,email',
+            'email'=> 'required|string',
             'contrasenya'=> 'required|string'
         ]);
 
@@ -22,10 +22,11 @@ class AuthController extends Controller
 
         if ($existUsuari) {
             $data = [
+                'error' => 1,
                 'missatge' => 'Aquest usuari ja existeix.'
             ];
 
-            return response()->json($data);
+            return response()->json(['data' => $data]);
         }
 
         $usuari = usuari::create([
@@ -38,11 +39,12 @@ class AuthController extends Controller
         $token = $usuari->createToken('$usuari->email')->plainTextToken;
 
         $data =  [
-            'user' => $usuari,
+            'error' => 0,
+            'missatge' => 'Usuari creat amb éxit!',
             'token' => $token
         ];
 
-        return response()->json($data);
+        return response()->json(['data' => $data]);
     }
 
     public function login(Request $request) {
