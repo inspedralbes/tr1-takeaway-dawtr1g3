@@ -29,7 +29,7 @@
                     <td>{{ $producte->preu }}</td>
                     <td>
                         <a class="button is-link is-light mt-1 mb-1" href="{{ route ('producte', ['id' => $producte->id]) }}">Actualitzar</a>
-                        <a class "button is-danger is-light mt-1 mb-1" href="{{ route ('productedestroy', ['id' => $producte->id]) }}">Eliminar</a>
+                        <a class="button is-danger is-light mt-1 mb-1" href="{{ route ('productedestroy', ['id' => $producte->id]) }}">Eliminar</a>
                     </td>
                 </tr>
                 @endforeach
