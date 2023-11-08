@@ -37,7 +37,7 @@
             <th style="text-align: left; width:25%; border-bottom: 1px solid grey; border-right: 1px solid grey">Preu unitari</th>
             <th style="text-align: left; width:10%; border-bottom: 1px solid grey">Preu</th>
         </tr>
-        @foreach ($dades[0]["items"] as $item)
+        @foreach ($dades["a"] as $item)
             <tr>
                 <td style="border-right: 1px solid grey; border-spacing: 15px;">{{$item['nom']}}</td>
                 <td style="border-right: 1px solid grey; border-spacing: 15px;">{{$item['counter']}}</td>

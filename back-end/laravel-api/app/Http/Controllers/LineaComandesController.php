@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Lineadecomanda;
+use App\Models\Product;
+use App\Models\Comanda;
 use PDF;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Correu;
@@ -22,24 +24,34 @@ class LineaComandesController extends Controller
     {
 
         $dades = json_decode($request->getContent(), true);
+        $total = 0;
         $comandaID = $dades[1]["idComanda"];
         $items = $dades[0]["items"];
         $dades["codiQR"] =  base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($comandaID));
+        $productes = [];
+
 
         foreach ($items as $item) {
+            $producte = Product::find($item['id']);
             $lineacomanda = new Lineadecomanda;
             $lineacomanda->id_comanda = $comandaID;
-            $lineacomanda->id_producte = $item['id'];
-            $lineacomanda->nom_producte = $item['nom'];
-            $lineacomanda->desc_producte = $item['descripcio'];
-            $lineacomanda->imatge_producte = $item['imatge'];
+            $lineacomanda->id_producte = $producte->id;
+            $lineacomanda->nom_producte = $producte->nom;
+            $lineacomanda->desc_producte = $producte->descripcio;
+            $lineacomanda->imatge_producte = $producte->imatge;
             $lineacomanda->quantitat = $item['counter'];
-            $lineacomanda->preu = $item['preu'];
+            $lineacomanda->preu = $producte->preu;
             $lineacomanda->save();
+            $productes[]= $lineacomanda;
+            $total += $lineacomanda->quantitat * $producte->preu;
         }
 
+        $comanda = Comanda::find($comandaID);
+        $comanda->total = $total;
+        $comanda->update();
+
         $pdf = PDF::loadView('pdf',compact('dades'));
-        Mail::to($dades[2]["usuari"]["email"])->send(new Correu($dades,$pdf));
+        Mail::to($dades[2]["usuari"]["email"])->send(new Correu($dades,$pdf,$productes));
 
     }
     /**
