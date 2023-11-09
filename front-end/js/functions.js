@@ -23,6 +23,7 @@ createApp({
             },
             registreMissatge: "",
             error: 0,
+            loginActive: false,
             estatOrderClient: {
                 id: '',
                 usuari: "",
@@ -42,7 +43,8 @@ createApp({
                 register_page: false,
                 login_page: false,
                 orders_users: false,
-                registreMissatgeView: false
+                registreMissatgeView: false,
+                adminButton: false
             }
         };
     },
@@ -63,11 +65,12 @@ createApp({
                 this.views.login_page = false,
                 this.views.register_page = false,
                 this.views.orders_users = false,
-                this.registreMissatgeView = false
+                this.views.registreMissatgeView = false
         },
         //header
         clickNavToggle() {
             this.views.cart_toggle = false;
+            this.views.registreMissatgeView = false;
             this.views.nav_toggle = !this.views.nav_toggle;
         },
         clickTitlePage() {
@@ -76,6 +79,7 @@ createApp({
         },
         clickCartToggle() {
             this.views.cart_toggle = !this.views.cart_toggle;
+            this.views.registreMissatgeView = false;
             this.views.nav_toggle = false;
             if (this.shopping_cart.products_cart.length == 0) {
                 this.views.showTotalTicket = false;
@@ -236,7 +240,7 @@ createApp({
                         });
                         //return response.json();
                     } else {
-                        throw new Error("Error al crear la comanda.");
+                        throw new Error("Error al crear la linea comanda.");
                     }
                 });
             }).catch((error) => {
@@ -322,8 +326,12 @@ createApp({
                 } else {
                     this.usuari.token = dades['token']; 
                     this.error = 0;
+                    this.loginActive = true;
                     this.hiddenAllPages();
                     this.views.landing_page = true;
+                    if (dades['tipusUsuari'] == 1) {
+                        this.views.adminButton = true;
+                    }
                 }
             }).catch((error) => {
                 console.error(error);
@@ -358,13 +366,13 @@ createApp({
             }).then((jsonData) => {
                 const dades = jsonData.data;
                 if (dades['error'] == 1) {
-                    this.views.registreMissatgeView = true;
-                    this.registreMissatge = dades['missatge'];
                     this.error = 1;
+                    this.views.registreMissatgeView = true;
+                    this.registreMissatge = dades['missatge'];                    
                 } else {
+                    this.error = 0;
                     this.views.registreMissatgeView = true;
                     this.registreMissatge = dades['missatge'];
-                    this.error = 0;
                 }
             }).catch((error) => {
                 console.error(error);
@@ -379,13 +387,24 @@ createApp({
         },
         // Logout Functions
         clickLogout(){
-            fetch("http://localhost:8000/api/logout", {
+            const response = fetch("http://localhost:8000/api/logout", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${this.usuari.token}`
                 }
             });
+
+            response.then(
+                this.usuari.token = "",
+                this.loginActive = false,
+                this.views.adminButton = false
+            );
+        },
+        // AdminPage
+        clickAdminPage() {
+            var nuevaRuta = 'http://studentstock.daw.inspedralbes.cat/back-end/laravel-api/public/admin';
+            window.open(nuevaRuta, '_blank');
         }
     },
     created() {

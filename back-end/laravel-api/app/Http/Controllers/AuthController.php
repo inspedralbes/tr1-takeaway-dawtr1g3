@@ -68,6 +68,7 @@ class AuthController extends Controller
 
         $data =  [
             'error' => 0,
+            'tipusUsuari' => $usuari->tipus,
             'token' => $token
         ];
 
