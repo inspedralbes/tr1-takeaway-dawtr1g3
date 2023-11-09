@@ -32,7 +32,8 @@
                                 <a class="itemExtens__link" @click="clickOrdersUser()">Les meves comandes</a>
                             </li>
                             <li class="listExtens__itemExtens itemExtens">
-                                <a class="itemExtens__link" @click="clickLogin()">Iniciar Sessió</a> / <a class="itemExtens__link" @click="clickRegister()">Registrar-se</a>
+                                <a class="itemExtens__link" @click="clickLogin()">Iniciar Sessió</a> / <a
+                                    class="itemExtens__link" @click="clickRegister()">Registrar-se</a>
                             </li>
                             <li class="listExtens__itemExtens itemExtens">
                                 <a class="itemExtens__link" @click="clickLogout()">Tancar Sessió</a>
@@ -129,28 +130,30 @@
         </div>
         <div class="shop" v-if="views.shop_page">
             <div class="shop__buttonsCategories">
-                <button class="buttonsCategories"  style="text-align: center;" :class="{ 'filterClicked': null == selectedCategory }" @click="clickStartShopping()">Tots els productes</button>
-                <button style="margin-left: 4%;" class="buttonsCategories" v-for="category in categories" @click="filterByCategory(category)" :class="{ 'filterClicked': category.id == selectedCategory }">
+                <button class="buttonsCategories" style="text-align: center;"
+                    :class="{ 'filterClicked': null == selectedCategory }" @click="clickStartShopping()">Tots els
+                    productes</button>
+                <button style="margin-left: 4%;" class="buttonsCategories" v-for="category in categories"
+                    @click="filterByCategory(category)" :class="{ 'filterClicked': category.id == selectedCategory }">
                     {{ category.nom }}
                 </button>
             </div>
             <hr>
             <div class="shop__item item" v-for="producte in productes">
-
-                <label class="item__label">{{ producte.nom }}</label>
+                <label class="item__label" @click="toggleCardDescription(producte)">{{ producte.nom }}</label>
                 <div class="item__buttons buttons">
-                    <input class="buttons__more" type="button" value="Afegir al carro 🛒"
-                        @click="clickButtonMore(producte)">
+                    <input class="buttons__more" type="button" value="Afegir al carro 🛒" @click="clickButtonMore(producte)">
                 </div>
-                <div class="image__background">
-                    <img class="item__image" :src="'back-end/laravel-api/public/'+producte.imatge">
-                    <label class="item__preu">{{producte.preu}}.00€</label>
-                    <span style="text-decoration:line-through; color: red;">{{producte.preu+4}}.99€</span>
-
-
-
+                <div class="image__background" @click="toggleCardDescription(producte)">
+                    <img class="item__image" :src="'back-end/laravel-api/public/' + producte.imatge">
+                    <label class="item__preu">{{ producte.preu }}.00€</label>
+                    <span style="text-decoration: line-through; color: red;">{{ producte.preu + 4 }}.99€</span>
+                </div>
+                <div class="item__description" :class="{ 'mostrada': producte.mostrarDescripcion }" @click="toggleCardDescription(producte)">
+                    <p>{{ producte.descripcio }}</p>
                 </div>
             </div>
+
 
         </div>
         <!--BOTON TRANSICION

@@ -393,7 +393,7 @@ body {
 /* Cambio de estilo al hacer clic en el botón */
 .buttons__more:active {
     background-color: #4cda30;
-    /* Cambia el color de fondo al hacer clic */
+    /* Cambia el color de fondo al hacer clic o al pasar el dedo sobre el botón en dispositivos táctiles */
 }
 
 .item__image {
@@ -408,10 +408,43 @@ body {
     border: 1px solid;
 }
 
-.activado {
-    background-color: #20f005;
+.item {
+    position: relative;
+    width: 200px;
+    cursor: pointer;
+    margin: 10px;
 }
 
+.item__background {
+    overflow: hidden;
+}
+
+.item__image {
+    width: 100%;
+    transition: transform 0.3s;
+}
+
+.item.expandido .item__image {
+    transform: translateY(-100%);
+}
+
+.item__description {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 35%;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black;
+    padding: 10px;
+    transform-origin: top;
+    transform: scaleY(0);
+    transition: transform 0.3s;
+}
+
+.item__description.mostrada {
+    transform: scaleY(1);
+}
 
 /* shop-ticket */
 .ticket {
