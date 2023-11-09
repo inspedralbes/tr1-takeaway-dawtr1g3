@@ -181,6 +181,7 @@ body {
     padding: 20px;
     border: #000000 1px solid;
     z-index: 999;
+    position: relative;
 }
 
 .horari__dies {
@@ -515,14 +516,14 @@ body {
         grid-template-columns: 1fr 5fr 1fr 1fr 1fr;
         grid-template-areas: "img name counter price btn";
     }
-
     .itemCart__image {
         width: 77px;
         height: 79px;
         padding-top: 7px;
         position: absolute;
         left: 1%;
-        margin-top: -9%;    }
+        margin-top: -9%;
+    }
 
     .itemCart__name,
     .total__name {
@@ -536,9 +537,12 @@ body {
     }
 
     .itemCart__products {
-    margin-top: 2.5vh;
-    margin-right: -330%;
+        position: relative;
+        text-align: right;
+        margin-left: auto;
+        left: 164px;
     }
+    
 
     .itemCart__counter,
     .total__items {
@@ -560,6 +564,18 @@ body {
         align-items: center;
         margin-bottom: 38px;
     }
+
+    .resumCart__itemCart {
+        position: relative;
+        display: grid;
+        grid-template-columns: 3fr 5fr 1fr 1fr;
+        grid-template-areas: "image name counter price";
+        font-family: var(--fontfamily);
+        margin: 10%;
+        border-bottom: #20f005 1.5px solid;
+
+    }
+
 /* check-page */
 .check {
     grid-area: container;

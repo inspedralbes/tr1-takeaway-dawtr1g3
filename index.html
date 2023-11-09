@@ -183,7 +183,7 @@
             <div class="check__resumTicket resumTicket">
                 <h3 class="resumTicket__title">Resum Compra</h3>
                 <div class="containerItemResum">
-                    <div class="resumTicket__itemTicket itemTicket" v-for="product_cart in shopping_cart.products_cart">
+                    <div class="resumCart__itemCart itemTicket" v-for="product_cart in shopping_cart.products_cart">
                         <img class="itemTicket__image" :src="'back-end/laravel-api/public/'+product_cart.imatge">
                         <p class="itemTicket__name">{{ product_cart.nom }}</p>
                         <p class="itemTicket__counter">{{ product_cart.counter }}</p>
@@ -195,25 +195,14 @@
             </div>
         </div>
         <div class="status" v-if="views.orders_users">
-            
-            <div class="recuadro">                
-                <p>ID DE LA COMANDA</p>
-                <p>TOTAL DE LA COMANDA</p>
-                <p>DATA DE LA COMANDA</p>
-            </div>
-            <div class="recuadro">
-                <p>ID DE LA COMANDA</p>
-                <p>TOTAL DE LA COMANDA</p>
-                <p>DATA DE LA COMANDA</p>
-            </div>
-            <div class="recuadro">
-                <p>ID DE LA COMANDA</p>
-                <p>TOTAL DE LA COMANDA</p>
-                <p>DATA DE LA COMANDA</p>
+            <div v-for="order in estatOrderClient" :key="order.id" class="recuadro">
+                <p>ID DE LA COMANDA: {{ order.id }}</p>
+                <p>TOTAL DE LA COMANDA: {{ order.total }}€</p>
+                <p>DATA DE LA COMANDA: {{ order.fecha }}</p>
             </div>
             <button @click="clickOrdersButton()"> COMANDES</button>
-
         </div>
+        
         <!-- COMANDES -->
         <div class="order__tracking" v-if="views.status_page">
             <h3>Número de comanda: <input class="status__search" type="search" name="comanda"
