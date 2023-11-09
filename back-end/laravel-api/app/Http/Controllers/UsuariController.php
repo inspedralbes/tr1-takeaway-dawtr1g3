@@ -76,4 +76,10 @@ class UsuariController extends Controller
     {
         //
     }
+
+    public function validar(Request $request){
+        $validator = Validator::make($request->all(),[
+            'email'=> 'required|email'
+        ]);
+    }
 }
