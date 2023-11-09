@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ComandesController;
 use App\Http\Controllers\ProductesController;
 use App\Models\Categoria;
@@ -64,10 +65,11 @@ Route::get('/admin/categoria/{id}', function($id) {
 
 Route::patch('/admin/categoria/{id}', [CategoriesController::class, 'update'])->name('categoriaupdate');
 
-Route::delete('/admin/categories/{id}', function($id) {
-    Categoria::destroy($id);
-    return view('admin.categories');
-})->name('categoriesdestroy');
+Route::get('/admin/categories/create', function() {
+    return view('admin.createCategoria');
+})->name('categoriacreateview');
+
+Route::post('/admin/categories/create', [CategoriesController::class, 'store'])->name('categoriacreate');
 
 Route::get('/', function () {
     return view('welcome');

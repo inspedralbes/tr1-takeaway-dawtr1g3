@@ -26,18 +26,16 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="field is-grouped is-justify-content-center">
+                            <div class="control">
+                                <button class="button is-success" type="submit" href="{{ route('categories') }}">Desar canvis</button>
+                            </div>
+                            <div class="control">
+                                <a class="button is-link is-danger is-light" href="{{ route('categories') }}">Cancel</a>
+                            </div>
+                        </div>
                     </form>
-
-                    <br>
-
-                    <div class="field is-grouped is-justify-content-center">
-                        <div class="control">
-                            <button class="button is-success" type="submit" href="{{ route('categories') }}">Desar canvis</button>
-                        </div>
-                        <div class="control">
-                            <a class="button is-link is-danger is-light" href="{{ route('categories') }}">Cancel</a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

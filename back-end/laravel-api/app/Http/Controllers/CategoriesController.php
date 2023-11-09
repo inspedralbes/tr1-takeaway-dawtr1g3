@@ -21,7 +21,7 @@ class CategoriesController extends Controller
             return 'error';
         }else{
             $categoria = Categoria::create($request->all());
-            return $categoria;
+            return redirect()->route('categories');
         }
     }
 
@@ -29,7 +29,8 @@ class CategoriesController extends Controller
     {
         $categoria = Categoria::find($id);
         $categoria->update($request->all());
-        return $categoria;
+
+        return redirect()->route('categories');
     }
 
     public function destroy(string $id)
