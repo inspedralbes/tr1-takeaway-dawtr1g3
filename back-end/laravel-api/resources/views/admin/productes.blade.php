@@ -29,7 +29,11 @@
                     <td>{{ $producte->preu }}</td>
                     <td>
                         <a class="button is-link is-light mt-1 mb-1" href="{{ route ('producte', ['id' => $producte->id]) }}">Actualitzar</a>
-                        <a class="button is-danger is-light mt-1 mb-1" href="{{ route ('productedestroy', ['id' => $producte->id]) }}">Eliminar</a>
+                        <form action="{{ route ('productedestroy', ['id' => $producte->id]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="button is-danger is-light mt-1 mb-1" type="submit">Eliminar</button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach
