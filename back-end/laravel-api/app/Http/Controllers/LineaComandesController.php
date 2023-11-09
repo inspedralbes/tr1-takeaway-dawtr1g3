@@ -26,6 +26,7 @@ class LineaComandesController extends Controller
         $comandaID = $dades[1]["idComanda"];
         $items = $dades[0]["items"];
         $dades["codiQR"] =  base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($comandaID));
+        $qrStudentStock =  base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate("http://studentstock.daw.inspedralbes.cat/"));
         $comanda= Comanda::find($comandaID);
         $productes = [];
         $total = 0;
@@ -50,7 +51,7 @@ class LineaComandesController extends Controller
 
         $comanda->total = $total;
         $comanda->update();
-        $pdf = PDF::loadView('pdf',compact('dades','productes','total'));
+        $pdf = PDF::loadView('pdf',compact('dades','productes','total','qrStudentStock'));
         Mail::to($dades[2]["usuari"]["email"])->send(new Correu($dades,$pdf,$total));
 
     }

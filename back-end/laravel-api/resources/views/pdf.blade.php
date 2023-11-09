@@ -51,9 +51,11 @@
             <th style="text-align: right;">Preu total: {{$total}}€</th>
         </tr>
     </table>
-    <div style="margin-left: auto;margin-right: auto; ">
+    <div style="margin-left: auto;margin-right: auto;width:90% ">
         <h3>Et deixem el QR per poder recollir la teva comanda a una tenda!</h3>
         <img src="data:image/png;base64,{{ $dades['codiQR']}}">
+        <h3>Et deixem el QR per tornar a la tenda!</h3>
+        <img src="data:image/png;base64,{{ $qrStudentStock }}">
     </div>
     
 </body>
