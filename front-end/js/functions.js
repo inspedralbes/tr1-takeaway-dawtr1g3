@@ -131,6 +131,7 @@ createApp({
         },
         clickStartShopping() {
             this.hiddenAllPages();
+            this.selectedCategory= null,
             this.productes = this.productesOriginal;
             this.views.shop_page = true;
         },
@@ -167,6 +168,9 @@ createApp({
             this.countPriceAccount();
             this.countItemsAccount();
         },
+        toggleCardDescription(producte) {
+            producte.mostrarDescripcion = !producte.mostrarDescripcion;
+        },
         //ticket
         searchProducte_CartPos(producte_cart) {
             for (let i = 0; i < this.shopping_cart.products_cart.length; i++) {
@@ -202,7 +206,36 @@ createApp({
             }
         },
         //checkout-page_functions
+        validateEmail(){
+            var emailField = document.getElementById('email');
+            var nombreField = document.getElementById('nombre');
+            var apellidosField = document.getElementById('apellidos');
+            var passwordField = document.getElementById('password');
+            var validEmail =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+            
+            if(nombreField.value == ""){
+                alert('Verifica que has introduit el nom');
+            }else{
+                if (apellidosField.value == "") {
+                    alert('Verifica que has introduit els cognoms')
+                }else{
+                    if(!validEmail.test(email.value) ){
+                        alert('Verifica que has introduit un correu o que el format es el correcte');
+                    }else{
+                        if (passwordField.value == "") {
+                            alert('Verifica que has introduit una contraseña');
+                        }else{
+                            this.clickBuyForm()
+                        }
+                    }
+                }
+            }
+
+            
+        },
         clickBuyForm() {
+            this.hiddenAllPages();
+            this.views.landing_page = true;
             const response = fetch("http://localhost:8000/api/comandes", {
                 method: "POST",
                 headers: {
@@ -230,8 +263,6 @@ createApp({
                 });
                 responseLineaComanda.then((response) => {
                     if (response.ok) {
-                        this.hiddenAllPages();
-                        this.landing_page = true;
                         this.shopping_cart.products_cart = [];
                         this.shopping_cart.totalAccount = 0;
                         this.shopping_cart.totalItems = 0;
@@ -283,6 +314,7 @@ createApp({
                 responseLineaComanda.then((response) => {
                     if (response.ok) {
                         return response.json();
+                        
                     } else {
                         throw new Error("Error al fer una cerca.");
                     }

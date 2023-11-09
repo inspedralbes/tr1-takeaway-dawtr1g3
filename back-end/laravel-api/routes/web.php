@@ -1,10 +1,15 @@
 <?php
 
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ComandesController;
 use App\Http\Controllers\ProductesController;
+use App\Http\Controllers\TipusUsuariController;
+use App\Http\Controllers\UsuariController;
 use App\Models\Categoria;
 use App\Models\Product;
 use App\Models\Comanda;
+use App\Models\usuari;
+use App\Models\tipusUsuari;
 use Illuminate\Support\Facades\Route;
 
 Route::get("/admin", function () {
@@ -53,6 +58,49 @@ Route::get('/admin/productes', function() {
 
 // Route::post('/admin/productes/create', [ProductesController::class, 'store'])->name('productecreate');
 
+//categories
+Route::get('/admin/categories',function(){
+    $categories = Categoria::all();
+    return view('admin.categories')->with('categories', $categories);
+})->name('categories');
+
+Route::get('/admin/categoria/{id}', function($id) {
+    $categoria = Categoria::find($id);
+    return view('admin.updateCategoria')->with(['categoria' => $categoria]);
+})->name('categoria');
+
+Route::patch('/admin/categoria/{id}', [CategoriesController::class, 'update'])->name('categoriaupdate');
+
+Route::get('/admin/categories/create', function() {
+    return view('admin.createCategoria');
+})->name('categoriacreateview');
+
+Route::post('/admin/categories/create', [CategoriesController::class, 'store'])->name('categoriacreate');
+
+//users
+Route::get('/admin/users',function(){
+    $users = usuari::all();
+    return view('admin.users')->with('users', $users);
+})->name('users');
+
+Route::get('/admin/users/{id}', function($id) {
+    $user = usuari::find($id);
+    $tipusUsuaris = tipusUsuari::all();
+    return view('admin.updateUser')->with(['user' => $user, 'tipusUsuaris'=> $tipusUsuaris]);
+})->name('user');
+
+Route::patch('/admin/user/{id}', [UsuariController::class, 'update'])->name('userupdate');
+
+Route::delete('/admin/users/{id}', function($id) {
+    usuaris::destroy($id);
+    return view('users');
+})->name('userdestroy');
+
+Route::get('/admin/users/create', function() {
+    return view('admin.createUser');
+})->name('usercreateview');
+
+Route::post('/admin/users/create', [UsuariController::class, 'store'])->name('usercreate');
 
 Route::get('/', function () {
     return view('welcome');
