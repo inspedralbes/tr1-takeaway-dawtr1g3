@@ -159,6 +159,9 @@ createApp({
             this.countPriceAccount();
             this.countItemsAccount();
         },
+        toggleCardDescription(producte) {
+            producte.mostrarDescripcion = !producte.mostrarDescripcion;
+        },
         //ticket
         searchProducte_CartPos(producte_cart) {
             for (let i = 0; i < this.shopping_cart.products_cart.length; i++) {
