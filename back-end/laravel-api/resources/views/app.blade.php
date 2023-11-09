@@ -59,6 +59,9 @@
             <a class="navbar-item" href="{{ route('categories') }}">
                 Categories
             </a>
+            <a class="navbar-item" href="{{ route('users') }}">
+                Usuaris
+            </a>
         </div>
     </nav>
 

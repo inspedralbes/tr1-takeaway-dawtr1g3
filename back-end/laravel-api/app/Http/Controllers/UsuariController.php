@@ -65,7 +65,7 @@ class UsuariController extends Controller
         }else{
             $usuari = usuari::where('email',$correu)->get();
             $usuari->update($request->all());
-            return $usuari;
+            return redirect()->route('users');
         }
     }
 
