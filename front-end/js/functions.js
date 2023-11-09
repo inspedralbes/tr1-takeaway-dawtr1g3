@@ -276,6 +276,7 @@ createApp({
                 responseLineaComanda.then((response) => {
                     if (response.ok) {
                         return response.json();
+                        
                     } else {
                         throw new Error("Error al fer una cerca.");
                     }

@@ -181,6 +181,7 @@ body {
     padding: 20px;
     border: #000000 1px solid;
     z-index: 999;
+    position: relative;
 }
 
 .horari__dies {
@@ -275,24 +276,24 @@ body {
 
 .shop__buttonsCategories {
     position: relative;
-    width: 175%; 
-    overflow-x: auto; 
+    width: 175%;
+    overflow-x: auto;
     white-space: nowrap;
     left: 12%;
     gap: 5%;
 
 }
 
-.filterClicked{
-    background-color:#9ad7e9;
+.filterClicked {
+    background-color: #9ad7e9;
 }
 
 
-.shop__buttonsCategories::-webkit-scrollbar{
+.shop__buttonsCategories::-webkit-scrollbar {
     display: none;
 }
 
-.buttonsCategories{
+.buttonsCategories {
     width: 45%;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -344,11 +345,19 @@ body {
 .item__preu {
     font-family: var(--fontfamily);
     font-variant: var(--fontvariant);
-    position: relative;
+    position: absolute;
     color: rgb(2, 2, 2);
     border: 1px solid;
     right: 15%;
+    width: 35%;
+    left: 1%;
+}
 
+.preu__anterior {
+    text-decoration: line-through;
+    color: red;
+    position: relative;
+    left: 10%;
 }
 
 .item__buttons {
@@ -363,6 +372,22 @@ body {
     padding-right: 0;
 }
 
+.order__tracking {
+    text-align: center;
+}
+
+.order__tracking h3 {
+    margin-top: 10%;
+}
+
+.details_order {
+    position: relative; /* Agregado */
+    border: 1px solid;
+    left: 11%;
+    right: 0px;
+    width: 77%;
+    margin-top: 10%;
+}
 
 .buttons__more {
     width: auto;
@@ -388,6 +413,7 @@ body {
     margin-top: 20px;
     margin-left: 10px;
     width: 300px;
+    line-height: 200%;
 }
 
 /* Cambio de estilo al hacer clic en el botón */
@@ -517,51 +543,71 @@ body {
     border: #000000 1px solid;
 }
 
-.div__itemCart,
-.account__total {
-    display: grid;
-    grid-template-columns: 1fr 5fr 1fr 1fr 1fr;
-    grid-template-areas: "img name counter price btn";
-}
+    .div__itemCart,
+    .account__total {
+        display: grid;
+        grid-template-columns: 1fr 5fr 1fr 1fr 1fr;
+        grid-template-areas: "img name counter price btn";
+    }
+    .itemCart__image {
+        width: 77px;
+        height: 79px;
+        padding-top: 7px;
+        position: absolute;
+        left: 1%;
+        margin-top: -9%;
+    }
 
-.itemCart__image {
-    grid-area: img;
-    width: 32px;
-    height: 32px;
-    padding-top: 7px;
-}
+    .itemCart__name,
+    .total__name {
+        grid-area: name;
+        text-align: left;
+    }
 
-.itemCart__name,
-.total__name {
-    grid-area: name;
-    text-align: left;
-}
+    .itemCart__price,
+    .total__price {
+        grid-area: price;
+    }
 
-.itemCart__price,
-.total__price {
-    grid-area: price;
-}
+    .itemCart__products {
+        position: relative;
+        text-align: right;
+        margin-left: auto;
+        left: 164px;
+    }
+    
 
-.itemCart__name,
-.itemCart__price,
-.itemCart__counter {
-    margin-top: 1.5vh;
-}
+    .itemCart__counter,
+    .total__items {
+        grid-area: counter;
+    }
 
-.itemCart__counter,
-.total__items {
-    grid-area: counter;
-}
+    .itemCart__btnless {
+        grid-area: btn;
+        width: 30px;
+        height: 30px;
+        margin-top: 7px;
+        border: none;
+        background-color: rgb(0, 0, 0);
+        color: #fff;
+    }
+    .itemCart__item {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        margin-bottom: 38px;
+    }
 
-.itemCart__btnless {
-    grid-area: btn;
-    width: 30px;
-    height: 30px;
-    margin-top: 7px;
-    border: none;
-    background-color: rgb(0, 0, 0);
-    color: #fff;
-}
+    .resumCart__itemCart {
+        position: relative;
+        display: grid;
+        grid-template-columns: 3fr 5fr 1fr 1fr;
+        grid-template-areas: "image name counter price";
+        font-family: var(--fontfamily);
+        margin: 10%;
+        border-bottom: #20f005 1.5px solid;
+
+    }
 
 /* check-page */
 .check {
@@ -980,6 +1026,27 @@ body {
     border-radius: 5px;
     cursor: pointer;
 }
+
+/* Añade estilos para la paginación */
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination__button {
+    background-color: #0073bbc5;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.pagination__info {
+    margin: 0 10px;
+}
+
 
 .footer__title {
     font-family: var(--fontfamily);
