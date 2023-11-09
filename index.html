@@ -32,7 +32,8 @@
                                 <a class="itemExtens__link" @click="clickOrdersUser()">Les meves comandes</a>
                             </li>
                             <li class="listExtens__itemExtens itemExtens">
-                                <a class="itemExtens__link" @click="clickLogin()">Iniciar Sessió</a> / <a class="itemExtens__link" @click="clickRegister()">Registrar-se</a>
+                                <a class="itemExtens__link" @click="clickLogin()">Iniciar Sessió</a> / <a
+                                    class="itemExtens__link" @click="clickRegister()">Registrar-se</a>
                             </li>
                             <li class="listExtens__itemExtens itemExtens">
                                 <a class="itemExtens__link" @click="clickLogout()">Tancar Sessió</a>
@@ -129,8 +130,11 @@
         </div>
         <div class="shop" v-if="views.shop_page">
             <div class="shop__buttonsCategories">
-                <button class="buttonsCategories"  style="text-align: center;" :class="{ 'filterClicked': null == selectedCategory }" @click="clickStartShopping()">Tots els productes</button>
-                <button style="margin-left: 4%;" class="buttonsCategories" v-for="category in categories" @click="filterByCategory(category)" :class="{ 'filterClicked': category.id == selectedCategory }">
+                <button class="buttonsCategories" style="text-align: center;"
+                    :class="{ 'filterClicked': null == selectedCategory }" @click="clickStartShopping()">Tots els
+                    productes</button>
+                <button style="margin-left: 4%;" class="buttonsCategories" v-for="category in categories"
+                    @click="filterByCategory(category)" :class="{ 'filterClicked': category.id == selectedCategory }">
                     {{ category.nom }}
                 </button>
             </div>
@@ -145,7 +149,7 @@
                 <div class="image__background">
                     <img class="item__image" :src="'back-end/laravel-api/public/'+producte.imatge">
                     <label class="item__preu">{{producte.preu}}.00€</label>
-                    <span style="text-decoration:line-through; color: red;">{{producte.preu+4}}.99€</span>
+                    <span class="preu__anterior">{{producte.preu+4}}.99€</span>
 
 
 
@@ -207,21 +211,24 @@
 
         </div>
         <!-- COMANDES -->
-        <div class="status" v-if="views.status_page">
+        <div class="order__tracking" v-if="views.status_page">
             <h3>Número de comanda: <input class="status__search" type="search" name="comanda"
                     id="searchInputOrderClient" @keyup.enter="clickSearchOrderClient()"></h3>
             <div v-if="views.searchOrderClientPage">
                 <h3>Últim estat de la comanda:</h3>
-                <h4>{{ this.estatOrderClient.estat }}</h4>
+                <u>{{ this.estatOrderClient.estat }}</u>
                 <p><strong>Client:</strong>{{ this.estatOrderClient.usuari }}</p>
                 <p><strong>Total:</strong>{{ this.estatOrderClient.total }}€</p>
                 <div>
-                    <h3>Detalls de la comanda:</h3>
-                    <div v-for="orderProduct in estatOrderClient.productsOrder">
-                        <img class="itemCart__image" :src="'back-end/laravel-api/public/'+orderProduct.imatge_producte">
-                        <p class="itemCart__name">{{ orderProduct.nom_producte }}</p>
-                        <p class="itemCart__price">{{ orderProduct.preu }}€</p>
-                        <p class="itemCart__counter">{{ orderProduct.quantitat }}</p>
+                    <div class="details_order">
+                        <h3>Detalls de la comanda:</h3>
+                        <div v-for="orderProduct in estatOrderClient.productsOrder">
+                            <img class="itemCart__image"
+                                :src="'back-end/laravel-api/public/'+orderProduct.imatge_producte">
+                            <p class="itemCart__name">{{ orderProduct.nom_producte }}</p>
+                            <p class="itemCart__price">{{ orderProduct.preu }}€</p>
+                            <p class="itemCart__counter">{{ orderProduct.quantitat }}</p>
+                        </div>
                     </div>
                 </div>
             </div>

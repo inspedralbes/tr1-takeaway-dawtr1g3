@@ -275,24 +275,24 @@ body {
 
 .shop__buttonsCategories {
     position: relative;
-    width: 175%; 
-    overflow-x: auto; 
+    width: 175%;
+    overflow-x: auto;
     white-space: nowrap;
     left: 12%;
     gap: 5%;
 
 }
 
-.filterClicked{
-    background-color:#9ad7e9;
+.filterClicked {
+    background-color: #9ad7e9;
 }
 
 
-.shop__buttonsCategories::-webkit-scrollbar{
+.shop__buttonsCategories::-webkit-scrollbar {
     display: none;
 }
 
-.buttonsCategories{
+.buttonsCategories {
     width: 45%;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -344,11 +344,19 @@ body {
 .item__preu {
     font-family: var(--fontfamily);
     font-variant: var(--fontvariant);
-    position: relative;
+    position: absolute;
     color: rgb(2, 2, 2);
     border: 1px solid;
     right: 15%;
+    width: 35%;
+    left: 1%;
+}
 
+.preu__anterior {
+    text-decoration: line-through;
+    color: red;
+    position: relative;
+    left: 10%;
 }
 
 .item__buttons {
@@ -363,6 +371,23 @@ body {
     padding-right: 0;
 }
 
+.order__tracking {
+    background-color: #20f005;
+    text-align: center;
+}
+
+.order__tracking h3 {
+    margin-top: 10%;
+}
+
+.details_order {
+    border: 1px solid;
+    position: relative;
+    left: 15%;
+    right: 0;
+    width: 70%;
+    margin-top: 20%;
+}
 
 .buttons__more {
     width: auto;
@@ -492,10 +517,11 @@ body {
 }
 
 .itemCart__image {
-    grid-area: img;
-    width: 32px;
-    height: 32px;
+    width: 77px;
+    height: 79px;
     padding-top: 7px;
+    position: absolute;
+    left: 1%;
 }
 
 .itemCart__name,
