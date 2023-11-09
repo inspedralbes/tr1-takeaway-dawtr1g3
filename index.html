@@ -140,21 +140,20 @@
             </div>
             <hr>
             <div class="shop__item item" v-for="producte in productes">
-
-                <label class="item__label">{{ producte.nom }}</label>
+                <label class="item__label" @click="toggleCardDescription(producte)">{{ producte.nom }}</label>
                 <div class="item__buttons buttons">
-                    <input class="buttons__more" type="button" value="Afegir al carro 🛒"
-                        @click="clickButtonMore(producte)">
+                    <input class="buttons__more" type="button" value="Afegir al carro 🛒" @click="clickButtonMore(producte)">
                 </div>
-                <div class="image__background">
-                    <img class="item__image" :src="'back-end/laravel-api/public/'+producte.imatge">
-                    <label class="item__preu">{{producte.preu}}.00€</label>
-                    <span class="preu__anterior">{{producte.preu+4}}.99€</span>
-
-
-
+                <div class="image__background" @click="toggleCardDescription(producte)">
+                    <img class="item__image" :src="'back-end/laravel-api/public/' + producte.imatge">
+                    <label class="item__preu">{{ producte.preu }}.00€</label>
+                    <span style="text-decoration: line-through; color: red;">{{ producte.preu + 4 }}.99€</span>
+                </div>
+                <div class="item__description" :class="{ 'mostrada': producte.mostrarDescripcion }" @click="toggleCardDescription(producte)">
+                    <p>{{ producte.descripcio }}</p>
                 </div>
             </div>
+
 
         </div>
         <!--BOTON TRANSICION
