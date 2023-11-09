@@ -22,13 +22,6 @@ Route::get('/admin/comandes', function() {
     return view('admin.comandes')->with('comandes', $comandes);
 })->name('comandes');
 
-// Route::get('/admin/comandes/{id}', function($id) {
-//     $comanda = Comanda::find($id);
-//     $estadosPosibles = ['Rebut','En preparacio','Llest per recollir'];
-//     return view('admin.updateComanda')->with(['comanda' => $comanda, 'estats' => $estadosPosibles]);
-// })->name('comanda');
-
-// Route::patch('/admin/comandes/{id}', [ComandesController::class, 'update'])->name('comandaupdate');
 
 // Product
 
@@ -36,27 +29,6 @@ Route::get('/admin/productes', function() {
     $productes = Product::all();
     return view('admin.productes')->with('productes', $productes);
 })->name('productes');
-
-// Route::get('/admin/producte/{id}', function($id) {
-//     $producte = Product::find($id);
-//     $categories = Categoria::all();
-//     return view('admin.updateProducte')->with(['producte' => $producte, 'categories'=> $categories]);
-// })->name('producte');
-
-// Route::patch('/admin/producte/{id}', [ProductesController::class, 'update'])->name('producteupdate');
-
-// Route::delete('/admin/productes/{id}', function($id) {
-//     Product::destroy($id);
-//     $productes = Product::all();
-//     return view('admin.productes')->with('productes', $productes);
-// })->name('productedestroy');
-
-// Route::get('/admin/productes/create', function() {
-//     $categories = Categoria::all();
-//     return view('admin.createProducte')->with(['categories'=> $categories]);
-// })->name('productecreateview');
-
-// Route::post('/admin/productes/create', [ProductesController::class, 'store'])->name('productecreate');
 
 //categories
 Route::get('/admin/categories',function(){
@@ -92,7 +64,7 @@ Route::get('/admin/users/{id}', function($id) {
 Route::patch('/admin/user/{id}', [UsuariController::class, 'update'])->name('userupdate');
 
 Route::delete('/admin/users/{id}', function($id) {
-    usuaris::destroy($id);
+    usuari::destroy($id);
     return view('users');
 })->name('userdestroy');
 

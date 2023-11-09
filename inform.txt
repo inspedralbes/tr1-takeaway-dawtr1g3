@@ -1,12 +1,11 @@
-comprar sin logearte
-
-y solo ver tus comandas por el correo
+comprar sin logearte OK
+y solo ver tus comandas por el correo OK
 
 
 SI estas logeado apartado de les teves comandes 
 - con una lista que muestra todas tus comandas
 - al hacer click a una comanda te lleva a 
-su page con sus datos
+su page con sus datos OK
 
 
 
@@ -19,5 +18,3 @@ Comporbar contrasenya si el user exite al crear comanda
 modificar alerts para buyForm
 
 slucionaar errores para crud users
-
-a las 17h hugo paginas comandas

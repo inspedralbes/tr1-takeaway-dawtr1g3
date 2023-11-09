@@ -23,6 +23,7 @@ Route::get('/correu', [LineaComandesController::class, 'enviarCorreu']);
 
 // Protected API routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/comandes/{id}', [ComandesController::class, 'show']);
     Route::get('/comandes/orderclient/{user}', [ComandesController::class, 'getComandesUser']);
     Route::get('/lineacomandes/orderclient/{comandaID}', [LineaComandesController::class,'getLineasPorIdComanda']);
     // Sessions
