@@ -20,12 +20,11 @@ class Correu extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct($dades,$pdf,$productes)
+    public function __construct($dades,$pdf,$total)
     { 
         $this->data["comandaID"] = $dades[1]["idComanda"];
         $this->data["pdf"] = $pdf;
-        $this->data["a"] = $productes;
-        $this->data["total"] = $dades[3]["total"];
+        $this->data["total"] = $total;
         
 
     }

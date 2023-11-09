@@ -37,18 +37,18 @@
             <th style="text-align: left; width:25%; border-bottom: 1px solid grey; border-right: 1px solid grey">Preu unitari</th>
             <th style="text-align: left; width:10%; border-bottom: 1px solid grey">Preu</th>
         </tr>
-        @foreach ($dades["a"] as $item)
+        @foreach ($productes as $item)
             <tr>
-                <td style="border-right: 1px solid grey; border-spacing: 15px;">{{$item['nom']}}</td>
-                <td style="border-right: 1px solid grey; border-spacing: 15px;">{{$item['counter']}}</td>
+                <td style="border-right: 1px solid grey; border-spacing: 15px;">{{$item['nom_producte']}}</td>
+                <td style="border-right: 1px solid grey; border-spacing: 15px;">{{$item['quantitat']}}</td>
                 <td style="border-right: 1px solid grey; border-spacing: 15px;">{{$item['preu']}}€</td>
-                <td style="border-spacing: 15px;">{{$item['preu'] * $item['counter']}}€</td>
+                <td style="border-spacing: 15px;">{{$item['preu'] * $item['quantitat']}}€</td>
             </tr>
         @endforeach
     </table>
     <table>
         <tr>
-            <th style="text-align: right;">Preu total: {{$dades[3]["total"]}}€</th>
+            <th style="text-align: right;">Preu total: {{$total}}€</th>
         </tr>
     </table>
     <div style="margin-left: auto;margin-right: auto; ">

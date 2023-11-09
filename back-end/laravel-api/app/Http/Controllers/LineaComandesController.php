@@ -22,36 +22,33 @@ class LineaComandesController extends Controller
      */
     public function store(Request $request)
     {
-
         $dades = json_decode($request->getContent(), true);
-        $total = 0;
         $comandaID = $dades[1]["idComanda"];
         $items = $dades[0]["items"];
         $dades["codiQR"] =  base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($comandaID));
+        $comanda= Comanda::find($comandaID);
         $productes = [];
-
+        $total = 0;
 
         foreach ($items as $item) {
             $producte = Product::find($item['id']);
             $lineacomanda = new Lineadecomanda;
             $lineacomanda->id_comanda = $comandaID;
-            $lineacomanda->id_producte = $producte->id;
-            $lineacomanda->nom_producte = $producte->nom;
-            $lineacomanda->desc_producte = $producte->descripcio;
-            $lineacomanda->imatge_producte = $producte->imatge;
+            $lineacomanda->id_producte = $producte['id'];
+            $lineacomanda->nom_producte = $producte['nom'];
+            $lineacomanda->desc_producte = $producte['descripcio'];
+            $lineacomanda->imatge_producte = $producte['imatge'];
             $lineacomanda->quantitat = $item['counter'];
-            $lineacomanda->preu = $producte->preu;
+            $lineacomanda->preu = $producte['preu'];
             $lineacomanda->save();
-            $productes[]= $lineacomanda;
-            $total += $lineacomanda->quantitat * $producte->preu;
+            $productes[] = $lineacomanda;
+            $total += $item['preu'] * $item['counter'];
         }
 
-        $comanda = Comanda::find($comandaID);
         $comanda->total = $total;
         $comanda->update();
-
-        $pdf = PDF::loadView('pdf',compact('dades'));
-        Mail::to($dades[2]["usuari"]["email"])->send(new Correu($dades,$pdf,$productes));
+        $pdf = PDF::loadView('pdf',compact('dades','productes','total'));
+        Mail::to($dades[2]["usuari"]["email"])->send(new Correu($dades,$pdf,$total));
 
     }
     /**
