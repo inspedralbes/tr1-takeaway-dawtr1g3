@@ -28,14 +28,19 @@
                             <li class="listExtens__itemExtens itemExtens">
                                 <a class="itemExtens__link" @click="clickStartShopping()">Tots els Productes</a>
                             </li>
-                            <li class="listExtens__itemExtens itemExtens">
+                            <li class="listExtens__itemExtens itemExtens" v-if="loginActive == true">
                                 <a class="itemExtens__link" @click="clickOrdersUser()">Les meves comandes</a>
                             </li>
-                            <li class="listExtens__itemExtens itemExtens">
-                                <a class="itemExtens__link" @click="clickLogin()">Iniciar Sessió</a> / <a class="itemExtens__link" @click="clickRegister()">Registrar-se</a>
+                            <li class="listExtens__itemExtens itemExtens"
+                                v-if="loginActive == true && views.adminButton == true">
+                                <a class="itemExtens__link" @click="clickAdminPage()">Administració</a>
                             </li>
-                            <li class="listExtens__itemExtens itemExtens">
+                            <li class="listExtens__itemExtens itemExtens" v-if="loginActive == true">
                                 <a class="itemExtens__link" @click="clickLogout()">Tancar Sessió</a>
+                            </li>
+                            <li class="listExtens__itemExtens itemExtens" v-else-if="loginActive == false">
+                                <a class="itemExtens__link" @click="clickLogin()">Iniciar Sessió</a> / <a
+                                    class="itemExtens__link" @click="clickRegister()">Registrar-se</a>
                             </li>
                         </ul>
                         <div class="navExtens__searchExtens searchExtens" role="search">
@@ -99,33 +104,36 @@
             </div>
         </div>
         <div class="login" v-if="views.login_page">
-            <form>
+            <div class="login__alert" v-if="views.registreMissatgeView" :class="{ error: error == 1 }">
+                {{ registreMissatge }}
+            </div>
+            <div class="login__form">
                 <h3>Iniciar Sessió</h3>
                 <label for="username">Correu electónic:</label>
-                <input type="email" placeholder="Email" id="email">
+                <input type="email" placeholder="Email" id="email" required v-model="usuari.email">
 
                 <label for="password">Contrasenya:</label>
-                <input type="password" placeholder="Password" id="password">
+                <input type="password" placeholder="Password" id="password" required v-model="usuari.contrasenya">
 
-                <button>Iniciar Sessió</button>
-                <button @click="clickRegister()">Registrar-se</button>
-            </form>
+                <button @click="clickLoginForm()">Iniciar Sessió</button>
+                <a @click="clickRegister()">Registrar-se</a>
+            </div>
         </div>
         <div class="register" v-if="views.register_page">
-            <form>
+            <div class="register__alert" v-if="views.registreMissatgeView"
+                :class="{ success: error == 0, error: error == 1 }">
+                {{ registreMissatge }}
+            </div>
+            <div class="register__form">
                 <h3>Registrar-se</h3>
-                <label for="nom">Nom</label>
-                <input type="text" placeholder="Nom" id="nom">
-                <label for="cognoms">Cognoms</label>
-                <input type="text" placeholder="Cognoms" id="cognoms">
-                <label for="email">Correu electónic:</label>
-                <input type="email" placeholder="Email" id="email">
-
-                <label for="password">Contrasenya:</label>
-                <input type="password" placeholder="Password" id="password">
-                <button>Registrar-se</button>
-
-            </form>
+                <label for="nom">Dades personals:</label>
+                <input type="text" placeholder="Nom" id="nom" name="nom" required v-model="usuari.nom">
+                <input type="text" placeholder="Cognoms" id="cognoms" name="cognoms" required v-model="usuari.cognoms">
+                <label for="email">Dades d'accés:</label>
+                <input type="email" placeholder="Email" id="email" name="email" required v-model="usuari.email">
+                <input type="password" placeholder="Contrasenya" id="contrasenya" name="contrasenya" required v-model="usuari.contrasenya">
+                <button @click="clickRegisterForm()">Registrar-se</button>
+            </div>
         </div>
         <div class="shop" v-if="views.shop_page">
             <div class="shop__buttonsCategories">
@@ -152,31 +160,21 @@
                     <p>{{ producte.descripcio }}</p>
                 </div>
             </div>
-
-
         </div>
-        <!--BOTON TRANSICION
-        <button class="hamburger__toggle">
-            <span class="hamburger__icon"></span>
-        </button>-->
         <div class="check" v-if="views.checkout_page">
             <div class="check__formContainer formContainer">
                 <h2 class="formContainer__title">Dades personals</h2>
                 <div class="formContainer__form form">
-                    <label class="form__labelNom" for="nombre">Nom:</label><br>
-                    <input class="form__inputNom" type="text" id="nombre" name="nombre" v-model="usuari.name"
-                        required><br>
-                    <label class="form__labelCognoms" for="apellidos">Cognoms:</label><br>
-                    <input class="form__inputCognoms" type="text" id="apellidos" name="apellidos"
-                        v-model="usuari.surnames" required><br>
+                    <label class="form__labelNom" for="nom">Nom:</label><br>
+                    <input class="form__inputNom" type="text" id="nom" name="nom" v-model="usuari.nom" required><br>
+                    <label class="form__labelCognoms" for="cognoms">Cognoms:</label><br>
+                    <input class="form__inputCognoms" type="text" id="cognoms" name="cognoms" v-model="usuari.cognoms" required><br>
                     <label class="form__labelDomicili" for="email">Correu electónic:</label><br>
-                    <input class="form__inputDomicili" type="email" id="email" name="email" v-model="usuari.email"
-                        required><br>
-                    <label class="form__labelEmail" for="password">Contrasenya:</label><br>
-                    <input class="form__inputEmail" type="password" id="password" name="password"
-                        v-model="usuari.password" required><br>
+                    <input class="form__inputDomicili" type="email" id="email" name="email" v-model="usuari.email" required><br>
+                    <label class="form__labelEmail" for="contrasenya">Contrasenya:</label><br>
+                    <input class="form__inputEmail" type="password" id="contrasenya" name="contrasenya" v-model="usuari.contrasenya" required><br>
                 </div>
-                <button class="form__btn" @click="clickBuyForm()">Realitzar Compra</button>
+                <button class="form__btn" @click="validateEmail()">Realitzar Compra</button>
             </div>
             <div class="check__resumTicket resumTicket">
                 <h3 class="resumTicket__title">Resum Compra</h3>
@@ -200,11 +198,10 @@
             </div>
             <button @click="clickOrdersButton()"> COMANDES</button>
         </div>
-        
+
         <!-- COMANDES -->
         <div class="order__tracking" v-if="views.status_page">
-            <h3>Número de comanda: <input class="status__search" type="search" name="comanda"
-                    id="searchInputOrderClient" @keyup.enter="clickSearchOrderClient()"></h3>
+            <h3>Número de comanda: <input class="status__search" type="search" name="comanda" id="searchInputOrderClient" @keyup.enter="clickSearchOrderClient()"></h3>
             <div v-if="views.searchOrderClientPage">
                 <h3>Estat de la comanda:</h3>
                 <u>{{ this.estatOrderClient.estat }}</u>
@@ -220,26 +217,20 @@
                                     :src="'back-end/laravel-api/public/'+orderProduct.imatge_producte">
                                 <p class="itemCart__products">{{ orderProduct.nom_producte }} {{ orderProduct.preu }}€
                                     x{{ orderProduct.quantitat }}</p>
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-            <footer class="footer">
-                <h2 class="footer__title">©2023, StudentStock</h2>
-                <a href="https://www.facebook.com/?locale=es_ES" target="_blank"><img class="footer__img"
-                        src="front-end/icons/facebook.png" alt="facebook"></a>
-                <a href="https://www.instagram.com/" target="_blank"><img class="footer__img"
-                        src="front-end/icons/instagram2.png" alt="instagram"></a>
-                <a href="https://twitter.com/?lang=es" target="_blank"><img class="footer__img"
-                        src="front-end/icons/gorjeo.png" alt="twitter"></a>
-                <a href="https://www.youtube.com/" target="_blank"><img class="footer__img"
-                        src="front-end/icons/social.png" alt="youtube"></a>
-            </footer>
-        </div>
-        <script src="front-end/js/functions.js" type="module"></script>
+        <footer class="footer">
+            <h2 class="footer__title">©2023, StudentStock</h2>
+            <a href="https://www.facebook.com/?locale=es_ES" target="_blank"><img class="footer__img" src="front-end/icons/facebook.png" alt="facebook"></a>
+            <a href="https://www.instagram.com/" target="_blank"><img class="footer__img" src="front-end/icons/instagram2.png" alt="instagram"></a>
+            <a href="https://twitter.com/?lang=es" target="_blank"><img class="footer__img" src="front-end/icons/gorjeo.png" alt="twitter"></a>
+            <a href="https://www.youtube.com/" target="_blank"><img class="footer__img" src="front-end/icons/social.png" alt="youtube"></a>
+        </footer>
+    </div>
+    <script src="front-end/js/functions.js" type="module"></script>
 </body>
-
 </html>

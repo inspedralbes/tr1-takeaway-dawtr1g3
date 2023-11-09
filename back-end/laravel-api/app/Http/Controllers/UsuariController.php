@@ -65,7 +65,7 @@ class UsuariController extends Controller
         }else{
             $usuari = usuari::where('email',$correu)->get();
             $usuari->update($request->all());
-            return $usuari;
+            return redirect()->route('users');
         }
     }
 
@@ -75,5 +75,11 @@ class UsuariController extends Controller
     public function destroy(usuari $usuari)
     {
         //
+    }
+
+    public function validar(Request $request){
+        $validator = Validator::make($request->all(),[
+            'email'=> 'required|email'
+        ]);
     }
 }

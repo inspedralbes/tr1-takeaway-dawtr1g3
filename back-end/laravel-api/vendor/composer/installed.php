@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'laravel/laravel',
-        'pretty_version' => 'dev-generar-pdf',
-        'version' => 'dev-generar-pdf',
-        'reference' => '7cfefd631341bdf62fc938aba2c4672ac743188f',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '5114744cfea8448cbd97a749a0b362eeca44edae',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -407,9 +407,9 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
-            'pretty_version' => 'dev-generar-pdf',
-            'version' => 'dev-generar-pdf',
-            'reference' => '7cfefd631341bdf62fc938aba2c4672ac743188f',
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '5114744cfea8448cbd97a749a0b362eeca44edae',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

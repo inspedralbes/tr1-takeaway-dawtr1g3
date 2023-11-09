@@ -145,8 +145,7 @@ body {
     position: relative;
     background-image: url(../img/fondopantalla.png);
     background-repeat: no-repeat;
-    background-size: cover;
-    
+    background-size: 100% 100%;
 }
 
 .landing__search {
@@ -227,9 +226,14 @@ body {
 }
 
 .slider-box img {
-    width: 100%;
+    /* width: 100%;
     position: absolute;
     top: -50px;
+    left: 0;
+    z-index: -1; */
+    width: 100%;
+    position: relative;
+    top: -20%;
     left: 0;
     z-index: -1;
 }
@@ -549,14 +553,19 @@ body {
         display: grid;
         grid-template-columns: 1fr 5fr 1fr 1fr 1fr;
         grid-template-areas: "img name counter price btn";
+        margin-top: 5%;
     }
     .itemCart__image {
-        width: 77px;
+        /* width: 77px;
         height: 79px;
         padding-top: 7px;
         position: absolute;
         left: 1%;
-        margin-top: -9%;
+        margin-top: -9%; */
+        width: 100%;
+        height: 100%;
+        margin-top: -25%;
+        margin-left: -12%;
     }
 
     .itemCart__name,
@@ -584,10 +593,17 @@ body {
     }
 
     .itemCart__btnless {
-        grid-area: btn;
+        /* grid-area: btn;
         width: 30px;
         height: 30px;
         margin-top: 7px;
+        border: none;
+        background-color: rgb(0, 0, 0);
+        color: #fff; */
+
+        grid-area: btn;
+        width: 90%;
+        height: 30px;
         border: none;
         background-color: rgb(0, 0, 0);
         color: #fff;
@@ -621,10 +637,9 @@ body {
     padding: 25px;
     width: 300px;
     text-align: center;
-    margin-top: 10%;
     margin: auto;
     border: #000000 1px solid;
-    margin-top: 15%;
+    margin-top: 10%;
 }
 
 .formContainer__title {
@@ -835,18 +850,6 @@ body {
     margin-top: 150px;
 }
 
-/* footer */
-.footer {
-    grid-area: footer;
-    background-color: var(--bg-Nav-Footer);
-    bottom: 0;
-    padding: 20px;
-    text-align: center;
-    z-index: 1;
-    border: #000000 1px solid;
-    margin-top: 20px;
-}
-
 /*Pagina Login Register*/
 .login {
     background-image: url("https://c.wallhere.com/photos/26/51/line_light_background_bright-685894.jpg!d");
@@ -860,28 +863,28 @@ body {
 }
 
 
-.login form {
-    width: 60vw;
+.login__form {
     background-color: rgba(51, 49, 49, 0.11);
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
+    position: relative;
+    margin: auto;
+    margin-top: 35%;
     border-radius: 10px;
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 40px rgba(8, 7, 16, 0.918);
-    padding: 50px 35px;
+    padding: 11% 10%;
+    width: 65%;
+    height: 55%;
 }
 
-.login form * {
+.login div * {
     color: #222020;
     letter-spacing: 0.5px;
     outline: none;
     border: none;
 }
 
-.login form h3 {
+.login div h3 {
     font-size: 32px;
     font-weight: 500;
     line-height: 42px;
@@ -898,14 +901,26 @@ body {
 
 .login input {
     display: block;
-    height: 50px;
-    width: 100%;
+    height: 10%;
+    width: 90%;
     background-color: rgba(255, 255, 255, 0.07);
     border-radius: 3px;
     padding: 0 10px;
     margin-top: 8px;
     font-size: 14px;
     font-weight: 300;
+}
+
+.login__alert {
+    position: absolute;
+    margin: auto;
+    margin-top: 30%;
+    margin-left: 25%;
+    margin-right: 25%;
+    height: 5%;
+    width: 50%;
+    text-align: center;
+    z-index: 999;
 }
 
 ::placeholder {
@@ -951,23 +966,21 @@ body {
     border-radius: 50%;
 }
 
-.register form {
-    width: 200px;
+.register__form {
     background-color: rgba(51, 49, 49, 0.11);
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 47%;
-    left: 50%;
+    position: relative;
+    margin: auto;
+    margin-top: 35%;
     border-radius: 10px;
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 40px rgba(8, 7, 16, 0.918);
-    padding: 50px 35px;
-    width: 250px;
-    height: 500px;
+    padding: 11% 10%;
+    width: 65%;
+    height: 55%;
 }
 
-.register form * {
+.register div * {
     color: #222020;
     letter-spacing: 0.5px;
     outline: none;
@@ -987,7 +1000,7 @@ body {
     opacity: 0;
 }
 
-.register form h3 {
+.register div h3 {
     font-size: 32px;
     font-weight: 500;
     line-height: 42px;
@@ -1028,6 +1041,36 @@ body {
     cursor: pointer;
 }
 
+.register__alert {
+    position: absolute;
+    margin: auto;
+    margin-top: 30%;
+    margin-left: 25%;
+    margin-right: 25%;
+    height: 5%;
+    width: 50%;
+    text-align: center;
+    z-index: 999;
+}
+
+.success {
+    border: 1px solid rgba(36, 241, 6, 0.46);
+    background-color: rgba(7, 149, 66, 0.6);
+    box-shadow: 0px 0px 2px #259c08;
+    color: #0ad406;
+    text-shadow: 2px 1px #3a3a3b;
+    transition: 0.5s;
+}
+
+.error {
+    border: 1px solid rgba(241, 6, 6, 0.81);
+    background-color: rgba(220, 17, 1, 0.46);
+    box-shadow: 0px 0px 2px #ff0303;
+    color: #ff0303;
+    text-shadow: 1px 1px #343435;
+    transition: 0.5s;
+}
+
 /* Añade estilos para la paginación */
 .pagination {
     text-align: center;
@@ -1048,6 +1091,16 @@ body {
     margin: 0 10px;
 }
 
+/* footer */
+.footer {
+    grid-area: footer;
+    background-color: var(--bg-Nav-Footer);
+    bottom: 0;
+    padding: 20px;
+    text-align: center;
+    z-index: 1;
+    border: #000000 1px solid;
+}
 
 .footer__title {
     font-family: var(--fontfamily);

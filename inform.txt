@@ -1,0 +1,20 @@
+comprar sin logearte OK
+y solo ver tus comandas por el correo OK
+
+
+SI estas logeado apartado de les teves comandes 
+- con una lista que muestra todas tus comandas
+- al hacer click a una comanda te lleva a 
+su page con sus datos OK
+
+
+
+al comprar si estas en login verifica que el correo enviado sea el mismo que el user
+
+si no, verifica que ese correo no corresponda ya a un usuari()
+
+
+Comporbar contrasenya si el user exite al crear comanda
+modificar alerts para buyForm
+
+slucionaar errores para crud users
