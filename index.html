@@ -195,17 +195,21 @@
             </div>
         </div>
         <div class="status" v-if="views.orders_users">
-            <div class="recuadro">
-                <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda illo, delectus consectetur
-                    reprehenderit temporafugiat doloribus?</h2>
+            
+            <div class="recuadro">                
+                <p>ID DE LA COMANDA</p>
+                <p>TOTAL DE LA COMANDA</p>
+                <p>DATA DE LA COMANDA</p>
             </div>
             <div class="recuadro">
-                <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda illo, delectus consectetur
-                    reprehenderit tempora dicta quo fugiat doloribus?</h2>
+                <p>ID DE LA COMANDA</p>
+                <p>TOTAL DE LA COMANDA</p>
+                <p>DATA DE LA COMANDA</p>
             </div>
             <div class="recuadro">
-                <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda illo, delectus consectetur
-                    reprehenderit temporafugiat doloribus?</h2>
+                <p>ID DE LA COMANDA</p>
+                <p>TOTAL DE LA COMANDA</p>
+                <p>DATA DE LA COMANDA</p>
             </div>
             <button @click="clickOrdersButton()"> COMANDES</button>
 
@@ -215,37 +219,40 @@
             <h3>Número de comanda: <input class="status__search" type="search" name="comanda"
                     id="searchInputOrderClient" @keyup.enter="clickSearchOrderClient()"></h3>
             <div v-if="views.searchOrderClientPage">
-                <h3>Últim estat de la comanda:</h3>
+                <h3>Estat de la comanda:</h3>
                 <u>{{ this.estatOrderClient.estat }}</u>
                 <p><strong>Client:</strong>{{ this.estatOrderClient.usuari }}</p>
                 <p><strong>Total:</strong>{{ this.estatOrderClient.total }}€</p>
                 <div>
                     <div class="details_order">
                         <h3>Detalls de la comanda:</h3>
-                        <div v-for="orderProduct in estatOrderClient.productsOrder">
-                            <img class="itemCart__image"
-                                :src="'back-end/laravel-api/public/'+orderProduct.imatge_producte">
-                            <p class="itemCart__name">{{ orderProduct.nom_producte }}</p>
-                            <p class="itemCart__price">{{ orderProduct.preu }}€</p>
-                            <p class="itemCart__counter">{{ orderProduct.quantitat }}</p>
+                        <div class="containerItemResum">
+                            <div class="resumTicket__itemTicket itemTicket"
+                                v-for="orderProduct in estatOrderClient.productsOrder">
+                                <img class="itemCart__image"
+                                    :src="'back-end/laravel-api/public/'+orderProduct.imatge_producte">
+                                <p class="itemCart__products">{{ orderProduct.nom_producte }} {{ orderProduct.preu }}€
+                                    x{{ orderProduct.quantitat }}</p>
+
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <footer class="footer">
-            <h2 class="footer__title">©2023, StudentStock</h2>
-            <a href="https://www.facebook.com/?locale=es_ES" target="_blank"><img class="footer__img"
-                    src="front-end/icons/facebook.png" alt="facebook"></a>
-            <a href="https://www.instagram.com/" target="_blank"><img class="footer__img"
-                    src="front-end/icons/instagram2.png" alt="instagram"></a>
-            <a href="https://twitter.com/?lang=es" target="_blank"><img class="footer__img"
-                    src="front-end/icons/gorjeo.png" alt="twitter"></a>
-            <a href="https://www.youtube.com/" target="_blank"><img class="footer__img" src="front-end/icons/social.png"
-                    alt="youtube"></a>
-        </footer>
-    </div>
-    <script src="front-end/js/functions.js" type="module"></script>
+            <footer class="footer">
+                <h2 class="footer__title">©2023, StudentStock</h2>
+                <a href="https://www.facebook.com/?locale=es_ES" target="_blank"><img class="footer__img"
+                        src="front-end/icons/facebook.png" alt="facebook"></a>
+                <a href="https://www.instagram.com/" target="_blank"><img class="footer__img"
+                        src="front-end/icons/instagram2.png" alt="instagram"></a>
+                <a href="https://twitter.com/?lang=es" target="_blank"><img class="footer__img"
+                        src="front-end/icons/gorjeo.png" alt="twitter"></a>
+                <a href="https://www.youtube.com/" target="_blank"><img class="footer__img"
+                        src="front-end/icons/social.png" alt="youtube"></a>
+            </footer>
+        </div>
+        <script src="front-end/js/functions.js" type="module"></script>
 </body>
 
 </html>
