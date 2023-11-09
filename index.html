@@ -99,20 +99,26 @@
             </div>
         </div>
         <div class="login" v-if="views.login_page">
-            <form>
+            <div class="login__alert" v-if="views.registreMissatgeView" :class="{ error: error = 1 }">
+                {{ registreMissatge }}
+            </div>
+            <div class="login__form">
                 <h3>Iniciar Sessió</h3>
                 <label for="username">Correu electónic:</label>
-                <input type="email" placeholder="Email" id="email">
+                <input type="email" placeholder="Email" id="email" required v-model="usuari.email">
 
                 <label for="password">Contrasenya:</label>
-                <input type="password" placeholder="Password" id="password">
+                <input type="password" placeholder="Password" id="password" required v-model="usuari.contrasenya">
 
-                <button>Iniciar Sessió</button>
+                <button @click="clickLoginForm()">Iniciar Sessió</button>
                 <button @click="clickRegister()">Registrar-se</button>
-            </form>
+            </div>
         </div>
         <div class="register" v-if="views.register_page">
-            <div>
+            <div class="register__alert" v-if="views.registreMissatgeView" :class="{ success: error = 0, error: error = 1 }">
+                {{ registreMissatge }}
+            </div>
+            <div class="register__form">
                 <h3>Registrar-se</h3>
                 <label for="nom">Dades personals:</label>
                 <input type="text" placeholder="Nom" id="nom" name="nom" required v-model="usuari.nom">
@@ -121,9 +127,6 @@
                 <input type="email" placeholder="Email" id="email" name="email" required v-model="usuari.email">
                 <input type="password" placeholder="Contrasenya" id="contrasenya" name="contrasenya" required v-model="usuari.contrasenya">
                 <button @click="clickRegisterForm()">Registrar-se</button>
-            </div>
-            <div v-if="views.registreMissatgeView">
-                {{ registreMissatge }}
             </div>
         </div>
         <div class="shop" v-if="views.shop_page">

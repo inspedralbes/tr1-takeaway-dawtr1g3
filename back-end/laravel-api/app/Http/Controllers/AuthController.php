@@ -36,12 +36,9 @@ class AuthController extends Controller
             'contrasenya'=> bcrypt($fields['contrasenya']),
         ]);
 
-        $token = $usuari->createToken('$usuari->email')->plainTextToken;
-
         $data =  [
             'error' => 0,
-            'missatge' => 'Usuari creat amb éxit!',
-            'token' => $token
+            'missatge' => 'Usuari creat amb éxit! Ja pots iniciar sessió!'
         ];
 
         return response()->json(['data' => $data]);
@@ -56,26 +53,25 @@ class AuthController extends Controller
         //Check email
         $usuari = usuari::where('email', $fields['email'])->first();
 
-
-        echo 'Contraseña proporcionada: ' . ($fields['contrasenya']);
-        echo 'Contraseña en la base de datos: ' . $usuari->contrasenya;
-        echo 'Email base de datos'. $usuari->email;
-
         // Check password
         if (!$usuari || !Hash::check($fields['contrasenya'], $usuari->contrasenya)) {
-            return response([
-                'message' => 'Credencials incorrectes'
-            ], 401);
+            $data = [
+                'error'=> 1,
+                'missatge'=> 'Credencials incorrectes!!'
+            ];
+
+            return response()->json(['data'=> $data]);
         }
 
-        $token = $usuari->createToken('myapptoken')->plainTextToken;
 
-        $response =  [
-            'user' => $usuari,
+        $token = $usuari->createToken($usuari->email)->plainTextToken;
+
+        $data =  [
+            'error' => 0,
             'token' => $token
         ];
 
-        return response($response, 201);
+        return response()->json(['data'=> $data]);
     }
 
     public function logout(Request $request) {

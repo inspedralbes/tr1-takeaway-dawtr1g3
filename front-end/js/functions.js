@@ -19,8 +19,10 @@ createApp({
                 cognoms: "",
                 email: "",
                 contrasenya: "",
+                token: ""
             },
             registreMissatge: "",
+            error: 0,
             estatOrderClient: {
                 id: '',
                 usuari: "",
@@ -60,7 +62,8 @@ createApp({
                 this.views.isFormValid = false,
                 this.views.login_page = false,
                 this.views.register_page = false,
-                this.views.orders_users = false
+                this.views.orders_users = false,
+                this.registreMissatgeView = false
         },
         //header
         clickNavToggle() {
@@ -200,6 +203,7 @@ createApp({
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${this.usuari.token}`
                 },
                 body: JSON.stringify([{ total: this.shopping_cart.totalPrice }, { usuari: this.usuari.email }]),
             });
@@ -215,6 +219,7 @@ createApp({
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
+                        "Authorization": `Bearer ${this.usuari.token}`
                     },
 
                     body: JSON.stringify([{ items: this.shopping_cart.products_cart }, { idComanda: comandaID }, { usuari: this.usuari }, { total: this.shopping_cart.totalPrice }]),
@@ -294,6 +299,43 @@ createApp({
             this.hiddenAllPages();
             this.views.login_page = true;
         },
+        clickLoginForm() {
+            const response = fetch("http://localhost:8000/api/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(this.usuari),
+            });
+            response.then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Error al iniciar Sessió.");
+                }
+            }).then((jsonData) => {
+                const dades = jsonData.data;
+                if (dades['error'] == 1) {
+                    this.views.registreMissatgeView = true;
+                    this.registreMissatge = dades['missatge'];
+                    this.error = 1;
+                } else {
+                    this.usuari.token = dades['token']; 
+                    this.error = 0;
+                    this.hiddenAllPages();
+                    this.views.landing_page = true;
+                }
+            }).catch((error) => {
+                console.error(error);
+            });
+
+            if (localStorage == null) {
+                localStorage.setItem('user', JSON.stringify(this.usuari));
+            } else {
+                localStorage.clear();
+                localStorage.setItem('user', JSON.stringify(this.usuari));
+            }
+        },
         // Register Functions
         clickRegister() {
             this.hiddenAllPages();
@@ -309,20 +351,20 @@ createApp({
             });
             response.then((response) => {
                 if (response.ok) {
-                    console.log('hola');
                     return response.json();
                 } else {
-                    throw new Error("Error al crear la comanda.");
+                    throw new Error("Error al crear usuari.");
                 }
             }).then((jsonData) => {
                 const dades = jsonData.data;
-                console.log(dades);
                 if (dades['error'] == 1) {
                     this.views.registreMissatgeView = true;
                     this.registreMissatge = dades['missatge'];
+                    this.error = 1;
                 } else {
                     this.views.registreMissatgeView = true;
                     this.registreMissatge = dades['missatge'];
+                    this.error = 0;
                 }
             }).catch((error) => {
                 console.error(error);
@@ -334,6 +376,16 @@ createApp({
                 localStorage.clear();
                 localStorage.setItem('user', JSON.stringify(this.usuari));
             }
+        },
+        // Logout Functions
+        clickLogout(){
+            fetch("http://localhost:8000/api/logout", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${this.usuari.token}`
+                }
+            });
         }
     },
     created() {
