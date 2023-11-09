@@ -38,6 +38,9 @@ class LineaComandesController extends Controller
             $lineacomanda->nom_producte = $producte['nom'];
             $lineacomanda->desc_producte = $producte['descripcio'];
             $lineacomanda->imatge_producte = $producte['imatge'];
+            if ($item['counter'] <= 0) {
+                $item['counter'] = 1;
+            }
             $lineacomanda->quantitat = $item['counter'];
             $lineacomanda->preu = $producte['preu'];
             $lineacomanda->save();
