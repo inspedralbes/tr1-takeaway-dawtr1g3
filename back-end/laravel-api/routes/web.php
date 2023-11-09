@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ComandesController;
 use App\Http\Controllers\ProductesController;
 use App\Models\Categoria;
@@ -51,6 +52,24 @@ Route::get('/admin/productes/create', function() {
 
 Route::post('/admin/productes/create', [ProductesController::class, 'store'])->name('productecreate');
 
+//categories
+Route::get('/admin/categories',function(){
+    $categories = Categoria::all();
+    return view('admin.categories')->with('categories', $categories);
+})->name('categories');
+
+Route::get('/admin/categoria/{id}', function($id) {
+    $categoria = Categoria::find($id);
+    return view('admin.updateCategoria')->with(['categoria' => $categoria]);
+})->name('categoria');
+
+Route::patch('/admin/categoria/{id}', [CategoriesController::class, 'update'])->name('categoriaupdate');
+
+Route::get('/admin/categories/create', function() {
+    return view('admin.createCategoria');
+})->name('categoriacreateview');
+
+Route::post('/admin/categories/create', [CategoriesController::class, 'store'])->name('categoriacreate');
 
 Route::get('/', function () {
     return view('welcome');
