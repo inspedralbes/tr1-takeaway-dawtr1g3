@@ -7,8 +7,8 @@
     <title>Document</title>
     <style>
         table{
-            width: 90%; 
-            margin: auto; 
+            width: 90%;
+            margin: auto;
             border:1px solid black;
             border-collapse: collapse;
             border-spacing: 15px;
@@ -23,7 +23,7 @@
         </tr>
         <tr>
             <td colspan="1">Número de comanda: {{$dades[1]["idComanda"]}}</td>
-            <td colspan="1">Nom: {{$dades[2]["usuari"]["name"]}} {{$dades[2]["usuari"]["surnames"]}}</td>
+            <td colspan="1">Nom: {{$dades[2]["usuari"]["nom"]}} {{$dades[2]["usuari"]["cognoms"]}}</td>
         </tr>
         <tr>
             <td>Data de la comanda: {{ date('d-m-Y ') }}</td>
@@ -57,6 +57,6 @@
         <h3>Et deixem el QR per tornar a la tenda!</h3>
         <img src="data:image/png;base64,{{ $qrStudentStock }}">
     </div>
-    
+
 </body>
 </html>

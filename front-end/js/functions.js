@@ -131,8 +131,8 @@ createApp({
         },
         clickStartShopping() {
             this.hiddenAllPages();
-            this.selectedCategory= null,
-            this.productes = this.productesOriginal;
+            this.selectedCategory = null,
+                this.productes = this.productesOriginal;
             this.views.shop_page = true;
         },
         //shop-page_functions
@@ -206,32 +206,32 @@ createApp({
             }
         },
         //checkout-page_functions
-        validateEmail(){
+        validateEmail() {
             var emailField = document.getElementById('email');
-            var nombreField = document.getElementById('nombre');
-            var apellidosField = document.getElementById('apellidos');
-            var passwordField = document.getElementById('password');
-            var validEmail =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
-            
-            if(nombreField.value == ""){
+            var nombreField = document.getElementById('nom');
+            var apellidosField = document.getElementById('cognoms');
+            var passwordField = document.getElementById('contrasenya');
+            var validEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+
+            if (nombreField.value == "") {
                 alert('Verifica que has introduit el nom');
-            }else{
+            } else {
                 if (apellidosField.value == "") {
                     alert('Verifica que has introduit els cognoms')
-                }else{
-                    if(!validEmail.test(email.value) ){
+                } else {
+                    if (!validEmail.test(email.value)) {
                         alert('Verifica que has introduit un correu o que el format es el correcte');
-                    }else{
+                    } else {
                         if (passwordField.value == "") {
-                            alert('Verifica que has introduit una contraseña');
-                        }else{
+                            alert('Verifica que has introduït una contrasenya.');
+                        } else {
                             this.clickBuyForm()
                         }
                     }
                 }
             }
 
-            
+
         },
         clickBuyForm() {
             this.hiddenAllPages();
@@ -296,7 +296,13 @@ createApp({
         clickSearchOrderClient() {
             let inputOrderClient = document.getElementById('searchInputOrderClient');
             var id = inputOrderClient.value;
-            const response = fetch(`http://localhost:8000/api/comandes/${id}`);
+            const response = fetch(`http://localhost:8000/api/comandes/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${this.usuari.token}`,
+                    'Content-Type': 'application/json' 
+                },
+                method: 'GET' 
+            });
             response.then((response) => {
                 if (response.ok) {
                     return response.json();
@@ -310,11 +316,17 @@ createApp({
                 this.estatOrderClient.total = data.comanda.total;
                 this.views.searchOrderClientPage = true;
                 let comandaID = this.estatOrderClient.id;
-                const responseLineaComanda = fetch(`http://localhost:8000/api/lineacomandes/orderclient/${comandaID}`);
+                const responseLineaComanda = fetch(`http://localhost:8000/api/lineacomandes/orderclient/${comandaID}`, {
+                    headers: {
+                        'Authorization': `Bearer ${this.usuari.token}`,
+                        'Content-Type': 'application/json' 
+                    },
+                    method: 'GET' 
+                });
                 responseLineaComanda.then((response) => {
                     if (response.ok) {
                         return response.json();
-                        
+
                     } else {
                         throw new Error("Error al fer una cerca.");
                     }
@@ -356,7 +368,7 @@ createApp({
                     this.registreMissatge = dades['missatge'];
                     this.error = 1;
                 } else {
-                    this.usuari.token = dades['token']; 
+                    this.usuari.token = dades['token'];
                     this.error = 0;
                     this.loginActive = true;
                     this.hiddenAllPages();
@@ -400,7 +412,7 @@ createApp({
                 if (dades['error'] == 1) {
                     this.error = 1;
                     this.views.registreMissatgeView = true;
-                    this.registreMissatge = dades['missatge'];                    
+                    this.registreMissatge = dades['missatge'];
                 } else {
                     this.error = 0;
                     this.views.registreMissatgeView = true;
@@ -418,7 +430,7 @@ createApp({
             }
         },
         // Logout Functions
-        clickLogout(){
+        clickLogout() {
             const response = fetch("http://localhost:8000/api/logout", {
                 method: "POST",
                 headers: {
