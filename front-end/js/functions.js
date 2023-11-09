@@ -194,6 +194,33 @@ createApp({
             }
         },
         //checkout-page_functions
+        validateEmail(){
+            var emailField = document.getElementById('email');
+            var nombreField = document.getElementById('nombre');
+            var apellidosField = document.getElementById('apellidos');
+            var passwordField = document.getElementById('password');
+            var validEmail =  /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+            
+            if(nombreField.value == ""){
+                alert('Verifica que has introduit el nom');
+            }else{
+                if (apellidosField.value == "") {
+                    alert('Verifica que has introduit els cognoms')
+                }else{
+                    if(!validEmail.test(email.value) ){
+                        alert('Verifica que has introduit un correu o que el format es el correcte');
+                    }else{
+                        if (passwordField.value == "") {
+                            alert('Verifica que has introduit una contraseña');
+                        }else{
+                            this.clickBuyForm()
+                        }
+                    }
+                }
+            }
+
+            
+        },
         clickBuyForm() {
             this.hiddenAllPages();
             this.views.landing_page = true;
