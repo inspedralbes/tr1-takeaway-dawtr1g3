@@ -353,9 +353,10 @@ body {
     position: absolute;
     color: rgb(2, 2, 2);
     border: 1px solid;
-    right: 15%;
+    right: 14%;
     width: 35%;
     left: 1%;
+    bottom: 34%;
 }
 
 .preu__anterior {
@@ -363,6 +364,7 @@ body {
     color: red;
     position: relative;
     left: 10%;
+    position: relative;
 }
 
 .item__buttons {
@@ -379,6 +381,7 @@ body {
 
 .order__tracking {
     text-align: center;
+    background: #ece8ffab;
 }
 
 .order__tracking h3 {
@@ -386,7 +389,8 @@ body {
 }
 
 .details_order {
-    position: relative; /* Agregado */
+    position: relative;
+    /* Agregado */
     border: 1px solid;
     left: 11%;
     right: 0px;
@@ -406,19 +410,26 @@ body {
     padding: 2px;
 }
 
+/*
 .recuadro:first-child {
     background-color: #007BFF;
     margin-top: 100px;
     margin-left: 10px;
     width: 300px;
-}
-
+}*/
 .recuadro {
-    background-color: #007BFF;
-    margin-top: 20px;
-    margin-left: 10px;
-    width: 300px;
-    line-height: 200%;
+    background-color: #fff;
+    /* Fondo blanco */
+    margin-top: 15px;
+    /* Espaciado superior */
+    padding: 10px;
+    /* Añadir espacio interno */
+    border: 1px solid #ddd;
+    /* Borde más claro */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    color: #333;
+    /* Texto en color oscuro */
 }
 
 /* Cambio de estilo al hacer clic en el botón */
@@ -548,52 +559,54 @@ body {
     border: #000000 1px solid;
 }
 
-    .div__itemCart,
-    .account__total {
-        display: grid;
-        grid-template-columns: 1fr 5fr 1fr 1fr 1fr;
-        grid-template-areas: "img name counter price btn";
-        margin-top: 5%;
-    }
-    .itemCart__image {
-        /* width: 77px;
+.div__itemCart,
+.account__total {
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr 1fr 1fr;
+    grid-template-areas: "img name counter price btn";
+    margin-top: 5%;
+}
+
+.itemCart__image {
+    /* width: 77px;
         height: 79px;
         padding-top: 7px;
         position: absolute;
         left: 1%;
         margin-top: -9%; */
-        width: 100%;
-        height: 100%;
-        margin-top: -25%;
-        margin-left: -12%;
-    }
+    width: 100%;
+    height: 100%;
+    margin-top: -25%;
+    margin-left: -12%;
+}
 
-    .itemCart__name,
-    .total__name {
-        grid-area: name;
-        text-align: left;
-    }
+.itemCart__name,
+.total__name {
+    grid-area: name;
+    text-align: left;
+}
 
-    .itemCart__price,
-    .total__price {
-        grid-area: price;
-    }
+.itemCart__price,
+.total__price {
+    grid-area: price;
+}
 
-    .itemCart__products {
-        position: relative;
-        text-align: right;
-        margin-left: auto;
-        left: 164px;
-    }
+.itemCart__products {
+    position: relative;
+    text-align: right;
+    margin-left: auto;
+    left: 56px;
     
+}
 
-    .itemCart__counter,
-    .total__items {
-        grid-area: counter;
-    }
 
-    .itemCart__btnless {
-        /* grid-area: btn;
+.itemCart__counter,
+.total__items {
+    grid-area: counter;
+}
+
+.itemCart__btnless {
+    /* grid-area: btn;
         width: 30px;
         height: 30px;
         margin-top: 7px;
@@ -601,30 +614,31 @@ body {
         background-color: rgb(0, 0, 0);
         color: #fff; */
 
-        grid-area: btn;
-        width: 90%;
-        height: 30px;
-        border: none;
-        background-color: rgb(0, 0, 0);
-        color: #fff;
-    }
-    .itemCart__item {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        align-items: center;
-        margin-bottom: 38px;
-    }
+    grid-area: btn;
+    width: 90%;
+    height: 30px;
+    border: none;
+    background-color: rgb(0, 0, 0);
+    color: #fff;
+}
 
-    .resumCart__itemCart {
-        position: relative;
-        display: grid;
-        grid-template-columns: 3fr 5fr 1fr 1fr;
-        grid-template-areas: "image name counter price";
-        font-family: var(--fontfamily);
-        margin: 10%;
-        border-bottom: #20f005 1.5px solid;
+.itemCart__item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    margin-bottom: 38px;
+}
 
-    }
+.resumCart__itemCart {
+    position: relative;
+    display: grid;
+    grid-template-columns: 3fr 5fr 1fr 1fr;
+    grid-template-areas: "image name counter price";
+    font-family: var(--fontfamily);
+    margin: 10%;
+    border-bottom: #20f005 1.5px solid;
+
+}
 
 /* check-page */
 .check {
@@ -768,17 +782,52 @@ body {
 }
 
 /* status-page */
+/* Estilo del contenedor principal */
 .status {
-    background-image: url("https://img.freepik.com/free-photo/abstract-light-pink-wallpaper-background-image_53876-102526.jpg?size=626&ext=jpg&ga=GA1.1.386372595.1697760000&semt=ais");
+    border: 1px solid black;
+    background-color: aliceblue;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Asegura que el contenedor ocupa el 100% de la altura de la ventana */
 }
 
 .status h3 {
-    margin-top: 200px;
-
+    margin-top: 10px;
+    color: #333;
 }
 
 .status__search {
-    width: 40%;
+    width: 50%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.status2__search{
+    position: relative;
+    left: 24%;
+    margin-top: 5%;
+}
+.status button {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    position: relative;
+    left: 145px;
+}
+
+.border__comandes {
+    border: 1px solid #222222;
+}
+
+.border__comandes h2 {
+    text-align: center;
+    margin-top: 4%;
 }
 
 /* admin */

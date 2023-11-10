@@ -39,8 +39,7 @@
                                 <a class="itemExtens__link" @click="clickLogout()">Tancar Sessió</a>
                             </li>
                             <li class="listExtens__itemExtens itemExtens" v-else-if="loginActive == false">
-                                <a class="itemExtens__link" @click="clickLogin()">Iniciar Sessió</a> / <a
-                                    class="itemExtens__link" @click="clickRegister()">Registrar-se</a>
+                                <a class="itemExtens__link" @click="clickLogin()">Iniciar Sessió</a> / <a  class="itemExtens__link" @click="clickRegister()">Registrar-se</a>
                             </li>
                         </ul>
                         <div class="navExtens__searchExtens searchExtens" role="search">
@@ -156,7 +155,7 @@
                 <div class="image__background" @click="toggleCardDescription(producte)">
                     <img class="item__image" :src="'back-end/laravel-api/public/' + producte.imatge">
                     <label class="item__preu">{{ producte.preu }}.00€</label>
-                    <span style="text-decoration: line-through; color: red;">{{ producte.preu + 4 }}.99€</span>
+                    <span class="preu__anterior" >{{ producte.preu + 4 }}.99€</span>
                 </div>
                 <div class="item__description" :class="{ 'mostrada': producte.mostrarDescripcion }"
                     @click="toggleCardDescription(producte)">
@@ -205,11 +204,17 @@
             </div>
         </div>
         <div class="status" v-if="views.orders_users">
+            <div  class="border__comandes">
+                <h2>Les teves comandes</h2>
+                <input class="status2__search" type="search" name="comanda" id="searchInputOrderClient" @keyup.enter="clickSearchOrderClient()">
+
+                
             <div v-for="order in estatOrderClient" :key="order.id" class="recuadro">
                 <p>ID DE LA COMANDA: {{ order.id }}</p>
                 <p>TOTAL DE LA COMANDA: {{ order.total }}€</p>
                 <p>DATA DE LA COMANDA: {{ order.fecha }}</p>
             </div>
+        </div>
             <button @click="clickOrdersButton()"> COMANDES</button>
         </div>
 
