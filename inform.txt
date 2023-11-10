@@ -1,1 +1,7 @@
 slucionaar errores para crud users (falta crear user)
+
+usuarios de la app :
+    - pedro@gmail.com 123 (administrador)
+    - julie@gmail.com 123 (administrador)
+    - hugo@gmail.com 123 (client)
+    - miquel@gmail.com 123 (client)

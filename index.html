@@ -126,14 +126,14 @@
             </div>
             <div class="register__formRegister formRegister">
                 <h3 class="formRegister__title">Registrar-se</h3>
-                <label for="nom">Dades personals:</label>
-                <input type="text" placeholder="Nom" id="nom" name="nom" required v-model="usuari.nom">
-                <input type="text" placeholder="Cognoms" id="cognoms" name="cognoms" required v-model="usuari.cognoms">
-                <label for="email">Dades d'accés:</label>
-                <input type="email" placeholder="Email" id="email" name="email" required v-model="usuari.email">
-                <input type="password" placeholder="Contrasenya" id="contrasenya" name="contrasenya" required
+                <label class="formRegister__label" for="nom">Dades personals:</label>
+                <input class="formRegister__input" type="text" placeholder="Nom" id="nom" name="nom" required v-model="usuari.nom">
+                <input class="formRegister__input" type="text" placeholder="Cognoms" id="cognoms" name="cognoms" required v-model="usuari.cognoms">
+                <label class="formRegister__label" for="email">Dades d'accés:</label>
+                <input class="formRegister__input" type="email" placeholder="Email" id="email" name="email" required v-model="usuari.email">
+                <input class="formRegister__input" type="password" placeholder="Contrasenya" id="contrasenya" name="contrasenya" required
                     v-model="usuari.contrasenya">
-                <button @click="clickRegisterForm()">Registrar-se</button>
+                <button class="formRegister__button" @click="clickRegisterForm()">Registrar-se</button>
             </div>
         </div>
         <div class="shop" v-if="views.shop_page">
@@ -210,16 +210,16 @@
                 </div>
             </div>
         </div>
-        <div class="order__tracking" v-if="views.status_page">
-            <h3>Número de comanda: {{ this.estatOrderClient.id }}</h3>
-            <div v-if="views.searchOrderClientPage">
-                <h3>Estat de la comanda:</h3>
-                <u>{{ this.estatOrderClient.estat }}</u>
-                <p><strong>Client:</strong>{{ this.estatOrderClient.usuari }}</p>
-                <p><strong>Total:</strong>{{ this.estatOrderClient.total }}€</p>
-                <div>
-                    <div class="details_order">
-                        <h3>Detalls de la comanda:</h3>
+        <div class="order__tracking order" v-if="views.status_page">
+            <h3 class="order__title">Número de comanda: {{ this.estatOrderClient.id }}</h3>
+            <div class="order__estatOrder estatOrder" v-if="views.searchOrderClientPage">
+                <h3 class="estatOrder__title">Estat de la comanda:</h3>
+                <u class="estatOrder__estat">{{ this.estatOrderClient.estat }}</u>
+                <p class="estatOrder__user"><strong>Client:</strong>{{ this.estatOrderClient.usuari }}</p>
+                <p class="estatOrder__total"><strong>Total:</strong>{{ this.estatOrderClient.total }}€</p>
+                <div class="estatOrder__details details">
+                    <div class="details__orderDetails">
+                        <h3 class="orderDetails__title">Detalls de la comanda:</h3>
                         <div class="containerItemResum">
                             <div class="resumTicket__itemTicket itemTicket"
                                 v-for="orderProduct in estatOrderClient.productsOrder">

@@ -500,88 +500,6 @@ body {
     background-image: url("https://c.wallhere.com/photos/26/51/line_light_background_bright-685894.jpg!d");
 }
 
-/* .background .shape {
-    height: 200px;
-    width: 200px;
-    position: absolute;
-    border-radius: 50%;
-} */
-
-.register__form {
-    background-color: rgba(51, 49, 49, 0.11);
-    position: relative;
-    margin: auto;
-    margin-top: 35%;
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 40px rgba(8, 7, 16, 0.918);
-    padding: 11% 10%;
-    width: 65%;
-    height: 55%;
-}
-
-.register div * {
-    color: #222020;
-    letter-spacing: 0.5px;
-    outline: none;
-    border: none;
-}
-
-/* .cart-enter-active {
-    transition: opacity 0.5s;
-}
-
-.cart-leave-active {
-    transition: opacity 0.5s;
-}
-
-.cart-enter,
-.cart-leave-to {
-    opacity: 0;
-} */
-
-.formRegister__title {
-    font-size: 32px;
-    font-weight: 500;
-    line-height: 42px;
-    text-align: center;
-}
-
-.register label {
-    display: block;
-    margin-top: 30px;
-    font-size: 16px;
-    font-weight: 500;
-    width: 60%;
-
-}
-
-.register input {
-    display: block;
-    height: 50px;
-    width: 100%;
-    background-color: rgba(15, 15, 15, 0.07);
-    border-radius: 3px;
-    padding: 0 10px;
-    margin-top: 8px;
-    font-size: 14px;
-    font-weight: 300;
-}
-
-
-.register button {
-    margin-top: 50px;
-    width: 100%;
-    background-color: #ffffff;
-    color: #080710;
-    padding: 15px 0;
-    font-size: 18px;
-    font-weight: 600;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
 .register__alert {
     position: absolute;
     margin: auto;
@@ -612,40 +530,65 @@ body {
     transition: 0.5s;
 }
 
+.register__formRegister {
+    background-color: rgba(51, 49, 49, 0.11);
+    position: relative;
+    margin: auto;
+    margin-top: 35%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.918);
+    padding: 11% 10%;
+    width: 65%;
+    height: 55%;
+}
 
+.register div * {
+    color: #222020;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
 
+.formRegister__title {
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
+}
 
+.formRegister__label {
+    display: block;
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
+    width: 60%;
+}
 
+.formRegister__input {
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(15, 15, 15, 0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.formRegister__button {
+    margin-top: 50px;
+    width: 100%;
+    background-color: #ffffff;
+    color: #080710;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 /* shop-page */
 .shop {
@@ -667,7 +610,6 @@ body {
 .filterClicked {
     background-color: #9ad7e9;
 }
-
 
 .shop__buttonsCategories::-webkit-scrollbar {
     display: none;
@@ -693,7 +635,6 @@ body {
     bottom: 0;
     filter: blur(2px);
 }
-
 
 .shop .shop__item {
     background-color: #f5fdff;
@@ -754,25 +695,6 @@ body {
     padding-right: 0;
 }
 
-.order__tracking {
-    text-align: center;
-    background: #ece8ffab;
-}
-
-.order__tracking h3 {
-    margin-top: 10%;
-}
-
-.details_order {
-    position: relative;
-    border: 1px solid;
-    left: 11%;
-    right: 0px;
-    width: 77%;
-    margin-top: 10%;    
-    margin-bottom: 4%;
-}
-
 .buttons__more {
     width: auto;
     height: 30px;
@@ -783,18 +705,6 @@ body {
     color: #fff7f7;
     transition: background-color 0.3s ease;
     padding: 2px;
-}
-
-.containerComandesList__cardComanda {
-    background-color: #fff;
-    margin-bottom: 5%;
-    margin-left: 2%;
-    margin-top: 5%;
-    margin-right: 2%;
-    padding: 3%;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    color: #333;
 }
 
 /* Cambio de estilo al hacer clic en el botón */
@@ -851,7 +761,6 @@ body {
 .item__description.mostrada {
     transform: scaleY(1);
 }
-
 
 /* check-page */
 .check {
@@ -994,40 +903,12 @@ body {
     font-size: 23px
 }
 
-/* status-page */
-/* Estilo del contenedor principal */
+/* Status List */
 .status {
     border: 1px solid black;
     background-color: aliceblue;
     padding: 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.containerComandesList__title {
-    margin-top: 10px;
-    color: #333;
-}
-
-.status__search {
-    width: 50%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.containerComandesList__button {
-    background-color: #007BFF;
-    color: #fff;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin: auto;
-    margin-top: 8%;
-    margin-right: 30%;
-    margin-left: 30%;
-    width: 45%;
 }
 
 .status__comandes {
@@ -1037,30 +918,44 @@ body {
 }
 
 .containerComandesList__title {
+    margin-top: 10px;
+    color: #333;
+}
+
+.containerComandesList__cardComanda {
+    background-color: #fff;
+    margin-bottom: 5%;
+    margin-left: 2%;
+    margin-top: 5%;
+    margin-right: 2%;
+    padding: 3%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    color: #333;
+}
+
+.containerComandesList__title {
     text-align: center;
     margin-top: 4%;
 }
 
-
-
-/* Añade estilos para la paginación */
-.pagination {
+.order__tracking {
     text-align: center;
-    margin-top: 20px;
+    background: #ece8ffab;
 }
 
-.pagination__button {
-    background-color: #0073bbc5;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 0 5px;
-    cursor: pointer;
-    border-radius: 5px;
+.order__title {
+    margin-top: 10%;
 }
 
-.pagination__info {
-    margin: 0 10px;
+.details__orderDetails {
+    position: relative;
+    border: 1px solid;
+    left: 11%;
+    right: 0px;
+    width: 77%;
+    margin-top: 10%;    
+    margin-bottom: 4%;
 }
 
 /* footer */
