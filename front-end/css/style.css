@@ -632,6 +632,15 @@ body {
     margin-top: 10%;
 }
 
+.check__alert{
+    margin: auto;
+    margin-top: 3%;
+    width: 50%;
+    text-align: center;
+    z-index: 999;
+    
+}
+
 .check__formContainer {
     background-color: #ffffff;
     padding: 25px;
@@ -639,7 +648,6 @@ body {
     text-align: center;
     margin: auto;
     border: #000000 1px solid;
-    margin-top: 10%;
 }
 
 .formContainer__title {
@@ -671,9 +679,7 @@ body {
 .form__btn {
     margin-top: 15px;
     background-color: #1e91d6;
-    /* Color de fondo del botón */
     color: #fff;
-    /* Color del texto del botón */
     padding: 15px;
     border: 1PX solid black;
     font-family: var(--fontfamily);

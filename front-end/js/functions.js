@@ -22,6 +22,7 @@ createApp({
                 token: ""
             },
             registreMissatge: "",
+            checkFormMissatge: "",
             error: 0,
             loginActive: false,
             estatOrderClient: {
@@ -44,7 +45,8 @@ createApp({
                 login_page: false,
                 orders_users: false,
                 registreMissatgeView: false,
-                adminButton: false
+                adminButton: false,
+                checkFormMissatge: false
             }
         };
     },
@@ -65,7 +67,8 @@ createApp({
                 this.views.login_page = false,
                 this.views.register_page = false,
                 this.views.orders_users = false,
-                this.views.registreMissatgeView = false
+                this.views.registreMissatgeView = false,
+                this.views.checkFormMissatge = false
         },
         //header
         clickNavToggle() {
@@ -214,18 +217,53 @@ createApp({
             var validEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
 
             if (nombreField.value == "") {
-                alert('Verifica que has introduit el nom');
+                this.error = 1;
+                this.views.checkFormMissatge = true;
+                this.checkFormMissatge = 'Verifica que has introduit el nom.';
             } else {
                 if (apellidosField.value == "") {
-                    alert('Verifica que has introduit els cognoms')
+                    this.error = 1;
+                    this.views.checkFormMissatge = true;
+                    this.checkFormMissatge = 'Verifica que has introduit els cognoms.';
                 } else {
-                    if (!validEmail.test(email.value)) {
-                        alert('Verifica que has introduit un correu o que el format es el correcte');
+                    if (!validEmail.test(emailField.value)) {
+                        this.error = 1;
+                        this.views.checkFormMissatge = true;
+                        this.checkFormMissatge = 'Verifica que has introduit un correu o que el format es el correcte.';
                     } else {
                         if (passwordField.value == "") {
-                            alert('Verifica que has introduït una contrasenya.');
+                            this.error = 1;
+                            this.views.checkFormMissatge = true;
+                            this.checkFormMissatge = 'Verifica que has introduït una contrasenya.';
                         } else {
-                            this.clickBuyForm()
+                            const response = fetch("http://localhost:8000/api/usuari/validation", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify({
+                                        usuari: this.usuari,
+                                        loginActive: this.loginActive,
+                                    }),
+                            });
+                            response.then((response) => {
+                                if (response.ok) {
+                                    return response.json();
+                                } else {
+                                    throw new Error("Error al validar usuari.");
+                                }
+                            }).then((jsonData) => {
+                                const dades = jsonData.data;
+                                if (dades['error'] == 1) {
+                                    this.error = 1;
+                                    this.views.checkFormMissatge = true;
+                                    this.checkFormMissatge = dades['missatge'];
+                                } else {
+                                    this.clickBuyForm()
+                                }
+                            }).catch((error) => {
+                                console.error(error);
+                            });
                         }
                     }
                 }
@@ -299,9 +337,9 @@ createApp({
             const response = fetch(`http://localhost:8000/api/comandes/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${this.usuari.token}`,
-                    'Content-Type': 'application/json' 
+                    'Content-Type': 'application/json'
                 },
-                method: 'GET' 
+                method: 'GET'
             });
             response.then((response) => {
                 if (response.ok) {
@@ -319,9 +357,9 @@ createApp({
                 const responseLineaComanda = fetch(`http://localhost:8000/api/lineacomandes/orderclient/${comandaID}`, {
                     headers: {
                         'Authorization': `Bearer ${this.usuari.token}`,
-                        'Content-Type': 'application/json' 
+                        'Content-Type': 'application/json'
                     },
-                    method: 'GET' 
+                    method: 'GET'
                 });
                 responseLineaComanda.then((response) => {
                     if (response.ok) {

@@ -131,7 +131,8 @@
                 <input type="text" placeholder="Cognoms" id="cognoms" name="cognoms" required v-model="usuari.cognoms">
                 <label for="email">Dades d'accés:</label>
                 <input type="email" placeholder="Email" id="email" name="email" required v-model="usuari.email">
-                <input type="password" placeholder="Contrasenya" id="contrasenya" name="contrasenya" required v-model="usuari.contrasenya">
+                <input type="password" placeholder="Contrasenya" id="contrasenya" name="contrasenya" required
+                    v-model="usuari.contrasenya">
                 <button @click="clickRegisterForm()">Registrar-se</button>
             </div>
         </div>
@@ -149,32 +150,45 @@
             <div class="shop__item item" v-for="producte in productes">
                 <label class="item__label" @click="toggleCardDescription(producte)">{{ producte.nom }}</label>
                 <div class="item__buttons buttons">
-                    <input class="buttons__more" type="button" value="Afegir al carro 🛒" @click="clickButtonMore(producte)">
+                    <input class="buttons__more" type="button" value="Afegir al carro 🛒"
+                        @click="clickButtonMore(producte)">
                 </div>
                 <div class="image__background" @click="toggleCardDescription(producte)">
                     <img class="item__image" :src="'back-end/laravel-api/public/' + producte.imatge">
                     <label class="item__preu">{{ producte.preu }}.00€</label>
                     <span style="text-decoration: line-through; color: red;">{{ producte.preu + 4 }}.99€</span>
                 </div>
-                <div class="item__description" :class="{ 'mostrada': producte.mostrarDescripcion }" @click="toggleCardDescription(producte)">
+                <div class="item__description" :class="{ 'mostrada': producte.mostrarDescripcion }"
+                    @click="toggleCardDescription(producte)">
                     <p>{{ producte.descripcio }}</p>
                 </div>
             </div>
         </div>
         <div class="check" v-if="views.checkout_page">
+            <!-- <div class="check__alert" v-if="views.checkFormMissatge"
+                :class="{ success: error == 0, error: error == 1 }">
+                {{ checkFormMissatge }}
+            </div> -->
             <div class="check__formContainer formContainer">
                 <h2 class="formContainer__title">Dades personals</h2>
                 <div class="formContainer__form form">
                     <label class="form__labelNom" for="nom">Nom:</label><br>
                     <input class="form__inputNom" type="text" id="nom" name="nom" v-model="usuari.nom" required><br>
                     <label class="form__labelCognoms" for="cognoms">Cognoms:</label><br>
-                    <input class="form__inputCognoms" type="text" id="cognoms" name="cognoms" v-model="usuari.cognoms" required><br>
+                    <input class="form__inputCognoms" type="text" id="cognoms" name="cognoms" v-model="usuari.cognoms"
+                        required><br>
                     <label class="form__labelDomicili" for="email">Correu electónic:</label><br>
-                    <input class="form__inputDomicili" type="email" id="email" name="email" v-model="usuari.email" required><br>
+                    <input class="form__inputDomicili" type="email" id="email" name="email" v-model="usuari.email"
+                        required><br>
                     <label class="form__labelEmail" for="contrasenya">Contrasenya:</label><br>
-                    <input class="form__inputEmail" type="password" id="contrasenya" name="contrasenya" v-model="usuari.contrasenya" required><br>
+                    <input class="form__inputEmail" type="password" id="contrasenya" name="contrasenya"
+                        v-model="usuari.contrasenya" required><br>
                 </div>
                 <button class="form__btn" @click="validateEmail()">Realitzar Compra</button>
+                <div class="check__alert" v-if="views.checkFormMissatge"
+                    :class="{ success: error == 0, error: error == 1 }">
+                    {{ checkFormMissatge }}
+                </div>
             </div>
             <div class="check__resumTicket resumTicket">
                 <h3 class="resumTicket__title">Resum Compra</h3>
@@ -201,7 +215,8 @@
 
         <!-- COMANDES -->
         <div class="order__tracking" v-if="views.status_page">
-            <h3>Número de comanda: <input class="status__search" type="search" name="comanda" id="searchInputOrderClient" @keyup.enter="clickSearchOrderClient()"></h3>
+            <h3>Número de comanda: <input class="status__search" type="search" name="comanda"
+                    id="searchInputOrderClient" @keyup.enter="clickSearchOrderClient()"></h3>
             <div v-if="views.searchOrderClientPage">
                 <h3>Estat de la comanda:</h3>
                 <u>{{ this.estatOrderClient.estat }}</u>
@@ -225,12 +240,17 @@
         </div>
         <footer class="footer">
             <h2 class="footer__title">©2023, StudentStock</h2>
-            <a href="https://www.facebook.com/?locale=es_ES" target="_blank"><img class="footer__img" src="front-end/icons/facebook.png" alt="facebook"></a>
-            <a href="https://www.instagram.com/" target="_blank"><img class="footer__img" src="front-end/icons/instagram2.png" alt="instagram"></a>
-            <a href="https://twitter.com/?lang=es" target="_blank"><img class="footer__img" src="front-end/icons/gorjeo.png" alt="twitter"></a>
-            <a href="https://www.youtube.com/" target="_blank"><img class="footer__img" src="front-end/icons/social.png" alt="youtube"></a>
+            <a href="https://www.facebook.com/?locale=es_ES" target="_blank"><img class="footer__img"
+                    src="front-end/icons/facebook.png" alt="facebook"></a>
+            <a href="https://www.instagram.com/" target="_blank"><img class="footer__img"
+                    src="front-end/icons/instagram2.png" alt="instagram"></a>
+            <a href="https://twitter.com/?lang=es" target="_blank"><img class="footer__img"
+                    src="front-end/icons/gorjeo.png" alt="twitter"></a>
+            <a href="https://www.youtube.com/" target="_blank"><img class="footer__img" src="front-end/icons/social.png"
+                    alt="youtube"></a>
         </footer>
     </div>
     <script src="front-end/js/functions.js" type="module"></script>
 </body>
+
 </html>
