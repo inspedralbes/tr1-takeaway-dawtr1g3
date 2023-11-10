@@ -12,11 +12,13 @@ use Illuminate\Support\Facades\Mail;
 class ComandesController extends Controller
 {
 
-    public function index(){
+    public function index()
+    {
         return Comanda::all();
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
         $dades = json_decode($request->getContent(), true);
         $user = $dades[1]["usuari"];
@@ -32,25 +34,38 @@ class ComandesController extends Controller
         return response()->json(['comandaID' => $comandaID]);
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
         $comanda = Comanda::find($id);
 
-        if($request->has('estat')) {
+        if ($request->has('estat')) {
             $estatAntic = $comanda->estat;
             $comanda->update(['estat' => $request->estat]);
-            Mail::to($comanda->usuari)->send(new CanviEstat($comanda,$estatAntic));
+            Mail::to($comanda->usuari)->send(new CanviEstat($comanda, $estatAntic));
         }
 
         return redirect()->route('comandes');
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $comanda = Comanda::find($id);
 
         return response()->json(['comanda' => $comanda]);
     }
 
-    public function search($id){
-        return Comanda::where('id', 'like', '%'.$id.'%')->get();
+    public function search($id)
+    {
+        return Comanda::where('id', 'like', '%' . $id . '%')->get();
+    }
+
+    public function postComandesUser(Request $request)
+    {
+
+        $comandes = [];
+        $email = $request->input('email');
+        $comandes = Comanda::where('usuari', $email)->get();
+
+        return response()->json(['comandes' => $comandes]);
     }
 }

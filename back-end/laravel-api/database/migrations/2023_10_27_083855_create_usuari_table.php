@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('cognoms');
             $table->string('email')->unique();
             $table->string('contrasenya');
-            $table->unsignedBigInteger('tipus');
+            $table->unsignedBigInteger('tipus')->default(3);
             $table->foreign('tipus')->references('id')->on('tipususuari');
 
         });

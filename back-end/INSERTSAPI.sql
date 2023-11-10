@@ -115,9 +115,10 @@ INSERT INTO `tipususuari` (`id`, `created_at`, `updated_at`, `tipus`) VALUES
 --
 
 INSERT INTO `usuari` (`id`, `created_at`, `updated_at`, `nom`, `cognoms`, `email`, `contrasenya`, `tipus`) VALUES
-(1, '2023-10-29 20:03:38', '2023-10-29 20:03:38', 'Juan', 'Garcia Perez', 'juangarcia@gmail.com', 'eyJpdiI6IlhLNVFkWVdCcHdodU90UXoxTlBaV0E9PSIsInZhbHVlIjoiNUpPWW9OWUJIOXYzUkU0QmtkUlllTWczMllVMTE5b3lMeVFtUU5aNExTdz0iLCJtYWMiOiJkY2M1NzgwNmJiNzE3MzhlNzZkMWNkMjI5Yzg0NTc1NTVkZDhkMWY5ZTQzNjkzZGIzNzg4YTdlNDVhOWYzMmU3IiwidGFnIjoiIn0=', 3),
-(2, '2023-10-29 20:05:15', '2023-10-29 20:05:15', 'Alberto', 'Rodriguez Nunes', 'albertorodriguez@gmail.com', 'eyJpdiI6IjhKTFUxTWxHblZELzVWVW1XWXpOZmc9PSIsInZhbHVlIjoidUlvanZMdFFuREozdHZiTXBUUWxnRmlmalNUWU0vQ0xIZ0svVWdYZ1QrRT0iLCJtYWMiOiI2ZTZlMjJiNmE0M2JhNTdkNTBkNTQ2ZjI4NGE5NmRjMmQwNDVmOWQwMWQ0Y2Q0ZDdiNTNiMzdiOGFhZGVhNjNkIiwidGFnIjoiIn0=', 1),
-(3, '2023-10-29 20:06:52', '2023-10-29 20:06:52', 'Lola', 'Ramirez Lopez', 'lolaramirez@gmail.com', 'eyJpdiI6IndNWVRuMTBHazVJcWJyV2dtVERpN0E9PSIsInZhbHVlIjoiaE1FTzdoQ0NFZm5HNjdLaEh5REZScFBhcW52LzYwZTBNZEl4R1REblMxQT0iLCJtYWMiOiI3ODRiZDQ3MzJmOTFmODA0Yjc1NTA3MzJiZGYyZmNlZjM3OTFlMDVkYmMyYmExOWZjYzRjMzhmN2MwMzE2YzNjIiwidGFnIjoiIn0=', 2);
+(1, '2023-11-10 06:43:48', '2023-11-10 06:43:48', 'Pedro', 'Garcia Guzman', 'pedro@gmail.com', '$2y$10$VwDkKZrSJnHazDDF4biTHexa63R4X1XHlHeRiBh/pPl8mXtr2jmo.', 1),
+(2, '2023-11-10 06:44:36', '2023-11-10 06:44:36', 'Julie', 'Villegas Vergara', 'julie@gmail.com', '$2y$10$BnL9dXyp3ZUsRKozWakD/ey3PcyO2GGQLTBT0y7aCTZ8F2cSwze0K', 1),
+(3, '2023-11-10 06:45:06', '2023-11-10 06:45:06', 'Hugo', 'Tripiana González', 'hugo@gmail.com', '$2y$10$yPhdA2t43p.mGuRTFkYw5O7qvGVqWpFEWHgRRtCVZ8/eO2PHVNCkW', 3),
+(4, '2023-11-10 06:46:08', '2023-11-10 06:46:08', 'Miquel', 'Barceló Giménez', 'miquel@gmail.com', '$2y$10$JdZH8Wtoji0psjCFdPlBGuDnTmDqBJDUkuwGssRDcIJsADXuD6t2m', 3);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

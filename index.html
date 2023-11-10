@@ -14,11 +14,11 @@
 
 <body>
     <div id="app">
-        <div class="nav__container-sticky">
-            <nav class="nav">
-                <div class="nav__container container">
-                    <a class="container__title" @click="clickTitlePage()">
-                        <h1>StudentStock</h1>
+        <div class="nav">
+            <nav class="nav__navbox navbox">
+                <div class="navbox__container container">
+                    <a class="container__title title" @click="clickTitlePage()">
+                        <h1 class="title__nav">StudentStock</h1>
                     </a>
                     <a class="container__buttonOpt buttonOpt " @click="clickNavToggle()">
                         <img class="buttonOpt__iconNav" src="front-end/icons/icon-nav-options.png"></img>
@@ -28,14 +28,19 @@
                             <li class="listExtens__itemExtens itemExtens">
                                 <a class="itemExtens__link" @click="clickStartShopping()">Tots els Productes</a>
                             </li>
-                            <li class="listExtens__itemExtens itemExtens">
+                            <li class="listExtens__itemExtens itemExtens" v-if="loginActive == true">
                                 <a class="itemExtens__link" @click="clickOrdersUser()">Les meves comandes</a>
                             </li>
-                            <li class="listExtens__itemExtens itemExtens">
-                                <a class="itemExtens__link" @click="clickLogin()">Iniciar Sessió</a> / <a class="itemExtens__link" @click="clickRegister()">Registrar-se</a>
+                            <li class="listExtens__itemExtens itemExtens"
+                                v-if="loginActive == true && views.adminButton == true">
+                                <a class="itemExtens__link" @click="clickAdminPage()">Administració</a>
                             </li>
-                            <li class="listExtens__itemExtens itemExtens">
+                            <li class="listExtens__itemExtens itemExtens" v-if="loginActive == true">
                                 <a class="itemExtens__link" @click="clickLogout()">Tancar Sessió</a>
+                            </li>
+                            <li class="listExtens__itemExtens itemExtens" v-else-if="loginActive == false">
+                                <a class="itemExtens__link" @click="clickLogin()">Iniciar Sessió</a> / <a
+                                    class="itemExtens__link" @click="clickRegister()">Registrar-se</a>
                             </li>
                         </ul>
                         <div class="navExtens__searchExtens searchExtens" role="search">
@@ -49,7 +54,7 @@
                         <span class="buttonCar__counterCar">{{ shopping_cart.totalItems }}</span>
                     </a>
                 </div>
-                <div class="ticket" v-if="views.cart_toggle">
+                <div class="navbox__ticket ticket" v-if="views.cart_toggle">
                     <h3 class="ticket__title" id="titleCart">La teva cistella</h3>
                     <div class="ticket__account account">
                         <div class="account__item div">
@@ -75,13 +80,13 @@
             </nav>
         </div>
         <div class="landing" v-if="views.landing_page">
-            <div class="slider-container">
-                <div class="slider-box">
-                    <ul>
-                        <li><img src="front-end/img/img-landing-carrusel.png" alt=""></li>
-                        <li><img src="front-end/img/img-landing-carrusel1.png" alt=""></li>
-                        <li><img src="front-end/img/img-landing-carrusel2.png" alt=""></li>
-                        <li><img src="front-end/img/img-landing-carrusel3.png" alt=""></li>
+            <div class="landing__slider-container slider-container">
+                <div class="slider-container__slider-box slider-box">
+                    <ul class="slider-box__listSlider listSlider">
+                        <li class="listSlider__itemList itemList"><img class="itemList__image" src="front-end/img/img-landing-carrusel.png" alt=""></li>
+                        <li class="listSlider__itemList itemList"><img class="itemList__image" src="front-end/img/img-landing-carrusel1.png" alt=""></li>
+                        <li class="listSlider__itemList itemList"><img class="itemList__image" src="front-end/img/img-landing-carrusel2.png" alt=""></li>
+                        <li class="listSlider__itemList itemList"><img class="itemList__image" src="front-end/img/img-landing-carrusel3.png" alt=""></li>
                     </ul>
                 </div>
             </div>
@@ -99,82 +104,92 @@
             </div>
         </div>
         <div class="login" v-if="views.login_page">
-            <form>
-                <h3>Iniciar Sessió</h3>
-                <label for="username">Correu electónic:</label>
-                <input type="email" placeholder="Email" id="email">
+            <div class="login__alert" v-if="views.registreMissatgeView" :class="{ error: error == 1 }">
+                {{ registreMissatge }}
+            </div>
+            <div class="login__formLogin formLogin">
+                <h3 class="formLogin__title">Iniciar Sessió</h3>
+                <label class="formLogin__label" for="username">Correu electónic:</label>
+                <input class="formLogin__input" type="email" placeholder="Email" id="email" required v-model="usuari.email">
 
-                <label for="password">Contrasenya:</label>
-                <input type="password" placeholder="Password" id="password">
+                <label class="formLogin__label" for="password">Contrasenya:</label>
+                <input class="formLogin__input" type="password" placeholder="Password" id="password" required v-model="usuari.contrasenya">
 
-                <button>Iniciar Sessió</button>
-                <button @click="clickRegister()">Registrar-se</button>
-            </form>
+                <button class="formLogin__button" @click="clickLoginForm()">Iniciar Sessió</button>
+                <a class="formLogin__anchore" @click="clickRegister()">Registrar-se</a>
+            </div>
         </div>
         <div class="register" v-if="views.register_page">
-            <form>
-                <h3>Registrar-se</h3>
-                <label for="nom">Nom</label>
-                <input type="text" placeholder="Nom" id="nom">
-                <label for="cognoms">Cognoms</label>
-                <input type="text" placeholder="Cognoms" id="cognoms">
-                <label for="email">Correu electónic:</label>
-                <input type="email" placeholder="Email" id="email">
-
-                <label for="password">Contrasenya:</label>
-                <input type="password" placeholder="Password" id="password">
-                <button>Registrar-se</button>
-
-            </form>
+            <div class="register__alert" v-if="views.registreMissatgeView"
+                :class="{ success: error == 0, error: error == 1 }">
+                {{ registreMissatge }}
+            </div>
+            <div class="register__formRegister formRegister">
+                <h3 class="formRegister__title">Registrar-se</h3>
+                <label class="formRegister__label" for="nom">Dades personals:</label>
+                <input class="formRegister__input" type="text" placeholder="Nom" id="nom" name="nom" required v-model="usuari.nom">
+                <input class="formRegister__input" type="text" placeholder="Cognoms" id="cognoms" name="cognoms" required v-model="usuari.cognoms">
+                <label class="formRegister__label" for="email">Dades d'accés:</label>
+                <input class="formRegister__input" type="email" placeholder="Email" id="email" name="email" required v-model="usuari.email">
+                <input class="formRegister__input" type="password" placeholder="Contrasenya" id="contrasenya" name="contrasenya" required
+                    v-model="usuari.contrasenya">
+                <button class="formRegister__button" @click="clickRegisterForm()">Registrar-se</button>
+            </div>
         </div>
         <div class="shop" v-if="views.shop_page">
-            <div class="shop__buttonsCategories buttonsCategories">
-                <button class="buttonsCategories" @click="clickStartShopping()">Tots els productes</button>
-                <button class="buttonsCategories" v-for="category in categories" @click="filterByCategory(category)"
-                    :class="{ active: category.id == selectedCategory }"
-                >
+            <div class="shop__buttonsCategories">
+                <button class="buttonsCategories" style="text-align: center;"
+                    :class="{ 'filterClicked': null == selectedCategory }" @click="clickStartShopping()">Tots els
+                    productes</button>
+                <button style="margin-left: 4%;" class="buttonsCategories" v-for="category in categories"
+                    @click="filterByCategory(category)" :class="{ 'filterClicked': category.id == selectedCategory }">
                     {{ category.nom }}
                 </button>
             </div>
-
+            <hr>
             <div class="shop__item item" v-for="producte in productes">
-                <label class="item__label">{{ producte.nom }}</label>
-                <label class="item__preu">{{producte.preu}}.00€</label>
+                <label class="item__label" @click="toggleCardDescription(producte)">{{ producte.nom }}</label>
                 <div class="item__buttons buttons">
-                    <input class="buttons__more" type="button" value="Afegir al carro"
+                    <input class="buttons__more" type="button" value="Afegir al carro 🛒"
                         @click="clickButtonMore(producte)">
                 </div>
-                <img class="item__image" :src="'back-end/laravel-api/public/'+producte.imatge">
-
+                <div class="image__background" @click="toggleCardDescription(producte)">
+                    <img class="item__image" :src="'back-end/laravel-api/public/' + producte.imatge">
+                    <label class="item__preu">{{ producte.preu }}.00€</label>
+                    <span class="preu__anterior">{{ producte.preu + 4 }}.99€</span>
+                </div>
+                <div class="item__description" :class="{ 'mostrada': producte.mostrarDescripcion }"
+                    @click="toggleCardDescription(producte)">
+                    <p>{{ producte.descripcio }}</p>
+                </div>
             </div>
         </div>
-        <!--BOTON TRANSICION
-        <button class="hamburger__toggle">
-            <span class="hamburger__icon"></span>
-        </button>-->
         <div class="check" v-if="views.checkout_page">
             <div class="check__formContainer formContainer">
                 <h2 class="formContainer__title">Dades personals</h2>
                 <div class="formContainer__form form">
-                    <label class="form__labelNom" for="nombre">Nom:</label><br>
-                    <input class="form__inputNom" type="text" id="nombre" name="nombre" v-model="usuari.name"
+                    <label class="form__labelNom" for="nom">Nom:</label><br>
+                    <input class="form__inputNom" type="text" id="nom" name="nom" v-model="usuari.nom" required><br>
+                    <label class="form__labelCognoms" for="cognoms">Cognoms:</label><br>
+                    <input class="form__inputCognoms" type="text" id="cognoms" name="cognoms" v-model="usuari.cognoms"
                         required><br>
-                    <label class="form__labelCognoms" for="apellidos">Cognoms:</label><br>
-                    <input class="form__inputCognoms" type="text" id="apellidos" name="apellidos"
-                        v-model="usuari.surnames" required><br>
-                    <label class="form__labelDomicili" for="email">Correu electónic:</label><br>
-                    <input class="form__inputDomicili" type="email" id="email" name="email" v-model="usuari.email"
+                    <label class="form__labelEmail" for="email">Correu electónic:</label><br>
+                    <input class="form__inputEmail" type="email" id="email" name="email" v-model="usuari.email"
                         required><br>
-                    <label class="form__labelEmail" for="password">Contrasenya:</label><br>
-                    <input class="form__inputEmail" type="password" id="password" name="password"
-                        v-model="usuari.password" required><br>
+                    <label class="form__labelContrasenya" for="contrasenya">Contrasenya:</label><br>
+                    <input class="form__inputContrasenya" type="password" id="contrasenya" name="contrasenya"
+                        v-model="usuari.contrasenya" required><br>
                 </div>
-                <button class="form__btn" @click="clickBuyForm()">Realitzar Compra</button>
+                <button class="form__btn" @click="validateEmail()">Realitzar Compra</button>
+                <div class="formContainer__alert" v-if="views.checkFormMissatge"
+                    :class="{ success: error == 0, error: error == 1 }">
+                    {{ checkFormMissatge }}
+                </div>
             </div>
             <div class="check__resumTicket resumTicket">
                 <h3 class="resumTicket__title">Resum Compra</h3>
                 <div class="containerItemResum">
-                    <div class="resumTicket__itemTicket itemTicket" v-for="product_cart in shopping_cart.products_cart">
+                    <div class="resumCart__itemCart itemTicket" v-for="product_cart in shopping_cart.products_cart">
                         <img class="itemTicket__image" :src="'back-end/laravel-api/public/'+product_cart.imatge">
                         <p class="itemTicket__name">{{ product_cart.nom }}</p>
                         <p class="itemTicket__counter">{{ product_cart.counter }}</p>
@@ -186,53 +201,51 @@
             </div>
         </div>
         <div class="status" v-if="views.orders_users">
-            <div class="recuadro">
-                <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda illo, delectus consectetur
-                    reprehenderit temporafugiat doloribus?</h2>
-            </div>
-            <div class="recuadro">
-                <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda illo, delectus consectetur
-                    reprehenderit tempora dicta quo fugiat doloribus?</h2>
-            </div>
-            <div class="recuadro">
-                <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda illo, delectus consectetur
-                    reprehenderit temporafugiat doloribus?</h2>
-            </div>
-            <button @click="clickOrdersButton()"> COMANDES</button>
+            <div class="status__comandes containerComandesList">
+                <h2 class="containerComandesList__title">Les teves comandes</h2>
 
+                <div v-for="order in ordersClient" class="containerComandesList__cardComanda cardComanda" @click="clickSearchOrderClient(order.id)">
+                    <p class="cardComanda__idComanda">ID de comanda: {{ order.id }}</p>
+                    <p class="cardComanda__totalComanda">TOTAL de la comanda: {{ order.total }}€</p>
+                </div>
+            </div>
         </div>
-        <!-- COMANDES -->
-        <div class="status" v-if="views.status_page">
-            <h3>Número de comanda: <input class="status__search" type="search" name="comanda"
-                    id="searchInputOrderClient" @keyup.enter="clickSearchOrderClient()"></h3>
-            <div v-if="views.searchOrderClientPage">
-                <h3>Últim estat de la comanda:</h3>
-                <h4>{{ this.estatOrderClient.estat }}</h4>
-                <p><strong>Client:</strong>{{ this.estatOrderClient.usuari }}</p>
-                <p><strong>Total:</strong>{{ this.estatOrderClient.total }}€</p>
-                <div>
-                    <h3>Detalls de la comanda:</h3>
-                    <div v-for="orderProduct in estatOrderClient.productsOrder">
-                        <img class="itemCart__image" :src="'back-end/laravel-api/public/'+orderProduct.imatge_producte">
-                        <p class="itemCart__name">{{ orderProduct.nom_producte }}</p>
-                        <p class="itemCart__price">{{ orderProduct.preu }}€</p>
-                        <p class="itemCart__counter">{{ orderProduct.quantitat }}</p>
+        <div class="order__tracking order" v-if="views.status_page">
+            <h3 class="order__title">Número de comanda: {{ this.estatOrderClient.id }}</h3>
+            <div class="order__estatOrder estatOrder" v-if="views.searchOrderClientPage">
+                <h3 class="estatOrder__title">Estat de la comanda:</h3>
+                <u class="estatOrder__estat">{{ this.estatOrderClient.estat }}</u>
+                <p class="estatOrder__user"><strong>Client:</strong>{{ this.estatOrderClient.usuari }}</p>
+                <p class="estatOrder__total"><strong>Total:</strong>{{ this.estatOrderClient.total }}€</p>
+                <div class="estatOrder__details details">
+                    <div class="details__orderDetails">
+                        <h3 class="orderDetails__title">Detalls de la comanda:</h3>
+                        <div class="containerItemResum">
+                            <div class="resumTicket__itemTicket itemTicket"
+                                v-for="orderProduct in estatOrderClient.productsOrder">
+                                <img class="itemCart__image"
+                                    :src="'back-end/laravel-api/public/'+orderProduct.imatge_producte">
+                                <p class="itemCart__products">{{ orderProduct.nom_producte }} {{ orderProduct.preu }}€
+                                    x{{ orderProduct.quantitat }}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <footer class="footer">
             <h2 class="footer__title">©2023, StudentStock</h2>
-            <a href="https://www.facebook.com/?locale=es_ES" target="_blank"><img class="footer__img"
+            <a class="footer__anchore" href="https://www.facebook.com/?locale=es_ES" target="_blank"><img class="footer__img"
                     src="front-end/icons/facebook.png" alt="facebook"></a>
-            <a href="https://www.instagram.com/" target="_blank"><img class="footer__img"
+            <a class="footer__anchore" href="https://www.instagram.com/" target="_blank"><img class="footer__img"
                     src="front-end/icons/instagram2.png" alt="instagram"></a>
-            <a href="https://twitter.com/?lang=es" target="_blank"><img class="footer__img"
+            <a class="footer__anchore" href="https://twitter.com/?lang=es" target="_blank"><img class="footer__img"
                     src="front-end/icons/gorjeo.png" alt="twitter"></a>
-            <a href="https://www.youtube.com/" target="_blank"><img class="footer__img" src="front-end/icons/social.png"
+            <a class="footer__anchore" href="https://www.youtube.com/" target="_blank"><img class="footer__img" src="front-end/icons/social.png"
                     alt="youtube"></a>
         </footer>
     </div>
     <script src="front-end/js/functions.js" type="module"></script>
 </body>
+
 </html>
