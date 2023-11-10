@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductesController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ComandesController;
 use App\Http\Controllers\LineaComandesController;
+use App\Http\Controllers\UsuariController;
 
 //  Public API routes
 Route::get('/productes', [ProductesController::class, 'index']);
@@ -17,6 +18,7 @@ Route::post('/lineacomandes', [LineaComandesController::class,'store']);
 Route::post('/register', [AuthController::class,'register']);
 Route::post('/login', [AuthController::class,'login']);
 
+Route::post('/usuari/validation', [UsuariController::class,'validar']);
 Route::get('/pdf', [LineaComandesController::class, 'getpdf']);
 Route::get('/correu', [LineaComandesController::class, 'enviarCorreu']);
 

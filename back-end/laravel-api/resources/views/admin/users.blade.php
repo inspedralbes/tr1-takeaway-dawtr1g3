@@ -6,13 +6,12 @@
 
         <h1 class="subtitle is-3 mt-3 has-text-centered">Gestió de usuaris</h1>
 
-
         <div class="has-text-centered">
-            <a class="button is-warning is-medium has-text-white mt-2 mb-2" href="{{ route('usercreateview') }}">Afegir Nou Usuari</a>
+            <a class="button is-warning is-medium has-text-white mt-2 mb-2" href="{{ route('pato') }}">Afegir Nou Usuari</a>
         </div>
 
         <div class="table-container">
-            <table class="table is-striped is-narrow is-fullwidth">
+            <table class="table is-striped is-narrow is-fullwidth mb-4">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -20,7 +19,7 @@
                         <th>Cognoms</th>
                         <th>Email</th>
                         <th>Tipus</th>
-                        <th>Accio</th>
+                        <th>Accions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,7 +32,11 @@
                         <td>{{ $user->tipus}}</td>
                         <td>
                             <a class="button is-link is-light" href="{{ route ('user', ['id' => $user->id]) }}">Actualitzar</a>
-                            <a class="button is-danger is-light" href="{{ route ('userdestroy', ['id' => $user->id]) }}">Eliminar</a>
+                            <form action="{{ route ('userdestroy', ['id' => $user->id]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="button is-danger is-light mt-2" type="submit">Eliminar</button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach

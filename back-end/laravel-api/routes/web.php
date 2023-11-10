@@ -16,20 +16,6 @@ Route::get("/admin", function () {
     return view('admin.index');
 })->name('index');
 
-// Comanda
-Route::get('/admin/comandes', function() {
-    $comandes = Comanda::where('estat', '<>', 'Llest per recollir')->get();
-    return view('admin.comandes')->with('comandes', $comandes);
-})->name('comandes');
-
-
-// Product
-
-Route::get('/admin/productes', function() {
-    $productes = Product::all();
-    return view('admin.productes')->with('productes', $productes);
-})->name('productes');
-
 //categories
 Route::get('/admin/categories',function(){
     $categories = Categoria::all();
@@ -65,52 +51,66 @@ Route::patch('/admin/user/{id}', [UsuariController::class, 'update'])->name('use
 
 Route::delete('/admin/users/{id}', function($id) {
     usuari::destroy($id);
-    return view('users');
+    $users = usuari::all();
+    return view('admin.users')->with('users', $users);
 })->name('userdestroy');
 
 Route::get('/admin/users/create', function() {
-    return view('admin.createUser');
+    $tipusUser = tipusUsuari::all();
+    return view('admin.createUser')->with(['tipusUser' => $tipusUser]);
 })->name('usercreateview');
 
 Route::post('/admin/users/create', [UsuariController::class, 'store'])->name('usercreate');
 
+// Comanda
+Route::get('/admin/comandes/{id}', function($id) {
+    $comanda = Comanda::find($id);
+    $estadosPosibles = ['Rebut','En preparacio','Llest per recollir'];
+    return view('admin.updateComanda')->with(['comanda' => $comanda, 'estats' => $estadosPosibles]);
+})->name('comanda');
+
+Route::patch('/admin/comandes/{id}', [ComandesController::class, 'update'])->name('comandaupdate');
+
+Route::get('/admin/comandes', function() {
+    $comandes = Comanda::where('estat', '<>', 'Llest per recollir')->get();
+    return view('admin.comandes')->with('comandes', $comandes);
+})->name('comandes');
+
+// Product
+Route::get('/admin/productes', function() {
+    $productes = Product::all();
+    return view('admin.productes')->with('productes', $productes);
+})->name('productes');
+
+Route::get('/admin/producte/{id}', function($id) {
+    $producte = Product::find($id);
+    $categories = Categoria::all();
+    return view('admin.updateProducte')->with(['producte' => $producte, 'categories'=> $categories]);
+})->name('producte');
+
+Route::patch('/admin/producte/{id}', [ProductesController::class, 'update'])->name('producteupdate');
+
+Route::delete('/admin/productes/{id}', function($id) {
+    Product::destroy($id);
+    $productes = Product::all();
+    return view('admin.productes')->with('productes', $productes);
+})->name('productedestroy');
+
+Route::get('/admin/productes/create', function() {
+    $categories = Categoria::all();
+    return view('admin.createProducte')->with(['categories'=> $categories]);
+})->name('productecreateview');
+
+Route::post('/admin/productes/create', [ProductesController::class, 'store'])->name('productecreate');
+
+// Route::group(['middleware' => ['auth:sanctum']], function () {
+
+
+
+
+// });
+
+
 Route::get('/', function () {
     return view('welcome');
-});
-
-Route::group(['middleware' => ['auth:sanctum']], function () {
-
-    // Comanda
-    Route::get('/admin/comandes/{id}', function($id) {
-        $comanda = Comanda::find($id);
-        $estadosPosibles = ['Rebut','En preparacio','Llest per recollir'];
-        return view('admin.updateComanda')->with(['comanda' => $comanda, 'estats' => $estadosPosibles]);
-    })->name('comanda');
-
-    Route::patch('/admin/comandes/{id}', [ComandesController::class, 'update'])->name('comandaupdate');
-
-
-    // Product
-    Route::get('/admin/producte/{id}', function($id) {
-        $producte = Product::find($id);
-        $categories = Categoria::all();
-        return view('admin.updateProducte')->with(['producte' => $producte, 'categories'=> $categories]);
-    })->name('producte');
-
-    Route::patch('/admin/producte/{id}', [ProductesController::class, 'update'])->name('producteupdate');
-
-    Route::delete('/admin/productes/{id}', function($id) {
-        Product::destroy($id);
-        $productes = Product::all();
-        return view('admin.productes')->with('productes', $productes);
-    })->name('productedestroy');
-
-    Route::get('/admin/productes/create', function() {
-        $categories = Categoria::all();
-        return view('admin.createProducte')->with(['categories'=> $categories]);
-    })->name('productecreateview');
-
-    Route::post('/admin/productes/create', [ProductesController::class, 'store'])->name('productecreate');
-
-
 });

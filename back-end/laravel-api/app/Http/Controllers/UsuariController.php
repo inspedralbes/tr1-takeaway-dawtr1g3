@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\usuari;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class UsuariController extends Controller
 {
@@ -39,7 +40,8 @@ class UsuariController extends Controller
             $user->contrasenya = encrypt($request->contrasenya);
             $user->tipus = $request->tipus;
             $user->save();
-            return $user;
+
+            return redirect()->route('users');
         }
     }
 
@@ -54,19 +56,14 @@ class UsuariController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $correu)
+    public function update(Request $request, string $id)
     {
-        
-        $validator = Validator::make($request->all(),[
-            'email'=> 'required'
-        ]);
-        if ($validator->fails()) {
-            return $request->all();
-        }else{
-            $usuari = usuari::where('email',$correu)->get();
-            $usuari->update($request->all());
-            return redirect()->route('users');
-        }
+        $usuari = usuari::find($id);
+
+        $usuari->tipus = $request->tipus;
+        $usuari->update();
+
+        return redirect()->route('users');
     }
 
     /**
@@ -78,8 +75,47 @@ class UsuariController extends Controller
     }
 
     public function validar(Request $request){
-        $validator = Validator::make($request->all(),[
-            'email'=> 'required|email'
-        ]);
+        $datos = $request->json()->all();
+
+        $usuari = $datos['usuari'];
+        $loginActive = $datos['loginActive'];
+
+        if ($loginActive == 'true'){
+            $userDB = usuari::where('email', $usuari['email'])->first();
+            if ($userDB == null) {
+                $data = [
+                    'error'=> 1,
+                    'missatge'=> 'Usuari no existent, comproba que el teu email sigui el mateix que per iniciar sessió!!'
+                ];
+                return response()->json(['data'=> $data]);
+            } else {
+                if (!Hash::check($usuari['contrasenya'], $userDB->contrasenya)) {
+                    $data = [
+                        'error'=> 1,
+                        'missatge'=> 'Usuari existent, comproba que la teva contrasenya sigui la mateixa que per iniciar sessió!!'
+                    ];
+                    return response()->json(['data'=> $data]);
+                } else {
+                    $data = [
+                        'error'=> 0
+                    ];
+                    return response()->json(['data'=> $data]);
+                }
+            }
+        } else {
+            $userDB = usuari::where('email', $usuari['email'])->first();
+            if ($userDB == null) {
+                $data = [
+                    'error'=> 0
+                ];
+                return response()->json(['data'=> $data]);
+            } else {
+                $data = [
+                    'error'=> 1,
+                    'missatge' => 'Ja existeix un usuari fent servir aquest email, INICIAR SESSIÓ si tens un compte o utilitza un altre email!'
+                ];
+                return response()->json(['data'=> $data]);
+            }
+        }
     }
 }
