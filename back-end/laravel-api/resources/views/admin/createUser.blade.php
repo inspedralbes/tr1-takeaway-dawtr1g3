@@ -8,7 +8,7 @@
 
             <form action="{{ route('usercreate') }}" method="POST">
                 @csrf
-
+                
                 <div class="field">
                     <label class="label">Nom:</label>
                     <div class="control">

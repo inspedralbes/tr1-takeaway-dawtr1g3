@@ -57,7 +57,7 @@ Route::delete('/admin/users/{id}', function($id) {
 
 Route::get('/admin/users/create', function() {
     $tipusUser = tipusUsuari::all();
-    return view('admin.createUser')->with(['tipusUser' => $tipusUser]);
+    return view('createUser')->with(['tipusUser' => $tipusUser]);
 })->name('usercreateview');
 
 Route::post('/admin/users/create', [UsuariController::class, 'store'])->name('usercreate');

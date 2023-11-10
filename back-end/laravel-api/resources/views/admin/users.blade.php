@@ -6,10 +6,6 @@
 
         <h1 class="subtitle is-3 mt-3 has-text-centered">Gestió de usuaris</h1>
 
-        <div class="has-text-centered">
-            <a class="button is-warning is-medium has-text-white mt-2 mb-2" href="{{ route('pato') }}">Afegir Nou Usuari</a>
-        </div>
-
         <div class="table-container">
             <table class="table is-striped is-narrow is-fullwidth mb-4">
                 <thead>
