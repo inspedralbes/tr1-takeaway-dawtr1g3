@@ -6,7 +6,7 @@ Teniu la carpeta /doc per deixar-hi tota la documentació que genereu, en format
 
 HEU DE MODIFICAR AQUEST DOCUMENT AMB LA VOSTRA INFORMACIÖ:
 * StudentStock
-* Petita descripció
+* StudentStock es una página web de material escolar, deixa fer comandes pero per takeaway. 
 * Integrants del grup:
     - Pedro Garcia -> Desplegament / Back
     - Hugo Tripiana -> Front
