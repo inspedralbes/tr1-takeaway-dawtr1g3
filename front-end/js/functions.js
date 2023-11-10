@@ -32,6 +32,7 @@ createApp({
                 total: "",
                 productsOrder: {}
             },
+            ordersClient: [],
             views: {
                 nav_toggle: false,
                 cart_toggle: false,
@@ -118,10 +119,8 @@ createApp({
             this.productes = result; // Actualiza el array productes con el resultado de la búsqueda.
             this.hiddenAllPages();
             this.views.shop_page = true;
-            console.log("Els productes per la recerca:", this.productes);
         },
         filterByCategory(category) {
-            console.log(category.id);
             this.selectedCategory = category.id;
 
             if (category.id == null) {
@@ -129,7 +128,6 @@ createApp({
             } else {
                 this.productes = this.productesOriginal;
                 this.productes = this.productes.filter(product => product.categoria_id == category.id);
-                console.log(this.productes);
             }
         },
         clickStartShopping() {
@@ -307,7 +305,6 @@ createApp({
                         this.productes.forEach(element => {
                             element.counter = 0;
                         });
-                        //return response.json();
                     } else {
                         throw new Error("Error al crear la linea comanda.");
                     }
@@ -328,12 +325,29 @@ createApp({
             this.views.status_page = true;
         },
         clickOrdersUser() {
-            this.hiddenAllPages();
-            this.views.orders_users = true;
+            const response = fetch("http://localhost:8000/api/comandes/orderclient", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${this.usuari.token}`
+                },
+                body: JSON.stringify(this.usuari),
+            });
+            response.then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error("Error al cercar comandes del usuari.");
+                }
+            }).then((jsonData) => {
+                this.ordersClient = jsonData.comandes;
+                this.hiddenAllPages();
+                this.views.orders_users = true;
+            }).catch((error) => {
+                console.error(error);
+            });
         },
-        clickSearchOrderClient() {
-            let inputOrderClient = document.getElementById('searchInputOrderClient');
-            var id = inputOrderClient.value;
+        clickSearchOrderClient(id) {
             const response = fetch(`http://localhost:8000/api/comandes/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${this.usuari.token}`,
@@ -352,6 +366,8 @@ createApp({
                 this.estatOrderClient.estat = data.comanda.estat;
                 this.estatOrderClient.usuari = data.comanda.usuari;
                 this.estatOrderClient.total = data.comanda.total;
+                this.hiddenAllPages();
+                this.views.status_page = true;
                 this.views.searchOrderClientPage = true;
                 let comandaID = this.estatOrderClient.id;
                 const responseLineaComanda = fetch(`http://localhost:8000/api/lineacomandes/orderclient/${comandaID}`, {
@@ -370,8 +386,6 @@ createApp({
                     }
                 }).then((data) => {
                     this.estatOrderClient.productsOrder = data.items;
-                    console.log(data.items);
-                    console.log(this.estatOrderClient.productsOrder);
                 }).catch((error) => {
                     console.error(error);
                 });
@@ -492,7 +506,6 @@ createApp({
     created() {
         getProductes().then((productes) => {
             this.productesOriginal = productes;
-            console.log(this.productesOriginal);
             this.productesOriginal.forEach((element) => {
                 element.counter = 0;
             });
@@ -500,7 +513,6 @@ createApp({
         });
         getCategories().then((categories) => {
             this.categories = categories;
-            console.log(this.categories);
         });
         document.addEventListener("DOMContentLoaded", function () {
             const button = document.querySelector(".hamburger__toggle");

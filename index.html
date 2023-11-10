@@ -14,11 +14,11 @@
 
 <body>
     <div id="app">
-        <div class="nav__container-sticky">
-            <nav class="nav">
-                <div class="nav__container container">
-                    <a class="container__title" @click="clickTitlePage()">
-                        <h1>StudentStock</h1>
+        <div class="nav">
+            <nav class="nav__navbox navbox">
+                <div class="navbox__container container">
+                    <a class="container__title title" @click="clickTitlePage()">
+                        <h1 class="title__nav">StudentStock</h1>
                     </a>
                     <a class="container__buttonOpt buttonOpt " @click="clickNavToggle()">
                         <img class="buttonOpt__iconNav" src="front-end/icons/icon-nav-options.png"></img>
@@ -39,7 +39,8 @@
                                 <a class="itemExtens__link" @click="clickLogout()">Tancar Sessió</a>
                             </li>
                             <li class="listExtens__itemExtens itemExtens" v-else-if="loginActive == false">
-                                <a class="itemExtens__link" @click="clickLogin()">Iniciar Sessió</a> / <a  class="itemExtens__link" @click="clickRegister()">Registrar-se</a>
+                                <a class="itemExtens__link" @click="clickLogin()">Iniciar Sessió</a> / <a
+                                    class="itemExtens__link" @click="clickRegister()">Registrar-se</a>
                             </li>
                         </ul>
                         <div class="navExtens__searchExtens searchExtens" role="search">
@@ -53,7 +54,7 @@
                         <span class="buttonCar__counterCar">{{ shopping_cart.totalItems }}</span>
                     </a>
                 </div>
-                <div class="ticket" v-if="views.cart_toggle">
+                <div class="navbox__ticket ticket" v-if="views.cart_toggle">
                     <h3 class="ticket__title" id="titleCart">La teva cistella</h3>
                     <div class="ticket__account account">
                         <div class="account__item div">
@@ -79,13 +80,13 @@
             </nav>
         </div>
         <div class="landing" v-if="views.landing_page">
-            <div class="slider-container">
-                <div class="slider-box">
-                    <ul>
-                        <li><img src="front-end/img/img-landing-carrusel.png" alt=""></li>
-                        <li><img src="front-end/img/img-landing-carrusel1.png" alt=""></li>
-                        <li><img src="front-end/img/img-landing-carrusel2.png" alt=""></li>
-                        <li><img src="front-end/img/img-landing-carrusel3.png" alt=""></li>
+            <div class="landing__slider-container slider-container">
+                <div class="slider-container__slider-box slider-box">
+                    <ul class="slider-box__listSlider listSlider">
+                        <li class="listSlider__itemList itemList"><img class="itemList__image" src="front-end/img/img-landing-carrusel.png" alt=""></li>
+                        <li class="listSlider__itemList itemList"><img class="itemList__image" src="front-end/img/img-landing-carrusel1.png" alt=""></li>
+                        <li class="listSlider__itemList itemList"><img class="itemList__image" src="front-end/img/img-landing-carrusel2.png" alt=""></li>
+                        <li class="listSlider__itemList itemList"><img class="itemList__image" src="front-end/img/img-landing-carrusel3.png" alt=""></li>
                     </ul>
                 </div>
             </div>
@@ -106,16 +107,16 @@
             <div class="login__alert" v-if="views.registreMissatgeView" :class="{ error: error == 1 }">
                 {{ registreMissatge }}
             </div>
-            <div class="login__form">
-                <h3>Iniciar Sessió</h3>
-                <label for="username">Correu electónic:</label>
-                <input type="email" placeholder="Email" id="email" required v-model="usuari.email">
+            <div class="login__formLogin formLogin">
+                <h3 class="formLogin__title">Iniciar Sessió</h3>
+                <label class="formLogin__label" for="username">Correu electónic:</label>
+                <input class="formLogin__input" type="email" placeholder="Email" id="email" required v-model="usuari.email">
 
-                <label for="password">Contrasenya:</label>
-                <input type="password" placeholder="Password" id="password" required v-model="usuari.contrasenya">
+                <label class="formLogin__label" for="password">Contrasenya:</label>
+                <input class="formLogin__input" type="password" placeholder="Password" id="password" required v-model="usuari.contrasenya">
 
-                <button @click="clickLoginForm()">Iniciar Sessió</button>
-                <a @click="clickRegister()">Registrar-se</a>
+                <button class="formLogin__button" @click="clickLoginForm()">Iniciar Sessió</button>
+                <a class="formLogin__anchore" @click="clickRegister()">Registrar-se</a>
             </div>
         </div>
         <div class="register" v-if="views.register_page">
@@ -123,8 +124,8 @@
                 :class="{ success: error == 0, error: error == 1 }">
                 {{ registreMissatge }}
             </div>
-            <div class="register__form">
-                <h3>Registrar-se</h3>
+            <div class="register__formRegister formRegister">
+                <h3 class="formRegister__title">Registrar-se</h3>
                 <label for="nom">Dades personals:</label>
                 <input type="text" placeholder="Nom" id="nom" name="nom" required v-model="usuari.nom">
                 <input type="text" placeholder="Cognoms" id="cognoms" name="cognoms" required v-model="usuari.cognoms">
@@ -155,7 +156,7 @@
                 <div class="image__background" @click="toggleCardDescription(producte)">
                     <img class="item__image" :src="'back-end/laravel-api/public/' + producte.imatge">
                     <label class="item__preu">{{ producte.preu }}.00€</label>
-                    <span class="preu__anterior" >{{ producte.preu + 4 }}.99€</span>
+                    <span class="preu__anterior">{{ producte.preu + 4 }}.99€</span>
                 </div>
                 <div class="item__description" :class="{ 'mostrada': producte.mostrarDescripcion }"
                     @click="toggleCardDescription(producte)">
@@ -164,10 +165,6 @@
             </div>
         </div>
         <div class="check" v-if="views.checkout_page">
-            <!-- <div class="check__alert" v-if="views.checkFormMissatge"
-                :class="{ success: error == 0, error: error == 1 }">
-                {{ checkFormMissatge }}
-            </div> -->
             <div class="check__formContainer formContainer">
                 <h2 class="formContainer__title">Dades personals</h2>
                 <div class="formContainer__form form">
@@ -176,15 +173,15 @@
                     <label class="form__labelCognoms" for="cognoms">Cognoms:</label><br>
                     <input class="form__inputCognoms" type="text" id="cognoms" name="cognoms" v-model="usuari.cognoms"
                         required><br>
-                    <label class="form__labelDomicili" for="email">Correu electónic:</label><br>
-                    <input class="form__inputDomicili" type="email" id="email" name="email" v-model="usuari.email"
+                    <label class="form__labelEmail" for="email">Correu electónic:</label><br>
+                    <input class="form__inputEmail" type="email" id="email" name="email" v-model="usuari.email"
                         required><br>
-                    <label class="form__labelEmail" for="contrasenya">Contrasenya:</label><br>
-                    <input class="form__inputEmail" type="password" id="contrasenya" name="contrasenya"
+                    <label class="form__labelContrasenya" for="contrasenya">Contrasenya:</label><br>
+                    <input class="form__inputContrasenya" type="password" id="contrasenya" name="contrasenya"
                         v-model="usuari.contrasenya" required><br>
                 </div>
                 <button class="form__btn" @click="validateEmail()">Realitzar Compra</button>
-                <div class="check__alert" v-if="views.checkFormMissatge"
+                <div class="formContainer__alert" v-if="views.checkFormMissatge"
                     :class="{ success: error == 0, error: error == 1 }">
                     {{ checkFormMissatge }}
                 </div>
@@ -204,24 +201,17 @@
             </div>
         </div>
         <div class="status" v-if="views.orders_users">
-            <div  class="border__comandes">
-                <h2>Les teves comandes</h2>
-                <input class="status2__search" type="search" name="comanda" id="searchInputOrderClient" @keyup.enter="clickSearchOrderClient()">
+            <div class="status__comandes containerComandesList">
+                <h2 class="containerComandesList__title">Les teves comandes</h2>
 
-                
-            <div v-for="order in estatOrderClient" :key="order.id" class="recuadro">
-                <p>ID DE LA COMANDA: {{ order.id }}</p>
-                <p>TOTAL DE LA COMANDA: {{ order.total }}€</p>
-                <p>DATA DE LA COMANDA: {{ order.fecha }}</p>
+                <div v-for="order in ordersClient" class="containerComandesList__cardComanda cardComanda" @click="clickSearchOrderClient(order.id)">
+                    <p class="cardComanda__idComanda">ID de comanda: {{ order.id }}</p>
+                    <p class="cardComanda__totalComanda">TOTAL de la comanda: {{ order.total }}€</p>
+                </div>
             </div>
         </div>
-            <button @click="clickOrdersButton()"> COMANDES</button>
-        </div>
-
-        <!-- COMANDES -->
         <div class="order__tracking" v-if="views.status_page">
-            <h3>Número de comanda: <input class="status__search" type="search" name="comanda"
-                    id="searchInputOrderClient" @keyup.enter="clickSearchOrderClient()"></h3>
+            <h3>Número de comanda: {{ this.estatOrderClient.id }}</h3>
             <div v-if="views.searchOrderClientPage">
                 <h3>Estat de la comanda:</h3>
                 <u>{{ this.estatOrderClient.estat }}</u>
@@ -245,13 +235,13 @@
         </div>
         <footer class="footer">
             <h2 class="footer__title">©2023, StudentStock</h2>
-            <a href="https://www.facebook.com/?locale=es_ES" target="_blank"><img class="footer__img"
+            <a class="footer__anchore" href="https://www.facebook.com/?locale=es_ES" target="_blank"><img class="footer__img"
                     src="front-end/icons/facebook.png" alt="facebook"></a>
-            <a href="https://www.instagram.com/" target="_blank"><img class="footer__img"
+            <a class="footer__anchore" href="https://www.instagram.com/" target="_blank"><img class="footer__img"
                     src="front-end/icons/instagram2.png" alt="instagram"></a>
-            <a href="https://twitter.com/?lang=es" target="_blank"><img class="footer__img"
+            <a class="footer__anchore" href="https://twitter.com/?lang=es" target="_blank"><img class="footer__img"
                     src="front-end/icons/gorjeo.png" alt="twitter"></a>
-            <a href="https://www.youtube.com/" target="_blank"><img class="footer__img" src="front-end/icons/social.png"
+            <a class="footer__anchore" href="https://www.youtube.com/" target="_blank"><img class="footer__img" src="front-end/icons/social.png"
                     alt="youtube"></a>
         </footer>
     </div>

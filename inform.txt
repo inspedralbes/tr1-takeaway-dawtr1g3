@@ -1,6 +1,1 @@
-SI estas logeado apartado de les teves comandes 
-- con una lista que muestra todas tus comandas
-- al hacer click a una comanda te lleva a 
-
-
 slucionaar errores para crud users (falta crear user)
