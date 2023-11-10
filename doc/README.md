@@ -14,11 +14,12 @@ Ha d'incloure, com a mínim
 
 ## Instruccions per desplegar el projecte a producció
 Quins fitxers s'han d'editar i com (típicament per connectar la BD etc...)
-- 
-- Clone 
--
--
-
+- Primer has de descarregar els arxius del github i pujarlos al servidor o fer un clone directament al servidor
+- Una vegada ho tens el servidor, has de cambiar tots els fetch en els arxius js i posar la següent ruta sense treure a quina api vols accedir "/back-end/laravel-api/public/apiNnomoRutaApi"
+- Has de canviar el .env el nom de la taula el que tu vulguis i posar la contrasemnya d'aquella base de dades
+- Una vegada acabat el pas anterior fer un php artisan migrate per poder crear les taules
+- Una vegada fet el migrate anar a la carpeta back-end on hi ha un arxiu .sql i insertar-lo a la base de dades.
+- Amb aixo ja funcionarà.
 
 ## Instruccions per seguir codificant el projecte
 eines necessaries i com es crea l'entorn per que algú us ajudi en el vostre projecte.
